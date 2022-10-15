@@ -7,7 +7,7 @@ using Microsoft.VisualBasic.CompilerServices;
 namespace iBMSC
 {
 
-    public partial class MainWindow
+    public partial class MainWindow : Form
     {
         private void OpenBMS(string xStrAll)
         {

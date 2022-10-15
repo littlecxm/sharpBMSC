@@ -4,7 +4,7 @@ using Microsoft.VisualBasic;
 namespace iBMSC
 {
 
-    public partial class MainWindow
+    public partial class MainWindow : Form
     {
 
         public const int niMeasure = 0;

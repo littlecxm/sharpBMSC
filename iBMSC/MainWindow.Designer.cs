@@ -35,16 +35,16 @@ namespace iBMSC
             this.TBLangDef = new System.Windows.Forms.ToolStripMenuItem();
             this.TBLangRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.TBLanguage = new System.Windows.Forms.ToolStripDropDownButton();
             this.mnLanguage = new System.Windows.Forms.ToolStripMenuItem();
+            this.TBLanguage = new System.Windows.Forms.ToolStripDropDownButton();
             this.cmnTheme = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.TBThemeDef = new System.Windows.Forms.ToolStripMenuItem();
             this.TBThemeSave = new System.Windows.Forms.ToolStripMenuItem();
             this.TBThemeRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.TBThemeLoadComptability = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.TBTheme = new System.Windows.Forms.ToolStripDropDownButton();
             this.mnTheme = new System.Windows.Forms.ToolStripMenuItem();
+            this.TBTheme = new System.Windows.Forms.ToolStripDropDownButton();
             this.POptionsScroll = new System.Windows.Forms.Panel();
             this.POptions = new System.Windows.Forms.Panel();
             this.POExpansion = new System.Windows.Forms.Panel();
@@ -282,11 +282,11 @@ namespace iBMSC
             this.ToolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.POBModify = new System.Windows.Forms.ToolStripMenuItem();
             this.POBMirror = new System.Windows.Forms.ToolStripMenuItem();
+            this.POConvert = new System.Windows.Forms.ToolStripDropDownButton();
             this.mnPreview = new System.Windows.Forms.ToolStripMenuItem();
             this.mnPlayB = new System.Windows.Forms.ToolStripMenuItem();
             this.mnPlay = new System.Windows.Forms.ToolStripMenuItem();
             this.mnStop = new System.Windows.Forms.ToolStripMenuItem();
-            this.POConvert = new System.Windows.Forms.ToolStripDropDownButton();
             this.TBMain = new System.Windows.Forms.ToolStrip();
             this.TBNew = new System.Windows.Forms.ToolStripButton();
             this.TBOpen = new System.Windows.Forms.ToolStripSplitButton();
@@ -467,7 +467,7 @@ namespace iBMSC
             this.TBLangRefresh,
             this.ToolStripSeparator9});
             this.cmnLanguage.Name = "cmnLanguage";
-            this.cmnLanguage.OwnerItem = this.mnLanguage;
+            this.cmnLanguage.OwnerItem = this.TBLanguage;
             this.cmnLanguage.Size = new System.Drawing.Size(145, 62);
             // 
             // TBLangDef
@@ -490,6 +490,14 @@ namespace iBMSC
             this.ToolStripSeparator9.Name = "ToolStripSeparator9";
             this.ToolStripSeparator9.Size = new System.Drawing.Size(141, 6);
             // 
+            // mnLanguage
+            // 
+            this.mnLanguage.DropDown = this.cmnLanguage;
+            this.mnLanguage.Image = global::iBMSC.Properties.Resources.x16Language;
+            this.mnLanguage.Name = "mnLanguage";
+            this.mnLanguage.Size = new System.Drawing.Size(302, 26);
+            this.mnLanguage.Text = "&Language";
+            // 
             // TBLanguage
             // 
             this.TBLanguage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -499,14 +507,6 @@ namespace iBMSC
             this.TBLanguage.Name = "TBLanguage";
             this.TBLanguage.Size = new System.Drawing.Size(34, 24);
             this.TBLanguage.Text = "Language";
-            // 
-            // mnLanguage
-            // 
-            this.mnLanguage.DropDown = this.cmnLanguage;
-            this.mnLanguage.Image = global::iBMSC.Properties.Resources.x16Language;
-            this.mnLanguage.Name = "mnLanguage";
-            this.mnLanguage.Size = new System.Drawing.Size(302, 26);
-            this.mnLanguage.Text = "&Language";
             // 
             // cmnTheme
             // 
@@ -518,7 +518,7 @@ namespace iBMSC
             this.TBThemeLoadComptability,
             this.ToolStripSeparator6});
             this.cmnTheme.Name = "cmnLanguage";
-            this.cmnTheme.OwnerItem = this.mnTheme;
+            this.cmnTheme.OwnerItem = this.TBTheme;
             this.cmnTheme.Size = new System.Drawing.Size(317, 114);
             // 
             // TBThemeDef
@@ -556,6 +556,14 @@ namespace iBMSC
             this.ToolStripSeparator6.Name = "ToolStripSeparator6";
             this.ToolStripSeparator6.Size = new System.Drawing.Size(313, 6);
             // 
+            // mnTheme
+            // 
+            this.mnTheme.DropDown = this.cmnTheme;
+            this.mnTheme.Image = global::iBMSC.Properties.Resources.x16Theme;
+            this.mnTheme.Name = "mnTheme";
+            this.mnTheme.Size = new System.Drawing.Size(302, 26);
+            this.mnTheme.Text = "&Theme";
+            // 
             // TBTheme
             // 
             this.TBTheme.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -565,14 +573,6 @@ namespace iBMSC
             this.TBTheme.Name = "TBTheme";
             this.TBTheme.Size = new System.Drawing.Size(34, 24);
             this.TBTheme.Text = "Theme";
-            // 
-            // mnTheme
-            // 
-            this.mnTheme.DropDown = this.cmnTheme;
-            this.mnTheme.Image = global::iBMSC.Properties.Resources.x16Theme;
-            this.mnTheme.Name = "mnTheme";
-            this.mnTheme.Size = new System.Drawing.Size(302, 26);
-            this.mnTheme.Text = "&Theme";
             // 
             // POptionsScroll
             // 
@@ -4947,7 +4947,7 @@ namespace iBMSC
             this.POBModify,
             this.POBMirror});
             this.cmnConversion.Name = "cmnLanguage";
-            this.cmnConversion.OwnerItem = this.POConvert;
+            this.cmnConversion.OwnerItem = this.mnConversion;
             this.cmnConversion.Size = new System.Drawing.Size(288, 224);
             // 
             // POBLong
@@ -5026,6 +5026,16 @@ namespace iBMSC
             this.POBMirror.Text = "Mi&rror";
             this.POBMirror.Click += new System.EventHandler(this.POBMirror_Click);
             // 
+            // POConvert
+            // 
+            this.POConvert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.POConvert.DropDown = this.cmnConversion;
+            this.POConvert.Image = global::iBMSC.Properties.Resources.ConvertNotes;
+            this.POConvert.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.POConvert.Name = "POConvert";
+            this.POConvert.Size = new System.Drawing.Size(34, 24);
+            this.POConvert.Text = "Convert Notes";
+            // 
             // mnPreview
             // 
             this.mnPreview.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -5062,16 +5072,6 @@ namespace iBMSC
             this.mnStop.Size = new System.Drawing.Size(264, 26);
             this.mnStop.Text = "&Stop";
             this.mnStop.Click += new System.EventHandler(this.TBStop_Click);
-            // 
-            // POConvert
-            // 
-            this.POConvert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.POConvert.DropDown = this.cmnConversion;
-            this.POConvert.Image = global::iBMSC.Properties.Resources.ConvertNotes;
-            this.POConvert.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.POConvert.Name = "POConvert";
-            this.POConvert.Size = new System.Drawing.Size(34, 24);
-            this.POConvert.Text = "Convert Notes";
             // 
             // TBMain
             // 

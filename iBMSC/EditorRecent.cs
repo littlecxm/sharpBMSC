@@ -90,10 +90,10 @@ namespace iBMSC
                     }
             }
 
-            xTBOpenR.Text = Conversions.ToString(Interaction.IIf(string.IsNullOrEmpty(Text), "<" + iBMSC.Strings.None + ">", this.GetFileName(Text)));
+            xTBOpenR.Text = Conversions.ToString(Interaction.IIf(string.IsNullOrEmpty(Text), "<" + iBMSCStrings.None + ">", this.GetFileName(Text)));
             xTBOpenR.ToolTipText = Text;
             xTBOpenR.Enabled = !string.IsNullOrEmpty(Text);
-            xmnOpenR.Text = Conversions.ToString(Interaction.IIf(string.IsNullOrEmpty(Text), "<" + iBMSC.Strings.None + ">", this.GetFileName(Text)));
+            xmnOpenR.Text = Conversions.ToString(Interaction.IIf(string.IsNullOrEmpty(Text), "<" + iBMSCStrings.None + ">", this.GetFileName(Text)));
             xmnOpenR.ToolTipText = Text;
             xmnOpenR.Enabled = !string.IsNullOrEmpty(Text);
         }
@@ -105,7 +105,7 @@ namespace iBMSC
             this.KMouseOver = -1;
             if (!File.Exists(xFileName))
             {
-                Interaction.MsgBox(iBMSC.Strings.Messages.CannotFind.Replace("{}", xFileName), MsgBoxStyle.Critical);
+                Interaction.MsgBox(iBMSCStrings.Messages.CannotFind.Replace("{}", xFileName), MsgBoxStyle.Critical);
                 return;
             }
             if (this.ClosingPopSave())
