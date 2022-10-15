@@ -1,7 +1,7 @@
 ﻿
 namespace iBMSC
 {
-    public class Strings
+    public class iBMSCStrings
     {
 
         public static string OK = "OK";
