@@ -7,7 +7,7 @@ using Microsoft.VisualBasic.CompilerServices;
 namespace iBMSC
 {
 
-    public partial class MainWindow
+    public partial class MainWindow : Form
     {
 
         private void BVCCalculate_Click(object sender, EventArgs e)
@@ -155,7 +155,14 @@ namespace iBMSC
                         // If longnote then adjust length
                         if (this.Notes[xI1].VPosition + this.Notes[xI1].Length > xVLower)
                         {
-                            this.Notes[xI1].Length = Conversions.ToDouble(this.Notes[xI1].Length + Operators.MultiplyObject(Operators.SubtractObject(Interaction.IIf(xVUpper < this.Notes[xI1].VPosition + this.Notes[xI1].Length, xVUpper, (object)(this.Notes[xI1].VPosition + this.Notes[xI1].Length)), xVLower), xRatio - 1d));
+                            // this.Notes[xI1].Length = Conversions.ToDouble(this.Notes[xI1].Length + Operators.MultiplyObject(Operators.SubtractObject(Interaction.IIf(xVUpper < this.Notes[xI1].VPosition + this.Notes[xI1].Length, xVUpper, (object)(this.Notes[xI1].VPosition + this.Notes[xI1].Length)), xVLower), xRatio - 1d));
+                            // this.Notes[xI1].Length += (-xVLower) * (xRatio - 1);
+                            var adj = Conversions.ToDouble(Interaction.IIf(
+                                xVUpper < this.Notes[xI1].VPosition + this.Notes[xI1].Length,
+                                xVUpper,
+                                this.Notes[xI1].VPosition + this.Notes[xI1].Length
+                                ));
+                            this.Notes[xI1].Length += (adj - xVLower) * (xRatio - 1);
                         }
                     }
 
@@ -172,7 +179,13 @@ namespace iBMSC
                         }
 
                         // Adjust Length
-                        this.Notes[xI1].Length = Conversions.ToDouble(this.Notes[xI1].Length + Operators.MultiplyObject(Operators.SubtractObject(Interaction.IIf(xVUpper < this.Notes[xI1].Length + this.Notes[xI1].VPosition, xVUpper, (object)(this.Notes[xI1].Length + this.Notes[xI1].VPosition)), this.Notes[xI1].VPosition), xRatio - 1d));
+                        // this.Notes[xI1].Length = Conversions.ToDouble(this.Notes[xI1].Length + Operators.MultiplyObject(Operators.SubtractObject(Interaction.IIf(xVUpper < this.Notes[xI1].Length + this.Notes[xI1].VPosition, xVUpper, (object)(this.Notes[xI1].Length + this.Notes[xI1].VPosition)), this.Notes[xI1].VPosition), xRatio - 1d));
+                        var adj = Conversions.ToDouble(Interaction.IIf(
+                            xVUpper < this.Notes[xI1].Length + this.Notes[xI1].VPosition,
+                            xVUpper,
+                            this.Notes[xI1].Length + this.Notes[xI1].VPosition
+                        ));
+                        this.Notes[xI1].Length += (adj - this.Notes[xI1].VPosition) * (xRatio - 1);
 
                         // Adjust VPosition
                         this.Notes[xI1].VPosition = (this.Notes[xI1].VPosition - xVLower) * xRatio + xVLower;
@@ -599,7 +612,7 @@ namespace iBMSC
             if ((xVUpper - xVLower) / xConstBPM <= (xVHalf - xVLower) / xValue)
             {
                 double Limit = (xVHalf - xVLower) * xConstBPM / (xVUpper - xVLower) / 10000d;
-                Interaction.MsgBox("Please enter a value that is greater than " + Limit + ".", MsgBoxStyle.Critical, iBMSC.Strings.Messages.Err);
+                Interaction.MsgBox("Please enter a value that is greater than " + Limit + ".", MsgBoxStyle.Critical, iBMSCStrings.Messages.Err);
                 return;
             }
             double xTempDivider = xConstBPM * (xVHalf - xVLower) - xValue * (xVUpper - xVLower);
