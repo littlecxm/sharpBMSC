@@ -9,7 +9,7 @@ using Microsoft.VisualBasic.CompilerServices;
 namespace iBMSC
 {
 
-    public partial class MainWindow
+    public partial class MainWindow : Form
     {
 
         private void XMLWriteColumn(XmlTextWriter w, int I)
@@ -68,7 +68,7 @@ namespace iBMSC
             w.WriteAttributeString("Build", iBMSC.My.MyProject.Application.Info.Version.Build.ToString());
 
             if (ThemeOnly)
-                goto 5000;
+                goto state5000;
 
             w.WriteStartElement("Form");
             w.WriteAttributeString("WindowState", Conversions.ToString(Interaction.IIf(this.isFullScreen, this.previousWindowState, this.WindowState)));
@@ -163,7 +163,7 @@ namespace iBMSC
                 XMLWritePlayerArguments(w, i);
             w.WriteEndElement();
 
-        5000:
+        state5000:
             ;
             w.WriteStartElement("Columns");
             // .WriteAttributeString("Count", col.Length)
@@ -309,9 +309,10 @@ namespace iBMSC
                 goto EndOfSub;
 
             // version
-            int Major = iBMSC.My.MyProject.Application.Info.Version.Major;
-            int Minor = iBMSC.My.MyProject.Application.Info.Version.Minor;
-            int Build = iBMSC.My.MyProject.Application.Info.Version.Build;
+            var assemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName();
+            int Major = assemblyName.Version.Major;
+            int Minor = assemblyName.Version.Minor;
+            int Build = assemblyName.Version.Build;
             try
             {
                 int xMajor = (int)Math.Round(Conversion.Val(Root.Attributes["Major"].Value));
@@ -382,7 +383,7 @@ namespace iBMSC
                 this.POBLong.Enabled = !this.NTInput;
                 this.POBLongShort.Enabled = !this.NTInput;
 
-                this.LoadLocale(iBMSC.My.MyProject.Application.Info.DirectoryPath + @"\" + eEdit.GetAttribute("Language"));
+                this.LoadLocale(Application.ExecutablePath + @"\" + eEdit.GetAttribute("Language"));
 
                 // XMLLoadAttribute(.GetAttribute("SortingMethod"), SortingMethod)
 
@@ -415,7 +416,7 @@ namespace iBMSC
             var eSave = Root["Save"];
             if (eSave is not null)
             {
-                switch (Strings.UCase(eSave.GetAttribute("TextEncoding")) ?? "")
+                switch (eSave.GetAttribute("TextEncoding").ToUpper() ?? "")
                 {
                     case "SYSTEM ANSI":
                         {
@@ -756,9 +757,9 @@ namespace iBMSC
                 if (Root is null)
                     throw new NullReferenceException();
 
-                this.XMLLoadLocale(Root["OK"], ref iBMSC.Strings.OK);
-                this.XMLLoadLocale(Root["Cancel"], ref iBMSC.Strings.Cancel);
-                this.XMLLoadLocale(Root["None"], ref iBMSC.Strings.None);
+                this.XMLLoadLocale(Root["OK"], ref iBMSCStrings.OK);
+                this.XMLLoadLocale(Root["Cancel"], ref iBMSCStrings.Cancel);
+                this.XMLLoadLocale(Root["None"], ref iBMSCStrings.None);
 
                 var eFont = Root["Font"];
                 if (eFont is not null)
@@ -780,7 +781,12 @@ namespace iBMSC
                         xChildNode = xChildNode.PreviousSibling;
                     }
 
-                    var rList = new object[] { this, this.mnSys, this.Menu1, this.mnMain, this.cmnLanguage, this.cmnTheme, this.cmnConversion, this.TBMain, this.FStatus, this.FStatus2 };
+                    var rList = new object[] {
+                        this, this.mnSys, this.Menu1,
+                        this.mnMain, this.cmnLanguage,
+                        this.cmnTheme, this.cmnConversion, this.TBMain,
+                        this.FStatus, this.FStatus2,
+                        };
                     foreach (object c in rList)
                     {
                         try
@@ -1138,10 +1144,10 @@ namespace iBMSC
                     string argtarget77 = this.FSP4.ToolTipText;
                     XMLLoadLocale(eStatusBar["AbsolutePosition"], ref argtarget77);
                     this.FSP4.ToolTipText = argtarget77;
-                    this.XMLLoadLocale(eStatusBar["Length"], ref iBMSC.Strings.StatusBar.Length);
-                    this.XMLLoadLocale(eStatusBar["LongNote"], ref iBMSC.Strings.StatusBar.LongNote);
-                    this.XMLLoadLocale(eStatusBar["Hidden"], ref iBMSC.Strings.StatusBar.Hidden);
-                    this.XMLLoadLocale(eStatusBar["Error"], ref iBMSC.Strings.StatusBar.Err);
+                    this.XMLLoadLocale(eStatusBar["Length"], ref iBMSCStrings.StatusBar.Length);
+                    this.XMLLoadLocale(eStatusBar["LongNote"], ref iBMSCStrings.StatusBar.LongNote);
+                    this.XMLLoadLocale(eStatusBar["Hidden"], ref iBMSCStrings.StatusBar.Hidden);
+                    this.XMLLoadLocale(eStatusBar["Error"], ref iBMSCStrings.StatusBar.Err);
                     string argtarget78 = this.FSSS.ToolTipText;
                     XMLLoadLocale(eStatusBar["SelStart"], ref argtarget78);
                     this.FSSS.ToolTipText = argtarget78;
@@ -1530,218 +1536,218 @@ namespace iBMSC
                 var eMessages = Root["Messages"];
                 if (eMessages is not null)
                 {
-                    this.XMLLoadLocale(eMessages["Err"], ref iBMSC.Strings.Messages.Err);
-                    this.XMLLoadLocale(eMessages["SaveOnExit"], ref iBMSC.Strings.Messages.SaveOnExit);
-                    this.XMLLoadLocale(eMessages["SaveOnExit1"], ref iBMSC.Strings.Messages.SaveOnExit1);
-                    this.XMLLoadLocale(eMessages["SaveOnExit2"], ref iBMSC.Strings.Messages.SaveOnExit2);
-                    this.XMLLoadLocale(eMessages["PromptEnter"], ref iBMSC.Strings.Messages.PromptEnter);
-                    this.XMLLoadLocale(eMessages["PromptEnterNumeric"], ref iBMSC.Strings.Messages.PromptEnterNumeric);
-                    this.XMLLoadLocale(eMessages["PromptEnterBPM"], ref iBMSC.Strings.Messages.PromptEnterBPM);
-                    this.XMLLoadLocale(eMessages["PromptEnterSTOP"], ref iBMSC.Strings.Messages.PromptEnterSTOP);
-                    this.XMLLoadLocale(eMessages["PromptEnterSCROLL"], ref iBMSC.Strings.Messages.PromptEnterSCROLL);
-                    this.XMLLoadLocale(eMessages["PromptSlashValue"], ref iBMSC.Strings.Messages.PromptSlashValue);
-                    this.XMLLoadLocale(eMessages["InvalidLabel"], ref iBMSC.Strings.Messages.InvalidLabel);
-                    this.XMLLoadLocale(eMessages["CannotFind"], ref iBMSC.Strings.Messages.CannotFind);
-                    this.XMLLoadLocale(eMessages["PleaseRespecifyPath"], ref iBMSC.Strings.Messages.PleaseRespecifyPath);
-                    this.XMLLoadLocale(eMessages["PlayerNotFound"], ref iBMSC.Strings.Messages.PlayerNotFound);
-                    this.XMLLoadLocale(eMessages["PreviewDelError"], ref iBMSC.Strings.Messages.PreviewDelError);
-                    this.XMLLoadLocale(eMessages["NegativeFactorError"], ref iBMSC.Strings.Messages.NegativeFactorError);
-                    this.XMLLoadLocale(eMessages["NegativeDivisorError"], ref iBMSC.Strings.Messages.NegativeDivisorError);
-                    this.XMLLoadLocale(eMessages["PreferencePostpone"], ref iBMSC.Strings.Messages.PreferencePostpone);
-                    this.XMLLoadLocale(eMessages["EraserObsolete"], ref iBMSC.Strings.Messages.EraserObsolete);
-                    this.XMLLoadLocale(eMessages["SaveWarning"], ref iBMSC.Strings.Messages.SaveWarning);
-                    this.XMLLoadLocale(eMessages["NoteOverlapError"], ref iBMSC.Strings.Messages.NoteOverlapError);
-                    this.XMLLoadLocale(eMessages["BPMOverflowError"], ref iBMSC.Strings.Messages.BPMOverflowError);
-                    this.XMLLoadLocale(eMessages["STOPOverflowError"], ref iBMSC.Strings.Messages.STOPOverflowError);
-                    this.XMLLoadLocale(eMessages["SCROLLOverflowError"], ref iBMSC.Strings.Messages.SCROLLOverflowError);
-                    this.XMLLoadLocale(eMessages["SavedFileWillContainErrors"], ref iBMSC.Strings.Messages.SavedFileWillContainErrors);
-                    this.XMLLoadLocale(eMessages["FileAssociationPrompt"], ref iBMSC.Strings.Messages.FileAssociationPrompt);
-                    this.XMLLoadLocale(eMessages["FileAssociationError"], ref iBMSC.Strings.Messages.FileAssociationError);
-                    this.XMLLoadLocale(eMessages["RestoreDefaultSettings"], ref iBMSC.Strings.Messages.RestoreDefaultSettings);
-                    this.XMLLoadLocale(eMessages["RestoreAutosavedFile"], ref iBMSC.Strings.Messages.RestoreAutosavedFile);
+                    this.XMLLoadLocale(eMessages["Err"], ref iBMSCStrings.Messages.Err);
+                    this.XMLLoadLocale(eMessages["SaveOnExit"], ref iBMSCStrings.Messages.SaveOnExit);
+                    this.XMLLoadLocale(eMessages["SaveOnExit1"], ref iBMSCStrings.Messages.SaveOnExit1);
+                    this.XMLLoadLocale(eMessages["SaveOnExit2"], ref iBMSCStrings.Messages.SaveOnExit2);
+                    this.XMLLoadLocale(eMessages["PromptEnter"], ref iBMSCStrings.Messages.PromptEnter);
+                    this.XMLLoadLocale(eMessages["PromptEnterNumeric"], ref iBMSCStrings.Messages.PromptEnterNumeric);
+                    this.XMLLoadLocale(eMessages["PromptEnterBPM"], ref iBMSCStrings.Messages.PromptEnterBPM);
+                    this.XMLLoadLocale(eMessages["PromptEnterSTOP"], ref iBMSCStrings.Messages.PromptEnterSTOP);
+                    this.XMLLoadLocale(eMessages["PromptEnterSCROLL"], ref iBMSCStrings.Messages.PromptEnterSCROLL);
+                    this.XMLLoadLocale(eMessages["PromptSlashValue"], ref iBMSCStrings.Messages.PromptSlashValue);
+                    this.XMLLoadLocale(eMessages["InvalidLabel"], ref iBMSCStrings.Messages.InvalidLabel);
+                    this.XMLLoadLocale(eMessages["CannotFind"], ref iBMSCStrings.Messages.CannotFind);
+                    this.XMLLoadLocale(eMessages["PleaseRespecifyPath"], ref iBMSCStrings.Messages.PleaseRespecifyPath);
+                    this.XMLLoadLocale(eMessages["PlayerNotFound"], ref iBMSCStrings.Messages.PlayerNotFound);
+                    this.XMLLoadLocale(eMessages["PreviewDelError"], ref iBMSCStrings.Messages.PreviewDelError);
+                    this.XMLLoadLocale(eMessages["NegativeFactorError"], ref iBMSCStrings.Messages.NegativeFactorError);
+                    this.XMLLoadLocale(eMessages["NegativeDivisorError"], ref iBMSCStrings.Messages.NegativeDivisorError);
+                    this.XMLLoadLocale(eMessages["PreferencePostpone"], ref iBMSCStrings.Messages.PreferencePostpone);
+                    this.XMLLoadLocale(eMessages["EraserObsolete"], ref iBMSCStrings.Messages.EraserObsolete);
+                    this.XMLLoadLocale(eMessages["SaveWarning"], ref iBMSCStrings.Messages.SaveWarning);
+                    this.XMLLoadLocale(eMessages["NoteOverlapError"], ref iBMSCStrings.Messages.NoteOverlapError);
+                    this.XMLLoadLocale(eMessages["BPMOverflowError"], ref iBMSCStrings.Messages.BPMOverflowError);
+                    this.XMLLoadLocale(eMessages["STOPOverflowError"], ref iBMSCStrings.Messages.STOPOverflowError);
+                    this.XMLLoadLocale(eMessages["SCROLLOverflowError"], ref iBMSCStrings.Messages.SCROLLOverflowError);
+                    this.XMLLoadLocale(eMessages["SavedFileWillContainErrors"], ref iBMSCStrings.Messages.SavedFileWillContainErrors);
+                    this.XMLLoadLocale(eMessages["FileAssociationPrompt"], ref iBMSCStrings.Messages.FileAssociationPrompt);
+                    this.XMLLoadLocale(eMessages["FileAssociationError"], ref iBMSCStrings.Messages.FileAssociationError);
+                    this.XMLLoadLocale(eMessages["RestoreDefaultSettings"], ref iBMSCStrings.Messages.RestoreDefaultSettings);
+                    this.XMLLoadLocale(eMessages["RestoreAutosavedFile"], ref iBMSCStrings.Messages.RestoreAutosavedFile);
                 }
 
                 var eFileType = Root["FileType"];
                 if (eFileType is not null)
                 {
-                    this.XMLLoadLocale(eFileType["_all"], ref iBMSC.Strings.FileType._all);
-                    this.XMLLoadLocale(eFileType["_bms"], ref iBMSC.Strings.FileType._bms);
-                    this.XMLLoadLocale(eFileType["BMS"], ref iBMSC.Strings.FileType.BMS);
-                    this.XMLLoadLocale(eFileType["BME"], ref iBMSC.Strings.FileType.BME);
-                    this.XMLLoadLocale(eFileType["BML"], ref iBMSC.Strings.FileType.BML);
-                    this.XMLLoadLocale(eFileType["PMS"], ref iBMSC.Strings.FileType.PMS);
-                    this.XMLLoadLocale(eFileType["TXT"], ref iBMSC.Strings.FileType.TXT);
-                    this.XMLLoadLocale(eFileType["SM"], ref iBMSC.Strings.FileType.SM);
-                    this.XMLLoadLocale(eFileType["IBMSC"], ref iBMSC.Strings.FileType.IBMSC);
-                    this.XMLLoadLocale(eFileType["XML"], ref iBMSC.Strings.FileType.XML);
-                    this.XMLLoadLocale(eFileType["THEME_XML"], ref iBMSC.Strings.FileType.THEME_XML);
-                    this.XMLLoadLocale(eFileType["TH"], ref iBMSC.Strings.FileType.TH);
-                    this.XMLLoadLocale(eFileType["_audio"], ref iBMSC.Strings.FileType._audio);
-                    this.XMLLoadLocale(eFileType["_wave"], ref iBMSC.Strings.FileType._wave);
-                    this.XMLLoadLocale(eFileType["WAV"], ref iBMSC.Strings.FileType.WAV);
-                    this.XMLLoadLocale(eFileType["OGG"], ref iBMSC.Strings.FileType.OGG);
-                    this.XMLLoadLocale(eFileType["MP3"], ref iBMSC.Strings.FileType.MP3);
-                    this.XMLLoadLocale(eFileType["MID"], ref iBMSC.Strings.FileType.MID);
-                    this.XMLLoadLocale(eFileType["_image"], ref iBMSC.Strings.FileType._image);
-                    this.XMLLoadLocale(eFileType["_movie"], ref iBMSC.Strings.FileType._movie);
-                    this.XMLLoadLocale(eFileType["BMP"], ref iBMSC.Strings.FileType.BMP);
-                    this.XMLLoadLocale(eFileType["PNG"], ref iBMSC.Strings.FileType.PNG);
-                    this.XMLLoadLocale(eFileType["JPG"], ref iBMSC.Strings.FileType.JPG);
-                    this.XMLLoadLocale(eFileType["GIF"], ref iBMSC.Strings.FileType.GIF);
-                    this.XMLLoadLocale(eFileType["MPG"], ref iBMSC.Strings.FileType.MPG);
-                    this.XMLLoadLocale(eFileType["AVI"], ref iBMSC.Strings.FileType.AVI);
-                    this.XMLLoadLocale(eFileType["MP4"], ref iBMSC.Strings.FileType.MP4);
-                    this.XMLLoadLocale(eFileType["WMV"], ref iBMSC.Strings.FileType.WMV);
-                    this.XMLLoadLocale(eFileType["WEBM"], ref iBMSC.Strings.FileType.WEBM);
-                    this.XMLLoadLocale(eFileType["EXE"], ref iBMSC.Strings.FileType.EXE);
+                    this.XMLLoadLocale(eFileType["_all"], ref iBMSCStrings.FileType._all);
+                    this.XMLLoadLocale(eFileType["_bms"], ref iBMSCStrings.FileType._bms);
+                    this.XMLLoadLocale(eFileType["BMS"], ref iBMSCStrings.FileType.BMS);
+                    this.XMLLoadLocale(eFileType["BME"], ref iBMSCStrings.FileType.BME);
+                    this.XMLLoadLocale(eFileType["BML"], ref iBMSCStrings.FileType.BML);
+                    this.XMLLoadLocale(eFileType["PMS"], ref iBMSCStrings.FileType.PMS);
+                    this.XMLLoadLocale(eFileType["TXT"], ref iBMSCStrings.FileType.TXT);
+                    this.XMLLoadLocale(eFileType["SM"], ref iBMSCStrings.FileType.SM);
+                    this.XMLLoadLocale(eFileType["IBMSC"], ref iBMSCStrings.FileType.IBMSC);
+                    this.XMLLoadLocale(eFileType["XML"], ref iBMSCStrings.FileType.XML);
+                    this.XMLLoadLocale(eFileType["THEME_XML"], ref iBMSCStrings.FileType.THEME_XML);
+                    this.XMLLoadLocale(eFileType["TH"], ref iBMSCStrings.FileType.TH);
+                    this.XMLLoadLocale(eFileType["_audio"], ref iBMSCStrings.FileType._audio);
+                    this.XMLLoadLocale(eFileType["_wave"], ref iBMSCStrings.FileType._wave);
+                    this.XMLLoadLocale(eFileType["WAV"], ref iBMSCStrings.FileType.WAV);
+                    this.XMLLoadLocale(eFileType["OGG"], ref iBMSCStrings.FileType.OGG);
+                    this.XMLLoadLocale(eFileType["MP3"], ref iBMSCStrings.FileType.MP3);
+                    this.XMLLoadLocale(eFileType["MID"], ref iBMSCStrings.FileType.MID);
+                    this.XMLLoadLocale(eFileType["_image"], ref iBMSCStrings.FileType._image);
+                    this.XMLLoadLocale(eFileType["_movie"], ref iBMSCStrings.FileType._movie);
+                    this.XMLLoadLocale(eFileType["BMP"], ref iBMSCStrings.FileType.BMP);
+                    this.XMLLoadLocale(eFileType["PNG"], ref iBMSCStrings.FileType.PNG);
+                    this.XMLLoadLocale(eFileType["JPG"], ref iBMSCStrings.FileType.JPG);
+                    this.XMLLoadLocale(eFileType["GIF"], ref iBMSCStrings.FileType.GIF);
+                    this.XMLLoadLocale(eFileType["MPG"], ref iBMSCStrings.FileType.MPG);
+                    this.XMLLoadLocale(eFileType["AVI"], ref iBMSCStrings.FileType.AVI);
+                    this.XMLLoadLocale(eFileType["MP4"], ref iBMSCStrings.FileType.MP4);
+                    this.XMLLoadLocale(eFileType["WMV"], ref iBMSCStrings.FileType.WMV);
+                    this.XMLLoadLocale(eFileType["WEBM"], ref iBMSCStrings.FileType.WEBM);
+                    this.XMLLoadLocale(eFileType["EXE"], ref iBMSCStrings.FileType.EXE);
                 }
 
                 var eStatistics = Root["Statistics"];
                 if (eStatistics is not null)
                 {
-                    this.XMLLoadLocale(eStatistics["Title"], ref iBMSC.Strings.fStatistics.Title);
-                    this.XMLLoadLocale(eStatistics["lBPM"], ref iBMSC.Strings.fStatistics.lBPM);
-                    this.XMLLoadLocale(eStatistics["lSTOP"], ref iBMSC.Strings.fStatistics.lSTOP);
-                    this.XMLLoadLocale(eStatistics["lSCROLL"], ref iBMSC.Strings.fStatistics.lSCROLL);
-                    this.XMLLoadLocale(eStatistics["lA"], ref iBMSC.Strings.fStatistics.lA);
-                    this.XMLLoadLocale(eStatistics["lD"], ref iBMSC.Strings.fStatistics.lD);
-                    this.XMLLoadLocale(eStatistics["lBGM"], ref iBMSC.Strings.fStatistics.lBGM);
-                    this.XMLLoadLocale(eStatistics["lTotal"], ref iBMSC.Strings.fStatistics.lTotal);
-                    this.XMLLoadLocale(eStatistics["lShort"], ref iBMSC.Strings.fStatistics.lShort);
-                    this.XMLLoadLocale(eStatistics["lLong"], ref iBMSC.Strings.fStatistics.lLong);
-                    this.XMLLoadLocale(eStatistics["lLnObj"], ref iBMSC.Strings.fStatistics.lLnObj);
-                    this.XMLLoadLocale(eStatistics["lHidden"], ref iBMSC.Strings.fStatistics.lHidden);
-                    this.XMLLoadLocale(eStatistics["lErrors"], ref iBMSC.Strings.fStatistics.lErrors);
+                    this.XMLLoadLocale(eStatistics["Title"], ref iBMSCStrings.fStatistics.Title);
+                    this.XMLLoadLocale(eStatistics["lBPM"], ref iBMSCStrings.fStatistics.lBPM);
+                    this.XMLLoadLocale(eStatistics["lSTOP"], ref iBMSCStrings.fStatistics.lSTOP);
+                    this.XMLLoadLocale(eStatistics["lSCROLL"], ref iBMSCStrings.fStatistics.lSCROLL);
+                    this.XMLLoadLocale(eStatistics["lA"], ref iBMSCStrings.fStatistics.lA);
+                    this.XMLLoadLocale(eStatistics["lD"], ref iBMSCStrings.fStatistics.lD);
+                    this.XMLLoadLocale(eStatistics["lBGM"], ref iBMSCStrings.fStatistics.lBGM);
+                    this.XMLLoadLocale(eStatistics["lTotal"], ref iBMSCStrings.fStatistics.lTotal);
+                    this.XMLLoadLocale(eStatistics["lShort"], ref iBMSCStrings.fStatistics.lShort);
+                    this.XMLLoadLocale(eStatistics["lLong"], ref iBMSCStrings.fStatistics.lLong);
+                    this.XMLLoadLocale(eStatistics["lLnObj"], ref iBMSCStrings.fStatistics.lLnObj);
+                    this.XMLLoadLocale(eStatistics["lHidden"], ref iBMSCStrings.fStatistics.lHidden);
+                    this.XMLLoadLocale(eStatistics["lErrors"], ref iBMSCStrings.fStatistics.lErrors);
                 }
 
                 var ePlayerOptions = Root["PlayerOptions"];
                 if (ePlayerOptions is not null)
                 {
-                    this.XMLLoadLocale(ePlayerOptions["Title"], ref iBMSC.Strings.fopPlayer.Title);
-                    this.XMLLoadLocale(ePlayerOptions["Add"], ref iBMSC.Strings.fopPlayer.Add);
-                    this.XMLLoadLocale(ePlayerOptions["Remove"], ref iBMSC.Strings.fopPlayer.Remove);
-                    this.XMLLoadLocale(ePlayerOptions["Path"], ref iBMSC.Strings.fopPlayer.Path);
-                    this.XMLLoadLocale(ePlayerOptions["PlayFromBeginning"], ref iBMSC.Strings.fopPlayer.PlayFromBeginning);
-                    this.XMLLoadLocale(ePlayerOptions["PlayFromHere"], ref iBMSC.Strings.fopPlayer.PlayFromHere);
-                    this.XMLLoadLocale(ePlayerOptions["StopPlaying"], ref iBMSC.Strings.fopPlayer.StopPlaying);
-                    this.XMLLoadLocale(ePlayerOptions["References"], ref iBMSC.Strings.fopPlayer.References);
-                    this.XMLLoadLocale(ePlayerOptions["DirectoryOfApp"], ref iBMSC.Strings.fopPlayer.DirectoryOfApp);
-                    this.XMLLoadLocale(ePlayerOptions["CurrMeasure"], ref iBMSC.Strings.fopPlayer.CurrMeasure);
-                    this.XMLLoadLocale(ePlayerOptions["FileName"], ref iBMSC.Strings.fopPlayer.FileName);
-                    this.XMLLoadLocale(ePlayerOptions["RestoreDefault"], ref iBMSC.Strings.fopPlayer.RestoreDefault);
+                    this.XMLLoadLocale(ePlayerOptions["Title"], ref iBMSCStrings.fopPlayer.Title);
+                    this.XMLLoadLocale(ePlayerOptions["Add"], ref iBMSCStrings.fopPlayer.Add);
+                    this.XMLLoadLocale(ePlayerOptions["Remove"], ref iBMSCStrings.fopPlayer.Remove);
+                    this.XMLLoadLocale(ePlayerOptions["Path"], ref iBMSCStrings.fopPlayer.Path);
+                    this.XMLLoadLocale(ePlayerOptions["PlayFromBeginning"], ref iBMSCStrings.fopPlayer.PlayFromBeginning);
+                    this.XMLLoadLocale(ePlayerOptions["PlayFromHere"], ref iBMSCStrings.fopPlayer.PlayFromHere);
+                    this.XMLLoadLocale(ePlayerOptions["StopPlaying"], ref iBMSCStrings.fopPlayer.StopPlaying);
+                    this.XMLLoadLocale(ePlayerOptions["References"], ref iBMSCStrings.fopPlayer.References);
+                    this.XMLLoadLocale(ePlayerOptions["DirectoryOfApp"], ref iBMSCStrings.fopPlayer.DirectoryOfApp);
+                    this.XMLLoadLocale(ePlayerOptions["CurrMeasure"], ref iBMSCStrings.fopPlayer.CurrMeasure);
+                    this.XMLLoadLocale(ePlayerOptions["FileName"], ref iBMSCStrings.fopPlayer.FileName);
+                    this.XMLLoadLocale(ePlayerOptions["RestoreDefault"], ref iBMSCStrings.fopPlayer.RestoreDefault);
                 }
 
                 var eVisualOptions = Root["VisualOptions"];
                 if (eVisualOptions is not null)
                 {
-                    this.XMLLoadLocale(eVisualOptions["Title"], ref iBMSC.Strings.fopVisual.Title);
-                    this.XMLLoadLocale(eVisualOptions["Width"], ref iBMSC.Strings.fopVisual.Width);
-                    this.XMLLoadLocale(eVisualOptions["Caption"], ref iBMSC.Strings.fopVisual.Caption);
-                    this.XMLLoadLocale(eVisualOptions["Note"], ref iBMSC.Strings.fopVisual.Note);
-                    this.XMLLoadLocale(eVisualOptions["Label"], ref iBMSC.Strings.fopVisual.Label);
-                    this.XMLLoadLocale(eVisualOptions["LongNote"], ref iBMSC.Strings.fopVisual.LongNote);
-                    this.XMLLoadLocale(eVisualOptions["LongNoteLabel"], ref iBMSC.Strings.fopVisual.LongNoteLabel);
-                    this.XMLLoadLocale(eVisualOptions["Bg"], ref iBMSC.Strings.fopVisual.Bg);
-                    this.XMLLoadLocale(eVisualOptions["ColumnCaption"], ref iBMSC.Strings.fopVisual.ColumnCaption);
-                    this.XMLLoadLocale(eVisualOptions["ColumnCaptionFont"], ref iBMSC.Strings.fopVisual.ColumnCaptionFont);
-                    this.XMLLoadLocale(eVisualOptions["Background"], ref iBMSC.Strings.fopVisual.Background);
-                    this.XMLLoadLocale(eVisualOptions["Grid"], ref iBMSC.Strings.fopVisual.Grid);
-                    this.XMLLoadLocale(eVisualOptions["SubGrid"], ref iBMSC.Strings.fopVisual.SubGrid);
-                    this.XMLLoadLocale(eVisualOptions["VerticalLine"], ref iBMSC.Strings.fopVisual.VerticalLine);
-                    this.XMLLoadLocale(eVisualOptions["MeasureBarLine"], ref iBMSC.Strings.fopVisual.MeasureBarLine);
-                    this.XMLLoadLocale(eVisualOptions["BGMWaveform"], ref iBMSC.Strings.fopVisual.BGMWaveform);
-                    this.XMLLoadLocale(eVisualOptions["NoteHeight"], ref iBMSC.Strings.fopVisual.NoteHeight);
-                    this.XMLLoadLocale(eVisualOptions["NoteLabel"], ref iBMSC.Strings.fopVisual.NoteLabel);
-                    this.XMLLoadLocale(eVisualOptions["MeasureLabel"], ref iBMSC.Strings.fopVisual.MeasureLabel);
-                    this.XMLLoadLocale(eVisualOptions["LabelVerticalShift"], ref iBMSC.Strings.fopVisual.LabelVerticalShift);
-                    this.XMLLoadLocale(eVisualOptions["LabelHorizontalShift"], ref iBMSC.Strings.fopVisual.LabelHorizontalShift);
-                    this.XMLLoadLocale(eVisualOptions["LongNoteLabelHorizontalShift"], ref iBMSC.Strings.fopVisual.LongNoteLabelHorizontalShift);
-                    this.XMLLoadLocale(eVisualOptions["HiddenNoteOpacity"], ref iBMSC.Strings.fopVisual.HiddenNoteOpacity);
-                    this.XMLLoadLocale(eVisualOptions["NoteBorderOnMouseOver"], ref iBMSC.Strings.fopVisual.NoteBorderOnMouseOver);
-                    this.XMLLoadLocale(eVisualOptions["NoteBorderOnSelection"], ref iBMSC.Strings.fopVisual.NoteBorderOnSelection);
-                    this.XMLLoadLocale(eVisualOptions["NoteBorderOnAdjustingLength"], ref iBMSC.Strings.fopVisual.NoteBorderOnAdjustingLength);
-                    this.XMLLoadLocale(eVisualOptions["SelectionBoxBorder"], ref iBMSC.Strings.fopVisual.SelectionBoxBorder);
-                    this.XMLLoadLocale(eVisualOptions["TSCursor"], ref iBMSC.Strings.fopVisual.TSCursor);
-                    this.XMLLoadLocale(eVisualOptions["TSSplitter"], ref iBMSC.Strings.fopVisual.TSSplitter);
-                    this.XMLLoadLocale(eVisualOptions["TSCursorSensitivity"], ref iBMSC.Strings.fopVisual.TSCursorSensitivity);
-                    this.XMLLoadLocale(eVisualOptions["TSMouseOverBorder"], ref iBMSC.Strings.fopVisual.TSMouseOverBorder);
-                    this.XMLLoadLocale(eVisualOptions["TSFill"], ref iBMSC.Strings.fopVisual.TSFill);
-                    this.XMLLoadLocale(eVisualOptions["TSBPM"], ref iBMSC.Strings.fopVisual.TSBPM);
-                    this.XMLLoadLocale(eVisualOptions["TSBPMFont"], ref iBMSC.Strings.fopVisual.TSBPMFont);
-                    this.XMLLoadLocale(eVisualOptions["MiddleSensitivity"], ref iBMSC.Strings.fopVisual.MiddleSensitivity);
+                    this.XMLLoadLocale(eVisualOptions["Title"], ref iBMSCStrings.fopVisual.Title);
+                    this.XMLLoadLocale(eVisualOptions["Width"], ref iBMSCStrings.fopVisual.Width);
+                    this.XMLLoadLocale(eVisualOptions["Caption"], ref iBMSCStrings.fopVisual.Caption);
+                    this.XMLLoadLocale(eVisualOptions["Note"], ref iBMSCStrings.fopVisual.Note);
+                    this.XMLLoadLocale(eVisualOptions["Label"], ref iBMSCStrings.fopVisual.Label);
+                    this.XMLLoadLocale(eVisualOptions["LongNote"], ref iBMSCStrings.fopVisual.LongNote);
+                    this.XMLLoadLocale(eVisualOptions["LongNoteLabel"], ref iBMSCStrings.fopVisual.LongNoteLabel);
+                    this.XMLLoadLocale(eVisualOptions["Bg"], ref iBMSCStrings.fopVisual.Bg);
+                    this.XMLLoadLocale(eVisualOptions["ColumnCaption"], ref iBMSCStrings.fopVisual.ColumnCaption);
+                    this.XMLLoadLocale(eVisualOptions["ColumnCaptionFont"], ref iBMSCStrings.fopVisual.ColumnCaptionFont);
+                    this.XMLLoadLocale(eVisualOptions["Background"], ref iBMSCStrings.fopVisual.Background);
+                    this.XMLLoadLocale(eVisualOptions["Grid"], ref iBMSCStrings.fopVisual.Grid);
+                    this.XMLLoadLocale(eVisualOptions["SubGrid"], ref iBMSCStrings.fopVisual.SubGrid);
+                    this.XMLLoadLocale(eVisualOptions["VerticalLine"], ref iBMSCStrings.fopVisual.VerticalLine);
+                    this.XMLLoadLocale(eVisualOptions["MeasureBarLine"], ref iBMSCStrings.fopVisual.MeasureBarLine);
+                    this.XMLLoadLocale(eVisualOptions["BGMWaveform"], ref iBMSCStrings.fopVisual.BGMWaveform);
+                    this.XMLLoadLocale(eVisualOptions["NoteHeight"], ref iBMSCStrings.fopVisual.NoteHeight);
+                    this.XMLLoadLocale(eVisualOptions["NoteLabel"], ref iBMSCStrings.fopVisual.NoteLabel);
+                    this.XMLLoadLocale(eVisualOptions["MeasureLabel"], ref iBMSCStrings.fopVisual.MeasureLabel);
+                    this.XMLLoadLocale(eVisualOptions["LabelVerticalShift"], ref iBMSCStrings.fopVisual.LabelVerticalShift);
+                    this.XMLLoadLocale(eVisualOptions["LabelHorizontalShift"], ref iBMSCStrings.fopVisual.LabelHorizontalShift);
+                    this.XMLLoadLocale(eVisualOptions["LongNoteLabelHorizontalShift"], ref iBMSCStrings.fopVisual.LongNoteLabelHorizontalShift);
+                    this.XMLLoadLocale(eVisualOptions["HiddenNoteOpacity"], ref iBMSCStrings.fopVisual.HiddenNoteOpacity);
+                    this.XMLLoadLocale(eVisualOptions["NoteBorderOnMouseOver"], ref iBMSCStrings.fopVisual.NoteBorderOnMouseOver);
+                    this.XMLLoadLocale(eVisualOptions["NoteBorderOnSelection"], ref iBMSCStrings.fopVisual.NoteBorderOnSelection);
+                    this.XMLLoadLocale(eVisualOptions["NoteBorderOnAdjustingLength"], ref iBMSCStrings.fopVisual.NoteBorderOnAdjustingLength);
+                    this.XMLLoadLocale(eVisualOptions["SelectionBoxBorder"], ref iBMSCStrings.fopVisual.SelectionBoxBorder);
+                    this.XMLLoadLocale(eVisualOptions["TSCursor"], ref iBMSCStrings.fopVisual.TSCursor);
+                    this.XMLLoadLocale(eVisualOptions["TSSplitter"], ref iBMSCStrings.fopVisual.TSSplitter);
+                    this.XMLLoadLocale(eVisualOptions["TSCursorSensitivity"], ref iBMSCStrings.fopVisual.TSCursorSensitivity);
+                    this.XMLLoadLocale(eVisualOptions["TSMouseOverBorder"], ref iBMSCStrings.fopVisual.TSMouseOverBorder);
+                    this.XMLLoadLocale(eVisualOptions["TSFill"], ref iBMSCStrings.fopVisual.TSFill);
+                    this.XMLLoadLocale(eVisualOptions["TSBPM"], ref iBMSCStrings.fopVisual.TSBPM);
+                    this.XMLLoadLocale(eVisualOptions["TSBPMFont"], ref iBMSCStrings.fopVisual.TSBPMFont);
+                    this.XMLLoadLocale(eVisualOptions["MiddleSensitivity"], ref iBMSCStrings.fopVisual.MiddleSensitivity);
                 }
 
                 var eGeneralOptions = Root["GeneralOptions"];
                 if (eGeneralOptions is not null)
                 {
-                    this.XMLLoadLocale(eGeneralOptions["Title"], ref iBMSC.Strings.fopGeneral.Title);
-                    this.XMLLoadLocale(eGeneralOptions["MouseWheel"], ref iBMSC.Strings.fopGeneral.MouseWheel);
-                    this.XMLLoadLocale(eGeneralOptions["TextEncoding"], ref iBMSC.Strings.fopGeneral.TextEncoding);
-                    this.XMLLoadLocale(eGeneralOptions["PageUpDown"], ref iBMSC.Strings.fopGeneral.PageUpDown);
-                    this.XMLLoadLocale(eGeneralOptions["MiddleButton"], ref iBMSC.Strings.fopGeneral.MiddleButton);
-                    this.XMLLoadLocale(eGeneralOptions["MiddleButtonAuto"], ref iBMSC.Strings.fopGeneral.MiddleButtonAuto);
-                    this.XMLLoadLocale(eGeneralOptions["MiddleButtonDrag"], ref iBMSC.Strings.fopGeneral.MiddleButtonDrag);
-                    this.XMLLoadLocale(eGeneralOptions["AssociateFileType"], ref iBMSC.Strings.fopGeneral.AssociateFileType);
-                    this.XMLLoadLocale(eGeneralOptions["MaxGridPartition"], ref iBMSC.Strings.fopGeneral.MaxGridPartition);
-                    this.XMLLoadLocale(eGeneralOptions["BeepWhileSaved"], ref iBMSC.Strings.fopGeneral.BeepWhileSaved);
-                    this.XMLLoadLocale(eGeneralOptions["ExtendBPM"], ref iBMSC.Strings.fopGeneral.ExtendBPM);
-                    this.XMLLoadLocale(eGeneralOptions["ExtendSTOP"], ref iBMSC.Strings.fopGeneral.ExtendSTOP);
-                    this.XMLLoadLocale(eGeneralOptions["AutoFocusOnMouseEnter"], ref iBMSC.Strings.fopGeneral.AutoFocusOnMouseEnter);
-                    this.XMLLoadLocale(eGeneralOptions["DisableFirstClick"], ref iBMSC.Strings.fopGeneral.DisableFirstClick);
-                    this.XMLLoadLocale(eGeneralOptions["AutoSave"], ref iBMSC.Strings.fopGeneral.AutoSave);
-                    this.XMLLoadLocale(eGeneralOptions["minutes"], ref iBMSC.Strings.fopGeneral.minutes);
-                    this.XMLLoadLocale(eGeneralOptions["StopPreviewOnClick"], ref iBMSC.Strings.fopGeneral.StopPreviewOnClick);
+                    this.XMLLoadLocale(eGeneralOptions["Title"], ref iBMSCStrings.fopGeneral.Title);
+                    this.XMLLoadLocale(eGeneralOptions["MouseWheel"], ref iBMSCStrings.fopGeneral.MouseWheel);
+                    this.XMLLoadLocale(eGeneralOptions["TextEncoding"], ref iBMSCStrings.fopGeneral.TextEncoding);
+                    this.XMLLoadLocale(eGeneralOptions["PageUpDown"], ref iBMSCStrings.fopGeneral.PageUpDown);
+                    this.XMLLoadLocale(eGeneralOptions["MiddleButton"], ref iBMSCStrings.fopGeneral.MiddleButton);
+                    this.XMLLoadLocale(eGeneralOptions["MiddleButtonAuto"], ref iBMSCStrings.fopGeneral.MiddleButtonAuto);
+                    this.XMLLoadLocale(eGeneralOptions["MiddleButtonDrag"], ref iBMSCStrings.fopGeneral.MiddleButtonDrag);
+                    this.XMLLoadLocale(eGeneralOptions["AssociateFileType"], ref iBMSCStrings.fopGeneral.AssociateFileType);
+                    this.XMLLoadLocale(eGeneralOptions["MaxGridPartition"], ref iBMSCStrings.fopGeneral.MaxGridPartition);
+                    this.XMLLoadLocale(eGeneralOptions["BeepWhileSaved"], ref iBMSCStrings.fopGeneral.BeepWhileSaved);
+                    this.XMLLoadLocale(eGeneralOptions["ExtendBPM"], ref iBMSCStrings.fopGeneral.ExtendBPM);
+                    this.XMLLoadLocale(eGeneralOptions["ExtendSTOP"], ref iBMSCStrings.fopGeneral.ExtendSTOP);
+                    this.XMLLoadLocale(eGeneralOptions["AutoFocusOnMouseEnter"], ref iBMSCStrings.fopGeneral.AutoFocusOnMouseEnter);
+                    this.XMLLoadLocale(eGeneralOptions["DisableFirstClick"], ref iBMSCStrings.fopGeneral.DisableFirstClick);
+                    this.XMLLoadLocale(eGeneralOptions["AutoSave"], ref iBMSCStrings.fopGeneral.AutoSave);
+                    this.XMLLoadLocale(eGeneralOptions["minutes"], ref iBMSCStrings.fopGeneral.minutes);
+                    this.XMLLoadLocale(eGeneralOptions["StopPreviewOnClick"], ref iBMSCStrings.fopGeneral.StopPreviewOnClick);
                 }
 
                 var eFind = Root["Find"];
                 if (eFind is not null)
                 {
-                    this.XMLLoadLocale(eFind["NoteRange"], ref iBMSC.Strings.fFind.NoteRange);
-                    this.XMLLoadLocale(eFind["MeasureRange"], ref iBMSC.Strings.fFind.MeasureRange);
-                    this.XMLLoadLocale(eFind["LabelRange"], ref iBMSC.Strings.fFind.LabelRange);
-                    this.XMLLoadLocale(eFind["ValueRange"], ref iBMSC.Strings.fFind.ValueRange);
-                    this.XMLLoadLocale(eFind["to"], ref iBMSC.Strings.fFind.to_);
-                    this.XMLLoadLocale(eFind["Selected"], ref iBMSC.Strings.fFind.Selected);
-                    this.XMLLoadLocale(eFind["UnSelected"], ref iBMSC.Strings.fFind.UnSelected);
-                    this.XMLLoadLocale(eFind["ShortNote"], ref iBMSC.Strings.fFind.ShortNote);
-                    this.XMLLoadLocale(eFind["LongNote"], ref iBMSC.Strings.fFind.LongNote);
-                    this.XMLLoadLocale(eFind["Hidden"], ref iBMSC.Strings.fFind.Hidden);
-                    this.XMLLoadLocale(eFind["Visible"], ref iBMSC.Strings.fFind.Visible);
-                    this.XMLLoadLocale(eFind["Column"], ref iBMSC.Strings.fFind.Column);
-                    this.XMLLoadLocale(eFind["SelectAll"], ref iBMSC.Strings.fFind.SelectAll);
-                    this.XMLLoadLocale(eFind["SelectInverse"], ref iBMSC.Strings.fFind.SelectInverse);
-                    this.XMLLoadLocale(eFind["UnselectAll"], ref iBMSC.Strings.fFind.UnselectAll);
-                    this.XMLLoadLocale(eFind["Operation"], ref iBMSC.Strings.fFind.Operation);
-                    this.XMLLoadLocale(eFind["ReplaceWithLabel"], ref iBMSC.Strings.fFind.ReplaceWithLabel);
-                    this.XMLLoadLocale(eFind["ReplaceWithValue"], ref iBMSC.Strings.fFind.ReplaceWithValue);
-                    this.XMLLoadLocale(eFind["Select"], ref iBMSC.Strings.fFind.Select_);
-                    this.XMLLoadLocale(eFind["Unselect"], ref iBMSC.Strings.fFind.Unselect_);
-                    this.XMLLoadLocale(eFind["Delete"], ref iBMSC.Strings.fFind.Delete_);
-                    this.XMLLoadLocale(eFind["Close"], ref iBMSC.Strings.fFind.Close_);
+                    this.XMLLoadLocale(eFind["NoteRange"], ref iBMSCStrings.fFind.NoteRange);
+                    this.XMLLoadLocale(eFind["MeasureRange"], ref iBMSCStrings.fFind.MeasureRange);
+                    this.XMLLoadLocale(eFind["LabelRange"], ref iBMSCStrings.fFind.LabelRange);
+                    this.XMLLoadLocale(eFind["ValueRange"], ref iBMSCStrings.fFind.ValueRange);
+                    this.XMLLoadLocale(eFind["to"], ref iBMSCStrings.fFind.to_);
+                    this.XMLLoadLocale(eFind["Selected"], ref iBMSCStrings.fFind.Selected);
+                    this.XMLLoadLocale(eFind["UnSelected"], ref iBMSCStrings.fFind.UnSelected);
+                    this.XMLLoadLocale(eFind["ShortNote"], ref iBMSCStrings.fFind.ShortNote);
+                    this.XMLLoadLocale(eFind["LongNote"], ref iBMSCStrings.fFind.LongNote);
+                    this.XMLLoadLocale(eFind["Hidden"], ref iBMSCStrings.fFind.Hidden);
+                    this.XMLLoadLocale(eFind["Visible"], ref iBMSCStrings.fFind.Visible);
+                    this.XMLLoadLocale(eFind["Column"], ref iBMSCStrings.fFind.Column);
+                    this.XMLLoadLocale(eFind["SelectAll"], ref iBMSCStrings.fFind.SelectAll);
+                    this.XMLLoadLocale(eFind["SelectInverse"], ref iBMSCStrings.fFind.SelectInverse);
+                    this.XMLLoadLocale(eFind["UnselectAll"], ref iBMSCStrings.fFind.UnselectAll);
+                    this.XMLLoadLocale(eFind["Operation"], ref iBMSCStrings.fFind.Operation);
+                    this.XMLLoadLocale(eFind["ReplaceWithLabel"], ref iBMSCStrings.fFind.ReplaceWithLabel);
+                    this.XMLLoadLocale(eFind["ReplaceWithValue"], ref iBMSCStrings.fFind.ReplaceWithValue);
+                    this.XMLLoadLocale(eFind["Select"], ref iBMSCStrings.fFind.Select_);
+                    this.XMLLoadLocale(eFind["Unselect"], ref iBMSCStrings.fFind.Unselect_);
+                    this.XMLLoadLocale(eFind["Delete"], ref iBMSCStrings.fFind.Delete_);
+                    this.XMLLoadLocale(eFind["Close"], ref iBMSCStrings.fFind.Close_);
                 }
 
                 var eImportSM = Root["ImportSM"];
                 if (eImportSM is not null)
                 {
-                    this.XMLLoadLocale(eImportSM["Title"], ref iBMSC.Strings.fImportSM.Title);
-                    this.XMLLoadLocale(eImportSM["Difficulty"], ref iBMSC.Strings.fImportSM.Difficulty);
-                    this.XMLLoadLocale(eImportSM["Note"], ref iBMSC.Strings.fImportSM.Note);
+                    this.XMLLoadLocale(eImportSM["Title"], ref iBMSCStrings.fImportSM.Title);
+                    this.XMLLoadLocale(eImportSM["Difficulty"], ref iBMSCStrings.fImportSM.Difficulty);
+                    this.XMLLoadLocale(eImportSM["Note"], ref iBMSCStrings.fImportSM.Note);
                 }
 
                 var eFileAssociation = Root["FileAssociation"];
                 if (eFileAssociation is not null)
                 {
-                    this.XMLLoadLocale(eFileAssociation["BMS"], ref iBMSC.Strings.FileAssociation.BMS);
-                    this.XMLLoadLocale(eFileAssociation["BME"], ref iBMSC.Strings.FileAssociation.BME);
-                    this.XMLLoadLocale(eFileAssociation["BML"], ref iBMSC.Strings.FileAssociation.BML);
-                    this.XMLLoadLocale(eFileAssociation["PMS"], ref iBMSC.Strings.FileAssociation.PMS);
-                    this.XMLLoadLocale(eFileAssociation["IBMSC"], ref iBMSC.Strings.FileAssociation.IBMSC);
-                    this.XMLLoadLocale(eFileAssociation["Open"], ref iBMSC.Strings.FileAssociation.Open);
-                    this.XMLLoadLocale(eFileAssociation["Preview"], ref iBMSC.Strings.FileAssociation.Preview);
-                    this.XMLLoadLocale(eFileAssociation["ViewCode"], ref iBMSC.Strings.FileAssociation.ViewCode);
+                    this.XMLLoadLocale(eFileAssociation["BMS"], ref iBMSCStrings.FileAssociation.BMS);
+                    this.XMLLoadLocale(eFileAssociation["BME"], ref iBMSCStrings.FileAssociation.BME);
+                    this.XMLLoadLocale(eFileAssociation["BML"], ref iBMSCStrings.FileAssociation.BML);
+                    this.XMLLoadLocale(eFileAssociation["PMS"], ref iBMSCStrings.FileAssociation.PMS);
+                    this.XMLLoadLocale(eFileAssociation["IBMSC"], ref iBMSCStrings.FileAssociation.IBMSC);
+                    this.XMLLoadLocale(eFileAssociation["Open"], ref iBMSCStrings.FileAssociation.Open);
+                    this.XMLLoadLocale(eFileAssociation["Preview"], ref iBMSCStrings.FileAssociation.Preview);
+                    this.XMLLoadLocale(eFileAssociation["ViewCode"], ref iBMSCStrings.FileAssociation.ViewCode);
                 }
 
-                this.DispLang = Path.Replace(iBMSC.My.MyProject.Application.Info.DirectoryPath + @"\", "");
+                this.DispLang = Path.Replace(Application.ExecutablePath + @"\", "");
             }
 
             catch (Exception ex)
@@ -1974,7 +1980,7 @@ namespace iBMSC
 
             catch (Exception ex)
             {
-                Interaction.MsgBox(ex.Message, MsgBoxStyle.Exclamation, iBMSC.Strings.Messages.Err);
+                Interaction.MsgBox(ex.Message, MsgBoxStyle.Exclamation, iBMSCStrings.Messages.Err);
             }
 
             finally
@@ -2028,7 +2034,7 @@ namespace iBMSC
             // If Not File.Exists(My.Application.Info.DirectoryPath & "\Data\" & sender.Text) Then Exit Sub
             // SaveTheme = True
             // LoadCFF(My.Computer.FileSystem.ReadAllText(My.Application.Info.DirectoryPath & "\Theme\" & sender.Text, System.Text.Encoding.Unicode))
-            LoadSettings(Conversions.ToString(Operators.ConcatenateObject(iBMSC.My.MyProject.Application.Info.DirectoryPath + @"\Data\", sender.Text)));
+            LoadSettings(Conversions.ToString(Operators.ConcatenateObject(Application.ExecutablePath + @"\Data\", sender.Text)));
             this.RefreshPanelAll();
         }
     }
