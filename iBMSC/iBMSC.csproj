@@ -19,6 +19,11 @@
     <BaseIntermediateOutputPath>Build\obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="obj\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="obj\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="CSCore" Version="1.2.1.2" />
     <PackageReference Include="NVorbis" Version="0.10.5" />
   </ItemGroup>
