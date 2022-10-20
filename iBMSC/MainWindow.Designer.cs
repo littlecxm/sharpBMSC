@@ -1,34 +1,26 @@
-﻿using System;
+using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace iBMSC
 {
-    [Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
     public partial class MainWindow : Form
     {
-
-        // Form 重写 Dispose，以清理组件列表。
-        [DebuggerNonUserCode()]
-        protected override void Dispose(bool disposing)
+    [DebuggerNonUserCode]
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing && components != null)
         {
-            if (disposing && components is not null)
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
+            components.Dispose();
         }
-
-        // Windows 窗体设计器所必需的
-        private System.ComponentModel.IContainer components;
-
-        // 注意: 以下过程是 Windows 窗体设计器所必需的
-        // 可以使用 Windows 窗体设计器修改它。
-        // 不要使用代码编辑器修改它。
-        [DebuggerStepThrough()]
-        private void InitializeComponent()
-        {
+        base.Dispose(disposing);
+    }
+    private IContainer components;
+    [System.Diagnostics.DebuggerStepThrough]
+    private void InitializeComponent()
+    {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.cmnLanguage = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -70,16 +62,6 @@ namespace iBMSC
             this.CBeatMeasure = new System.Windows.Forms.RadioButton();
             this.CBeatPreserve = new System.Windows.Forms.RadioButton();
             this.POBeatSwitch = new System.Windows.Forms.CheckBox();
-            this.POBMP = new System.Windows.Forms.Panel();
-            this.POBMPInner = new System.Windows.Forms.TableLayoutPanel();
-            this.LBMP = new System.Windows.Forms.ListBox();
-            this.FlowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.BBMPUp = new System.Windows.Forms.Button();
-            this.BBMPDown = new System.Windows.Forms.Button();
-            this.BBMPBrowse = new System.Windows.Forms.Button();
-            this.BBMPRemove = new System.Windows.Forms.Button();
-            this.POBMPResizer = new System.Windows.Forms.Button();
-            this.POBMPSwitch = new System.Windows.Forms.CheckBox();
             this.POWAV = new System.Windows.Forms.Panel();
             this.POWAVInner = new System.Windows.Forms.TableLayoutPanel();
             this.POWAVExpander = new System.Windows.Forms.CheckBox();
@@ -388,9 +370,6 @@ namespace iBMSC
             ((System.ComponentModel.ISupportInitialize)(this.nBeatD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nBeatN)).BeginInit();
             this.POBeatPart2.SuspendLayout();
-            this.POBMP.SuspendLayout();
-            this.POBMPInner.SuspendLayout();
-            this.FlowLayoutPanel4.SuspendLayout();
             this.POWAV.SuspendLayout();
             this.POWAVInner.SuspendLayout();
             this.FlowLayoutPanel3.SuspendLayout();
@@ -479,7 +458,7 @@ namespace iBMSC
             // 
             // TBLangRefresh
             // 
-            this.TBLangRefresh.Image = global::iBMSC.Properties.Resources.x16Refresh;
+            this.TBLangRefresh.Image = global::iBMSC.Resources.x16Refresh;
             this.TBLangRefresh.Name = "TBLangRefresh";
             this.TBLangRefresh.Size = new System.Drawing.Size(144, 26);
             this.TBLangRefresh.Text = "Refresh";
@@ -493,7 +472,7 @@ namespace iBMSC
             // mnLanguage
             // 
             this.mnLanguage.DropDown = this.cmnLanguage;
-            this.mnLanguage.Image = global::iBMSC.Properties.Resources.x16Language;
+            this.mnLanguage.Image = global::iBMSC.Resources.x16Language;
             this.mnLanguage.Name = "mnLanguage";
             this.mnLanguage.Size = new System.Drawing.Size(302, 26);
             this.mnLanguage.Text = "&Language";
@@ -502,7 +481,7 @@ namespace iBMSC
             // 
             this.TBLanguage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.TBLanguage.DropDown = this.cmnLanguage;
-            this.TBLanguage.Image = global::iBMSC.Properties.Resources.x16Language;
+            this.TBLanguage.Image = global::iBMSC.Resources.x16Language;
             this.TBLanguage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBLanguage.Name = "TBLanguage";
             this.TBLanguage.Size = new System.Drawing.Size(34, 24);
@@ -530,7 +509,7 @@ namespace iBMSC
             // 
             // TBThemeSave
             // 
-            this.TBThemeSave.Image = global::iBMSC.Properties.Resources.x16SaveAs;
+            this.TBThemeSave.Image = global::iBMSC.Resources.x16SaveAs;
             this.TBThemeSave.Name = "TBThemeSave";
             this.TBThemeSave.Size = new System.Drawing.Size(316, 26);
             this.TBThemeSave.Text = "Save Theme";
@@ -538,7 +517,7 @@ namespace iBMSC
             // 
             // TBThemeRefresh
             // 
-            this.TBThemeRefresh.Image = global::iBMSC.Properties.Resources.x16Refresh;
+            this.TBThemeRefresh.Image = global::iBMSC.Resources.x16Refresh;
             this.TBThemeRefresh.Name = "TBThemeRefresh";
             this.TBThemeRefresh.Size = new System.Drawing.Size(316, 26);
             this.TBThemeRefresh.Text = "Refresh";
@@ -559,7 +538,7 @@ namespace iBMSC
             // mnTheme
             // 
             this.mnTheme.DropDown = this.cmnTheme;
-            this.mnTheme.Image = global::iBMSC.Properties.Resources.x16Theme;
+            this.mnTheme.Image = global::iBMSC.Resources.x16Theme;
             this.mnTheme.Name = "mnTheme";
             this.mnTheme.Size = new System.Drawing.Size(302, 26);
             this.mnTheme.Text = "&Theme";
@@ -568,7 +547,7 @@ namespace iBMSC
             // 
             this.TBTheme.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.TBTheme.DropDown = this.cmnTheme;
-            this.TBTheme.Image = global::iBMSC.Properties.Resources.x16Theme;
+            this.TBTheme.Image = global::iBMSC.Resources.x16Theme;
             this.TBTheme.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBTheme.Name = "TBTheme";
             this.TBTheme.Size = new System.Drawing.Size(34, 24);
@@ -590,7 +569,6 @@ namespace iBMSC
             this.POptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.POptions.Controls.Add(this.POExpansion);
             this.POptions.Controls.Add(this.POBeat);
-            this.POptions.Controls.Add(this.POBMP);
             this.POptions.Controls.Add(this.POWAV);
             this.POptions.Controls.Add(this.POWaveForm);
             this.POptions.Controls.Add(this.POGrid);
@@ -598,7 +576,7 @@ namespace iBMSC
             this.POptions.Dock = System.Windows.Forms.DockStyle.Top;
             this.POptions.Location = new System.Drawing.Point(0, 0);
             this.POptions.Name = "POptions";
-            this.POptions.Size = new System.Drawing.Size(179, 2096);
+            this.POptions.Size = new System.Drawing.Size(179, 1826);
             this.POptions.TabIndex = 29;
             // 
             // POExpansion
@@ -608,7 +586,7 @@ namespace iBMSC
             this.POExpansion.Controls.Add(this.POExpansionInner);
             this.POExpansion.Controls.Add(this.POExpansionSwitch);
             this.POExpansion.Dock = System.Windows.Forms.DockStyle.Top;
-            this.POExpansion.Location = new System.Drawing.Point(0, 1826);
+            this.POExpansion.Location = new System.Drawing.Point(0, 1556);
             this.POExpansion.Name = "POExpansion";
             this.POExpansion.Size = new System.Drawing.Size(179, 270);
             this.POExpansion.TabIndex = 6;
@@ -619,7 +597,7 @@ namespace iBMSC
             this.POExpansionInner.Controls.Add(this.TExpansion);
             this.POExpansionInner.Controls.Add(this.POExpansionResizer);
             this.POExpansionInner.Dock = System.Windows.Forms.DockStyle.Top;
-            this.POExpansionInner.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.POExpansionInner.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.POExpansionInner.Location = new System.Drawing.Point(0, 20);
             this.POExpansionInner.Name = "POExpansionInner";
             this.POExpansionInner.Size = new System.Drawing.Size(179, 250);
@@ -661,7 +639,7 @@ namespace iBMSC
             this.POExpansionSwitch.BackColor = System.Drawing.SystemColors.Control;
             this.POExpansionSwitch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.POExpansionSwitch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.POExpansionSwitch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.POExpansionSwitch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.POExpansionSwitch.Location = new System.Drawing.Point(0, 0);
             this.POExpansionSwitch.Name = "POExpansionSwitch";
             this.POExpansionSwitch.Size = new System.Drawing.Size(179, 20);
@@ -680,7 +658,7 @@ namespace iBMSC
             this.POBeat.Controls.Add(this.POBeatInner);
             this.POBeat.Controls.Add(this.POBeatSwitch);
             this.POBeat.Dock = System.Windows.Forms.DockStyle.Top;
-            this.POBeat.Location = new System.Drawing.Point(0, 1556);
+            this.POBeat.Location = new System.Drawing.Point(0, 1286);
             this.POBeat.Name = "POBeat";
             this.POBeat.Size = new System.Drawing.Size(179, 270);
             this.POBeat.TabIndex = 5;
@@ -869,7 +847,7 @@ namespace iBMSC
             // LBeat
             // 
             this.LBeat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LBeat.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LBeat.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LBeat.IntegralHeight = false;
             this.LBeat.ItemHeight = 18;
             this.LBeat.Items.AddRange(new object[] {
@@ -961,7 +939,7 @@ namespace iBMSC
             this.POBeatSwitch.BackColor = System.Drawing.SystemColors.Control;
             this.POBeatSwitch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.POBeatSwitch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.POBeatSwitch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.POBeatSwitch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.POBeatSwitch.Location = new System.Drawing.Point(0, 0);
             this.POBeatSwitch.Name = "POBeatSwitch";
             this.POBeatSwitch.Size = new System.Drawing.Size(179, 20);
@@ -972,153 +950,6 @@ namespace iBMSC
             this.POBeatSwitch.UseCompatibleTextRendering = true;
             this.POBeatSwitch.UseVisualStyleBackColor = false;
             this.POBeatSwitch.CheckedChanged += new System.EventHandler(this.Switches_CheckedChanged);
-            // 
-            // POBMP
-            // 
-            this.POBMP.AllowDrop = true;
-            this.POBMP.AutoSize = true;
-            this.POBMP.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.POBMP.Controls.Add(this.POBMPInner);
-            this.POBMP.Controls.Add(this.POBMPSwitch);
-            this.POBMP.Dock = System.Windows.Forms.DockStyle.Top;
-            this.POBMP.Location = new System.Drawing.Point(0, 1286);
-            this.POBMP.Name = "POBMP";
-            this.POBMP.Size = new System.Drawing.Size(179, 270);
-            this.POBMP.TabIndex = 4;
-            this.POBMP.DragDrop += new System.Windows.Forms.DragEventHandler(this.POBMP_DragDrop);
-            this.POBMP.DragEnter += new System.Windows.Forms.DragEventHandler(this.POBMP_DragEnter);
-            this.POBMP.DragLeave += new System.EventHandler(this.POBMP_DragLeave);
-            this.POBMP.Resize += new System.EventHandler(this.POBMP_Resize);
-            // 
-            // POBMPInner
-            // 
-            this.POBMPInner.ColumnCount = 1;
-            this.POBMPInner.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.POBMPInner.Controls.Add(this.LBMP, 0, 1);
-            this.POBMPInner.Controls.Add(this.FlowLayoutPanel4, 0, 0);
-            this.POBMPInner.Controls.Add(this.POBMPResizer, 0, 2);
-            this.POBMPInner.Dock = System.Windows.Forms.DockStyle.Top;
-            this.POBMPInner.Location = new System.Drawing.Point(0, 20);
-            this.POBMPInner.Name = "POBMPInner";
-            this.POBMPInner.RowCount = 3;
-            this.POBMPInner.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.POBMPInner.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.POBMPInner.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.POBMPInner.Size = new System.Drawing.Size(179, 250);
-            this.POBMPInner.TabIndex = 5;
-            this.POBMPInner.Visible = false;
-            // 
-            // LBMP
-            // 
-            this.LBMP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LBMP.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LBMP.IntegralHeight = false;
-            this.LBMP.ItemHeight = 18;
-            this.LBMP.Location = new System.Drawing.Point(3, 30);
-            this.LBMP.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.LBMP.Name = "LBMP";
-            this.LBMP.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.LBMP.Size = new System.Drawing.Size(173, 215);
-            this.LBMP.TabIndex = 25;
-            this.LBMP.DoubleClick += new System.EventHandler(this.LBMP_DoubleClick);
-            this.LBMP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LBMP_KeyDown);
-            // 
-            // FlowLayoutPanel4
-            // 
-            this.FlowLayoutPanel4.AutoSize = true;
-            this.FlowLayoutPanel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.FlowLayoutPanel4.Controls.Add(this.BBMPUp);
-            this.FlowLayoutPanel4.Controls.Add(this.BBMPDown);
-            this.FlowLayoutPanel4.Controls.Add(this.BBMPBrowse);
-            this.FlowLayoutPanel4.Controls.Add(this.BBMPRemove);
-            this.FlowLayoutPanel4.Location = new System.Drawing.Point(3, 3);
-            this.FlowLayoutPanel4.Name = "FlowLayoutPanel4";
-            this.FlowLayoutPanel4.Size = new System.Drawing.Size(96, 24);
-            this.FlowLayoutPanel4.TabIndex = 26;
-            this.FlowLayoutPanel4.WrapContents = false;
-            // 
-            // BBMPUp
-            // 
-            this.BBMPUp.Image = global::iBMSC.Properties.Resources.x16Up;
-            this.BBMPUp.Location = new System.Drawing.Point(0, 0);
-            this.BBMPUp.Margin = new System.Windows.Forms.Padding(0);
-            this.BBMPUp.Name = "BBMPUp";
-            this.BBMPUp.Size = new System.Drawing.Size(24, 24);
-            this.BBMPUp.TabIndex = 26;
-            this.ToolTipUniversal.SetToolTip(this.BBMPUp, "Move Up");
-            this.BBMPUp.UseVisualStyleBackColor = true;
-            this.BBMPUp.Click += new System.EventHandler(this.BBMPUp_Click);
-            // 
-            // BBMPDown
-            // 
-            this.BBMPDown.Image = global::iBMSC.Properties.Resources.x16Down;
-            this.BBMPDown.Location = new System.Drawing.Point(24, 0);
-            this.BBMPDown.Margin = new System.Windows.Forms.Padding(0);
-            this.BBMPDown.Name = "BBMPDown";
-            this.BBMPDown.Size = new System.Drawing.Size(24, 24);
-            this.BBMPDown.TabIndex = 27;
-            this.ToolTipUniversal.SetToolTip(this.BBMPDown, "Move Down");
-            this.BBMPDown.UseVisualStyleBackColor = true;
-            this.BBMPDown.Click += new System.EventHandler(this.BBMPDown_Click);
-            // 
-            // BBMPBrowse
-            // 
-            this.BBMPBrowse.Image = global::iBMSC.Properties.Resources.x16PlayerBrowse;
-            this.BBMPBrowse.Location = new System.Drawing.Point(48, 0);
-            this.BBMPBrowse.Margin = new System.Windows.Forms.Padding(0);
-            this.BBMPBrowse.Name = "BBMPBrowse";
-            this.BBMPBrowse.Size = new System.Drawing.Size(24, 24);
-            this.BBMPBrowse.TabIndex = 30;
-            this.ToolTipUniversal.SetToolTip(this.BBMPBrowse, "Browse");
-            this.BBMPBrowse.UseVisualStyleBackColor = true;
-            this.BBMPBrowse.Click += new System.EventHandler(this.BBMPBrowse_Click);
-            // 
-            // BBMPRemove
-            // 
-            this.BBMPRemove.Image = global::iBMSC.Properties.Resources.x16Remove;
-            this.BBMPRemove.Location = new System.Drawing.Point(72, 0);
-            this.BBMPRemove.Margin = new System.Windows.Forms.Padding(0);
-            this.BBMPRemove.Name = "BBMPRemove";
-            this.BBMPRemove.Size = new System.Drawing.Size(24, 24);
-            this.BBMPRemove.TabIndex = 31;
-            this.ToolTipUniversal.SetToolTip(this.BBMPRemove, "Remove");
-            this.BBMPRemove.UseVisualStyleBackColor = true;
-            this.BBMPRemove.Click += new System.EventHandler(this.BBMPRemove_Click);
-            // 
-            // POBMPResizer
-            // 
-            this.POBMPResizer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.POBMPResizer.FlatAppearance.BorderSize = 0;
-            this.POBMPResizer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.POBMPResizer.Location = new System.Drawing.Point(0, 245);
-            this.POBMPResizer.Margin = new System.Windows.Forms.Padding(0);
-            this.POBMPResizer.Name = "POBMPResizer";
-            this.POBMPResizer.Size = new System.Drawing.Size(179, 5);
-            this.POBMPResizer.TabIndex = 33;
-            this.POBMPResizer.TabStop = false;
-            this.POBMPResizer.UseVisualStyleBackColor = true;
-            this.POBMPResizer.MouseDown += new System.Windows.Forms.MouseEventHandler(this.VerticalResizer_MouseDown);
-            this.POBMPResizer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.POResizer_MouseMove);
-            // 
-            // POBMPSwitch
-            // 
-            this.POBMPSwitch.Appearance = System.Windows.Forms.Appearance.Button;
-            this.POBMPSwitch.BackColor = System.Drawing.SystemColors.Control;
-            this.POBMPSwitch.Checked = true;
-            this.POBMPSwitch.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.POBMPSwitch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.POBMPSwitch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.POBMPSwitch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.POBMPSwitch.Location = new System.Drawing.Point(0, 0);
-            this.POBMPSwitch.Name = "POBMPSwitch";
-            this.POBMPSwitch.Size = new System.Drawing.Size(179, 20);
-            this.POBMPSwitch.TabIndex = 4;
-            this.POBMPSwitch.TabStop = false;
-            this.POBMPSwitch.Text = "#BMP (Images List)";
-            this.POBMPSwitch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.POBMPSwitch.UseCompatibleTextRendering = true;
-            this.POBMPSwitch.UseVisualStyleBackColor = false;
-            this.POBMPSwitch.CheckedChanged += new System.EventHandler(this.Switches_CheckedChanged);
             // 
             // POWAV
             // 
@@ -1180,7 +1011,7 @@ namespace iBMSC
             // LWAV
             // 
             this.LWAV.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LWAV.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LWAV.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LWAV.IntegralHeight = false;
             this.LWAV.ItemHeight = 18;
             this.LWAV.Location = new System.Drawing.Point(3, 108);
@@ -1209,7 +1040,7 @@ namespace iBMSC
             // 
             // BWAVUp
             // 
-            this.BWAVUp.Image = global::iBMSC.Properties.Resources.x16Up;
+            this.BWAVUp.Image = global::iBMSC.Resources.x16Up;
             this.BWAVUp.Location = new System.Drawing.Point(0, 0);
             this.BWAVUp.Margin = new System.Windows.Forms.Padding(0);
             this.BWAVUp.Name = "BWAVUp";
@@ -1221,7 +1052,7 @@ namespace iBMSC
             // 
             // BWAVDown
             // 
-            this.BWAVDown.Image = global::iBMSC.Properties.Resources.x16Down;
+            this.BWAVDown.Image = global::iBMSC.Resources.x16Down;
             this.BWAVDown.Location = new System.Drawing.Point(24, 0);
             this.BWAVDown.Margin = new System.Windows.Forms.Padding(0);
             this.BWAVDown.Name = "BWAVDown";
@@ -1233,7 +1064,7 @@ namespace iBMSC
             // 
             // BWAVBrowse
             // 
-            this.BWAVBrowse.Image = global::iBMSC.Properties.Resources.x16PlayerBrowse;
+            this.BWAVBrowse.Image = global::iBMSC.Resources.x16PlayerBrowse;
             this.BWAVBrowse.Location = new System.Drawing.Point(48, 0);
             this.BWAVBrowse.Margin = new System.Windows.Forms.Padding(0);
             this.BWAVBrowse.Name = "BWAVBrowse";
@@ -1245,7 +1076,7 @@ namespace iBMSC
             // 
             // BWAVRemove
             // 
-            this.BWAVRemove.Image = global::iBMSC.Properties.Resources.x16Remove;
+            this.BWAVRemove.Image = global::iBMSC.Resources.x16Remove;
             this.BWAVRemove.Location = new System.Drawing.Point(72, 0);
             this.BWAVRemove.Margin = new System.Windows.Forms.Padding(0);
             this.BWAVRemove.Name = "BWAVRemove";
@@ -1325,7 +1156,7 @@ namespace iBMSC
             this.POWAVSwitch.CheckState = System.Windows.Forms.CheckState.Checked;
             this.POWAVSwitch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.POWAVSwitch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.POWAVSwitch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.POWAVSwitch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.POWAVSwitch.Location = new System.Drawing.Point(0, 0);
             this.POWAVSwitch.Name = "POWAVSwitch";
             this.POWAVSwitch.Size = new System.Drawing.Size(179, 20);
@@ -1420,7 +1251,7 @@ namespace iBMSC
             // 
             // PictureBox2
             // 
-            this.PictureBox2.Image = global::iBMSC.Properties.Resources.WAVLeft;
+            this.PictureBox2.Image = global::iBMSC.Resources.WAVLeft;
             this.PictureBox2.Location = new System.Drawing.Point(3, 0);
             this.PictureBox2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.PictureBox2.Name = "PictureBox2";
@@ -1456,7 +1287,7 @@ namespace iBMSC
             // 
             // PictureBox3
             // 
-            this.PictureBox3.Image = global::iBMSC.Properties.Resources.WAVWidth;
+            this.PictureBox3.Image = global::iBMSC.Resources.WAVWidth;
             this.PictureBox3.Location = new System.Drawing.Point(3, 28);
             this.PictureBox3.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.PictureBox3.Name = "PictureBox3";
@@ -1487,7 +1318,7 @@ namespace iBMSC
             // 
             // PictureBox4
             // 
-            this.PictureBox4.Image = global::iBMSC.Properties.Resources.WAVPrecision;
+            this.PictureBox4.Image = global::iBMSC.Resources.WAVPrecision;
             this.PictureBox4.Location = new System.Drawing.Point(3, 56);
             this.PictureBox4.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.PictureBox4.Name = "PictureBox4";
@@ -1523,7 +1354,7 @@ namespace iBMSC
             // 
             // PictureBox5
             // 
-            this.PictureBox5.Image = global::iBMSC.Properties.Resources.WAVTransparency;
+            this.PictureBox5.Image = global::iBMSC.Resources.WAVTransparency;
             this.PictureBox5.Location = new System.Drawing.Point(3, 84);
             this.PictureBox5.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.PictureBox5.Name = "PictureBox5";
@@ -1559,7 +1390,7 @@ namespace iBMSC
             // 
             // PictureBox6
             // 
-            this.PictureBox6.Image = global::iBMSC.Properties.Resources.WAVSaturation;
+            this.PictureBox6.Image = global::iBMSC.Resources.WAVSaturation;
             this.PictureBox6.Location = new System.Drawing.Point(3, 112);
             this.PictureBox6.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.PictureBox6.Name = "PictureBox6";
@@ -1710,7 +1541,7 @@ namespace iBMSC
             // 
             // BWLoad
             // 
-            this.BWLoad.Image = global::iBMSC.Properties.Resources.x16Add;
+            this.BWLoad.Image = global::iBMSC.Resources.x16Add;
             this.BWLoad.Location = new System.Drawing.Point(0, 0);
             this.BWLoad.Margin = new System.Windows.Forms.Padding(0);
             this.BWLoad.Name = "BWLoad";
@@ -1722,7 +1553,7 @@ namespace iBMSC
             // 
             // BWClear
             // 
-            this.BWClear.Image = global::iBMSC.Properties.Resources.x16Remove;
+            this.BWClear.Image = global::iBMSC.Resources.x16Remove;
             this.BWClear.Location = new System.Drawing.Point(24, 0);
             this.BWClear.Margin = new System.Windows.Forms.Padding(0);
             this.BWClear.Name = "BWClear";
@@ -1737,7 +1568,7 @@ namespace iBMSC
             this.BWLock.Appearance = System.Windows.Forms.Appearance.Button;
             this.BWLock.Checked = true;
             this.BWLock.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.BWLock.Image = global::iBMSC.Properties.Resources.x16Lock;
+            this.BWLock.Image = global::iBMSC.Resources.x16Lock;
             this.BWLock.Location = new System.Drawing.Point(48, 0);
             this.BWLock.Margin = new System.Windows.Forms.Padding(0);
             this.BWLock.Name = "BWLock";
@@ -1779,7 +1610,7 @@ namespace iBMSC
             // 
             // PictureBox1
             // 
-            this.PictureBox1.Image = global::iBMSC.Properties.Resources.WAVOffset;
+            this.PictureBox1.Image = global::iBMSC.Resources.WAVOffset;
             this.PictureBox1.Location = new System.Drawing.Point(3, 0);
             this.PictureBox1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.PictureBox1.Name = "PictureBox1";
@@ -1825,7 +1656,7 @@ namespace iBMSC
             this.POWaveFormSwitch.BackColor = System.Drawing.SystemColors.Control;
             this.POWaveFormSwitch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.POWaveFormSwitch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.POWaveFormSwitch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.POWaveFormSwitch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.POWaveFormSwitch.Location = new System.Drawing.Point(0, 0);
             this.POWaveFormSwitch.Name = "POWaveFormSwitch";
             this.POWaveFormSwitch.Size = new System.Drawing.Size(179, 20);
@@ -1915,7 +1746,7 @@ namespace iBMSC
             // 
             this.cVSLockL.Appearance = System.Windows.Forms.Appearance.Button;
             this.cVSLockL.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cVSLockL.Image = global::iBMSC.Properties.Resources.x16Lock;
+            this.cVSLockL.Image = global::iBMSC.Resources.x16Lock;
             this.cVSLockL.Location = new System.Drawing.Point(0, 0);
             this.cVSLockL.Margin = new System.Windows.Forms.Padding(0);
             this.cVSLockL.Name = "cVSLockL";
@@ -1929,7 +1760,7 @@ namespace iBMSC
             // 
             this.cVSLock.Appearance = System.Windows.Forms.Appearance.Button;
             this.cVSLock.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cVSLock.Image = global::iBMSC.Properties.Resources.x16Lock;
+            this.cVSLock.Image = global::iBMSC.Resources.x16Lock;
             this.cVSLock.Location = new System.Drawing.Point(23, 0);
             this.cVSLock.Margin = new System.Windows.Forms.Padding(0);
             this.cVSLock.Name = "cVSLock";
@@ -1943,7 +1774,7 @@ namespace iBMSC
             // 
             this.cVSLockR.Appearance = System.Windows.Forms.Appearance.Button;
             this.cVSLockR.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cVSLockR.Image = global::iBMSC.Properties.Resources.x16Lock;
+            this.cVSLockR.Image = global::iBMSC.Resources.x16Lock;
             this.cVSLockR.Location = new System.Drawing.Point(46, 0);
             this.cVSLockR.Margin = new System.Windows.Forms.Padding(0);
             this.cVSLockR.Name = "cVSLockR";
@@ -2084,7 +1915,7 @@ namespace iBMSC
             // 
             // PictureBox9
             // 
-            this.PictureBox9.Image = global::iBMSC.Properties.Resources.lgheight;
+            this.PictureBox9.Image = global::iBMSC.Resources.lgheight;
             this.PictureBox9.Location = new System.Drawing.Point(3, 0);
             this.PictureBox9.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.PictureBox9.Name = "PictureBox9";
@@ -2141,7 +1972,7 @@ namespace iBMSC
             // 
             // PictureBox10
             // 
-            this.PictureBox10.Image = global::iBMSC.Properties.Resources.lgwidth;
+            this.PictureBox10.Image = global::iBMSC.Resources.lgwidth;
             this.PictureBox10.Location = new System.Drawing.Point(3, 28);
             this.PictureBox10.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.PictureBox10.Name = "PictureBox10";
@@ -2247,7 +2078,7 @@ namespace iBMSC
             // PictureBox7
             // 
             this.PictureBox7.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.PictureBox7.Image = global::iBMSC.Properties.Resources.lgpartition;
+            this.PictureBox7.Image = global::iBMSC.Resources.lgpartition;
             this.PictureBox7.Location = new System.Drawing.Point(3, 4);
             this.PictureBox7.Name = "PictureBox7";
             this.PictureBox7.Size = new System.Drawing.Size(24, 24);
@@ -2306,7 +2137,7 @@ namespace iBMSC
             // BGSlash
             // 
             this.BGSlash.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.BGSlash.Image = global::iBMSC.Properties.Resources.Shortcut;
+            this.BGSlash.Image = global::iBMSC.Resources.Shortcut;
             this.BGSlash.Location = new System.Drawing.Point(154, 5);
             this.BGSlash.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.BGSlash.Name = "BGSlash";
@@ -2323,7 +2154,7 @@ namespace iBMSC
             this.POGridSwitch.CheckState = System.Windows.Forms.CheckState.Checked;
             this.POGridSwitch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.POGridSwitch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.POGridSwitch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.POGridSwitch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.POGridSwitch.Location = new System.Drawing.Point(0, 0);
             this.POGridSwitch.Name = "POGridSwitch";
             this.POGridSwitch.Size = new System.Drawing.Size(179, 20);
@@ -4240,7 +4071,7 @@ namespace iBMSC
             this.POHeaderSwitch.CheckState = System.Windows.Forms.CheckState.Checked;
             this.POHeaderSwitch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.POHeaderSwitch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.POHeaderSwitch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.POHeaderSwitch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.POHeaderSwitch.Location = new System.Drawing.Point(0, 0);
             this.POHeaderSwitch.Name = "POHeaderSwitch";
             this.POHeaderSwitch.Size = new System.Drawing.Size(179, 20);
@@ -4268,7 +4099,7 @@ namespace iBMSC
             // 
             // MInsert
             // 
-            this.MInsert.Image = global::iBMSC.Properties.Resources.x16Add;
+            this.MInsert.Image = global::iBMSC.Resources.x16Add;
             this.MInsert.Name = "MInsert";
             this.MInsert.Size = new System.Drawing.Size(209, 26);
             this.MInsert.Text = "Insert Measure";
@@ -4276,7 +4107,7 @@ namespace iBMSC
             // 
             // MRemove
             // 
-            this.MRemove.Image = global::iBMSC.Properties.Resources.x16Remove;
+            this.MRemove.Image = global::iBMSC.Resources.x16Remove;
             this.MRemove.Name = "MRemove";
             this.MRemove.Size = new System.Drawing.Size(209, 26);
             this.MRemove.Text = "Remove Measure";
@@ -4303,7 +4134,7 @@ namespace iBMSC
             this.mnConversion,
             this.mnPreview});
             this.mnMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.mnMain.Location = new System.Drawing.Point(0, 27);
+            this.mnMain.Location = new System.Drawing.Point(0, 0);
             this.mnMain.Name = "mnMain";
             this.mnMain.Size = new System.Drawing.Size(876, 28);
             this.mnMain.TabIndex = 57;
@@ -4334,7 +4165,7 @@ namespace iBMSC
             // 
             // mnNew
             // 
-            this.mnNew.Image = global::iBMSC.Properties.Resources.x16New;
+            this.mnNew.Image = global::iBMSC.Resources.x16New;
             this.mnNew.Name = "mnNew";
             this.mnNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.mnNew.Size = new System.Drawing.Size(262, 26);
@@ -4343,7 +4174,7 @@ namespace iBMSC
             // 
             // mnOpen
             // 
-            this.mnOpen.Image = global::iBMSC.Properties.Resources.x16Open;
+            this.mnOpen.Image = global::iBMSC.Resources.x16Open;
             this.mnOpen.Name = "mnOpen";
             this.mnOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.mnOpen.Size = new System.Drawing.Size(262, 26);
@@ -4352,7 +4183,7 @@ namespace iBMSC
             // 
             // mnImportSM
             // 
-            this.mnImportSM.Image = global::iBMSC.Properties.Resources.x16Import2;
+            this.mnImportSM.Image = global::iBMSC.Resources.x16Import2;
             this.mnImportSM.Name = "mnImportSM";
             this.mnImportSM.Size = new System.Drawing.Size(262, 26);
             this.mnImportSM.Text = "Import from .S&M file";
@@ -4360,7 +4191,7 @@ namespace iBMSC
             // 
             // mnImportIBMSC
             // 
-            this.mnImportIBMSC.Image = global::iBMSC.Properties.Resources.x16Import2;
+            this.mnImportIBMSC.Image = global::iBMSC.Resources.x16Import2;
             this.mnImportIBMSC.Name = "mnImportIBMSC";
             this.mnImportIBMSC.Size = new System.Drawing.Size(262, 26);
             this.mnImportIBMSC.Text = "Import from .&IBMSC file";
@@ -4373,7 +4204,7 @@ namespace iBMSC
             // 
             // mnSave
             // 
-            this.mnSave.Image = global::iBMSC.Properties.Resources.x16Save;
+            this.mnSave.Image = global::iBMSC.Resources.x16Save;
             this.mnSave.Name = "mnSave";
             this.mnSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.mnSave.Size = new System.Drawing.Size(262, 26);
@@ -4382,7 +4213,7 @@ namespace iBMSC
             // 
             // mnSaveAs
             // 
-            this.mnSaveAs.Image = global::iBMSC.Properties.Resources.x16SaveAs;
+            this.mnSaveAs.Image = global::iBMSC.Resources.x16SaveAs;
             this.mnSaveAs.Name = "mnSaveAs";
             this.mnSaveAs.Size = new System.Drawing.Size(262, 26);
             this.mnSaveAs.Text = "Save &As...";
@@ -4390,7 +4221,7 @@ namespace iBMSC
             // 
             // mnExport
             // 
-            this.mnExport.Image = global::iBMSC.Properties.Resources.x16Export;
+            this.mnExport.Image = global::iBMSC.Resources.x16Export;
             this.mnExport.Name = "mnExport";
             this.mnExport.Size = new System.Drawing.Size(262, 26);
             this.mnExport.Text = "&Export .IBMSC file";
@@ -4486,7 +4317,7 @@ namespace iBMSC
             // mnUndo
             // 
             this.mnUndo.Enabled = false;
-            this.mnUndo.Image = global::iBMSC.Properties.Resources.x16Undo;
+            this.mnUndo.Image = global::iBMSC.Resources.x16Undo;
             this.mnUndo.Name = "mnUndo";
             this.mnUndo.ShortcutKeyDisplayString = "Ctrl+Z";
             this.mnUndo.Size = new System.Drawing.Size(311, 26);
@@ -4496,7 +4327,7 @@ namespace iBMSC
             // mnRedo
             // 
             this.mnRedo.Enabled = false;
-            this.mnRedo.Image = global::iBMSC.Properties.Resources.x16Redo;
+            this.mnRedo.Image = global::iBMSC.Resources.x16Redo;
             this.mnRedo.Name = "mnRedo";
             this.mnRedo.ShortcutKeyDisplayString = "Ctrl+Y";
             this.mnRedo.Size = new System.Drawing.Size(311, 26);
@@ -4510,7 +4341,7 @@ namespace iBMSC
             // 
             // mnCut
             // 
-            this.mnCut.Image = global::iBMSC.Properties.Resources.x16Cut;
+            this.mnCut.Image = global::iBMSC.Resources.x16Cut;
             this.mnCut.Name = "mnCut";
             this.mnCut.ShortcutKeyDisplayString = "Ctrl+X";
             this.mnCut.Size = new System.Drawing.Size(311, 26);
@@ -4519,7 +4350,7 @@ namespace iBMSC
             // 
             // mnCopy
             // 
-            this.mnCopy.Image = global::iBMSC.Properties.Resources.x16Copy;
+            this.mnCopy.Image = global::iBMSC.Resources.x16Copy;
             this.mnCopy.Name = "mnCopy";
             this.mnCopy.ShortcutKeyDisplayString = "Ctrl+C";
             this.mnCopy.Size = new System.Drawing.Size(311, 26);
@@ -4528,7 +4359,7 @@ namespace iBMSC
             // 
             // mnPaste
             // 
-            this.mnPaste.Image = global::iBMSC.Properties.Resources.x16Paste;
+            this.mnPaste.Image = global::iBMSC.Resources.x16Paste;
             this.mnPaste.Name = "mnPaste";
             this.mnPaste.ShortcutKeyDisplayString = "Ctrl+V";
             this.mnPaste.Size = new System.Drawing.Size(311, 26);
@@ -4537,7 +4368,7 @@ namespace iBMSC
             // 
             // mnDelete
             // 
-            this.mnDelete.Image = global::iBMSC.Properties.Resources.x16Remove;
+            this.mnDelete.Image = global::iBMSC.Resources.x16Remove;
             this.mnDelete.Name = "mnDelete";
             this.mnDelete.ShortcutKeyDisplayString = "Del";
             this.mnDelete.Size = new System.Drawing.Size(311, 26);
@@ -4567,7 +4398,7 @@ namespace iBMSC
             // 
             // mnFind
             // 
-            this.mnFind.Image = global::iBMSC.Properties.Resources.x16Find;
+            this.mnFind.Image = global::iBMSC.Resources.x16Find;
             this.mnFind.Name = "mnFind";
             this.mnFind.ShortcutKeyDisplayString = "Ctrl+F";
             this.mnFind.Size = new System.Drawing.Size(311, 26);
@@ -4576,7 +4407,7 @@ namespace iBMSC
             // 
             // mnStatistics
             // 
-            this.mnStatistics.Image = global::iBMSC.Properties.Resources.x16Statistics;
+            this.mnStatistics.Image = global::iBMSC.Resources.x16Statistics;
             this.mnStatistics.Name = "mnStatistics";
             this.mnStatistics.ShortcutKeyDisplayString = "Ctrl+T";
             this.mnStatistics.Size = new System.Drawing.Size(311, 26);
@@ -4591,7 +4422,7 @@ namespace iBMSC
             // mnTimeSelect
             // 
             this.mnTimeSelect.CheckOnClick = true;
-            this.mnTimeSelect.Image = global::iBMSC.Properties.Resources.x16TimeSelection;
+            this.mnTimeSelect.Image = global::iBMSC.Resources.x16TimeSelection;
             this.mnTimeSelect.Name = "mnTimeSelect";
             this.mnTimeSelect.ShortcutKeys = System.Windows.Forms.Keys.F1;
             this.mnTimeSelect.Size = new System.Drawing.Size(311, 26);
@@ -4603,7 +4434,7 @@ namespace iBMSC
             this.mnSelect.Checked = true;
             this.mnSelect.CheckOnClick = true;
             this.mnSelect.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mnSelect.Image = global::iBMSC.Properties.Resources.x16Select;
+            this.mnSelect.Image = global::iBMSC.Resources.x16Select;
             this.mnSelect.Name = "mnSelect";
             this.mnSelect.ShortcutKeys = System.Windows.Forms.Keys.F2;
             this.mnSelect.Size = new System.Drawing.Size(311, 26);
@@ -4613,7 +4444,7 @@ namespace iBMSC
             // mnWrite
             // 
             this.mnWrite.CheckOnClick = true;
-            this.mnWrite.Image = global::iBMSC.Properties.Resources.x16Pen;
+            this.mnWrite.Image = global::iBMSC.Resources.x16Pen;
             this.mnWrite.Name = "mnWrite";
             this.mnWrite.ShortcutKeys = System.Windows.Forms.Keys.F3;
             this.mnWrite.Size = new System.Drawing.Size(311, 26);
@@ -4627,7 +4458,7 @@ namespace iBMSC
             // 
             // mnMyO2
             // 
-            this.mnMyO2.Image = global::iBMSC.Properties.Resources.x16MyO2;
+            this.mnMyO2.Image = global::iBMSC.Resources.x16MyO2;
             this.mnMyO2.Name = "mnMyO2";
             this.mnMyO2.Size = new System.Drawing.Size(311, 26);
             this.mnMyO2.Text = "MyO2 ToolBox (Chinese Only)";
@@ -4858,7 +4689,7 @@ namespace iBMSC
             this.mnNTInput.Checked = true;
             this.mnNTInput.CheckOnClick = true;
             this.mnNTInput.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mnNTInput.Image = global::iBMSC.Properties.Resources.x16NTInput;
+            this.mnNTInput.Image = global::iBMSC.Resources.x16NTInput;
             this.mnNTInput.Name = "mnNTInput";
             this.mnNTInput.ShortcutKeys = System.Windows.Forms.Keys.F8;
             this.mnNTInput.Size = new System.Drawing.Size(302, 26);
@@ -4870,7 +4701,7 @@ namespace iBMSC
             this.mnErrorCheck.Checked = true;
             this.mnErrorCheck.CheckOnClick = true;
             this.mnErrorCheck.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mnErrorCheck.Image = global::iBMSC.Properties.Resources.x16CheckError;
+            this.mnErrorCheck.Image = global::iBMSC.Resources.x16CheckError;
             this.mnErrorCheck.Name = "mnErrorCheck";
             this.mnErrorCheck.Size = new System.Drawing.Size(302, 26);
             this.mnErrorCheck.Text = "&Error Check";
@@ -4881,7 +4712,7 @@ namespace iBMSC
             this.mnPreviewOnClick.Checked = true;
             this.mnPreviewOnClick.CheckOnClick = true;
             this.mnPreviewOnClick.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mnPreviewOnClick.Image = global::iBMSC.Properties.Resources.x16PreviewOnClick;
+            this.mnPreviewOnClick.Image = global::iBMSC.Resources.x16PreviewOnClick;
             this.mnPreviewOnClick.Name = "mnPreviewOnClick";
             this.mnPreviewOnClick.Size = new System.Drawing.Size(302, 26);
             this.mnPreviewOnClick.Text = "Preview on &Click";
@@ -4890,7 +4721,7 @@ namespace iBMSC
             // mnShowFileName
             // 
             this.mnShowFileName.CheckOnClick = true;
-            this.mnShowFileName.Image = global::iBMSC.Properties.Resources.x16ShowFileNameN;
+            this.mnShowFileName.Image = global::iBMSC.Resources.x16ShowFileNameN;
             this.mnShowFileName.Name = "mnShowFileName";
             this.mnShowFileName.Size = new System.Drawing.Size(302, 26);
             this.mnShowFileName.Text = "Show &File Name on Notes";
@@ -4903,7 +4734,7 @@ namespace iBMSC
             // 
             // mnGOptions
             // 
-            this.mnGOptions.Image = global::iBMSC.Properties.Resources.x16GeneralOptions;
+            this.mnGOptions.Image = global::iBMSC.Resources.x16GeneralOptions;
             this.mnGOptions.Name = "mnGOptions";
             this.mnGOptions.Size = new System.Drawing.Size(302, 26);
             this.mnGOptions.Text = "&General Options";
@@ -4911,7 +4742,7 @@ namespace iBMSC
             // 
             // mnVOptions
             // 
-            this.mnVOptions.Image = global::iBMSC.Properties.Resources.x16VisualOptions;
+            this.mnVOptions.Image = global::iBMSC.Resources.x16VisualOptions;
             this.mnVOptions.Name = "mnVOptions";
             this.mnVOptions.Size = new System.Drawing.Size(302, 26);
             this.mnVOptions.Text = "&Visual Options";
@@ -4919,7 +4750,7 @@ namespace iBMSC
             // 
             // mnPOptions
             // 
-            this.mnPOptions.Image = global::iBMSC.Properties.Resources.x16PlayerOptions;
+            this.mnPOptions.Image = global::iBMSC.Resources.x16PlayerOptions;
             this.mnPOptions.Name = "mnPOptions";
             this.mnPOptions.Size = new System.Drawing.Size(302, 26);
             this.mnPOptions.Text = "&Player Options";
@@ -4953,7 +4784,7 @@ namespace iBMSC
             // POBLong
             // 
             this.POBLong.Enabled = false;
-            this.POBLong.Image = global::iBMSC.Properties.Resources.ConvertNotesL;
+            this.POBLong.Image = global::iBMSC.Resources.ConvertNotesL;
             this.POBLong.Name = "POBLong";
             this.POBLong.Size = new System.Drawing.Size(287, 26);
             this.POBLong.Text = "→ &Long Note";
@@ -4961,7 +4792,7 @@ namespace iBMSC
             // 
             // POBShort
             // 
-            this.POBShort.Image = global::iBMSC.Properties.Resources.ConvertNotesN;
+            this.POBShort.Image = global::iBMSC.Resources.ConvertNotesN;
             this.POBShort.Name = "POBShort";
             this.POBShort.Size = new System.Drawing.Size(287, 26);
             this.POBShort.Text = "→ &Short Note";
@@ -4970,7 +4801,7 @@ namespace iBMSC
             // POBLongShort
             // 
             this.POBLongShort.Enabled = false;
-            this.POBLongShort.Image = global::iBMSC.Properties.Resources.ConvertNotes;
+            this.POBLongShort.Image = global::iBMSC.Resources.ConvertNotes;
             this.POBLongShort.Name = "POBLongShort";
             this.POBLongShort.Size = new System.Drawing.Size(287, 26);
             this.POBLongShort.Text = "Long Note ↔ Short Note";
@@ -4983,7 +4814,7 @@ namespace iBMSC
             // 
             // POBHidden
             // 
-            this.POBHidden.Image = global::iBMSC.Properties.Resources.ConvertNotesH;
+            this.POBHidden.Image = global::iBMSC.Resources.ConvertNotesH;
             this.POBHidden.Name = "POBHidden";
             this.POBHidden.Size = new System.Drawing.Size(287, 26);
             this.POBHidden.Text = "→ &Hidden Note";
@@ -4991,7 +4822,7 @@ namespace iBMSC
             // 
             // POBVisible
             // 
-            this.POBVisible.Image = global::iBMSC.Properties.Resources.ConvertNotesV;
+            this.POBVisible.Image = global::iBMSC.Resources.ConvertNotesV;
             this.POBVisible.Name = "POBVisible";
             this.POBVisible.Size = new System.Drawing.Size(287, 26);
             this.POBVisible.Text = "→ &Visible Note";
@@ -4999,7 +4830,7 @@ namespace iBMSC
             // 
             // POBHiddenVisible
             // 
-            this.POBHiddenVisible.Image = global::iBMSC.Properties.Resources.ConvertNotesHV;
+            this.POBHiddenVisible.Image = global::iBMSC.Resources.ConvertNotesHV;
             this.POBHiddenVisible.Name = "POBHiddenVisible";
             this.POBHiddenVisible.Size = new System.Drawing.Size(287, 26);
             this.POBHiddenVisible.Text = "Hidden Note ↔ Visible Note";
@@ -5012,7 +4843,7 @@ namespace iBMSC
             // 
             // POBModify
             // 
-            this.POBModify.Image = global::iBMSC.Properties.Resources.x16ModifyLabel;
+            this.POBModify.Image = global::iBMSC.Resources.x16ModifyLabel;
             this.POBModify.Name = "POBModify";
             this.POBModify.Size = new System.Drawing.Size(287, 26);
             this.POBModify.Text = "&Modify Labels";
@@ -5020,7 +4851,7 @@ namespace iBMSC
             // 
             // POBMirror
             // 
-            this.POBMirror.Image = global::iBMSC.Properties.Resources.x16Mirror;
+            this.POBMirror.Image = global::iBMSC.Resources.x16Mirror;
             this.POBMirror.Name = "POBMirror";
             this.POBMirror.Size = new System.Drawing.Size(287, 26);
             this.POBMirror.Text = "Mi&rror";
@@ -5030,7 +4861,7 @@ namespace iBMSC
             // 
             this.POConvert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.POConvert.DropDown = this.cmnConversion;
-            this.POConvert.Image = global::iBMSC.Properties.Resources.ConvertNotes;
+            this.POConvert.Image = global::iBMSC.Resources.ConvertNotes;
             this.POConvert.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.POConvert.Name = "POConvert";
             this.POConvert.Size = new System.Drawing.Size(34, 24);
@@ -5048,7 +4879,7 @@ namespace iBMSC
             // 
             // mnPlayB
             // 
-            this.mnPlayB.Image = global::iBMSC.Properties.Resources.x16PlayB;
+            this.mnPlayB.Image = global::iBMSC.Resources.x16PlayB;
             this.mnPlayB.Name = "mnPlayB";
             this.mnPlayB.ShortcutKeys = System.Windows.Forms.Keys.F5;
             this.mnPlayB.Size = new System.Drawing.Size(264, 26);
@@ -5057,7 +4888,7 @@ namespace iBMSC
             // 
             // mnPlay
             // 
-            this.mnPlay.Image = global::iBMSC.Properties.Resources.x16Play;
+            this.mnPlay.Image = global::iBMSC.Resources.x16Play;
             this.mnPlay.Name = "mnPlay";
             this.mnPlay.ShortcutKeys = System.Windows.Forms.Keys.F6;
             this.mnPlay.Size = new System.Drawing.Size(264, 26);
@@ -5066,7 +4897,7 @@ namespace iBMSC
             // 
             // mnStop
             // 
-            this.mnStop.Image = global::iBMSC.Properties.Resources.x16Stop;
+            this.mnStop.Image = global::iBMSC.Resources.x16Stop;
             this.mnStop.Name = "mnStop";
             this.mnStop.ShortcutKeys = System.Windows.Forms.Keys.F7;
             this.mnStop.Size = new System.Drawing.Size(264, 26);
@@ -5117,7 +4948,7 @@ namespace iBMSC
             this.TBLanguage,
             this.TBTheme,
             this.POBStorm});
-            this.TBMain.Location = new System.Drawing.Point(4, 0);
+            this.TBMain.Location = new System.Drawing.Point(4, 28);
             this.TBMain.Name = "TBMain";
             this.TBMain.Size = new System.Drawing.Size(872, 27);
             this.TBMain.TabIndex = 64;
@@ -5126,7 +4957,7 @@ namespace iBMSC
             // TBNew
             // 
             this.TBNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBNew.Image = global::iBMSC.Properties.Resources.x16New;
+            this.TBNew.Image = global::iBMSC.Resources.x16New;
             this.TBNew.ImageTransparentColor = System.Drawing.Color.Transparent;
             this.TBNew.Name = "TBNew";
             this.TBNew.Size = new System.Drawing.Size(29, 24);
@@ -5145,7 +4976,7 @@ namespace iBMSC
             this.ToolStripSeparator12,
             this.TBImportSM,
             this.TBImportIBMSC});
-            this.TBOpen.Image = global::iBMSC.Properties.Resources.x16Open;
+            this.TBOpen.Image = global::iBMSC.Resources.x16Open;
             this.TBOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBOpen.Name = "TBOpen";
             this.TBOpen.Size = new System.Drawing.Size(39, 24);
@@ -5204,7 +5035,7 @@ namespace iBMSC
             // 
             // TBImportSM
             // 
-            this.TBImportSM.Image = global::iBMSC.Properties.Resources.x16Import2;
+            this.TBImportSM.Image = global::iBMSC.Resources.x16Import2;
             this.TBImportSM.Name = "TBImportSM";
             this.TBImportSM.Size = new System.Drawing.Size(262, 26);
             this.TBImportSM.Text = "Import from .SM file";
@@ -5212,7 +5043,7 @@ namespace iBMSC
             // 
             // TBImportIBMSC
             // 
-            this.TBImportIBMSC.Image = global::iBMSC.Properties.Resources.x16Import2;
+            this.TBImportIBMSC.Image = global::iBMSC.Resources.x16Import2;
             this.TBImportIBMSC.Name = "TBImportIBMSC";
             this.TBImportIBMSC.Size = new System.Drawing.Size(262, 26);
             this.TBImportIBMSC.Text = "Import from .IBMSC file";
@@ -5224,7 +5055,7 @@ namespace iBMSC
             this.TBSave.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TBSaveAs,
             this.TBExport});
-            this.TBSave.Image = global::iBMSC.Properties.Resources.x16Save;
+            this.TBSave.Image = global::iBMSC.Resources.x16Save;
             this.TBSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBSave.Name = "TBSave";
             this.TBSave.Size = new System.Drawing.Size(39, 24);
@@ -5233,7 +5064,7 @@ namespace iBMSC
             // 
             // TBSaveAs
             // 
-            this.TBSaveAs.Image = global::iBMSC.Properties.Resources.x16SaveAs;
+            this.TBSaveAs.Image = global::iBMSC.Resources.x16SaveAs;
             this.TBSaveAs.Name = "TBSaveAs";
             this.TBSaveAs.Size = new System.Drawing.Size(221, 26);
             this.TBSaveAs.Text = "Save As...";
@@ -5241,7 +5072,7 @@ namespace iBMSC
             // 
             // TBExport
             // 
-            this.TBExport.Image = global::iBMSC.Properties.Resources.x16Export;
+            this.TBExport.Image = global::iBMSC.Resources.x16Export;
             this.TBExport.Name = "TBExport";
             this.TBExport.Size = new System.Drawing.Size(221, 26);
             this.TBExport.Text = "Export .IBMSC file";
@@ -5255,7 +5086,7 @@ namespace iBMSC
             // TBCut
             // 
             this.TBCut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBCut.Image = global::iBMSC.Properties.Resources.x16Cut;
+            this.TBCut.Image = global::iBMSC.Resources.x16Cut;
             this.TBCut.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBCut.Name = "TBCut";
             this.TBCut.Size = new System.Drawing.Size(29, 24);
@@ -5265,7 +5096,7 @@ namespace iBMSC
             // TBCopy
             // 
             this.TBCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBCopy.Image = global::iBMSC.Properties.Resources.x16Copy;
+            this.TBCopy.Image = global::iBMSC.Resources.x16Copy;
             this.TBCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBCopy.Name = "TBCopy";
             this.TBCopy.Size = new System.Drawing.Size(29, 24);
@@ -5275,7 +5106,7 @@ namespace iBMSC
             // TBPaste
             // 
             this.TBPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBPaste.Image = global::iBMSC.Properties.Resources.x16Paste;
+            this.TBPaste.Image = global::iBMSC.Resources.x16Paste;
             this.TBPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBPaste.Name = "TBPaste";
             this.TBPaste.Size = new System.Drawing.Size(29, 24);
@@ -5285,7 +5116,7 @@ namespace iBMSC
             // TBFind
             // 
             this.TBFind.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBFind.Image = global::iBMSC.Properties.Resources.x16Find;
+            this.TBFind.Image = global::iBMSC.Resources.x16Find;
             this.TBFind.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBFind.Name = "TBFind";
             this.TBFind.Size = new System.Drawing.Size(29, 24);
@@ -5299,8 +5130,8 @@ namespace iBMSC
             // 
             // TBStatistics
             // 
-            this.TBStatistics.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.TBStatistics.Image = global::iBMSC.Properties.Resources.x16Statistics;
+            this.TBStatistics.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.TBStatistics.Image = global::iBMSC.Resources.x16Statistics;
             this.TBStatistics.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBStatistics.Name = "TBStatistics";
             this.TBStatistics.Size = new System.Drawing.Size(42, 24);
@@ -5311,7 +5142,7 @@ namespace iBMSC
             // TBMyO2
             // 
             this.TBMyO2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBMyO2.Image = global::iBMSC.Properties.Resources.x16MyO2;
+            this.TBMyO2.Image = global::iBMSC.Resources.x16MyO2;
             this.TBMyO2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBMyO2.Name = "TBMyO2";
             this.TBMyO2.Size = new System.Drawing.Size(29, 24);
@@ -5329,7 +5160,7 @@ namespace iBMSC
             this.TBErrorCheck.CheckOnClick = true;
             this.TBErrorCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.TBErrorCheck.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBErrorCheck.Image = global::iBMSC.Properties.Resources.x16CheckError;
+            this.TBErrorCheck.Image = global::iBMSC.Resources.x16CheckError;
             this.TBErrorCheck.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBErrorCheck.Name = "TBErrorCheck";
             this.TBErrorCheck.Size = new System.Drawing.Size(29, 24);
@@ -5342,7 +5173,7 @@ namespace iBMSC
             this.TBPreviewOnClick.CheckOnClick = true;
             this.TBPreviewOnClick.CheckState = System.Windows.Forms.CheckState.Checked;
             this.TBPreviewOnClick.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBPreviewOnClick.Image = global::iBMSC.Properties.Resources.x16PreviewOnClick;
+            this.TBPreviewOnClick.Image = global::iBMSC.Resources.x16PreviewOnClick;
             this.TBPreviewOnClick.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBPreviewOnClick.Name = "TBPreviewOnClick";
             this.TBPreviewOnClick.Size = new System.Drawing.Size(29, 24);
@@ -5353,7 +5184,7 @@ namespace iBMSC
             // 
             this.TBShowFileName.CheckOnClick = true;
             this.TBShowFileName.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBShowFileName.Image = global::iBMSC.Properties.Resources.x16ShowFileNameN;
+            this.TBShowFileName.Image = global::iBMSC.Resources.x16ShowFileNameN;
             this.TBShowFileName.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBShowFileName.Name = "TBShowFileName";
             this.TBShowFileName.Size = new System.Drawing.Size(29, 24);
@@ -5371,7 +5202,7 @@ namespace iBMSC
             this.TBNTInput.CheckOnClick = true;
             this.TBNTInput.CheckState = System.Windows.Forms.CheckState.Checked;
             this.TBNTInput.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBNTInput.Image = global::iBMSC.Properties.Resources.x16NTInput;
+            this.TBNTInput.Image = global::iBMSC.Resources.x16NTInput;
             this.TBNTInput.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBNTInput.Name = "TBNTInput";
             this.TBNTInput.Size = new System.Drawing.Size(29, 24);
@@ -5397,7 +5228,7 @@ namespace iBMSC
             // 
             this.TBUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.TBUndo.Enabled = false;
-            this.TBUndo.Image = global::iBMSC.Properties.Resources.x16Undo;
+            this.TBUndo.Image = global::iBMSC.Resources.x16Undo;
             this.TBUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBUndo.Name = "TBUndo";
             this.TBUndo.Size = new System.Drawing.Size(29, 24);
@@ -5408,7 +5239,7 @@ namespace iBMSC
             // 
             this.TBRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.TBRedo.Enabled = false;
-            this.TBRedo.Image = global::iBMSC.Properties.Resources.x16Redo;
+            this.TBRedo.Image = global::iBMSC.Resources.x16Redo;
             this.TBRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBRedo.Name = "TBRedo";
             this.TBRedo.Size = new System.Drawing.Size(29, 24);
@@ -5423,7 +5254,7 @@ namespace iBMSC
             // TBTimeSelect
             // 
             this.TBTimeSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBTimeSelect.Image = global::iBMSC.Properties.Resources.x16TimeSelection;
+            this.TBTimeSelect.Image = global::iBMSC.Resources.x16TimeSelection;
             this.TBTimeSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBTimeSelect.Name = "TBTimeSelect";
             this.TBTimeSelect.Size = new System.Drawing.Size(29, 24);
@@ -5435,7 +5266,7 @@ namespace iBMSC
             this.TBSelect.Checked = true;
             this.TBSelect.CheckState = System.Windows.Forms.CheckState.Checked;
             this.TBSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBSelect.Image = global::iBMSC.Properties.Resources.x16Select;
+            this.TBSelect.Image = global::iBMSC.Resources.x16Select;
             this.TBSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBSelect.Name = "TBSelect";
             this.TBSelect.Size = new System.Drawing.Size(29, 24);
@@ -5445,7 +5276,7 @@ namespace iBMSC
             // TBWrite
             // 
             this.TBWrite.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBWrite.Image = global::iBMSC.Properties.Resources.x16Pen;
+            this.TBWrite.Image = global::iBMSC.Resources.x16Pen;
             this.TBWrite.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBWrite.Name = "TBWrite";
             this.TBWrite.Size = new System.Drawing.Size(29, 24);
@@ -5460,7 +5291,7 @@ namespace iBMSC
             // TBPlayB
             // 
             this.TBPlayB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBPlayB.Image = global::iBMSC.Properties.Resources.x16PlayB;
+            this.TBPlayB.Image = global::iBMSC.Resources.x16PlayB;
             this.TBPlayB.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBPlayB.Name = "TBPlayB";
             this.TBPlayB.Size = new System.Drawing.Size(29, 24);
@@ -5470,7 +5301,7 @@ namespace iBMSC
             // TBPlay
             // 
             this.TBPlay.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBPlay.Image = global::iBMSC.Properties.Resources.x16Play;
+            this.TBPlay.Image = global::iBMSC.Resources.x16Play;
             this.TBPlay.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBPlay.Name = "TBPlay";
             this.TBPlay.Size = new System.Drawing.Size(29, 24);
@@ -5480,7 +5311,7 @@ namespace iBMSC
             // TBStop
             // 
             this.TBStop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBStop.Image = global::iBMSC.Properties.Resources.x16Stop;
+            this.TBStop.Image = global::iBMSC.Resources.x16Stop;
             this.TBStop.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBStop.Name = "TBStop";
             this.TBStop.Size = new System.Drawing.Size(29, 24);
@@ -5490,7 +5321,7 @@ namespace iBMSC
             // TBPOptions
             // 
             this.TBPOptions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBPOptions.Image = global::iBMSC.Properties.Resources.x16PlayerOptions;
+            this.TBPOptions.Image = global::iBMSC.Resources.x16PlayerOptions;
             this.TBPOptions.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBPOptions.Name = "TBPOptions";
             this.TBPOptions.Size = new System.Drawing.Size(29, 24);
@@ -5505,7 +5336,7 @@ namespace iBMSC
             // TBVOptions
             // 
             this.TBVOptions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBVOptions.Image = global::iBMSC.Properties.Resources.x16VisualOptions;
+            this.TBVOptions.Image = global::iBMSC.Resources.x16VisualOptions;
             this.TBVOptions.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBVOptions.Name = "TBVOptions";
             this.TBVOptions.Size = new System.Drawing.Size(29, 24);
@@ -5515,7 +5346,7 @@ namespace iBMSC
             // TBGOptions
             // 
             this.TBGOptions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.TBGOptions.Image = global::iBMSC.Properties.Resources.x16GeneralOptions;
+            this.TBGOptions.Image = global::iBMSC.Resources.x16GeneralOptions;
             this.TBGOptions.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.TBGOptions.Name = "TBGOptions";
             this.TBGOptions.Size = new System.Drawing.Size(29, 24);
@@ -5525,7 +5356,7 @@ namespace iBMSC
             // POBStorm
             // 
             this.POBStorm.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.POBStorm.Image = global::iBMSC.Properties.Resources.x16Storm;
+            this.POBStorm.Image = global::iBMSC.Resources.x16Storm;
             this.POBStorm.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.POBStorm.Name = "POBStorm";
             this.POBStorm.Size = new System.Drawing.Size(29, 24);
@@ -5573,7 +5404,7 @@ namespace iBMSC
             // FSSS
             // 
             this.FSSS.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.FSSS.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.FSSS.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.FSSS.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.FSSS.Name = "FSSS";
             this.FSSS.Size = new System.Drawing.Size(29, 20);
@@ -5584,7 +5415,7 @@ namespace iBMSC
             // FSSL
             // 
             this.FSSL.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.FSSL.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.FSSL.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.FSSL.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.FSSL.Name = "FSSL";
             this.FSSL.Size = new System.Drawing.Size(29, 20);
@@ -5595,7 +5426,7 @@ namespace iBMSC
             // FSSH
             // 
             this.FSSH.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.FSSH.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.FSSH.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.FSSH.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.FSSH.Name = "FSSH";
             this.FSSH.Size = new System.Drawing.Size(29, 20);
@@ -5623,7 +5454,7 @@ namespace iBMSC
             // 
             this.TVCM.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.TVCM.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TVCM.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.TVCM.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.TVCM.Name = "TVCM";
             this.TVCM.Size = new System.Drawing.Size(60, 22);
             this.TVCM.Text = "2";
@@ -5641,7 +5472,7 @@ namespace iBMSC
             // 
             this.TVCD.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.TVCD.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TVCD.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.TVCD.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.TVCD.Name = "TVCD";
             this.TVCD.Size = new System.Drawing.Size(60, 22);
             this.TVCD.Text = "1";
@@ -5665,7 +5496,7 @@ namespace iBMSC
             // 
             this.TVCBPM.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.TVCBPM.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TVCBPM.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.TVCBPM.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.TVCBPM.Name = "TVCBPM";
             this.TVCBPM.Size = new System.Drawing.Size(80, 22);
             this.TVCBPM.Text = "120";
@@ -5750,7 +5581,7 @@ namespace iBMSC
             // FSP1
             // 
             this.FSP1.AutoSize = false;
-            this.FSP1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.FSP1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.FSP1.Name = "FSP1";
             this.FSP1.Size = new System.Drawing.Size(170, 20);
             this.FSP1.Text = "9.41176470588235 / 9999";
@@ -5759,7 +5590,7 @@ namespace iBMSC
             // FSP3
             // 
             this.FSP3.AutoSize = false;
-            this.FSP3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.FSP3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.FSP3.ForeColor = System.Drawing.Color.Maroon;
             this.FSP3.Name = "FSP3";
             this.FSP3.Size = new System.Drawing.Size(85, 20);
@@ -5769,7 +5600,7 @@ namespace iBMSC
             // FSP2
             // 
             this.FSP2.AutoSize = false;
-            this.FSP2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.FSP2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.FSP2.ForeColor = System.Drawing.Color.Green;
             this.FSP2.Name = "FSP2";
             this.FSP2.Size = new System.Drawing.Size(170, 20);
@@ -5837,8 +5668,8 @@ namespace iBMSC
             // 
             // ToolStripContainer1.TopToolStripPanel
             // 
-            this.ToolStripContainer1.TopToolStripPanel.Controls.Add(this.TBMain);
             this.ToolStripContainer1.TopToolStripPanel.Controls.Add(this.mnMain);
+            this.ToolStripContainer1.TopToolStripPanel.Controls.Add(this.TBMain);
             // 
             // PMain
             // 
@@ -5847,7 +5678,7 @@ namespace iBMSC
             this.PMain.Controls.Add(this.MainPanelScroll);
             this.PMain.Controls.Add(this.HS);
             this.PMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PMain.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.PMain.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PMain.ForeColor = System.Drawing.Color.White;
             this.PMain.Location = new System.Drawing.Point(5, 0);
             this.PMain.Name = "PMain";
@@ -5859,7 +5690,7 @@ namespace iBMSC
             // 
             this.PMainIn.BackColor = System.Drawing.Color.Black;
             this.PMainIn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PMainIn.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.PMainIn.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PMainIn.ForeColor = System.Drawing.Color.White;
             this.PMainIn.Location = new System.Drawing.Point(0, 0);
             this.PMainIn.Name = "PMainIn";
@@ -5945,7 +5776,7 @@ namespace iBMSC
             this.PMainR.Controls.Add(this.RightPanelScroll);
             this.PMainR.Controls.Add(this.HSR);
             this.PMainR.Dock = System.Windows.Forms.DockStyle.Right;
-            this.PMainR.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.PMainR.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PMainR.ForeColor = System.Drawing.Color.White;
             this.PMainR.Location = new System.Drawing.Point(876, 0);
             this.PMainR.Name = "PMainR";
@@ -5957,7 +5788,7 @@ namespace iBMSC
             // 
             this.PMainInR.BackColor = System.Drawing.Color.Black;
             this.PMainInR.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PMainInR.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.PMainInR.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PMainInR.ForeColor = System.Drawing.Color.White;
             this.PMainInR.Location = new System.Drawing.Point(0, 0);
             this.PMainInR.Name = "PMainInR";
@@ -6011,7 +5842,7 @@ namespace iBMSC
             this.PMainL.Controls.Add(this.LeftPanelScroll);
             this.PMainL.Controls.Add(this.HSL);
             this.PMainL.Dock = System.Windows.Forms.DockStyle.Left;
-            this.PMainL.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.PMainL.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PMainL.ForeColor = System.Drawing.Color.White;
             this.PMainL.Location = new System.Drawing.Point(0, 0);
             this.PMainL.Name = "PMainL";
@@ -6023,7 +5854,7 @@ namespace iBMSC
             // 
             this.PMainInL.BackColor = System.Drawing.Color.Black;
             this.PMainInL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PMainInL.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.PMainInL.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PMainInL.ForeColor = System.Drawing.Color.White;
             this.PMainInL.Location = new System.Drawing.Point(0, 0);
             this.PMainInL.Name = "PMainInL";
@@ -6096,20 +5927,11 @@ namespace iBMSC
             this.Controls.Add(this.POptionsResizer);
             this.Controls.Add(this.POptionsScroll);
             this.DoubleBuffered = true;
-            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.mnMain;
             this.Name = "MainWindow";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
-            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
-            this.DragLeave += new System.EventHandler(this.Form1_DragLeave);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
-            this.Disposed += new System.EventHandler(this.Unload);
             this.cmnLanguage.ResumeLayout(false);
             this.cmnTheme.ResumeLayout(false);
             this.POptionsScroll.ResumeLayout(false);
@@ -6128,10 +5950,6 @@ namespace iBMSC
             ((System.ComponentModel.ISupportInitialize)(this.nBeatN)).EndInit();
             this.POBeatPart2.ResumeLayout(false);
             this.POBeatPart2.PerformLayout();
-            this.POBMP.ResumeLayout(false);
-            this.POBMPInner.ResumeLayout(false);
-            this.POBMPInner.PerformLayout();
-            this.FlowLayoutPanel4.ResumeLayout(false);
             this.POWAV.ResumeLayout(false);
             this.POWAVInner.ResumeLayout(false);
             this.POWAVInner.PerformLayout();
@@ -6228,351 +6046,342 @@ namespace iBMSC
             this.ResumeLayout(false);
             this.PerformLayout();
 
-        }
-        internal Panel POptionsScroll;
-        internal ListBox LWAV;
-        internal ListBox LBMP;
-        internal System.Windows.Forms.Timer Timer1;
-        internal ToolStripMenuItem MInsert;
-        internal ToolStripMenuItem MRemove;
-        internal ContextMenuStrip Menu1;
-        internal System.Windows.Forms.Timer AutoSaveTimer;
-        internal MenuStrip mnMain;
-        internal ToolStripMenuItem mnFile;
-        internal ToolStripMenuItem mnNew;
-        internal ToolStripMenuItem mnOpen;
-        internal ToolStripMenuItem mnImportSM;
-        internal ToolStripMenuItem mnImportIBMSC;
-        internal ToolStripSeparator ToolStripSeparator14;
-        internal ToolStripMenuItem mnSave;
-        internal ToolStripMenuItem mnSaveAs;
-        internal ToolStripMenuItem mnExport;
-        internal ToolStripSeparator ToolStripSeparator15;
-        internal ToolStripMenuItem mnOpenR0;
-        internal ToolStripMenuItem mnOpenR1;
-        internal ToolStripMenuItem mnOpenR2;
-        internal ToolStripMenuItem mnOpenR3;
-        internal ToolStripMenuItem mnOpenR4;
-        internal ToolStripSeparator ToolStripSeparator16;
-        internal ToolStripMenuItem mnQuit;
-        internal ToolStripMenuItem mnEdit;
-        internal ToolStripMenuItem mnUndo;
-        internal ToolStripMenuItem mnRedo;
-        internal ToolStripSeparator ToolStripSeparator17;
-        internal ToolStripMenuItem mnCut;
-        internal ToolStripMenuItem mnCopy;
-        internal ToolStripMenuItem mnPaste;
-        internal ToolStripSeparator ToolStripSeparator18;
-        internal ToolStripMenuItem mnFind;
-        internal ToolStripMenuItem mnStatistics;
-        internal ToolStripMenuItem mnDelete;
-        internal ToolStripMenuItem mnSelectAll;
-        internal ToolStripMenuItem mnMyO2;
-        internal ToolStripSeparator ToolStripSeparator19;
-        internal ToolStripMenuItem mnOptions;
-        internal ToolStripMenuItem mnPreview;
-        internal ToolStripMenuItem mnPlayB;
-        internal ToolStripMenuItem mnPlay;
-        internal ToolStripMenuItem mnStop;
-        internal ToolStripMenuItem mnTimeSelect;
-        internal ToolStripMenuItem mnSelect;
-        internal ToolStripMenuItem mnWrite;
-        internal ToolStripSeparator ToolStripSeparator23;
-        internal ToolStripMenuItem mnConversion;
-        internal ToolStripMenuItem mnErrorCheck;
-        internal ToolStripMenuItem mnPreviewOnClick;
-        internal ToolStripMenuItem mnShowFileName;
-        internal ToolStripSeparator ToolStripSeparator20;
-        internal ToolStripMenuItem mnGOptions;
-        internal ToolStripMenuItem mnVOptions;
-        internal ToolStripMenuItem mnLanguage;
-        internal ToolStripMenuItem mnTheme;
-        internal ContextMenuStrip cmnLanguage;
-        internal ToolStripMenuItem TBLangDef;
-        internal ToolStripSeparator ToolStripSeparator9;
-        internal ContextMenuStrip cmnTheme;
-        internal ToolStripMenuItem TBThemeDef;
-        internal ToolStripMenuItem TBThemeSave;
-        internal ToolStripMenuItem TBThemeRefresh;
-        internal ToolStripSeparator ToolStripSeparator6;
-        internal ContextMenuStrip cmnConversion;
-        internal ToolStripMenuItem POBLong;
-        internal ToolStripMenuItem POBShort;
-        internal ToolStripMenuItem POBLongShort;
-        internal ToolStripSeparator ToolStripSeparator10;
-        internal ToolStripMenuItem POBHidden;
-        internal ToolStripMenuItem POBVisible;
-        internal ToolStripMenuItem POBHiddenVisible;
-        internal ToolStripSeparator ToolStripSeparator11;
-        internal ToolStripMenuItem POBMirror;
-        internal ToolStripMenuItem POBModify;
-        internal ToolStripMenuItem mnSys;
-        internal ToolStripMenuItem mnSMenu;
-        internal ToolStripMenuItem mnSTB;
-        internal ToolStripMenuItem mnSOP;
-        internal ToolStripMenuItem mnSStatus;
-        internal ToolStripMenuItem mnSLSplitter;
-        internal ToolStripMenuItem mnSRSplitter;
-        internal ToolStripMenuItem mnNTInput;
-        internal ToolStripMenuItem TBLangRefresh;
-        internal NumericUpDown CGSub;
-        internal NumericUpDown CGDivide;
-        internal PictureBox PictureBox7;
-        internal CheckBox CGSnap;
-        internal CheckBox BWLock;
-        internal NumericUpDown TWSaturation;
-        internal NumericUpDown TWTransparency;
-        internal NumericUpDown TWPrecision;
-        internal NumericUpDown TWWidth;
-        internal NumericUpDown TWLeft;
-        internal NumericUpDown TWPosition;
-        internal PictureBox PictureBox5;
-        internal PictureBox PictureBox6;
-        internal PictureBox PictureBox4;
-        internal PictureBox PictureBox3;
-        internal PictureBox PictureBox2;
-        internal PictureBox PictureBox1;
-        internal TrackBar TWSaturation2;
-        internal TrackBar TWTransparency2;
-        internal TrackBar TWPrecision2;
-        internal TrackBar TWWidth2;
-        internal TrackBar TWLeft2;
-        internal TrackBar TWPosition2;
-        internal TextBox TWFileName;
-        internal Button BWClear;
-        internal Button BWLoad;
-        internal ToolStrip TBMain;
-        internal ToolStripButton TBNew;
-        internal ToolStripSplitButton TBOpen;
-        internal ToolStripMenuItem TBOpenR0;
-        internal ToolStripMenuItem TBOpenR1;
-        internal ToolStripMenuItem TBOpenR2;
-        internal ToolStripMenuItem TBOpenR3;
-        internal ToolStripMenuItem TBOpenR4;
-        internal ToolStripSeparator ToolStripSeparator12;
-        internal ToolStripMenuItem TBImportSM;
-        internal ToolStripMenuItem TBImportIBMSC;
-        internal ToolStripSplitButton TBSave;
-        internal ToolStripMenuItem TBSaveAs;
-        internal ToolStripMenuItem TBExport;
-        internal ToolStripSeparator ToolStripSeparator1;
-        internal ToolStripButton TBCut;
-        internal ToolStripButton TBCopy;
-        internal ToolStripButton TBPaste;
-        internal ToolStripButton TBFind;
-        internal ToolStripButton TBStatistics;
-        internal Panel pStatus;
-        internal StatusStrip FStatus;
-        internal ToolStripStatusLabel FSC;
-        internal ToolStripStatusLabel FSP1;
-        internal ToolStripStatusLabel FSP2;
-        internal ToolStripStatusLabel FSP3;
-        internal ToolStripStatusLabel FSP4;
-        internal ToolStripStatusLabel FST;
-        internal ToolStripStatusLabel FSH;
-        internal ToolStripStatusLabel FSE;
-        internal StatusStrip FStatus2;
-        internal ToolStripButton BVCReverse;
-        internal ToolStripStatusLabel LblMultiply;
-        internal ToolStripTextBox TVCBPM;
-        internal ToolStripTextBox TVCM;
-        internal ToolStripStatusLabel LblDivide;
-        internal ToolStripTextBox TVCD;
-        internal ToolStripButton BVCApply;
-        internal ToolStripButton BVCCalculate;
-        internal ToolStripStatusLabel FSW;
-        internal ToolStripButton FSSS;
-        internal ToolStripButton FSSL;
-        internal ToolStripButton FSSH;
-        internal TextBox TExpansion;
-        internal System.Windows.Forms.Timer TimerMiddle;
-        internal ToolStripSeparator ToolStripSeparator21;
-        internal ToolStripMenuItem CGShow;
-        internal ToolStripMenuItem CGShowS;
-        internal ToolStripMenuItem CGShowBG;
-        internal ToolStripMenuItem CGShowM;
-        internal ToolStripMenuItem CGShowMB;
-        internal ToolStripMenuItem CGShowV;
-        internal ToolStripMenuItem CGShowC;
-        internal ToolStripSeparator ToolStripSeparator22;
-        internal ToolStripMenuItem CGBLP;
-        internal ToolStripMenuItem CGSTOP;
-        internal ToolStripMenuItem CGSCROLL;
-        internal NumericUpDown nBeatN;
-        internal ListBox LBeat;
-        internal Label Label7;
-        internal Button BBeatApply;
-        internal ToolStripMenuItem mnPOptions;
-        internal ToolStripContainer ToolStripContainer1;
-        internal Panel PMain;
-        internal Panel PMainIn;
-        internal VScrollBar MainPanelScroll;
-        internal HScrollBar HS;
-        internal Panel PMainR;
-        internal Panel PMainInR;
-        internal VScrollBar RightPanelScroll;
-        internal HScrollBar HSR;
-        internal Panel PMainL;
-        internal Panel PMainInL;
-        internal VScrollBar LeftPanelScroll;
-        internal HScrollBar HSL;
-        internal ToolStripDropDownButton POConvert;
-        internal ToolStripDropDownButton TBLanguage;
-        internal ToolStripDropDownButton TBTheme;
-        internal ToolStripButton TBMyO2;
-        internal ToolStripSeparator ToolStripSeparator4;
-        internal ToolStripButton TBErrorCheck;
-        internal ToolStripButton TBPreviewOnClick;
-        internal ToolStripButton TBShowFileName;
-        internal ToolStripSeparator ToolStripSeparator2;
-        internal ToolStripButton TBUndo;
-        internal ToolStripButton TBRedo;
-        internal ToolStripSeparator ToolStripSeparator5;
-        internal ToolStripButton TBNTInput;
-        internal ToolStripButton TBTimeSelect;
-        internal ToolStripButton TBSelect;
-        internal ToolStripButton TBWrite;
-        internal ToolStripSeparator ToolStripSeparator3;
-        internal ToolStripButton TBPlayB;
-        internal ToolStripButton TBPlay;
-        internal ToolStripButton TBStop;
-        internal ToolStripButton TBPOptions;
-        internal ToolStripSeparator ToolStripSeparator7;
-        internal ToolStripButton TBVOptions;
-        internal ToolStripButton TBGOptions;
-        internal ToolStripButton POBStorm;
-        internal Panel POptions;
-        internal Panel POHeader;
-        internal CheckBox POHeaderSwitch;
-        internal Panel POGrid;
-        internal CheckBox POGridSwitch;
-        internal Panel POHeaderInner;
-        internal TableLayoutPanel POHeaderPart2;
-        internal TextBox THExRank;
-        internal Label Label25;
-        internal ComboBox CHLnObj;
-        internal Label Label23;
-        internal Label Label21;
-        internal TextBox THComment;
-        internal Label Label24;
-        internal Label Label15;
-        internal TextBox THTotal;
-        internal Label Label20;
-        internal Button BHStageFile;
-        internal Button BHBanner;
-        internal Label Label19;
-        internal Button BHBackBMP;
-        internal Label Label17;
-        internal Label Label16;
-        internal Label Label12;
-        internal TextBox THBackBMP;
-        internal Label Label11;
-        internal TextBox THBanner;
-        internal TextBox THStageFile;
-        internal TextBox THSubTitle;
-        internal TextBox THSubArtist;
-        internal CheckBox POHeaderExpander;
-        internal TableLayoutPanel POHeaderPart1;
-        internal Label Label3;
-        internal TextBox THPlayLevel;
-        internal ComboBox CHRank;
-        internal Label Label10;
-        internal ComboBox CHPlayer;
-        internal ComboBox CHDifficulty;
-        internal Label Label4;
-        internal TextBox THGenre;
-        internal NumericUpDown THBPM;
-        internal Label Label2;
-        internal TextBox THArtist;
-        internal TextBox THTitle;
-        internal Label Label9;
-        internal Label Label8;
-        internal Label Label6;
-        internal TableLayoutPanel POGridPart1;
-        internal TableLayoutPanel TableLayoutPanel2;
-        internal Panel POGridInner;
-        internal TableLayoutPanel POGridPart2;
-        internal TableLayoutPanel TableLayoutPanel5;
-        internal CheckBox cVSLockR;
-        internal Label Label5;
-        internal CheckBox cVSLock;
-        internal CheckBox cVSLockL;
-        internal CheckBox CGDisableVertical;
-        internal TableLayoutPanel TableLayoutPanel4;
-        internal Label Label1;
-        internal NumericUpDown CGB;
-        internal CheckBox POGridExpander;
-        internal TableLayoutPanel TableLayoutPanel3;
-        internal PictureBox PictureBox9;
-        internal TrackBar CGHeight2;
-        internal NumericUpDown CGHeight;
-        internal PictureBox PictureBox10;
-        internal TrackBar CGWidth2;
-        internal NumericUpDown CGWidth;
-        internal Panel POWaveForm;
-        internal CheckBox POWaveFormSwitch;
-        internal Panel POWaveFormInner;
-        internal TableLayoutPanel POWaveFormPart2;
-        internal CheckBox POWaveFormExpander;
-        internal TableLayoutPanel POWaveFormPart1;
-        internal TableLayoutPanel TableLayoutPanel1;
-        internal TableLayoutPanel TableLayoutPanel6;
-        internal FlowLayoutPanel FlowLayoutPanel1;
-        internal FlowLayoutPanel FlowLayoutPanel2;
-        internal Panel POWAV;
-        internal TableLayoutPanel POWAVInner;
-        internal CheckBox POWAVSwitch;
-        internal Panel POBMP;
-        internal TableLayoutPanel POBMPInner;
-        internal CheckBox POBMPSwitch;
-        internal Panel POBeat;
-        internal TableLayoutPanel POBeatInner;
-        internal CheckBox POBeatSwitch;
-        internal FlowLayoutPanel FlowLayoutPanel3;
-        internal FlowLayoutPanel FlowLayoutPanel4;
-        internal Button BWAVUp;
-        internal Button BWAVDown;
-        internal Button BWAVBrowse;
-        internal Button BWAVRemove;
-        internal Button BBMPUp;
-        internal Button BBMPDown;
-        internal Button BBMPBrowse;
-        internal Button BBMPRemove;
-        internal Panel POExpansion;
-        internal Panel POExpansionInner;
-        internal CheckBox POExpansionSwitch;
-        internal Button POWAVResizer;
-        internal Button POBMPResizer;
-        internal TableLayoutPanel TableLayoutPanel7;
-        internal Button POExpansionResizer;
-        internal Button POBeatResizer;
-        internal Button POptionsResizer;
-        internal Button SpR;
-        internal Button SpL;
-        internal ToolStripMenuItem TBThemeLoadComptability;
-        internal CheckBox POWAVExpander;
-        internal TableLayoutPanel POWAVPart2;
-        internal CheckBox CWAVMultiSelect;
-        internal CheckBox CWAVChangeLabel;
-        internal NumericUpDown nBeatD;
-        internal Button BBeatApplyV;
-        internal TextBox tBeatValue;
-        internal CheckBox POBeatExpander;
-        internal TableLayoutPanel POBeatPart2;
-        internal RadioButton CBeatScale;
-        internal RadioButton CBeatCut;
-        internal RadioButton CBeatMeasure;
-        internal RadioButton CBeatPreserve;
-        internal Label Label13;
-        internal ToolTip ToolTipUniversal;
-        internal ToolStripMenuItem CGBPM;
-        internal Button BGSlash;
-        internal ToolStripStatusLabel FSM;
-        internal ToolStripMenuItem mnGotoMeasure;
-        internal ToolStripSeparator ToolStripSeparator24;
-        internal ToolStripSeparator ToolStripSeparator8;
-        internal ToolStripButton TBWavIncrease;
-        internal ToolStripStatusLabel TimeStatusLabel;
-        internal ToolStripButton BConvertStop;
+    }
+
+internal Panel POptionsScroll;
+internal ListBox LWAV;
+internal Timer Timer1;
+internal ToolStripMenuItem MInsert;
+internal ToolStripMenuItem MRemove;
+internal ContextMenuStrip Menu1;
+internal Timer AutoSaveTimer;
+internal MenuStrip mnMain;
+internal ToolStripMenuItem mnFile;
+internal ToolStripMenuItem mnNew;
+internal ToolStripMenuItem mnOpen;
+internal ToolStripMenuItem mnImportSM;
+internal ToolStripMenuItem mnImportIBMSC;
+internal ToolStripSeparator ToolStripSeparator14;
+internal ToolStripMenuItem mnSave;
+internal ToolStripMenuItem mnSaveAs;
+internal ToolStripMenuItem mnExport;
+internal ToolStripSeparator ToolStripSeparator15;
+internal ToolStripMenuItem mnOpenR0;
+internal ToolStripMenuItem mnOpenR1;
+internal ToolStripMenuItem mnOpenR2;
+internal ToolStripMenuItem mnOpenR3;
+internal ToolStripMenuItem mnOpenR4;
+internal ToolStripSeparator ToolStripSeparator16;
+internal ToolStripMenuItem mnQuit;
+internal ToolStripMenuItem mnEdit;
+internal ToolStripMenuItem mnUndo;
+internal ToolStripMenuItem mnRedo;
+internal ToolStripSeparator ToolStripSeparator17;
+internal ToolStripMenuItem mnCut;
+internal ToolStripMenuItem mnCopy;
+internal ToolStripMenuItem mnPaste;
+internal ToolStripSeparator ToolStripSeparator18;
+internal ToolStripMenuItem mnFind;
+internal ToolStripMenuItem mnStatistics;
+internal ToolStripMenuItem mnDelete;
+internal ToolStripMenuItem mnSelectAll;
+internal ToolStripMenuItem mnMyO2;
+internal ToolStripSeparator ToolStripSeparator19;
+internal ToolStripMenuItem mnOptions;
+internal ToolStripMenuItem mnPreview;
+internal ToolStripMenuItem mnPlayB;
+internal ToolStripMenuItem mnPlay;
+internal ToolStripMenuItem mnStop;
+internal ToolStripMenuItem mnTimeSelect;
+internal ToolStripMenuItem mnSelect;
+internal ToolStripMenuItem mnWrite;
+internal ToolStripSeparator ToolStripSeparator23;
+internal ToolStripMenuItem mnConversion;
+internal ToolStripMenuItem mnErrorCheck;
+internal ToolStripMenuItem mnPreviewOnClick;
+internal ToolStripMenuItem mnShowFileName;
+internal ToolStripSeparator ToolStripSeparator20;
+internal ToolStripMenuItem mnGOptions;
+internal ToolStripMenuItem mnVOptions;
+internal ToolStripMenuItem mnLanguage;
+internal ToolStripMenuItem mnTheme;
+internal ContextMenuStrip cmnLanguage;
+internal ToolStripMenuItem TBLangDef;
+internal ToolStripSeparator ToolStripSeparator9;
+internal ContextMenuStrip cmnTheme;
+internal ToolStripMenuItem TBThemeDef;
+internal ToolStripMenuItem TBThemeSave;
+internal ToolStripMenuItem TBThemeRefresh;
+internal ToolStripSeparator ToolStripSeparator6;
+internal ContextMenuStrip cmnConversion;
+internal ToolStripMenuItem POBLong;
+internal ToolStripMenuItem POBShort;
+internal ToolStripMenuItem POBLongShort;
+internal ToolStripSeparator ToolStripSeparator10;
+internal ToolStripMenuItem POBHidden;
+internal ToolStripMenuItem POBVisible;
+internal ToolStripMenuItem POBHiddenVisible;
+internal ToolStripSeparator ToolStripSeparator11;
+internal ToolStripMenuItem POBMirror;
+internal ToolStripMenuItem POBModify;
+internal ToolStripMenuItem mnSys;
+internal ToolStripMenuItem mnSMenu;
+internal ToolStripMenuItem mnSTB;
+internal ToolStripMenuItem mnSOP;
+internal ToolStripMenuItem mnSStatus;
+internal ToolStripMenuItem mnSLSplitter;
+internal ToolStripMenuItem mnSRSplitter;
+internal ToolStripMenuItem mnNTInput;
+internal ToolStripMenuItem TBLangRefresh;
+internal NumericUpDown CGSub;
+internal NumericUpDown CGDivide;
+internal PictureBox PictureBox7;
+internal CheckBox CGSnap;
+internal CheckBox BWLock;
+internal NumericUpDown TWSaturation;
+internal NumericUpDown TWTransparency;
+internal NumericUpDown TWPrecision;
+internal NumericUpDown TWWidth;
+internal NumericUpDown TWLeft;
+internal NumericUpDown TWPosition;
+internal PictureBox PictureBox5;
+internal PictureBox PictureBox6;
+internal PictureBox PictureBox4;
+internal PictureBox PictureBox3;
+internal PictureBox PictureBox2;
+internal PictureBox PictureBox1;
+internal TrackBar TWSaturation2;
+internal TrackBar TWTransparency2;
+internal TrackBar TWPrecision2;
+internal TrackBar TWWidth2;
+internal TrackBar TWLeft2;
+internal TrackBar TWPosition2;
+internal TextBox TWFileName;
+internal Button BWClear;
+internal Button BWLoad;
+internal ToolStrip TBMain;
+internal ToolStripButton TBNew;
+internal ToolStripSplitButton TBOpen;
+internal ToolStripMenuItem TBOpenR0;
+internal ToolStripMenuItem TBOpenR1;
+internal ToolStripMenuItem TBOpenR2;
+internal ToolStripMenuItem TBOpenR3;
+internal ToolStripMenuItem TBOpenR4;
+internal ToolStripSeparator ToolStripSeparator12;
+internal ToolStripMenuItem TBImportSM;
+internal ToolStripMenuItem TBImportIBMSC;
+internal ToolStripSplitButton TBSave;
+internal ToolStripMenuItem TBSaveAs;
+internal ToolStripMenuItem TBExport;
+internal ToolStripSeparator ToolStripSeparator1;
+internal ToolStripButton TBCut;
+internal ToolStripButton TBCopy;
+internal ToolStripButton TBPaste;
+internal ToolStripButton TBFind;
+internal ToolStripButton TBStatistics;
+internal Panel pStatus;
+internal StatusStrip FStatus;
+internal ToolStripStatusLabel FSC;
+internal ToolStripStatusLabel FSP1;
+internal ToolStripStatusLabel FSP2;
+internal ToolStripStatusLabel FSP3;
+internal ToolStripStatusLabel FSP4;
+internal ToolStripStatusLabel FST;
+internal ToolStripStatusLabel FSH;
+internal ToolStripStatusLabel FSE;
+internal StatusStrip FStatus2;
+internal ToolStripButton BVCReverse;
+internal ToolStripStatusLabel LblMultiply;
+internal ToolStripTextBox TVCBPM;
+internal ToolStripTextBox TVCM;
+internal ToolStripStatusLabel LblDivide;
+internal ToolStripTextBox TVCD;
+internal ToolStripButton BVCApply;
+internal ToolStripButton BVCCalculate;
+internal ToolStripStatusLabel FSW;
+internal ToolStripButton FSSS;
+internal ToolStripButton FSSL;
+internal ToolStripButton FSSH;
+internal TextBox TExpansion;
+internal Timer TimerMiddle;
+internal ToolStripSeparator ToolStripSeparator21;
+internal ToolStripMenuItem CGShow;
+internal ToolStripMenuItem CGShowS;
+internal ToolStripMenuItem CGShowBG;
+internal ToolStripMenuItem CGShowM;
+internal ToolStripMenuItem CGShowMB;
+internal ToolStripMenuItem CGShowV;
+internal ToolStripMenuItem CGShowC;
+internal ToolStripSeparator ToolStripSeparator22;
+internal ToolStripMenuItem CGBLP;
+internal ToolStripMenuItem CGSTOP;
+internal ToolStripMenuItem CGSCROLL;
+internal NumericUpDown nBeatN;
+internal ListBox LBeat;
+internal Label Label7;
+internal Button BBeatApply;
+internal ToolStripMenuItem mnPOptions;
+internal ToolStripContainer ToolStripContainer1;
+internal Panel PMain;
+internal Panel PMainIn;
+internal VScrollBar MainPanelScroll;
+internal HScrollBar HS;
+internal Panel PMainR;
+internal Panel PMainInR;
+internal VScrollBar RightPanelScroll;
+internal HScrollBar HSR;
+internal Panel PMainL;
+internal Panel PMainInL;
+internal VScrollBar LeftPanelScroll;
+internal HScrollBar HSL;
+internal ToolStripDropDownButton POConvert;
+internal ToolStripDropDownButton TBLanguage;
+internal ToolStripDropDownButton TBTheme;
+internal ToolStripButton TBMyO2;
+internal ToolStripSeparator ToolStripSeparator4;
+internal ToolStripButton TBErrorCheck;
+internal ToolStripButton TBPreviewOnClick;
+internal ToolStripButton TBShowFileName;
+internal ToolStripSeparator ToolStripSeparator2;
+internal ToolStripButton TBUndo;
+internal ToolStripButton TBRedo;
+internal ToolStripSeparator ToolStripSeparator5;
+internal ToolStripButton TBNTInput;
+internal ToolStripButton TBTimeSelect;
+internal ToolStripButton TBSelect;
+internal ToolStripButton TBWrite;
+internal ToolStripSeparator ToolStripSeparator3;
+internal ToolStripButton TBPlayB;
+internal ToolStripButton TBPlay;
+internal ToolStripButton TBStop;
+internal ToolStripButton TBPOptions;
+internal ToolStripSeparator ToolStripSeparator7;
+internal ToolStripButton TBVOptions;
+internal ToolStripButton TBGOptions;
+internal ToolStripButton POBStorm;
+internal Panel POptions;
+internal Panel POHeader;
+internal CheckBox POHeaderSwitch;
+internal Panel POGrid;
+internal CheckBox POGridSwitch;
+internal Panel POHeaderInner;
+internal TableLayoutPanel POHeaderPart2;
+internal TextBox THExRank;
+internal Label Label25;
+internal ComboBox CHLnObj;
+internal Label Label23;
+internal Label Label21;
+internal TextBox THComment;
+internal Label Label24;
+internal Label Label15;
+internal TextBox THTotal;
+internal Label Label20;
+internal Button BHStageFile;
+internal Button BHBanner;
+internal Label Label19;
+internal Button BHBackBMP;
+internal Label Label17;
+internal Label Label16;
+internal Label Label12;
+internal TextBox THBackBMP;
+internal Label Label11;
+internal TextBox THBanner;
+internal TextBox THStageFile;
+internal TextBox THSubTitle;
+internal TextBox THSubArtist;
+internal CheckBox POHeaderExpander;
+internal TableLayoutPanel POHeaderPart1;
+internal Label Label3;
+internal TextBox THPlayLevel;
+internal ComboBox CHRank;
+internal Label Label10;
+internal ComboBox CHPlayer;
+internal ComboBox CHDifficulty;
+internal Label Label4;
+internal TextBox THGenre;
+internal NumericUpDown THBPM;
+internal Label Label2;
+internal TextBox THArtist;
+internal TextBox THTitle;
+internal Label Label9;
+internal Label Label8;
+internal Label Label6;
+internal TableLayoutPanel POGridPart1;
+internal TableLayoutPanel TableLayoutPanel2;
+internal Panel POGridInner;
+internal TableLayoutPanel POGridPart2;
+internal TableLayoutPanel TableLayoutPanel5;
+internal CheckBox cVSLockR;
+internal Label Label5;
+internal CheckBox cVSLock;
+internal CheckBox cVSLockL;
+internal CheckBox CGDisableVertical;
+internal TableLayoutPanel TableLayoutPanel4;
+internal Label Label1;
+internal NumericUpDown CGB;
+internal CheckBox POGridExpander;
+internal TableLayoutPanel TableLayoutPanel3;
+internal PictureBox PictureBox9;
+internal TrackBar CGHeight2;
+internal NumericUpDown CGHeight;
+internal PictureBox PictureBox10;
+internal TrackBar CGWidth2;
+internal NumericUpDown CGWidth;
+internal Panel POWaveForm;
+internal CheckBox POWaveFormSwitch;
+internal Panel POWaveFormInner;
+internal TableLayoutPanel POWaveFormPart2;
+internal CheckBox POWaveFormExpander;
+internal TableLayoutPanel POWaveFormPart1;
+internal TableLayoutPanel TableLayoutPanel1;
+internal TableLayoutPanel TableLayoutPanel6;
+internal FlowLayoutPanel FlowLayoutPanel1;
+internal FlowLayoutPanel FlowLayoutPanel2;
+internal Panel POWAV;
+internal TableLayoutPanel POWAVInner;
+internal CheckBox POWAVSwitch;
+internal Panel POBeat;
+internal TableLayoutPanel POBeatInner;
+internal CheckBox POBeatSwitch;
+internal FlowLayoutPanel FlowLayoutPanel3;
+internal Button BWAVUp;
+internal Button BWAVDown;
+internal Button BWAVBrowse;
+internal Button BWAVRemove;
+internal Panel POExpansion;
+internal Panel POExpansionInner;
+internal CheckBox POExpansionSwitch;
+internal Button POWAVResizer;
+internal TableLayoutPanel TableLayoutPanel7;
+internal Button POExpansionResizer;
+internal Button POBeatResizer;
+internal Button POptionsResizer;
+internal Button SpR;
+internal Button SpL;
+internal ToolStripMenuItem TBThemeLoadComptability;
+internal CheckBox POWAVExpander;
+internal TableLayoutPanel POWAVPart2;
+internal CheckBox CWAVMultiSelect;
+internal CheckBox CWAVChangeLabel;
+internal NumericUpDown nBeatD;
+internal Button BBeatApplyV;
+internal TextBox tBeatValue;
+internal CheckBox POBeatExpander;
+internal TableLayoutPanel POBeatPart2;
+internal RadioButton CBeatScale;
+internal RadioButton CBeatCut;
+internal RadioButton CBeatMeasure;
+internal RadioButton CBeatPreserve;
+internal Label Label13;
+internal ToolTip ToolTipUniversal;
+internal ToolStripMenuItem CGBPM;
+internal Button BGSlash;
+internal ToolStripStatusLabel FSM;
+internal ToolStripMenuItem mnGotoMeasure;
+internal ToolStripSeparator ToolStripSeparator24;
+internal ToolStripSeparator ToolStripSeparator8;
+internal ToolStripButton TBWavIncrease;
+internal ToolStripStatusLabel TimeStatusLabel;
+internal ToolStripButton BConvertStop;
     }
 }

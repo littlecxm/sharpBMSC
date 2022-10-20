@@ -1,31 +1,28 @@
-﻿using System;
+using System;
+using iBMSC.Editor;
 using Microsoft.VisualBasic;
 
-namespace iBMSC
+namespace iBMSC;
+
+internal static class BMS
 {
-
-    static class BMS
+    public static bool IsChannelLongNote(string I)
     {
-        public static bool IsChannelLongNote(string I)
-        {
-            int xI = (int)Math.Round(Conversion.Val(I));
-            return xI >= 50 & xI < 90;
-        }
+        int num = checked((int)Math.Round(Conversion.Val(I)));
+        return num >= 50 && num < 90;
+    }
 
-        public static bool IsChannelHidden(string I)
-        {
-            int xI = (int)Math.Round(Conversion.Val(I));
-            return xI >= 30 & xI < 50 | xI >= 70 & xI < 90;
-        }
+    public static bool IsChannelHidden(string I)
+    {
+        int num = checked((int)Math.Round(Conversion.Val(I)));
+        return (num >= 30 && num < 50) || (num >= 70 && num < 90);
+    }
 
-        public static bool IsChannelLandmine(string I)
-        {
-            int LandmineStart = iBMSC.Editor.Functions.C36to10("D0");
-            int LandmineEnd = iBMSC.Editor.Functions.C36to10("EZ");
-
-            int xI = iBMSC.Editor.Functions.C36to10(I);
-
-            return xI > LandmineStart & xI < LandmineEnd;
-        }
+    public static bool IsChannelLandmine(string I)
+    {
+        int num = Functions.C36to10("D0");
+        int num2 = Functions.C36to10("EZ");
+        int num3 = Functions.C36to10(I);
+        return num3 > num && num3 < num2;
     }
 }

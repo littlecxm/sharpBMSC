@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<iBMSC Major="3" Minor="1" Build="0">
+    <Columns>
+        <Column Index="0" Width="50" Title="Measure" NoteColor="0" TextColor="-16711681" LongNoteColor="0" LongTextColor="-16711681" BG="0" />
+        <Column Index="1" Width="60" Title="SCROLL" NoteColor="0" TextColor="-65536" LongNoteColor="0" LongTextColor="-65536" BG="0" />
+        <Column Index="2" Width="60" Title="BPM" NoteColor="0" TextColor="-65536" LongNoteColor="0" LongTextColor="-65536" BG="0" />
+        <Column Index="3" Width="50" Title="STOP" NoteColor="0" TextColor="-65536" LongNoteColor="0" LongTextColor="-65536" BG="0" />
+        <Column Index="4" Width="5" Title="" NoteColor="0" TextColor="0" LongNoteColor="0" LongTextColor="0" BG="0" />
+        <Column Index="5" Width="42" Title="A1" NoteColor="-5197648" TextColor="-16777216" LongNoteColor="-4144960" LongTextColor="-16777216" BG="352321535" />
+        <Column Index="6" Width="30" Title="A2" NoteColor="-10309377" TextColor="-16777216" LongNoteColor="-9785097" LongTextColor="-16777216" BG="335557631" />
+        <Column Index="7" Width="42" Title="A3" NoteColor="-5197648" TextColor="-16777216" LongNoteColor="-4144960" LongTextColor="-16777216" BG="352321535" />
+        <Column Index="8" Width="45" Title="A4" NoteColor="-14238" TextColor="-16777216" LongNoteColor="-539030" LongTextColor="-16777216" BG="385059596" />
+        <Column Index="9" Width="42" Title="A5" NoteColor="-5197648" TextColor="-16777216" LongNoteColor="-4144960" LongTextColor="-16777216" BG="352321535" />
+        <Column Index="10" Width="30" Title="A6" NoteColor="-10309377" TextColor="-16777216" LongNoteColor="-9785097" LongTextColor="-16777216" BG="335557631" />
+        <Column Index="11" Width="42" Title="A7" NoteColor="-5197648" TextColor="-16777216" LongNoteColor="-4144960" LongTextColor="-16777216" BG="352321535" />
+        <Column Index="12" Width="0" Title="A8" NoteColor="-8355712" TextColor="-16777216" LongNoteColor="-7303024" LongTextColor="-16777216" BG="0" />
+        <Column Index="13" Width="5" Title="" NoteColor="0" TextColor="0" LongNoteColor="0" LongTextColor="0" BG="0" />
+        <Column Index="14" Width="42" Title="D1" NoteColor="-5197648" TextColor="-16777216" LongNoteColor="-4144960" LongTextColor="-16777216" BG="352321535" />
+        <Column Index="15" Width="30" Title="D2" NoteColor="-10309377" TextColor="-16777216" LongNoteColor="-9785097" LongTextColor="-16777216" BG="335557631" />
+        <Column Index="16" Width="42" Title="D3" NoteColor="-5197648" TextColor="-16777216" LongNoteColor="-4144960" LongTextColor="-16777216" BG="352321535" />
+        <Column Index="17" Width="45" Title="D4" NoteColor="-14238" TextColor="-16777216" LongNoteColor="-539030" LongTextColor="-16777216" BG="385059596" />
+        <Column Index="18" Width="42" Title="D5" NoteColor="-5197648" TextColor="-16777216" LongNoteColor="-4144960" LongTextColor="-16777216" BG="352321535" />
+        <Column Index="19" Width="30" Title="D6" NoteColor="-10309377" TextColor="-16777216" LongNoteColor="-9785097" LongTextColor="-16777216" BG="335557631" />
+        <Column Index="20" Width="42" Title="D7" NoteColor="-5197648" TextColor="-16777216" LongNoteColor="-4144960" LongTextColor="-16777216" BG="352321535" />
+        <Column Index="21" Width="40" Title="D8" NoteColor="-8355712" TextColor="-16777216" LongNoteColor="-7303024" LongTextColor="-16777216" BG="0" />
+        <Column Index="22" Width="5" Title="" NoteColor="0" TextColor="0" LongNoteColor="0" LongTextColor="0" BG="0" />
+        <Column Index="23" Width="40" Title="BGA" NoteColor="-7546998" TextColor="-16777216" LongNoteColor="-7285874" LongTextColor="-16777216" BG="0" />
+        <Column Index="24" Width="40" Title="LAYER" NoteColor="-7546998" TextColor="-16777216" LongNoteColor="-7285874" LongTextColor="-16777216" BG="0" />
+        <Column Index="25" Width="40" Title="POOR" NoteColor="-7546998" TextColor="-16777216" LongNoteColor="-7285874" LongTextColor="-16777216" BG="0" />
+        <Column Index="26" Width="5" Title="" NoteColor="0" TextColor="0" LongNoteColor="0" LongTextColor="0" BG="0" />
+        <Column Index="27" Width="40" Title="B" NoteColor="-1998720" TextColor="-16777216" LongNoteColor="-2325115" LongTextColor="-16777216" BG="0" />
+    </Columns>
+    <VisualSettings>
+        <ColumnTitle Value="-16711936" />
+        <ColumnTitleFont Name="Tahoma" Size="8" Style="0" />
+        <Bg Value="-16777216" />
+        <Grid Value="893008442" />
+        <Sub Value="1530542650" />
+        <VLine Value="-13158601" />
+        <MLine Value="1599230546" />
+        <BGMWav Value="1354809536" />
+        <SelBox Value="-1056964609" />
+        <TSCursor Value="-1056997248" />
+        <TSHalf Value="-2139062017" />
+        <TSDeltaMouseOver Value="5" />
+        <TSMouseOver Value="-2130739072" />
+        <TSSel Value="855605376" />
+        <TSBPM Value="855605376" />
+        <TSBPMFont Name="Verdana" Size="9" Style="1" />
+        <MiddleDeltaRelease Value="1" />
+        <kHeight Value="10" />
+        <kFont Name="Verdana" Size="9" Style="1" />
+        <kMFont Name="Verdana" Size="9" Style="0" />
+        <kLabelVShift Value="-2" />
+        <kLabelHShift Value="0" />
+        <kLabelHShiftL Value="2" />
+        <kMouseOver Value="-16711936" />
+        <kMouseOverE Value="-16711681" />
+        <kSelected Value="-65536" />
+        <kOpacity Value="1" />
+    </VisualSettings>
+</iBMSC>

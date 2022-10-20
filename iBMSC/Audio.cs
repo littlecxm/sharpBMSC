@@ -1,149 +1,75 @@
+using System;
+using System.IO;
+using System.Runtime.CompilerServices;
 using CSCore;
 using CSCore.Codecs;
 using CSCore.SoundOut;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
-using NVorbis;
 
-namespace iBMSC
+namespace iBMSC;
+
+internal static class Audio
 {
-    internal static class Audio
+    private static WasapiOut Output;
+
+    private static IWaveSource Source;
+
+    public static void Initialize()
     {
-        private static WasapiOut Output;
-        private static IWaveSource Source;
+        Output = new WasapiOut();
+        CodecFactory.Instance.Register("ogg", new CodecFactoryEntry((GetCodecAction)([SpecialName] (Stream s) => new NVorbisSource(s).ToWaveSource()), new string[1] { ".ogg" }));
+    }
 
-        public static void Initialize()
+    public static void Finalize()
+    {
+        Output.Stop();
+        Output.Dispose();
+        Output = null;
+    }
+
+    public static string CheckFilename(string filename)
+    {
+        if (File.Exists(filename))
         {
-            Output = new WasapiOut();
-            CodecFactory.Instance.Register("ogg",
-                new CodecFactoryEntry(s => new NVorbisSource(s).ToWaveSource(), ".ogg"));
-        }
-
-        public static void Finalize()
-        {
-            Output.Stop();
-            Output.Dispose();
-            Output = null;
-        }
-
-        public static string CheckFilename(string filename)
-        {
-            if (File.Exists(filename))
-            {
-                return filename;
-            }
-
-            string ext = Path.GetExtension(filename);
-            if (string.Compare(ext, ".ogg") == 0)
-            {
-                string wpath = Path.ChangeExtension(filename, ".wav");
-                return Conversions.ToString(Interaction.IIf(File.Exists(wpath), wpath, filename));
-            }
-
-            if (string.Compare(ext, ".wav") == 0)
-            {
-                string opath = Path.ChangeExtension(filename, ".ogg");
-                return Conversions.ToString(Interaction.IIf(File.Exists(opath), opath, filename));
-            }
-
             return filename;
         }
-
-        public static void Play(string filename)
+        string extension = Path.GetExtension(filename);
+        if (string.Compare(extension, ".ogg") == 0)
         {
-            if (Source is not null)
-            {
-                Output.Stop();
-                Source.Dispose();
-                Source = null;
-            }
-
-            if (ReferenceEquals(filename, ""))
-            {
-                return;
-            }
-
-            string fn = CheckFilename(filename);
-            if (!File.Exists(fn))
-            {
-                return;
-            }
-
-            Source = CodecFactory.Instance.GetCodec(fn);
-            Output.Initialize(Source);
-            Output.Play();
+            string text = Path.ChangeExtension(filename, ".wav");
+            return Conversions.ToString(Interaction.IIf(File.Exists(text), text, filename));
         }
+        if (string.Compare(extension, ".wav") == 0)
+        {
+            string text2 = Path.ChangeExtension(filename, ".ogg");
+            return Conversions.ToString(Interaction.IIf(File.Exists(text2), text2, filename));
+        }
+        return filename;
+    }
 
-        public static void StopPlaying()
+    public static void Play(string filename)
+    {
+        if (Source != null)
         {
             Output.Stop();
+            ((IDisposable)Source).Dispose();
+            Source = null;
+        }
+        if ((object)filename != "")
+        {
+            string text = CheckFilename(filename);
+            if (File.Exists(text))
+            {
+                Source = CodecFactory.Instance.GetCodec(text);
+                Output.Initialize(Source);
+                Output.Play();
+            }
         }
     }
 
-    internal class NVorbisSource : ISampleSource
+    public static void StopPlaying()
     {
-        private Stream _stream;
-        private VorbisReader _vorbisReader;
-        private WaveFormat _waveFormat;
-        private bool _disposed;
-
-        public NVorbisSource(Stream stream)
-        {
-            if (stream is null | !stream.CanRead)
-            {
-                throw new ArgumentException("stream");
-            }
-
-            _stream = stream;
-            _vorbisReader = new VorbisReader(stream, default);
-            _waveFormat = new WaveFormat(_vorbisReader.SampleRate, 32, _vorbisReader.Channels, AudioEncoding.IeeeFloat);
-        }
-
-        public bool CanSeek => _stream.CanSeek;
-
-        public WaveFormat WaveFormat => _waveFormat;
-
-        public long Length => Conversions.ToLong(Interaction.IIf(CanSeek,
-            _vorbisReader.TotalTime.TotalSeconds * _waveFormat.SampleRate * _waveFormat.Channels, 0));
-
-        public long Position
-        {
-            get => Conversions.ToLong(Interaction.IIf(CanSeek,
-                _vorbisReader.DecodedTime.TotalSeconds * _vorbisReader.SampleRate * _vorbisReader.Channels, 0));
-            set
-            {
-                if (!CanSeek)
-                {
-                    throw new InvalidOperationException("Can't seek this stream.");
-                }
-
-                if (value < 0L | value >= Length)
-                {
-                    throw new ArgumentOutOfRangeException("value");
-                }
-
-                _vorbisReader.DecodedTime =
-                    TimeSpan.FromSeconds(value / (double)_vorbisReader.SampleRate / _vorbisReader.Channels);
-            }
-        }
-
-        public int Read(float[] buffer, int offset, int count)
-        {
-            return _vorbisReader.ReadSamples(buffer, offset, count);
-        }
-
-        public void Dispose()
-        {
-            if (!_disposed)
-            {
-            }
-            // _vorbisReader.Dispose()
-            else
-            {
-                // Throw New ObjectDisposedException("NVorbisSource")
-            }
-
-            _disposed = true;
-        }
+        Output.Stop();
     }
 }

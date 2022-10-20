@@ -1,537 +1,628 @@
+using System;
+using System.IO;
+using iBMSC.Editor;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 
-namespace iBMSC
+namespace iBMSC;
+
+public class UndoRedo
 {
-    public class UndoRedo
+    public abstract class LinkedURCmd
     {
-        public const byte opVoid = 0;
-        public const byte opAddNote = 1;
-        public const byte opRemoveNote = 2;
-        public const byte opChangeNote = 3;
-        public const byte opMoveNote = 4;
-        public const byte opLongNoteModify = 5;
-        public const byte opHiddenNoteModify = 6;
-        public const byte opRelabelNote = 7;
-        public const byte opRemoveAllNotes = 15;
-        public const byte opChangeMeasureLength = 16;
-        public const byte opChangeTimeSelection = 17;
-        public const byte opNT = 18;
+        public LinkedURCmd Next;
 
-        // Public Const opChangeVisibleColumns As Byte = 19
-        public const byte opWavAutoincFlag = 20;
-        public const byte opNoOperation = 255;
-        private const byte trueByte = 1;
-        private const byte falseByte = 0;
-
-        public abstract class LinkedURCmd
+        protected LinkedURCmd()
         {
-            public LinkedURCmd Next = null;
-            public abstract byte ofType();
-            public abstract byte[] toBytes();
-            // Public MustOverride Sub fromBytes(ByVal b As Byte())
+            Next = null;
         }
 
-        public static LinkedURCmd? fromBytes(byte[]? b)
+        public abstract byte ofType();
+
+        public abstract byte[] toBytes();
+    }
+
+    public class Void : LinkedURCmd
+    {
+        public override byte[] toBytes()
         {
-            if (b is null) return null;
-            if (b.Length == 0) return null;
-            return b[0] switch
+            return new byte[1] { 0 };
+        }
+
+        public Void()
+        {
+        }
+
+        public Void(byte[] b)
+        {
+        }
+
+        public override byte ofType()
+        {
+            return 0;
+        }
+    }
+
+    public abstract class LinkedURNoteCmd : LinkedURCmd
+    {
+        public Note note;
+
+        public LinkedURNoteCmd()
+        {
+        }
+
+        public LinkedURNoteCmd(Note b)
+        {
+            note = b;
+        }
+
+        public LinkedURNoteCmd(byte[] b)
+        {
+            BinaryReader br = new BinaryReader(new MemoryStream(b));
+            FromBinaryReader(ref br);
+        }
+
+        public void FromBinaryReader(ref BinaryReader br)
+        {
+            br.ReadByte();
+            note.FromBinReader(ref br);
+        }
+
+        public void WriteBinWriter(ref BinaryWriter bw)
+        {
+            bw.Write(ofType());
+            bw.Write(note.ToBytes());
+        }
+
+        public abstract override byte ofType();
+
+        public override byte[] toBytes()
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            BinaryWriter bw = new BinaryWriter(memoryStream);
+            WriteBinWriter(ref bw);
+            return memoryStream.GetBuffer();
+        }
+    }
+
+    public class AddNote : LinkedURNoteCmd
+    {
+        public AddNote(Note _note)
+        {
+            note = _note;
+        }
+
+        public AddNote(byte[] b)
+            : base(b)
+        {
+        }
+
+        public override byte ofType()
+        {
+            return 1;
+        }
+    }
+
+    public class RemoveNote : LinkedURNoteCmd
+    {
+        public RemoveNote(Note _note)
+        {
+            note = _note;
+        }
+
+        public RemoveNote(byte[] b)
+            : base(b)
+        {
+        }
+
+        public override byte ofType()
+        {
+            return 2;
+        }
+    }
+
+    public class ChangeNote : LinkedURNoteCmd
+    {
+        public Note NNote;
+
+        public override byte[] toBytes()
+        {
+            MemoryStream memoryStream = new MemoryStream(base.toBytes());
+            BinaryWriter bw = new BinaryWriter(memoryStream);
+            WriteBinWriter(ref bw);
+            NNote.WriteBinWriter(ref bw);
+            return memoryStream.GetBuffer();
+        }
+
+        public ChangeNote(byte[] b)
+        {
+            BinaryReader br = new BinaryReader(new MemoryStream(b));
+            FromBinaryReader(ref br);
+            NNote.FromBinReader(ref br);
+        }
+
+        public ChangeNote(Note note1, Note note2)
+        {
+            note = note1;
+            NNote = note2;
+        }
+
+        public override byte ofType()
+        {
+            return 3;
+        }
+    }
+
+    public class MoveNote : LinkedURNoteCmd
+    {
+        public int NColumnIndex;
+
+        public double NVPosition;
+
+        public override byte[] toBytes()
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            BinaryWriter bw = new BinaryWriter(memoryStream);
+            WriteBinWriter(ref bw);
+            bw.Write(NColumnIndex);
+            bw.Write(NVPosition);
+            return memoryStream.GetBuffer();
+        }
+
+        public MoveNote(byte[] b)
+        {
+            NColumnIndex = 0;
+            NVPosition = 0.0;
+            BinaryReader br = new BinaryReader(new MemoryStream(b));
+            FromBinaryReader(ref br);
+            NColumnIndex = br.ReadInt32();
+            NVPosition = br.ReadDouble();
+        }
+
+        public MoveNote(Note _note, int _ColIndex, double _VPos)
+        {
+            NColumnIndex = 0;
+            NVPosition = 0.0;
+            note = _note;
+            NColumnIndex = _ColIndex;
+            NVPosition = _VPos;
+        }
+
+        public override byte ofType()
+        {
+            return 4;
+        }
+    }
+
+    public class LongNoteModify : LinkedURNoteCmd
+    {
+        public double NVPosition;
+
+        public double NLongNote;
+
+        public override byte[] toBytes()
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            BinaryWriter bw = new BinaryWriter(memoryStream);
+            WriteBinWriter(ref bw);
+            bw.Write(NVPosition);
+            bw.Write(NLongNote);
+            return memoryStream.GetBuffer();
+        }
+
+        public LongNoteModify(byte[] b)
+        {
+            NVPosition = 0.0;
+            NLongNote = 0.0;
+            BinaryReader br = new BinaryReader(new MemoryStream(b));
+            FromBinaryReader(ref br);
+            NLongNote = br.ReadDouble();
+            NVPosition = br.ReadDouble();
+        }
+
+        public LongNoteModify(Note _note, double xNVPosition, double xNLongNote)
+        {
+            NVPosition = 0.0;
+            NLongNote = 0.0;
+            note = _note;
+            NVPosition = xNVPosition;
+            NLongNote = xNLongNote;
+        }
+
+        public override byte ofType()
+        {
+            return 5;
+        }
+    }
+
+    public class HiddenNoteModify : LinkedURNoteCmd
+    {
+        public bool NHidden;
+
+        public override byte[] toBytes()
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            BinaryWriter bw = new BinaryWriter(memoryStream);
+            WriteBinWriter(ref bw);
+            bw.Write(NHidden);
+            return memoryStream.GetBuffer();
+        }
+
+        public HiddenNoteModify(byte[] b)
+        {
+            NHidden = false;
+            BinaryReader br = new BinaryReader(new MemoryStream(b));
+            FromBinaryReader(ref br);
+            NHidden = br.ReadBoolean();
+        }
+
+        public HiddenNoteModify(Note _note, bool xNHidden)
+        {
+            NHidden = false;
+            note = _note;
+            NHidden = xNHidden;
+        }
+
+        public override byte ofType()
+        {
+            return 6;
+        }
+    }
+
+    public class RelabelNote : LinkedURNoteCmd
+    {
+        public long NValue;
+
+        public override byte[] toBytes()
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            BinaryWriter bw = new BinaryWriter(memoryStream);
+            WriteBinWriter(ref bw);
+            bw.Write(NValue);
+            return memoryStream.GetBuffer();
+        }
+
+        public RelabelNote(byte[] b)
+        {
+            NValue = 10000L;
+            BinaryReader br = new BinaryReader(new MemoryStream(b));
+            FromBinaryReader(ref br);
+            NValue = br.ReadInt64();
+        }
+
+        public RelabelNote(Note _note, long xNValue)
+        {
+            NValue = 10000L;
+            note = _note;
+            NValue = xNValue;
+        }
+
+        public override byte ofType()
+        {
+            return 7;
+        }
+    }
+
+    public class RemoveAllNotes : LinkedURCmd
+    {
+        public override byte[] toBytes()
+        {
+            return new byte[1] { 15 };
+        }
+
+        public RemoveAllNotes(byte[] b)
+        {
+        }
+
+        public RemoveAllNotes()
+        {
+        }
+
+        public override byte ofType()
+        {
+            return 15;
+        }
+    }
+
+    public class ChangeMeasureLength : LinkedURCmd
+    {
+        public double Value;
+
+        public int[] Indices;
+
+        public override byte[] toBytes()
+        {
+            byte[] bytes = BitConverter.GetBytes(Value);
+            byte[] bytes2 = BitConverter.GetBytes(Information.UBound(Indices));
+            byte[] array = new byte[13]
             {
-                opVoid => new Void(b),
-                opAddNote => new AddNote(b),
-                opRemoveNote => new RemoveNote(b),
-                opChangeNote => new ChangeNote(b),
-                opMoveNote => new MoveNote(b),
-                opLongNoteModify => new LongNoteModify(b),
-                opHiddenNoteModify => new HiddenNoteModify(b),
-                opRelabelNote => new RelabelNote(b),
-                opRemoveAllNotes => new RemoveAllNotes(b),
-                opChangeMeasureLength => new ChangeMeasureLength(b),
-                opChangeTimeSelection => new ChangeTimeSelection(b),
-                opNT => new NT(b),
-                // Case opChangeVisibleColumns : Return New ChangeVisibleColumns(b)
-                opWavAutoincFlag => new WavAutoincFlag(b),
-                opNoOperation => new NoOperation(b),
-                _ => null
+                16,
+                bytes[0],
+                bytes[1],
+                bytes[2],
+                bytes[3],
+                bytes[4],
+                bytes[5],
+                bytes[6],
+                bytes[7],
+                bytes2[0],
+                bytes2[1],
+                bytes2[2],
+                bytes2[3]
+            };
+            checked
+            {
+                array = (byte[])Utils.CopyArray(array, new byte[12 + 4 * Indices.Length + 1]);
+                int num = Information.UBound(array);
+                for (int i = 13; i <= num; i += 4)
+                {
+                    byte[] bytes3;
+                    unchecked
+                    {
+                        bytes3 = BitConverter.GetBytes(Indices[checked(i - 13) / 4]);
+                    }
+                    array[i + 0] = bytes3[0];
+                    array[i + 1] = bytes3[1];
+                    array[i + 2] = bytes3[2];
+                    array[i + 3] = bytes3[3];
+                }
+                return array;
+            }
+        }
+
+        public ChangeMeasureLength(byte[] b)
+        {
+            Value = 192.0;
+            Indices = new int[0];
+            Value = BitConverter.ToDouble(b, 1);
+            int num = BitConverter.ToInt32(b, 9);
+            Indices = (int[])Utils.CopyArray(Indices, new int[checked(num + 1)]);
+            int num2 = num;
+            for (int i = 13; i <= num2; i = checked(i + 4))
+            {
+                Indices[checked(i - 13) / 4] = BitConverter.ToInt32(b, i);
+            }
+        }
+
+        public ChangeMeasureLength(double xValue, int[] xIndices)
+        {
+            Value = 192.0;
+            Indices = new int[0];
+            Value = xValue;
+            Indices = xIndices;
+        }
+
+        public override byte ofType()
+        {
+            return 16;
+        }
+    }
+
+    public class ChangeTimeSelection : LinkedURCmd
+    {
+        public double SelStart;
+
+        public double SelLength;
+
+        public double SelHalf;
+
+        public bool Selected;
+
+        public override byte[] toBytes()
+        {
+            byte[] bytes = BitConverter.GetBytes(SelStart);
+            byte[] bytes2 = BitConverter.GetBytes(SelLength);
+            byte[] bytes3 = BitConverter.GetBytes(SelLength);
+            return new byte[26]
+            {
+                17,
+                bytes[0],
+                bytes[1],
+                bytes[2],
+                bytes[3],
+                bytes[4],
+                bytes[5],
+                bytes[6],
+                bytes[7],
+                bytes2[0],
+                bytes2[1],
+                bytes2[2],
+                bytes2[3],
+                bytes2[4],
+                bytes2[5],
+                bytes2[6],
+                bytes2[7],
+                bytes3[0],
+                bytes3[1],
+                bytes3[2],
+                bytes3[3],
+                bytes3[4],
+                bytes3[5],
+                bytes3[6],
+                bytes3[7],
+                Conversions.ToByte(Interaction.IIf(Selected, (byte)1, (byte)0))
             };
         }
 
-        public class Void : LinkedURCmd
+        public ChangeTimeSelection(byte[] b)
         {
-            // 1 = 1
-            public override byte[] toBytes()
-            {
-                byte[] toBytesRet = default;
-                toBytesRet = new byte[] { opVoid };
-                return toBytesRet;
-            }
-
-            public Void()
-            {
-            }
-
-            public Void(byte[] b)
-            {
-            }
-
-            public override byte ofType()
-            {
-                return opVoid;
-            }
+            SelStart = 0.0;
+            SelLength = 0.0;
+            SelHalf = 0.0;
+            Selected = false;
+            SelStart = BitConverter.ToDouble(b, 1);
+            SelLength = BitConverter.ToDouble(b, 9);
+            SelHalf = BitConverter.ToDouble(b, 17);
+            Selected = b[25] != 0;
         }
 
-        public abstract class LinkedURNoteCmd : LinkedURCmd
+        public ChangeTimeSelection(double xSelStart, double xSelLength, double xSelHalf, bool xSelected)
         {
-            public iBMSC.Editor.Note note;
-
-            public LinkedURNoteCmd()
-            {
-            }
-
-            public LinkedURNoteCmd(iBMSC.Editor.Note b)
-            {
-                note = b;
-            }
-
-            public LinkedURNoteCmd(byte[] b)
-            {
-                var argbr = new BinaryReader(new MemoryStream(b));
-                FromBinaryReader(ref argbr);
-            }
-
-            public void FromBinaryReader(ref BinaryReader br)
-            {
-                br.ReadByte();
-                note.FromBinReader(ref br);
-            }
-
-            public void WriteBinWriter(ref BinaryWriter bw)
-            {
-                bw.Write(ofType());
-                bw.Write(note.ToBytes());
-            }
-
-            public abstract override byte ofType();
-
-            public override byte[] toBytes()
-            {
-                var ms = new MemoryStream();
-                var bw = new BinaryWriter(ms);
-                WriteBinWriter(ref bw);
-                return ms.GetBuffer();
-            }
+            SelStart = 0.0;
+            SelLength = 0.0;
+            SelHalf = 0.0;
+            Selected = false;
+            SelStart = xSelStart;
+            SelLength = xSelLength;
+            SelHalf = xSelHalf;
+            Selected = xSelected;
         }
 
-        public class AddNote : LinkedURNoteCmd
+        public override byte ofType()
         {
-            public AddNote(iBMSC.Editor.Note _note)
-            {
-                note = _note;
-            }
+            return 17;
+        }
+    }
 
-            public AddNote(byte[] b) : base(b)
-            {
-            }
+    public class NT : LinkedURCmd
+    {
+        public bool BecomeNT;
 
-            public override byte ofType()
+        public bool AutoConvert;
+
+        public override byte[] toBytes()
+        {
+            return new byte[3]
             {
-                return opAddNote;
-            }
+                18,
+                Conversions.ToByte(Interaction.IIf(BecomeNT, (byte)1, (byte)0)),
+                Conversions.ToByte(Interaction.IIf(AutoConvert, (byte)1, (byte)0))
+            };
         }
 
-        public class RemoveNote : LinkedURNoteCmd
+        public NT(byte[] b)
         {
-            public RemoveNote(iBMSC.Editor.Note _note)
-            {
-                note = _note;
-            }
-
-            public RemoveNote(byte[] b) : base(b)
-            {
-            }
-
-            public override byte ofType()
-            {
-                return opRemoveNote;
-            }
+            BecomeNT = false;
+            AutoConvert = false;
+            BecomeNT = b[1] != 0;
+            AutoConvert = b[2] != 0;
         }
 
-        public class ChangeNote : LinkedURNoteCmd
+        public NT(bool xBecomeNT, bool xAutoConvert)
         {
-            public iBMSC.Editor.Note NNote;
-
-            public override byte[] toBytes()
-            {
-                var ms = new MemoryStream(base.toBytes());
-                var bw = new BinaryWriter(ms);
-                WriteBinWriter(ref bw);
-                NNote.WriteBinWriter(ref bw);
-                return ms.GetBuffer();
-            }
-
-            public ChangeNote(byte[] b)
-            {
-                var br = new BinaryReader(new MemoryStream(b));
-                FromBinaryReader(ref br);
-                NNote.FromBinReader(ref br);
-            }
-
-            public ChangeNote(iBMSC.Editor.Note note1, iBMSC.Editor.Note note2)
-            {
-                note = note1;
-                NNote = note2;
-            }
-
-            public override byte ofType()
-            {
-                return opChangeNote;
-            }
+            BecomeNT = false;
+            AutoConvert = false;
+            BecomeNT = xBecomeNT;
+            AutoConvert = xAutoConvert;
         }
 
-        public class MoveNote : LinkedURNoteCmd
+        public override byte ofType()
         {
-            public int NColumnIndex = 0;
-            public double NVPosition = 0d;
+            return 18;
+        }
+    }
 
-            public override byte[] toBytes()
-            {
-                var ms = new MemoryStream();
-                var bw = new BinaryWriter(ms);
-                WriteBinWriter(ref bw);
-                bw.Write(NColumnIndex);
-                bw.Write(NVPosition);
-                return ms.GetBuffer();
-            }
+    public class WavAutoincFlag : LinkedURCmd
+    {
+        public bool Checked;
 
-            public MoveNote(byte[] b)
-            {
-                var br = new BinaryReader(new MemoryStream(b));
-                FromBinaryReader(ref br);
-                NColumnIndex = br.ReadInt32();
-                NVPosition = br.ReadDouble();
-            }
-
-            public MoveNote(iBMSC.Editor.Note _note, int _ColIndex, double _VPos)
-            {
-                note = _note;
-                NColumnIndex = _ColIndex;
-                NVPosition = _VPos;
-            }
-
-            public override byte ofType()
-            {
-                return opMoveNote;
-            }
+        public WavAutoincFlag(bool _checked)
+        {
+            Checked = false;
+            Checked = _checked;
         }
 
-        public class LongNoteModify : LinkedURNoteCmd
+        public override byte[] toBytes()
         {
-            public double NVPosition = 0d;
-            public double NLongNote = 0d;
-
-            public override byte[] toBytes()
+            return new byte[2]
             {
-                var ms = new MemoryStream();
-                var bw = new BinaryWriter(ms);
-                WriteBinWriter(ref bw);
-                bw.Write(NVPosition);
-                bw.Write(NLongNote);
-                return ms.GetBuffer();
-            }
-
-            public LongNoteModify(byte[] b)
-            {
-                var br = new BinaryReader(new MemoryStream(b));
-                FromBinaryReader(ref br);
-                NLongNote = br.ReadDouble();
-                NVPosition = br.ReadDouble();
-            }
-
-            public LongNoteModify(iBMSC.Editor.Note _note, double xNVPosition, double xNLongNote)
-            {
-                note = _note;
-                NVPosition = xNVPosition;
-                NLongNote = xNLongNote;
-            }
-
-            public override byte ofType()
-            {
-                return opLongNoteModify;
-            }
+                20,
+                Conversions.ToByte(Interaction.IIf(Checked, (byte)1, (byte)0))
+            };
         }
 
-        public class HiddenNoteModify : LinkedURNoteCmd
+        public WavAutoincFlag(byte[] b)
         {
-            public bool NHidden = false;
-
-            public override byte[] toBytes()
-            {
-                var MS = new MemoryStream();
-                var bw = new BinaryWriter(MS);
-                WriteBinWriter(ref bw);
-                bw.Write(NHidden);
-                return MS.GetBuffer();
-            }
-
-            public HiddenNoteModify(byte[] b)
-            {
-                var br = new BinaryReader(new MemoryStream(b));
-                FromBinaryReader(ref br);
-                NHidden = br.ReadBoolean();
-            }
-
-            public HiddenNoteModify(iBMSC.Editor.Note _note, bool xNHidden)
-            {
-                note = _note;
-                NHidden = xNHidden;
-            }
-
-            public override byte ofType()
-            {
-                return opHiddenNoteModify;
-            }
+            Checked = false;
+            Checked = b[1] != 0;
         }
 
-        public class RelabelNote : LinkedURNoteCmd
+        public override byte ofType()
         {
-            // 1 + 25 + 4 + 1 = 31
-            public long NValue = 10000L;
+            return 20;
+        }
+    }
 
-            public override byte[] toBytes()
-            {
-                var ms = new MemoryStream();
-                var bw = new BinaryWriter(ms);
-                WriteBinWriter(ref bw);
-                bw.Write(NValue);
-                return ms.GetBuffer();
-            }
-
-            public RelabelNote(byte[] b)
-            {
-                var br = new BinaryReader(new MemoryStream(b));
-                FromBinaryReader(ref br);
-                NValue = br.ReadInt64();
-            }
-
-            public RelabelNote(iBMSC.Editor.Note _note, long xNValue)
-            {
-                note = _note;
-                NValue = xNValue;
-            }
-
-            public override byte ofType()
-            {
-                return opRelabelNote;
-            }
+    public class NoOperation : LinkedURCmd
+    {
+        public override byte[] toBytes()
+        {
+            return new byte[1] { 255 };
         }
 
-        public class RemoveAllNotes : LinkedURCmd
+        public NoOperation()
         {
-            // 1 = 1
-            public override byte[] toBytes()
-            {
-                byte[] toBytesRet = default;
-                toBytesRet = new byte[] { opRemoveAllNotes };
-                return toBytesRet;
-            }
-
-            public RemoveAllNotes(byte[] b)
-            {
-            }
-
-            public RemoveAllNotes()
-            {
-            }
-
-            public override byte ofType()
-            {
-                return opRemoveAllNotes;
-            }
         }
 
-        public class ChangeMeasureLength : LinkedURCmd
+        public NoOperation(byte[] b)
         {
-            // 1 + 8 + 4 + 4 * Indices.Length = 13 + 4 * Indices.Length
-            public double Value = 192d;
-            public int[] Indices = Array.Empty<int>();
-
-            public override byte[] toBytes()
-            {
-                var xVal = BitConverter.GetBytes(Value);
-                var xUbound = BitConverter.GetBytes(Information.UBound(Indices));
-                var xToBytes = new byte[]
-                {
-                    opChangeMeasureLength, xVal[0], xVal[1], xVal[2], xVal[3], xVal[4], xVal[5], xVal[6], xVal[7],
-                    xUbound[0], xUbound[1], xUbound[2], xUbound[3]
-                };
-                Array.Resize(ref xToBytes, 12 + 4 * Indices.Length + 1);
-                for (int xI1 = 13, loopTo = Information.UBound(xToBytes); xI1 <= loopTo; xI1 += 4)
-                {
-                    var xId = BitConverter.GetBytes(Indices[(xI1 - 13) / 4]);
-                    xToBytes[xI1 + 0] = xId[0];
-                    xToBytes[xI1 + 1] = xId[1];
-                    xToBytes[xI1 + 2] = xId[2];
-                    xToBytes[xI1 + 3] = xId[3];
-                }
-
-                return xToBytes;
-            }
-
-            public ChangeMeasureLength(byte[] b)
-            {
-                Value = BitConverter.ToDouble(b, 1);
-                int xUbound = BitConverter.ToInt32(b, 9);
-                Array.Resize(ref Indices, xUbound + 1);
-                for (int xI1 = 13, loopTo = xUbound; xI1 <= loopTo; xI1 += 4)
-                    Indices[(xI1 - 13) / 4] = BitConverter.ToInt32(b, xI1);
-            }
-
-            public ChangeMeasureLength(double xValue, int[] xIndices)
-            {
-                Value = xValue;
-                Indices = xIndices;
-            }
-
-            public override byte ofType()
-            {
-                return opChangeMeasureLength;
-            }
         }
 
-        public class ChangeTimeSelection : LinkedURCmd
+        public override byte ofType()
         {
-            // 1 + 8 + 8 + 8 + 1 = 26
-            public double SelStart = 0d;
-            public double SelLength = 0d;
-            public double SelHalf = 0d;
-            public bool Selected = false;
-
-            public override byte[] toBytes()
-            {
-                byte[] toBytesRet = default;
-                var xSta = BitConverter.GetBytes(SelStart);
-                var xLen = BitConverter.GetBytes(SelLength);
-                var xHalf = BitConverter.GetBytes(SelLength);
-                toBytesRet = new byte[]
-                {
-                    opChangeTimeSelection, xSta[0], xSta[1], xSta[2], xSta[3], xSta[4], xSta[5], xSta[6], xSta[7],
-                    xLen[0], xLen[1], xLen[2], xLen[3], xLen[4], xLen[5], xLen[6], xLen[7], xHalf[0], xHalf[1],
-                    xHalf[2], xHalf[3], xHalf[4], xHalf[5], xHalf[6], xHalf[7],
-                    Conversions.ToByte(Interaction.IIf(Selected, trueByte, falseByte))
-                };
-                return toBytesRet;
-            }
-
-            public ChangeTimeSelection(byte[] b)
-            {
-                SelStart = BitConverter.ToDouble(b, 1);
-                SelLength = BitConverter.ToDouble(b, 9);
-                SelHalf = BitConverter.ToDouble(b, 17);
-                Selected = Conversions.ToBoolean(b[25]);
-            }
-
-            public ChangeTimeSelection(double xSelStart, double xSelLength, double xSelHalf, bool xSelected)
-            {
-                SelStart = xSelStart;
-                SelLength = xSelLength;
-                SelHalf = xSelHalf;
-                Selected = xSelected;
-            }
-
-            public override byte ofType()
-            {
-                return opChangeTimeSelection;
-            }
+            return byte.MaxValue;
         }
+    }
 
-        public class NT : LinkedURCmd
+    public const byte opVoid = 0;
+
+    public const byte opAddNote = 1;
+
+    public const byte opRemoveNote = 2;
+
+    public const byte opChangeNote = 3;
+
+    public const byte opMoveNote = 4;
+
+    public const byte opLongNoteModify = 5;
+
+    public const byte opHiddenNoteModify = 6;
+
+    public const byte opRelabelNote = 7;
+
+    public const byte opRemoveAllNotes = 15;
+
+    public const byte opChangeMeasureLength = 16;
+
+    public const byte opChangeTimeSelection = 17;
+
+    public const byte opNT = 18;
+
+    public const byte opWavAutoincFlag = 20;
+
+    public const byte opNoOperation = byte.MaxValue;
+
+    private const byte trueByte = 1;
+
+    private const byte falseByte = 0;
+
+    public static LinkedURCmd fromBytes(byte[] b)
+    {
+        if (b == null)
         {
-            // 1 + 1 + 1 = 3
-            public bool BecomeNT = false;
-            public bool AutoConvert = false;
-
-            public override byte[] toBytes()
-            {
-                byte[] toBytesRet = default;
-                toBytesRet = new byte[]
-                {
-                    opNT, Conversions.ToByte(Interaction.IIf(BecomeNT, trueByte, falseByte)),
-                    Conversions.ToByte(Interaction.IIf(AutoConvert, trueByte, falseByte))
-                };
-                return toBytesRet;
-            }
-
-            public NT(byte[] b)
-            {
-                BecomeNT = Conversions.ToBoolean(b[1]);
-                AutoConvert = Conversions.ToBoolean(b[2]);
-            }
-
-            public NT(bool xBecomeNT, bool xAutoConvert)
-            {
-                BecomeNT = xBecomeNT;
-                AutoConvert = xAutoConvert;
-            }
-
-            public override byte ofType()
-            {
-                return opNT;
-            }
+            return null;
         }
-
-        public class WavAutoincFlag : LinkedURCmd
+        if (b.Length == 0)
         {
-            public bool Checked = false;
-
-            public WavAutoincFlag(bool _checked)
-            {
-                Checked = _checked;
-            }
-
-            public override byte[] toBytes()
-            {
-                byte[] toBytesRet = default;
-                toBytesRet = new byte[]
-                {
-                    opWavAutoincFlag, Conversions.ToByte(Interaction.IIf(Checked, trueByte, falseByte))
-                };
-                return toBytesRet;
-            }
-
-            public WavAutoincFlag(byte[] b)
-            {
-                Checked = Conversions.ToBoolean(b[1]);
-            }
-
-            public override byte ofType()
-            {
-                return opWavAutoincFlag;
-            }
+            return null;
         }
-
-        public class NoOperation : LinkedURCmd
+        return b[0] switch
         {
-            // 1 = 1
-            public override byte[] toBytes()
-            {
-                byte[] toBytesRet = default;
-                toBytesRet = new byte[] { opNoOperation };
-                return toBytesRet;
-            }
-
-            public NoOperation()
-            {
-            }
-
-            public NoOperation(byte[] b)
-            {
-            }
-
-            public override byte ofType()
-            {
-                return opNoOperation;
-            }
-        }
+            0 => new Void(b), 
+            1 => new AddNote(b), 
+            2 => new RemoveNote(b), 
+            3 => new ChangeNote(b), 
+            4 => new MoveNote(b), 
+            5 => new LongNoteModify(b), 
+            6 => new HiddenNoteModify(b), 
+            7 => new RelabelNote(b), 
+            15 => new RemoveAllNotes(b), 
+            16 => new ChangeMeasureLength(b), 
+            17 => new ChangeTimeSelection(b), 
+            18 => new NT(b), 
+            20 => new WavAutoincFlag(b), 
+            byte.MaxValue => new NoOperation(b), 
+            _ => null, 
+        };
     }
 }
