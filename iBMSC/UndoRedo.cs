@@ -1,11 +1,8 @@
-using System;
-using System.IO;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 
 namespace iBMSC
 {
-
     public class UndoRedo
     {
         public const byte opVoid = 0;
@@ -20,15 +17,12 @@ namespace iBMSC
         public const byte opChangeMeasureLength = 16;
         public const byte opChangeTimeSelection = 17;
         public const byte opNT = 18;
+
         // Public Const opChangeVisibleColumns As Byte = 19
         public const byte opWavAutoincFlag = 20;
-
         public const byte opNoOperation = 255;
-
         private const byte trueByte = 1;
         private const byte falseByte = 0;
-
-
 
         public abstract class LinkedURCmd
         {
@@ -38,82 +32,30 @@ namespace iBMSC
             // Public MustOverride Sub fromBytes(ByVal b As Byte())
         }
 
-
-
-        public static LinkedURCmd fromBytes(byte[] b)
+        public static LinkedURCmd? fromBytes(byte[]? b)
         {
-            if (b is null)
-                return null;
-            if (b.Length == 0)
-                return null;
-
-            switch (b[0])
+            if (b is null) return null;
+            if (b.Length == 0) return null;
+            return b[0] switch
             {
-                case opVoid:
-                    {
-                        return new Void(b);
-                    }
-                case opAddNote:
-                    {
-                        return new AddNote(b);
-                    }
-                case opRemoveNote:
-                    {
-                        return new RemoveNote(b);
-                    }
-                case opChangeNote:
-                    {
-                        return new ChangeNote(b);
-                    }
-                case opMoveNote:
-                    {
-                        return new MoveNote(b);
-                    }
-                case opLongNoteModify:
-                    {
-                        return new LongNoteModify(b);
-                    }
-                case opHiddenNoteModify:
-                    {
-                        return new HiddenNoteModify(b);
-                    }
-                case opRelabelNote:
-                    {
-                        return new RelabelNote(b);
-                    }
-                case opRemoveAllNotes:
-                    {
-                        return new RemoveAllNotes(b);
-                    }
-                case opChangeMeasureLength:
-                    {
-                        return new ChangeMeasureLength(b);
-                    }
-                case opChangeTimeSelection:
-                    {
-                        return new ChangeTimeSelection(b);
-                    }
-                case opNT:
-                    {
-                        return new NT(b);
-                    }
+                opVoid => new Void(b),
+                opAddNote => new AddNote(b),
+                opRemoveNote => new RemoveNote(b),
+                opChangeNote => new ChangeNote(b),
+                opMoveNote => new MoveNote(b),
+                opLongNoteModify => new LongNoteModify(b),
+                opHiddenNoteModify => new HiddenNoteModify(b),
+                opRelabelNote => new RelabelNote(b),
+                opRemoveAllNotes => new RemoveAllNotes(b),
+                opChangeMeasureLength => new ChangeMeasureLength(b),
+                opChangeTimeSelection => new ChangeTimeSelection(b),
+                opNT => new NT(b),
                 // Case opChangeVisibleColumns : Return New ChangeVisibleColumns(b)
-                case opWavAutoincFlag:
-                    {
-                        return new WavAutoincFlag(b);
-                    }
-                case opNoOperation:
-                    {
-                        return new NoOperation(b);
-                    }
-
-                default:
-                    {
-                        return null;
-                    }
-            }
+                opWavAutoincFlag => new WavAutoincFlag(b),
+                opNoOperation => new NoOperation(b),
+                _ => null
+            };
         }
-
 
         public class Void : LinkedURCmd
         {
@@ -145,7 +87,6 @@ namespace iBMSC
 
             public LinkedURNoteCmd()
             {
-
             }
 
             public LinkedURNoteCmd(iBMSC.Editor.Note b)
@@ -178,7 +119,6 @@ namespace iBMSC
                 var ms = new MemoryStream();
                 var bw = new BinaryWriter(ms);
                 WriteBinWriter(ref bw);
-
                 return ms.GetBuffer();
             }
         }
@@ -200,8 +140,6 @@ namespace iBMSC
             }
         }
 
-
-
         public class RemoveNote : LinkedURNoteCmd
         {
             public RemoveNote(iBMSC.Editor.Note _note)
@@ -218,8 +156,6 @@ namespace iBMSC
                 return opRemoveNote;
             }
         }
-
-
 
         public class ChangeNote : LinkedURNoteCmd
         {
@@ -253,8 +189,6 @@ namespace iBMSC
             }
         }
 
-
-
         public class MoveNote : LinkedURNoteCmd
         {
             public int NColumnIndex = 0;
@@ -267,7 +201,6 @@ namespace iBMSC
                 WriteBinWriter(ref bw);
                 bw.Write(NColumnIndex);
                 bw.Write(NVPosition);
-
                 return ms.GetBuffer();
             }
 
@@ -292,8 +225,6 @@ namespace iBMSC
             }
         }
 
-
-
         public class LongNoteModify : LinkedURNoteCmd
         {
             public double NVPosition = 0d;
@@ -306,7 +237,6 @@ namespace iBMSC
                 WriteBinWriter(ref bw);
                 bw.Write(NVPosition);
                 bw.Write(NLongNote);
-
                 return ms.GetBuffer();
             }
 
@@ -330,8 +260,6 @@ namespace iBMSC
                 return opLongNoteModify;
             }
         }
-
-
 
         public class HiddenNoteModify : LinkedURNoteCmd
         {
@@ -365,12 +293,9 @@ namespace iBMSC
             }
         }
 
-
-
         public class RelabelNote : LinkedURNoteCmd
         {
             // 1 + 25 + 4 + 1 = 31
-
             public long NValue = 10000L;
 
             public override byte[] toBytes()
@@ -379,7 +304,6 @@ namespace iBMSC
                 var bw = new BinaryWriter(ms);
                 WriteBinWriter(ref bw);
                 bw.Write(NValue);
-
                 return ms.GetBuffer();
             }
 
@@ -401,8 +325,6 @@ namespace iBMSC
                 return opRelabelNote;
             }
         }
-
-
 
         public class RemoveAllNotes : LinkedURCmd
         {
@@ -428,8 +350,6 @@ namespace iBMSC
             }
         }
 
-
-
         public class ChangeMeasureLength : LinkedURCmd
         {
             // 1 + 8 + 4 + 4 * Indices.Length = 13 + 4 * Indices.Length
@@ -440,7 +360,11 @@ namespace iBMSC
             {
                 var xVal = BitConverter.GetBytes(Value);
                 var xUbound = BitConverter.GetBytes(Information.UBound(Indices));
-                var xToBytes = new byte[] { opChangeMeasureLength, xVal[0], xVal[1], xVal[2], xVal[3], xVal[4], xVal[5], xVal[6], xVal[7], xUbound[0], xUbound[1], xUbound[2], xUbound[3] };
+                var xToBytes = new byte[]
+                {
+                    opChangeMeasureLength, xVal[0], xVal[1], xVal[2], xVal[3], xVal[4], xVal[5], xVal[6], xVal[7],
+                    xUbound[0], xUbound[1], xUbound[2], xUbound[3]
+                };
                 Array.Resize(ref xToBytes, 12 + 4 * Indices.Length + 1);
                 for (int xI1 = 13, loopTo = Information.UBound(xToBytes); xI1 <= loopTo; xI1 += 4)
                 {
@@ -450,6 +374,7 @@ namespace iBMSC
                     xToBytes[xI1 + 2] = xId[2];
                     xToBytes[xI1 + 3] = xId[3];
                 }
+
                 return xToBytes;
             }
 
@@ -474,8 +399,6 @@ namespace iBMSC
             }
         }
 
-
-
         public class ChangeTimeSelection : LinkedURCmd
         {
             // 1 + 8 + 8 + 8 + 1 = 26
@@ -490,7 +413,13 @@ namespace iBMSC
                 var xSta = BitConverter.GetBytes(SelStart);
                 var xLen = BitConverter.GetBytes(SelLength);
                 var xHalf = BitConverter.GetBytes(SelLength);
-                toBytesRet = new byte[] { opChangeTimeSelection, xSta[0], xSta[1], xSta[2], xSta[3], xSta[4], xSta[5], xSta[6], xSta[7], xLen[0], xLen[1], xLen[2], xLen[3], xLen[4], xLen[5], xLen[6], xLen[7], xHalf[0], xHalf[1], xHalf[2], xHalf[3], xHalf[4], xHalf[5], xHalf[6], xHalf[7], Conversions.ToByte(Interaction.IIf(Selected, trueByte, falseByte)) };
+                toBytesRet = new byte[]
+                {
+                    opChangeTimeSelection, xSta[0], xSta[1], xSta[2], xSta[3], xSta[4], xSta[5], xSta[6], xSta[7],
+                    xLen[0], xLen[1], xLen[2], xLen[3], xLen[4], xLen[5], xLen[6], xLen[7], xHalf[0], xHalf[1],
+                    xHalf[2], xHalf[3], xHalf[4], xHalf[5], xHalf[6], xHalf[7],
+                    Conversions.ToByte(Interaction.IIf(Selected, trueByte, falseByte))
+                };
                 return toBytesRet;
             }
 
@@ -516,8 +445,6 @@ namespace iBMSC
             }
         }
 
-
-
         public class NT : LinkedURCmd
         {
             // 1 + 1 + 1 = 3
@@ -527,7 +454,11 @@ namespace iBMSC
             public override byte[] toBytes()
             {
                 byte[] toBytesRet = default;
-                toBytesRet = new byte[] { opNT, Conversions.ToByte(Interaction.IIf(BecomeNT, trueByte, falseByte)), Conversions.ToByte(Interaction.IIf(AutoConvert, trueByte, falseByte)) };
+                toBytesRet = new byte[]
+                {
+                    opNT, Conversions.ToByte(Interaction.IIf(BecomeNT, trueByte, falseByte)),
+                    Conversions.ToByte(Interaction.IIf(AutoConvert, trueByte, falseByte))
+                };
                 return toBytesRet;
             }
 
@@ -557,10 +488,14 @@ namespace iBMSC
             {
                 Checked = _checked;
             }
+
             public override byte[] toBytes()
             {
                 byte[] toBytesRet = default;
-                toBytesRet = new byte[] { opWavAutoincFlag, Conversions.ToByte(Interaction.IIf(Checked, trueByte, falseByte)) };
+                toBytesRet = new byte[]
+                {
+                    opWavAutoincFlag, Conversions.ToByte(Interaction.IIf(Checked, trueByte, falseByte))
+                };
                 return toBytesRet;
             }
 
@@ -573,11 +508,7 @@ namespace iBMSC
             {
                 return opWavAutoincFlag;
             }
-
         }
-
-
-
 
         public class NoOperation : LinkedURCmd
         {
