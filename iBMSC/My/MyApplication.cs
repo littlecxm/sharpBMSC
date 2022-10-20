@@ -38,29 +38,4 @@ internal class MyApplication : WindowsFormsApplicationBase
             Interaction.MsgBox("A back-up has been saved to " + MyProject.Application.Info.DirectoryPath + text, MsgBoxStyle.Information);
         }
     }
-
-    [DebuggerStepThrough]
-    public MyApplication()
-        : base(AuthenticationMode.Windows)
-    {
-        base.UnhandledException += MyApplication_UnhandledException;
-        base.Shutdown += MyApplication_Shutdown;
-        base.Startup += MyApplication_Startup;
-        IsSingleInstance = false;
-        EnableVisualStyles = true;
-        SaveMySettingsOnExit = true;
-        ShutdownStyle = ShutdownMode.AfterMainFormCloses;
-    }
-
-    [DebuggerStepThrough]
-    protected override void OnCreateMainForm()
-    {
-        MainForm = MyProject.Forms.MainWindow;
-    }
-
-    [DebuggerStepThrough]
-    protected override void OnCreateSplashScreen()
-    {
-        SplashScreen = MyProject.Forms.SplashScreen1;
-    }
 }
