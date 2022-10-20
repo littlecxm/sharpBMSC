@@ -3,7 +3,6 @@ using System.CodeDom.Compiler;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.ApplicationServices;
 using Microsoft.VisualBasic.CompilerServices;
@@ -14,21 +13,6 @@ namespace iBMSC.My;
 [GeneratedCode("MyTemplate", "10.0.0.0")]
 internal class MyApplication : WindowsFormsApplicationBase
 {
-    [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-    [EditorBrowsable(EditorBrowsableState.Advanced)]
-    [DebuggerHidden]
-    [STAThread]
-    internal static void Main(string[] Args)
-    {
-        try
-        {
-            Application.SetCompatibleTextRenderingDefault(WindowsFormsApplicationBase.UseCompatibleTextRendering);
-        }
-        finally
-        {
-        }
-        MyProject.Application.Run(Args);
-    }
 
     private void MyApplication_Shutdown(object sender, EventArgs e)
     {
