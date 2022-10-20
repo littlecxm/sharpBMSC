@@ -10992,8 +10992,13 @@ end_IL_0000_3:
 
     public object GetColumnHighlightColor(Color col, double factor = 2.0)
     {
-        VB_0024AnonymousDelegate_1<object, object> vB_0024AnonymousDelegate_ = [SpecialName] (object x) => Interaction.IIf(Operators.ConditionalCompareObjectGreater(x, 255, TextCompare: false), 255, RuntimeHelpers.GetObjectValue(x));
-        return Color.FromArgb(Conversions.ToInteger(vB_0024AnonymousDelegate_((double)(int)col.A * factor)), Conversions.ToInteger(vB_0024AnonymousDelegate_((double)(int)col.R * factor)), Conversions.ToInteger(vB_0024AnonymousDelegate_((double)(int)col.G * factor)), Conversions.ToInteger(vB_0024AnonymousDelegate_((double)(int)col.B * factor)));
+        var clamp = delegate (object x) { return Interaction.IIf(Operators.ConditionalCompareObjectGreater(x, 255, TextCompare: false), 255, RuntimeHelpers.GetObjectValue(x)); };
+        return Color.FromArgb(
+            Conversions.ToInteger(clamp((double)(int)col.A * factor)), 
+            Conversions.ToInteger(clamp((double)(int)col.R * factor)), 
+            Conversions.ToInteger(clamp((double)(int)col.G * factor)), 
+            Conversions.ToInteger(clamp((double)(int)col.B * factor))
+          );
     }
 
     private void DrawBackgroundColor(BufferedGraphics e1, int xTHeight, int xTWidth, int xHS, int xI1)
