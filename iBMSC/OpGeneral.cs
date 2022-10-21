@@ -117,12 +117,12 @@ public partial  class OpGeneral : Form
 
     public OpGeneral(int xMsWheel, int xPgUpDn, int xMiddleButton, int xTextEncoding, int xGridPartition, int xAutoSave, bool xBeep, bool xBPMx, bool xSTOPx, bool xMFEnter, bool xMFClick, bool xMStopPreview)
     {
-        int try0006_dispatch = -1;
-        int num2 = default(int);
-        int num = default(int);
-        int num3 = default(int);
-        int num5 = default(int);
-        int num6 = default(int);
+        var try0006_dispatch = -1;
+        var num2 = default(int);
+        var num = default(int);
+        var num3 = default(int);
+        var num5 = default(int);
+        var num6 = default(int);
         while (true)
         {
             try
@@ -144,7 +144,7 @@ public partial  class OpGeneral : Form
                                 default:
                                     goto end_IL_0006;
                             }
-                            int num4 = num2 + 1;
+                            var num4 = num2 + 1;
                             num2 = 0;
                             switch (num4)
                             {
@@ -504,7 +504,7 @@ end_IL_0006_3:
         cAutoSave.Text = Strings.fopGeneral.AutoSave;
         Label7.Text = Strings.fopGeneral.minutes;
         cMStopPreview.Text = Strings.fopGeneral.StopPreviewOnClick;
-        Encoding @default = Encoding.Default;
+        var @default = Encoding.Default;
         CTextEncoding.Items[0] = "System ANSI (" + @default.EncodingName + ")";
         OK_Button.Text = Strings.OK;
         Cancel_Button.Text = Strings.Cancel;
@@ -544,13 +544,13 @@ end_IL_0006_3:
         }
         try
         {
-            RegistryKey classesRoot = Registry.ClassesRoot;
+            var classesRoot = Registry.ClassesRoot;
             if (Array.IndexOf(classesRoot.GetSubKeyNames(), xExt) != -1)
             {
                 classesRoot.DeleteSubKeyTree(xExt);
             }
             classesRoot.CreateSubKey(xExt);
-            RegistryKey registryKey = classesRoot.OpenSubKey(xExt, writable: true);
+            var registryKey = classesRoot.OpenSubKey(xExt, writable: true);
             registryKey.SetValue("", xClass, RegistryValueKind.String);
             if (Array.IndexOf(classesRoot.GetSubKeyNames(), xClass) != -1)
             {
@@ -588,7 +588,7 @@ end_IL_0006_3:
                 registryKey.SetValue("", Environment.SystemDirectory + "\\notepad.exe %1");
             }
             classesRoot = null;
-            RegistryKey currentUser = Registry.CurrentUser;
+            var currentUser = Registry.CurrentUser;
             currentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\" + xExt);
             registryKey = currentUser.OpenSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\" + xExt, writable: true);
             registryKey.CreateSubKey("UserChoice");

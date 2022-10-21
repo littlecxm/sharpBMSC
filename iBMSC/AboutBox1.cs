@@ -28,7 +28,7 @@ public sealed partial  class AboutBox1 : Form
     {
         get
         {
-            CreateParams createParams = base.CreateParams;
+            var createParams = base.CreateParams;
             createParams.ExStyle |= 524288;
             return createParams;
         }
@@ -65,18 +65,18 @@ public sealed partial  class AboutBox1 : Form
         {
             throw new ApplicationException("The bitmap must be 32bpp with alpha-channel.");
         }
-        IntPtr dC = APIHelp.GetDC(IntPtr.Zero);
-        IntPtr intPtr = APIHelp.CreateCompatibleDC(dC);
-        IntPtr intPtr2 = IntPtr.Zero;
-        IntPtr hObject = IntPtr.Zero;
+        var dC = APIHelp.GetDC(IntPtr.Zero);
+        var intPtr = APIHelp.CreateCompatibleDC(dC);
+        var intPtr2 = IntPtr.Zero;
+        var hObject = IntPtr.Zero;
         try
         {
             intPtr2 = bBitmap.GetHbitmap(Color.FromArgb(0));
             hObject = APIHelp.SelectObject(intPtr, intPtr2);
-            APIHelp.Size psize = new APIHelp.Size(bBitmap.Width, bBitmap.Height);
-            APIHelp.Point pprSrc = new APIHelp.Point(0, 0);
-            APIHelp.Point pptDst = new APIHelp.Point(Left, Top);
-            APIHelp.BLENDFUNCTION pblend = default(APIHelp.BLENDFUNCTION);
+            var psize = new APIHelp.Size(bBitmap.Width, bBitmap.Height);
+            var pprSrc = new APIHelp.Point(0, 0);
+            var pptDst = new APIHelp.Point(Left, Top);
+            var pblend = default(APIHelp.BLENDFUNCTION);
             pblend.BlendOp = 0;
             pblend.BlendFlags = 0;
             pblend.SourceConstantAlpha = byte.MaxValue;

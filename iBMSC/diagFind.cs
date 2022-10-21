@@ -39,13 +39,13 @@ public partial  class diagFind : Form
 
     private void BSAll_Click(object sender, EventArgs e)
     {
-        IEnumerator enumerator = default(IEnumerator);
+        var enumerator = default(IEnumerator);
         try
         {
             enumerator = Panel1.Controls.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                CheckBox checkBox = (CheckBox)enumerator.Current;
+                var checkBox = (CheckBox)enumerator.Current;
                 checkBox.Checked = true;
             }
         }
@@ -60,13 +60,13 @@ public partial  class diagFind : Form
 
     private void BSInv_Click(object sender, EventArgs e)
     {
-        IEnumerator enumerator = default(IEnumerator);
+        var enumerator = default(IEnumerator);
         try
         {
             enumerator = Panel1.Controls.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                CheckBox checkBox = (CheckBox)enumerator.Current;
+                var checkBox = (CheckBox)enumerator.Current;
                 checkBox.Checked = !checkBox.Checked;
             }
         }
@@ -81,13 +81,13 @@ public partial  class diagFind : Form
 
     private void BSNone_Click(object sender, EventArgs e)
     {
-        IEnumerator enumerator = default(IEnumerator);
+        var enumerator = default(IEnumerator);
         try
         {
             enumerator = Panel1.Controls.GetEnumerator();
             while (enumerator.MoveNext())
             {
-                CheckBox checkBox = (CheckBox)enumerator.Current;
+                var checkBox = (CheckBox)enumerator.Current;
                 checkBox.Checked = false;
             }
         }
@@ -103,7 +103,7 @@ public partial  class diagFind : Form
     private void diagFind_Load(object sender, EventArgs e)
     {
         Font = MyProject.Forms.MainWindow.Font;
-        Font font = new Font(Font, FontStyle.Bold);
+        var font = new Font(Font, FontStyle.Bold);
         TBSelect.Font = font;
         Label8.Font = font;
         Label9.Font = font;
@@ -132,21 +132,21 @@ public partial  class diagFind : Form
         TBUnselect.Text = Strings.fFind.Unselect_;
         TBDelete.Text = Strings.fFind.Delete_;
         TBClose.Text = Strings.fFind.Close_;
-        int num = bCol;
+        var num = bCol;
         checked
         {
-            for (int i = 27; i <= num; i++)
+            for (var i = 27; i <= num; i++)
             {
-                CheckBox checkBox = new CheckBox();
-                CheckBox checkBox2 = checkBox;
+                var checkBox = new CheckBox();
+                var checkBox2 = checkBox;
                 checkBox2.Appearance = Appearance.Button;
                 checkBox2.Checked = true;
                 checkBox2.FlatStyle = FlatStyle.System;
-                CheckBox checkBox3 = checkBox2;
-                Point location = new Point(unchecked(checked(i - 26) % 8) * 35 + 3, unchecked(checked(i - 26) / 8) * 25 + 103);
+                var checkBox3 = checkBox2;
+                var location = new Point(unchecked(checked(i - 26) % 8) * 35 + 3, unchecked(checked(i - 26) / 8) * 25 + 103);
                 checkBox3.Location = location;
-                CheckBox checkBox4 = checkBox2;
-                Size size = new Size(35, 25);
+                var checkBox4 = checkBox2;
+                var size = new Size(35, 25);
                 checkBox4.Size = size;
                 checkBox2.Tag = i;
                 checkBox2.Text = "B" + (i - 25);
@@ -176,14 +176,14 @@ public partial  class diagFind : Form
         {
             return false;
         }
-        int num = Microsoft.VisualBasic.Strings.Asc(Microsoft.VisualBasic.Strings.Mid(xStr, 1, 1));
+        var num = Microsoft.VisualBasic.Strings.Asc(Microsoft.VisualBasic.Strings.Mid(xStr, 1, 1));
         if (!((num >= 48 && num <= 57) || (num >= 65 && num <= 90)))
         {
             return false;
         }
         if (Microsoft.VisualBasic.Strings.Len(xStr) == 2)
         {
-            int num2 = Microsoft.VisualBasic.Strings.Asc(Microsoft.VisualBasic.Strings.Mid(xStr, 2, 1));
+            var num2 = Microsoft.VisualBasic.Strings.Asc(Microsoft.VisualBasic.Strings.Mid(xStr, 2, 1));
             if (!((num2 >= 48 && num2 <= 57) || (num2 >= 65 && num2 <= 90)))
             {
                 return false;
@@ -202,12 +202,12 @@ public partial  class diagFind : Form
 
     private bool ValidateLabel(object sender)
     {
-        bool flag = ValidLabel(Conversions.ToString(NewLateBinding.LateGet(sender, null, "Text", new object[0], null, null, null)));
+        var flag = ValidLabel(Conversions.ToString(NewLateBinding.LateGet(sender, null, "Text", Array.Empty<object>(), null, null, null)));
         if (!flag)
         {
             Interaction.MsgBox(msg2, MsgBoxStyle.Critical, msg1);
-            NewLateBinding.LateCall(sender, null, "Focus", new object[0], null, null, null, IgnoreReturn: true);
-            NewLateBinding.LateCall(sender, null, "SelectAll", new object[0], null, null, null, IgnoreReturn: true);
+            NewLateBinding.LateCall(sender, null, "Focus", Array.Empty<object>(), null, null, null, IgnoreReturn: true);
+            NewLateBinding.LateCall(sender, null, "SelectAll", Array.Empty<object>(), null, null, null, IgnoreReturn: true);
         }
         return flag;
     }
@@ -218,16 +218,16 @@ public partial  class diagFind : Form
         {
             return;
         }
-        int[] array = new int[0];
+        var array = Array.Empty<int>();
         checked
         {
-            IEnumerator enumerator = default(IEnumerator);
+            var enumerator = default(IEnumerator);
             try
             {
                 enumerator = Panel1.Controls.GetEnumerator();
                 while (enumerator.MoveNext())
                 {
-                    CheckBox checkBox = (CheckBox)enumerator.Current;
+                    var checkBox = (CheckBox)enumerator.Current;
                     if (checkBox.Checked)
                     {
                         array = (int[])Utils.CopyArray(array, new int[Information.UBound(array) + 1 + 1]);
@@ -242,7 +242,7 @@ public partial  class diagFind : Form
                     (enumerator as IDisposable).Dispose();
                 }
             }
-            int num = 1;
+            var num = 1;
             if (cbx1.Checked)
             {
                 num *= 2;
@@ -277,16 +277,16 @@ public partial  class diagFind : Form
         {
             return;
         }
-        int[] array = new int[0];
+        var array = Array.Empty<int>();
         checked
         {
-            IEnumerator enumerator = default(IEnumerator);
+            var enumerator = default(IEnumerator);
             try
             {
                 enumerator = Panel1.Controls.GetEnumerator();
                 while (enumerator.MoveNext())
                 {
-                    CheckBox checkBox = (CheckBox)enumerator.Current;
+                    var checkBox = (CheckBox)enumerator.Current;
                     if (checkBox.Checked)
                     {
                         array = (int[])Utils.CopyArray(array, new int[Information.UBound(array) + 1 + 1]);
@@ -301,7 +301,7 @@ public partial  class diagFind : Form
                     (enumerator as IDisposable).Dispose();
                 }
             }
-            int num = 1;
+            var num = 1;
             if (cbx1.Checked)
             {
                 num *= 2;
@@ -336,16 +336,16 @@ public partial  class diagFind : Form
         {
             return;
         }
-        int[] array = new int[0];
+        var array = Array.Empty<int>();
         checked
         {
-            IEnumerator enumerator = default(IEnumerator);
+            var enumerator = default(IEnumerator);
             try
             {
                 enumerator = Panel1.Controls.GetEnumerator();
                 while (enumerator.MoveNext())
                 {
-                    CheckBox checkBox = (CheckBox)enumerator.Current;
+                    var checkBox = (CheckBox)enumerator.Current;
                     if (checkBox.Checked)
                     {
                         array = (int[])Utils.CopyArray(array, new int[Information.UBound(array) + 1 + 1]);
@@ -360,7 +360,7 @@ public partial  class diagFind : Form
                     (enumerator as IDisposable).Dispose();
                 }
             }
-            int num = 1;
+            var num = 1;
             if (cbx1.Checked)
             {
                 num *= 2;
@@ -395,16 +395,16 @@ public partial  class diagFind : Form
         {
             return;
         }
-        int[] array = new int[0];
+        var array = Array.Empty<int>();
         checked
         {
-            IEnumerator enumerator = default(IEnumerator);
+            var enumerator = default(IEnumerator);
             try
             {
                 enumerator = Panel1.Controls.GetEnumerator();
                 while (enumerator.MoveNext())
                 {
-                    CheckBox checkBox = (CheckBox)enumerator.Current;
+                    var checkBox = (CheckBox)enumerator.Current;
                     if (checkBox.Checked)
                     {
                         array = (int[])Utils.CopyArray(array, new int[Information.UBound(array) + 1 + 1]);
@@ -419,7 +419,7 @@ public partial  class diagFind : Form
                     (enumerator as IDisposable).Dispose();
                 }
             }
-            int num = 1;
+            var num = 1;
             if (cbx1.Checked)
             {
                 num *= 2;
@@ -454,16 +454,16 @@ public partial  class diagFind : Form
         {
             return;
         }
-        int[] array = new int[0];
+        var array = Array.Empty<int>();
         checked
         {
-            IEnumerator enumerator = default(IEnumerator);
+            var enumerator = default(IEnumerator);
             try
             {
                 enumerator = Panel1.Controls.GetEnumerator();
                 while (enumerator.MoveNext())
                 {
-                    CheckBox checkBox = (CheckBox)enumerator.Current;
+                    var checkBox = (CheckBox)enumerator.Current;
                     if (checkBox.Checked)
                     {
                         array = (int[])Utils.CopyArray(array, new int[Information.UBound(array) + 1 + 1]);
@@ -478,7 +478,7 @@ public partial  class diagFind : Form
                     (enumerator as IDisposable).Dispose();
                 }
             }
-            int num = 1;
+            var num = 1;
             if (cbx1.Checked)
             {
                 num *= 2;

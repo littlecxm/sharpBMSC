@@ -73,7 +73,7 @@ public partial class OpVisual : Form
         fButtonChange(fNoteLabel, vo.kFont);
         fButtonChange(fMeasureLabel, vo.kMFont);
         fButtonChange(fTSBPM, vo.PEBPMFont);
-        NumericUpDown self = iNoteHeight;
+        var self = iNoteHeight;
         Extensions.SetValClamped(self, new decimal(vo.kHeight));
         iNoteHeight = self;
         self = iLabelVerticalShift;
@@ -98,41 +98,41 @@ public partial class OpVisual : Form
         checked
         {
             co = new ColumnOptionSet[Information.UBound(col) + 1];
-            int num = Information.UBound(col);
-            Color color = default(Color);
-            for (int i = 0; i <= num; i++)
+            var num = Information.UBound(col);
+            var color = default(Color);
+            for (var i = 0; i <= num; i++)
             {
-                NumericUpDown numericUpDown = new NumericUpDown();
-                NumericUpDown numericUpDown2 = numericUpDown;
+                var numericUpDown = new NumericUpDown();
+                var numericUpDown2 = numericUpDown;
                 numericUpDown2.BorderStyle = BorderStyle.FixedSingle;
-                NumericUpDown numericUpDown3 = numericUpDown2;
-                Point location = new Point(lLeft[i], 12);
+                var numericUpDown3 = numericUpDown2;
+                var location = new Point(lLeft[i], 12);
                 numericUpDown3.Location = location;
                 numericUpDown2.Maximum = 999m;
-                NumericUpDown numericUpDown4 = numericUpDown2;
-                Size size = new Size(33, 23);
+                var numericUpDown4 = numericUpDown2;
+                var size = new Size(33, 23);
                 numericUpDown4.Size = size;
                 numericUpDown2.Value = new decimal(col[i].Width);
                 numericUpDown2 = null;
-                TextBox textBox = new TextBox();
-                TextBox textBox2 = textBox;
+                var textBox = new TextBox();
+                var textBox2 = textBox;
                 textBox2.BorderStyle = BorderStyle.FixedSingle;
-                TextBox textBox3 = textBox2;
+                var textBox3 = textBox2;
                 location = new Point(lLeft[i], 34);
                 textBox3.Location = location;
-                TextBox textBox4 = textBox2;
+                var textBox4 = textBox2;
                 size = new Size(33, 23);
                 textBox4.Size = size;
                 textBox2.Text = col[i].Title;
                 textBox2 = null;
-                Button button = new Button();
-                Button button2 = button;
+                var button = new Button();
+                var button2 = button;
                 button2.FlatStyle = FlatStyle.Popup;
                 button2.Font = monoFont;
-                Button button3 = button2;
+                var button3 = button2;
                 location = new Point(lLeft[i], 63);
                 button3.Location = location;
-                Button button4 = button2;
+                var button4 = button2;
                 size = new Size(33, 66);
                 button4.Size = size;
                 button2.BackColor = Color.FromArgb(col[i].cNote);
@@ -140,14 +140,14 @@ public partial class OpVisual : Form
                 button2.Text = To4Hex(col[i].cNote);
                 button2.Name = "cNote";
                 button2 = null;
-                Button button5 = new Button();
-                Button button6 = button5;
+                var button5 = new Button();
+                var button6 = button5;
                 button6.FlatStyle = FlatStyle.Popup;
                 button6.Font = monoFont;
-                Button button7 = button6;
+                var button7 = button6;
                 location = new Point(lLeft[i], 128);
                 button7.Location = location;
-                Button button8 = button6;
+                var button8 = button6;
                 size = new Size(33, 66);
                 button8.Size = size;
                 button6.BackColor = Color.FromArgb(col[i].cNote);
@@ -157,14 +157,14 @@ public partial class OpVisual : Form
                 button6 = null;
                 button.Tag = button5;
                 button5.Tag = button;
-                Button button9 = new Button();
-                Button button10 = button9;
+                var button9 = new Button();
+                var button10 = button9;
                 button10.FlatStyle = FlatStyle.Popup;
                 button10.Font = monoFont;
-                Button button11 = button10;
+                var button11 = button10;
                 location = new Point(lLeft[i], 193);
                 button11.Location = location;
-                Button button12 = button10;
+                var button12 = button10;
                 size = new Size(33, 66);
                 button12.Size = size;
                 button10.BackColor = Color.FromArgb(col[i].cLNote);
@@ -172,14 +172,14 @@ public partial class OpVisual : Form
                 button10.Text = To4Hex(col[i].cLNote);
                 button10.Name = "cNote";
                 button10 = null;
-                Button button13 = new Button();
-                Button button14 = button13;
+                var button13 = new Button();
+                var button14 = button13;
                 button14.FlatStyle = FlatStyle.Popup;
                 button14.Font = monoFont;
-                Button button15 = button14;
+                var button15 = button14;
                 location = new Point(lLeft[i], 258);
                 button15.Location = location;
-                Button button16 = button14;
+                var button16 = button14;
                 size = new Size(33, 66);
                 button16.Size = size;
                 button14.BackColor = Color.FromArgb(col[i].cLNote);
@@ -189,19 +189,19 @@ public partial class OpVisual : Form
                 button14 = null;
                 button9.Tag = button13;
                 button13.Tag = button9;
-                Button button17 = new Button();
-                Button button18 = button17;
+                var button17 = new Button();
+                var button18 = button17;
                 button18.FlatStyle = FlatStyle.Popup;
                 button18.Font = monoFont;
-                Button button19 = button18;
+                var button19 = button18;
                 location = new Point(lLeft[i], 323);
                 button19.Location = location;
-                Button button20 = button18;
+                var button20 = button18;
                 size = new Size(33, 66);
                 button20.Size = size;
                 button18.BackColor = col[i].cBG;
-                Button button21 = button18;
-                object obj = Interaction.IIf((int)Math.Round(col[i].cBG.GetBrightness() * 255f) + 255 - unchecked(col[i].cBG.A) >= 128, Color.Black, Color.White);
+                var button21 = button18;
+                var obj = Interaction.IIf((int)Math.Round(col[i].cBG.GetBrightness() * 255f) + 255 - unchecked(col[i].cBG.A) >= 128, Color.Black, Color.White);
                 button21.ForeColor = ((obj != null) ? ((Color)obj) : color);
                 button18.Text = To4Hex(col[i].cBG.ToArgb());
                 button18.Name = "cBG";
@@ -236,8 +236,8 @@ public partial class OpVisual : Form
         xbutton.BackColor = c;
         checked
         {
-            object obj = Interaction.IIf((int)Math.Round(c.GetBrightness() * 255f) + 255 - unchecked(c.A) >= 128, Color.Black, Color.White);
-            Color color = default(Color);
+            var obj = Interaction.IIf((int)Math.Round(c.GetBrightness() * 255f) + 255 - unchecked(c.A) >= 128, Color.Black, Color.White);
+            var color = default(Color);
             xbutton.ForeColor = ((obj != null) ? ((Color)obj) : color);
         }
     }
@@ -278,8 +278,8 @@ public partial class OpVisual : Form
         vo.PEDeltaMouseOver = Convert.ToInt32(iTSSensitivity.Value);
         vo.MiddleDeltaRelease = Convert.ToInt32(iMiddleSensitivity.Value);
         MyProject.Forms.MainWindow.setVO(vo);
-        int num = Information.UBound(co);
-        for (int i = 0; i <= num; i = checked(i + 1))
+        var num = Information.UBound(co);
+        for (var i = 0; i <= num; i = checked(i + 1))
         {
             col[i].Title = co[i].Title.Text;
             col[i].Width = Convert.ToInt32(co[i].Width.Value);
@@ -342,8 +342,8 @@ public partial class OpVisual : Form
 
     private void BCClick(object sender, EventArgs e)
     {
-        Button button = (Button)sender;
-        ColorPicker colorPicker = new ColorPicker();
+        var button = (Button)sender;
+        var colorPicker = new ColorPicker();
         colorPicker.SetOrigColor(button.BackColor);
         if (colorPicker.ShowDialog(this) != DialogResult.Cancel)
         {
@@ -353,8 +353,8 @@ public partial class OpVisual : Form
 
     private void BFClick(object sender, EventArgs e)
     {
-        Button button = (Button)sender;
-        FontDialog fontDialog = new FontDialog();
+        var button = (Button)sender;
+        var fontDialog = new FontDialog();
         fontDialog.Font = button.Font;
         if (fontDialog.ShowDialog(this) != DialogResult.Cancel)
         {
@@ -364,8 +364,8 @@ public partial class OpVisual : Form
 
     private void ButtonClick(object sender, EventArgs e)
     {
-        Button button = (Button)sender;
-        ColorPicker colorPicker = new ColorPicker();
+        var button = (Button)sender;
+        var colorPicker = new ColorPicker();
         if (Operators.CompareString(button.Name, "cText", TextCompare: false) == 0)
         {
             colorPicker.SetOrigColor(button.ForeColor);
@@ -392,8 +392,8 @@ public partial class OpVisual : Form
                     case "cBG":
                         {
                             button.BackColor = colorPicker.NewColor;
-                            object obj = Interaction.IIf((int)Math.Round(colorPicker.NewColor.GetBrightness() * 255f) + 255 - unchecked(colorPicker.NewColor.A) >= 128, Color.Black, Color.White);
-                            Color color = default(Color);
+                            var obj = Interaction.IIf((int)Math.Round(colorPicker.NewColor.GetBrightness() * 255f) + 255 - unchecked(colorPicker.NewColor.A) >= 128, Color.Black, Color.White);
+                            var color = default(Color);
                             button.ForeColor = ((obj != null) ? ((Color)obj) : color);
                             break;
                         }
@@ -406,9 +406,9 @@ public partial class OpVisual : Form
     {
         checked
         {
-            int[] array = new int[Information.UBound(xC) + 1];
-            int num = Information.UBound(array);
-            for (int i = 0; i <= num; i++)
+            var array = new int[Information.UBound(xC) + 1];
+            var num = Information.UBound(array);
+            for (var i = 0; i <= num; i++)
             {
                 array[i] = xC[i].ToArgb();
             }
@@ -418,7 +418,7 @@ public partial class OpVisual : Form
 
     private string To4Hex(int xInt)
     {
-        Color color = Color.FromArgb(xInt);
+        var color = Color.FromArgb(xInt);
         return Conversion.Hex(color.A) + "\r\n" + Conversion.Hex(color.R) + "\r\n" + Conversion.Hex(color.G) + "\r\n" + Conversion.Hex(color.B);
     }
 }

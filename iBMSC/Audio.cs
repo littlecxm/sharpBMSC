@@ -34,15 +34,15 @@ internal static class Audio
         {
             return filename;
         }
-        string extension = Path.GetExtension(filename);
+        var extension = Path.GetExtension(filename);
         if (string.Compare(extension, ".ogg") == 0)
         {
-            string text = Path.ChangeExtension(filename, ".wav");
+            var text = Path.ChangeExtension(filename, ".wav");
             return Conversions.ToString(Interaction.IIf(File.Exists(text), text, filename));
         }
         if (string.Compare(extension, ".wav") == 0)
         {
-            string text2 = Path.ChangeExtension(filename, ".ogg");
+            var text2 = Path.ChangeExtension(filename, ".ogg");
             return Conversions.ToString(Interaction.IIf(File.Exists(text2), text2, filename));
         }
         return filename;
@@ -58,7 +58,7 @@ internal static class Audio
         }
         if ((object)filename != "")
         {
-            string text = CheckFilename(filename);
+            var text = CheckFilename(filename);
             if (File.Exists(text))
             {
                 Source = CodecFactory.Instance.GetCodec(text);

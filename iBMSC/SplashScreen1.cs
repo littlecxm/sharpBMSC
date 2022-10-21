@@ -21,7 +21,7 @@ public sealed partial  class SplashScreen1 : Form
 
     protected override void OnPaintBackground(PaintEventArgs e)
     {
-        Rectangle rectangle = new Rectangle(0, 0, Width, Height);
+        var rectangle = new Rectangle(0, 0, Width, Height);
     }
 
     private void SplashScreen1_Paint(object sender, PaintEventArgs e)

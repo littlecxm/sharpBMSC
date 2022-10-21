@@ -165,7 +165,7 @@ internal sealed class MyProject
                     return ex.InnerException != null;
                 }).Invoke())
                 {
-                    string resourceString = Utils.GetResourceString("WinForms_SeeInnerException", ex.InnerException.Message);
+                    var resourceString = Utils.GetResourceString("WinForms_SeeInnerException", ex.InnerException.Message);
                     throw new InvalidOperationException(resourceString, ex.InnerException);
                 }
                 finally

@@ -23,7 +23,7 @@ public partial  class fLoadFileProgress : Form
     {
         base.Shown += fLoadFileProgress_Shown;
         base.Load += fLoadFileProgress_Load;
-        xPath = new string[0];
+        xPath = Array.Empty<string>();
         CancelPressed = false;
         IsSaved = false;
         InitializeComponent();
@@ -42,9 +42,9 @@ public partial  class fLoadFileProgress : Form
 
     private void fLoadFileProgress_Shown(object sender, EventArgs e)
     {
-        int try0000_dispatch = -1;
-        int num2 = default(int);
-        int num = default(int);
+        var try0000_dispatch = -1;
+        var num2 = default(int);
+        var num = default(int);
         while (true)
         {
             try
@@ -58,12 +58,12 @@ public partial  class fLoadFileProgress : Form
                     {
                         ProjectData.ClearProjectError();
                         num2 = 0;
-                        int num3 = Information.UBound(xPath);
-                        for (int i = 0; i <= num3; i++)
+                        var num3 = Information.UBound(xPath);
+                        for (var i = 0; i <= num3; i++)
                         {
                             Label1.Text = "Currently loading ( " + Conversions.ToString(i + 1) + " / " + Conversions.ToString(Information.UBound(xPath) + 1) + " ): " + xPath[i];
-                            int maximum = prog.Maximum;
-                            int value = prog.Value;
+                            var maximum = prog.Maximum;
+                            var value = prog.Value;
                             prog.Value = i;
                             Application.DoEvents();
                             if (CancelPressed)

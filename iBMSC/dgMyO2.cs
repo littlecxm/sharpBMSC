@@ -45,7 +45,7 @@ public partial  class dgMyO2 : Form
     private void AddAdjItem(Adj xAj, int Index)
     {
         lResult.Rows.Add();
-        int rowIndex = checked(lResult.Rows.Count - 1);
+        var rowIndex = checked(lResult.Rows.Count - 1);
         lResult[0, rowIndex].Value = Index;
         lResult[1, rowIndex].Value = xAj.Measure;
         lResult[2, rowIndex].Value = xAj.ColumnName;
@@ -64,16 +64,16 @@ public partial  class dgMyO2 : Form
 
     private void bApply2_Click(object sender, EventArgs e)
     {
-        string[] array = MyProject.Forms.MainWindow.MyO2GridCheck();
+        var array = MyProject.Forms.MainWindow.MyO2GridCheck();
         checked
         {
             Aj = new Adj[Information.UBound(array) + 1];
             lResult.Rows.Clear();
-            int num = Information.UBound(Aj);
-            for (int i = 0; i <= num; i++)
+            var num = Information.UBound(Aj);
+            for (var i = 0; i <= num; i++)
             {
-                string[] array2 = Microsoft.VisualBasic.Strings.Split(array[i], "_");
-                Adj[] aj = Aj;
+                var array2 = Microsoft.VisualBasic.Strings.Split(array[i], "_");
+                var aj = Aj;
                 aj[i].Measure = (int)Math.Round(Conversion.Val(array2[0]));
                 aj[i].ColumnIndex = (int)Math.Round(Conversion.Val(array2[1]));
                 aj[i].ColumnName = array2[2];
@@ -96,7 +96,7 @@ public partial  class dgMyO2 : Form
     public dgMyO2()
     {
         base.Load += fMyO2_Load;
-        Aj = new Adj[0];
+        Aj = Array.Empty<Adj>();
         InitializeComponent();
     }
 

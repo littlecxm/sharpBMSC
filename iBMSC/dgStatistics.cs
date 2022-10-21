@@ -47,20 +47,20 @@ public partial  class dgStatistics : Form
     {
         base.Load += dgStatistics_Load;
         InitializeComponent();
-        int num = 0;
+        var num = 0;
         checked
         {
             do
             {
-                int num2 = 0;
+                var num2 = 0;
                 do
                 {
-                    Label label = new Label
+                    var label = new Label
                     {
                         Dock = DockStyle.Fill,
                         TextAlign = ContentAlignment.MiddleCenter
                     };
-                    Padding margin = new Padding(0);
+                    var margin = new Padding(0);
                     label.Margin = margin;
                     label.Font = new Font(Font, FontStyle.Bold);
                     if (data[num, num2] != 0)

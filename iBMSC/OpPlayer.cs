@@ -70,11 +70,11 @@ public partial  class OpPlayer : Form
         {
             pArg = (MainWindow.PlayerArguments[])Utils.CopyArray(pArg, new MainWindow.PlayerArguments[Information.UBound(pArg) + 1 + 1]);
             CurrPlayer++;
-            int num = Information.UBound(pArg);
-            int currPlayer = CurrPlayer;
-            for (int i = num; i >= currPlayer; i += -1)
+            var num = Information.UBound(pArg);
+            var currPlayer = CurrPlayer;
+            for (var i = num; i >= currPlayer; i += -1)
             {
-                ref MainWindow.PlayerArguments reference = ref pArg[i];
+                ref var reference = ref pArg[i];
                 reference = pArg[i - 1];
             }
             LPlayer.Items.Insert(CurrPlayer, GetFileName(pArg[CurrPlayer - 1].Path));
@@ -89,13 +89,13 @@ public partial  class OpPlayer : Form
             Interaction.MsgBox(Strings.Messages.PreviewDelError, MsgBoxStyle.Exclamation);
             return;
         }
-        int currPlayer = CurrPlayer;
+        var currPlayer = CurrPlayer;
         checked
         {
-            int num = Information.UBound(pArg) - 1;
-            for (int i = currPlayer; i <= num; i++)
+            var num = Information.UBound(pArg) - 1;
+            for (var i = currPlayer; i <= num; i++)
             {
-                ref MainWindow.PlayerArguments reference = ref pArg[i];
+                ref var reference = ref pArg[i];
                 reference = pArg[i + 1];
             }
             pArg = (MainWindow.PlayerArguments[])Utils.CopyArray(pArg, new MainWindow.PlayerArguments[Information.UBound(pArg) - 1 + 1]);
@@ -109,7 +109,7 @@ public partial  class OpPlayer : Form
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
     private void BPrevBrowse_Click(object sender, EventArgs e)
     {
-        OpenFileDialog openFileDialog = new OpenFileDialog();
+        var openFileDialog = new OpenFileDialog();
         openFileDialog.InitialDirectory = Conversions.ToString(Interaction.IIf(Operators.CompareString(Path.GetDirectoryName(Microsoft.VisualBasic.Strings.Replace(TPath.Text, "<apppath>", MyProject.Application.Info.DirectoryPath)), "", TextCompare: false) == 0, MyProject.Application.Info.DirectoryPath, Path.GetDirectoryName(Microsoft.VisualBasic.Strings.Replace(TPath.Text, "<apppath>", MyProject.Application.Info.DirectoryPath))));
         openFileDialog.Filter = Strings.FileType.EXE + "|*.exe";
         openFileDialog.DefaultExt = "exe";
@@ -123,12 +123,12 @@ public partial  class OpPlayer : Form
     {
         if (Interaction.MsgBox(Strings.Messages.RestoreDefaultSettings, MsgBoxStyle.YesNo | MsgBoxStyle.Question) != MsgBoxResult.No)
         {
-            MainWindow.PlayerArguments[] array = new MainWindow.PlayerArguments[2];
-            ref MainWindow.PlayerArguments reference = ref array[0];
-            MainWindow.PlayerArguments playerArguments = new MainWindow.PlayerArguments("<apppath>\\uBMplay.exe", "-P -N0 \"<filename>\"", "-P -N<measure> \"<filename>\"", "-S");
+            var array = new MainWindow.PlayerArguments[2];
+            ref var reference = ref array[0];
+            var playerArguments = new MainWindow.PlayerArguments("<apppath>\\uBMplay.exe", "-P -N0 \"<filename>\"", "-P -N<measure> \"<filename>\"", "-S");
             reference = playerArguments;
-            ref MainWindow.PlayerArguments reference2 = ref array[1];
-            MainWindow.PlayerArguments playerArguments2 = new MainWindow.PlayerArguments("<apppath>\\o2play.exe", "-P -N0 \"<filename>\"", "-P -N<measure> \"<filename>\"", "-S");
+            ref var reference2 = ref array[1];
+            var playerArguments2 = new MainWindow.PlayerArguments("<apppath>\\o2play.exe", "-P -N0 \"<filename>\"", "-P -N<measure> \"<filename>\"", "-S");
             reference2 = playerArguments2;
             pArg = array;
             CurrPlayer = 0;
@@ -139,8 +139,8 @@ public partial  class OpPlayer : Form
     private void ResetLPlayer_ShowInTextbox()
     {
         LPlayer.Items.Clear();
-        int num = Information.UBound(pArg);
-        for (int i = 0; i <= num; i = checked(i + 1))
+        var num = Information.UBound(pArg);
+        for (var i = 0; i <= num; i = checked(i + 1))
         {
             LPlayer.Items.Add(GetFileName(pArg[i].Path));
         }
@@ -172,15 +172,15 @@ public partial  class OpPlayer : Form
 
     private void ValidateTextBox()
     {
-        TextBox[] array = new TextBox[4] { TPath, TPlayB, TPlay, TStop };
-        Color backColor = default(Color);
-        foreach (TextBox textBox in array)
+        var array = new TextBox[4] { TPath, TPlayB, TPlay, TStop };
+        var backColor = default(Color);
+        foreach (var textBox in array)
         {
-            string text = textBox.Text.Replace("<apppath>", "").Replace("<measure>", "").Replace("<filename>", "")
+            var text = textBox.Text.Replace("<apppath>", "").Replace("<measure>", "").Replace("<filename>", "")
                 .Replace("\"", "");
-            bool flag = false;
-            char[] invalidPathChars = Path.GetInvalidPathChars();
-            foreach (char value in invalidPathChars)
+            var flag = false;
+            var invalidPathChars = Path.GetInvalidPathChars();
+            foreach (var value in invalidPathChars)
             {
                 if (text.IndexOf(value) != -1)
                 {
@@ -230,8 +230,8 @@ public partial  class OpPlayer : Form
 
     private string GetFileName(string s)
     {
-        int num = Microsoft.VisualBasic.Strings.InStrRev(s, "/");
-        int num2 = Microsoft.VisualBasic.Strings.InStrRev(s, "\\");
+        var num = Microsoft.VisualBasic.Strings.InStrRev(s, "/");
+        var num2 = Microsoft.VisualBasic.Strings.InStrRev(s, "\\");
         return Microsoft.VisualBasic.Strings.Mid(s, Conversions.ToInteger(Operators.AddObject(Interaction.IIf(num > num2, num, num2), 1)));
     }
 }

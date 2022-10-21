@@ -59,7 +59,7 @@ internal static class XMLUtil
         {
             return;
         }
-        bool lockTaken = false;
+        var lockTaken = false;
         try
         {
             Monitor.Enter(_0024STATIC_0024XMLLoadAttribute_0024021E10C_0024nfi_0024Init, ref lockTaken);
@@ -91,7 +91,7 @@ internal static class XMLUtil
         {
             return;
         }
-        bool lockTaken = false;
+        var lockTaken = false;
         try
         {
             Monitor.Enter(_0024STATIC_0024XMLLoadAttribute_0024021E10D_0024nfi_0024Init, ref lockTaken);

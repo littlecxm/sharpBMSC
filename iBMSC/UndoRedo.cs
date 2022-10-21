@@ -58,7 +58,7 @@ public class UndoRedo
 
         public LinkedURNoteCmd(byte[] b)
         {
-            BinaryReader br = new BinaryReader(new MemoryStream(b));
+            var br = new BinaryReader(new MemoryStream(b));
             FromBinaryReader(ref br);
         }
 
@@ -78,8 +78,8 @@ public class UndoRedo
 
         public override byte[] toBytes()
         {
-            MemoryStream memoryStream = new MemoryStream();
-            BinaryWriter bw = new BinaryWriter(memoryStream);
+            var memoryStream = new MemoryStream();
+            var bw = new BinaryWriter(memoryStream);
             WriteBinWriter(ref bw);
             return memoryStream.GetBuffer();
         }
@@ -127,8 +127,8 @@ public class UndoRedo
 
         public override byte[] toBytes()
         {
-            MemoryStream memoryStream = new MemoryStream(base.toBytes());
-            BinaryWriter bw = new BinaryWriter(memoryStream);
+            var memoryStream = new MemoryStream(base.toBytes());
+            var bw = new BinaryWriter(memoryStream);
             WriteBinWriter(ref bw);
             NNote.WriteBinWriter(ref bw);
             return memoryStream.GetBuffer();
@@ -136,7 +136,7 @@ public class UndoRedo
 
         public ChangeNote(byte[] b)
         {
-            BinaryReader br = new BinaryReader(new MemoryStream(b));
+            var br = new BinaryReader(new MemoryStream(b));
             FromBinaryReader(ref br);
             NNote.FromBinReader(ref br);
         }
@@ -161,8 +161,8 @@ public class UndoRedo
 
         public override byte[] toBytes()
         {
-            MemoryStream memoryStream = new MemoryStream();
-            BinaryWriter bw = new BinaryWriter(memoryStream);
+            var memoryStream = new MemoryStream();
+            var bw = new BinaryWriter(memoryStream);
             WriteBinWriter(ref bw);
             bw.Write(NColumnIndex);
             bw.Write(NVPosition);
@@ -173,7 +173,7 @@ public class UndoRedo
         {
             NColumnIndex = 0;
             NVPosition = 0.0;
-            BinaryReader br = new BinaryReader(new MemoryStream(b));
+            var br = new BinaryReader(new MemoryStream(b));
             FromBinaryReader(ref br);
             NColumnIndex = br.ReadInt32();
             NVPosition = br.ReadDouble();
@@ -202,8 +202,8 @@ public class UndoRedo
 
         public override byte[] toBytes()
         {
-            MemoryStream memoryStream = new MemoryStream();
-            BinaryWriter bw = new BinaryWriter(memoryStream);
+            var memoryStream = new MemoryStream();
+            var bw = new BinaryWriter(memoryStream);
             WriteBinWriter(ref bw);
             bw.Write(NVPosition);
             bw.Write(NLongNote);
@@ -214,7 +214,7 @@ public class UndoRedo
         {
             NVPosition = 0.0;
             NLongNote = 0.0;
-            BinaryReader br = new BinaryReader(new MemoryStream(b));
+            var br = new BinaryReader(new MemoryStream(b));
             FromBinaryReader(ref br);
             NLongNote = br.ReadDouble();
             NVPosition = br.ReadDouble();
@@ -241,8 +241,8 @@ public class UndoRedo
 
         public override byte[] toBytes()
         {
-            MemoryStream memoryStream = new MemoryStream();
-            BinaryWriter bw = new BinaryWriter(memoryStream);
+            var memoryStream = new MemoryStream();
+            var bw = new BinaryWriter(memoryStream);
             WriteBinWriter(ref bw);
             bw.Write(NHidden);
             return memoryStream.GetBuffer();
@@ -251,7 +251,7 @@ public class UndoRedo
         public HiddenNoteModify(byte[] b)
         {
             NHidden = false;
-            BinaryReader br = new BinaryReader(new MemoryStream(b));
+            var br = new BinaryReader(new MemoryStream(b));
             FromBinaryReader(ref br);
             NHidden = br.ReadBoolean();
         }
@@ -275,8 +275,8 @@ public class UndoRedo
 
         public override byte[] toBytes()
         {
-            MemoryStream memoryStream = new MemoryStream();
-            BinaryWriter bw = new BinaryWriter(memoryStream);
+            var memoryStream = new MemoryStream();
+            var bw = new BinaryWriter(memoryStream);
             WriteBinWriter(ref bw);
             bw.Write(NValue);
             return memoryStream.GetBuffer();
@@ -285,7 +285,7 @@ public class UndoRedo
         public RelabelNote(byte[] b)
         {
             NValue = 10000L;
-            BinaryReader br = new BinaryReader(new MemoryStream(b));
+            var br = new BinaryReader(new MemoryStream(b));
             FromBinaryReader(ref br);
             NValue = br.ReadInt64();
         }
@@ -332,9 +332,9 @@ public class UndoRedo
 
         public override byte[] toBytes()
         {
-            byte[] bytes = BitConverter.GetBytes(Value);
-            byte[] bytes2 = BitConverter.GetBytes(Information.UBound(Indices));
-            byte[] array = new byte[13]
+            var bytes = BitConverter.GetBytes(Value);
+            var bytes2 = BitConverter.GetBytes(Information.UBound(Indices));
+            var array = new byte[13]
             {
                 16,
                 bytes[0],
@@ -353,8 +353,8 @@ public class UndoRedo
             checked
             {
                 array = (byte[])Utils.CopyArray(array, new byte[12 + 4 * Indices.Length + 1]);
-                int num = Information.UBound(array);
-                for (int i = 13; i <= num; i += 4)
+                var num = Information.UBound(array);
+                for (var i = 13; i <= num; i += 4)
                 {
                     byte[] bytes3;
                     unchecked
@@ -373,11 +373,11 @@ public class UndoRedo
         public ChangeMeasureLength(byte[] b)
         {
             Value = 192.0;
-            Indices = new int[0];
+            Indices = Array.Empty<int>();
             Value = BitConverter.ToDouble(b, 1);
-            int num = BitConverter.ToInt32(b, 9);
+            var num = BitConverter.ToInt32(b, 9);
             Indices = (int[])Utils.CopyArray(Indices, new int[checked(num + 1)]);
-            for (int i = 13; i <= num; i = checked(i + 4))
+            for (var i = 13; i <= num; i = checked(i + 4))
             {
                 Indices[checked(i - 13) / 4] = BitConverter.ToInt32(b, i);
             }
@@ -386,7 +386,7 @@ public class UndoRedo
         public ChangeMeasureLength(double xValue, int[] xIndices)
         {
             Value = 192.0;
-            Indices = new int[0];
+            Indices = Array.Empty<int>();
             Value = xValue;
             Indices = xIndices;
         }
@@ -409,9 +409,9 @@ public class UndoRedo
 
         public override byte[] toBytes()
         {
-            byte[] bytes = BitConverter.GetBytes(SelStart);
-            byte[] bytes2 = BitConverter.GetBytes(SelLength);
-            byte[] bytes3 = BitConverter.GetBytes(SelLength);
+            var bytes = BitConverter.GetBytes(SelStart);
+            var bytes2 = BitConverter.GetBytes(SelLength);
+            var bytes3 = BitConverter.GetBytes(SelLength);
             return new byte[26]
             {
                 17,

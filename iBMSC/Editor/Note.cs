@@ -54,8 +54,8 @@ public struct Note
 
     internal byte[] ToBytes()
     {
-        MemoryStream memoryStream = new MemoryStream();
-        BinaryWriter bw = new BinaryWriter(memoryStream);
+        var memoryStream = new MemoryStream();
+        var bw = new BinaryWriter(memoryStream);
         WriteBinWriter(ref bw);
         return memoryStream.GetBuffer();
     }
@@ -84,7 +84,7 @@ public struct Note
 
     internal void FromBytes(ref byte[] bytes)
     {
-        BinaryReader br = new BinaryReader(new MemoryStream(bytes));
+        var br = new BinaryReader(new MemoryStream(bytes));
         FromBinReader(ref br);
     }
 }

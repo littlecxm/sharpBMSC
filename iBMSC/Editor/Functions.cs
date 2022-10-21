@@ -29,7 +29,7 @@ public sealed class Functions
 
     public static string WriteDecimalWithDot(double v)
     {
-        bool lockTaken = false;
+        var lockTaken = false;
         try
         {
             Monitor.Enter(_0024STATIC_0024WriteDecimalWithDot_002401ED_0024nfi_0024Init, ref lockTaken);
@@ -57,13 +57,13 @@ public sealed class Functions
 
     public static string Add3Zeros(int xNum)
     {
-        string text = "000" + Conversions.ToString(xNum);
+        var text = "000" + Conversions.ToString(xNum);
         return Microsoft.VisualBasic.Strings.Mid(text, checked(Microsoft.VisualBasic.Strings.Len(text) - 2));
     }
 
     public static string Add2Zeros(int xNum)
     {
-        string text = "00" + Conversions.ToString(xNum);
+        var text = "00" + Conversions.ToString(xNum);
         return Microsoft.VisualBasic.Strings.Mid(text, checked(Microsoft.VisualBasic.Strings.Len(text) - 1));
     }
 
@@ -78,7 +78,7 @@ public sealed class Functions
 
     public static int C36to10S(char xChar)
     {
-        int num = Microsoft.VisualBasic.Strings.Asc(Microsoft.VisualBasic.Strings.UCase(xChar));
+        var num = Microsoft.VisualBasic.Strings.Asc(Microsoft.VisualBasic.Strings.UCase(xChar));
         if (num >= 48 && num <= 57)
         {
             return checked(num - 48);
@@ -170,13 +170,13 @@ public sealed class Functions
 
     public static bool IdentifiertoLongNote(string I)
     {
-        int num = checked((int)Math.Round(Conversion.Val(I)));
+        var num = checked((int)Math.Round(Conversion.Val(I)));
         return num >= 50 && num < 90;
     }
 
     public static bool IdentifiertoHidden(string I)
     {
-        int num = checked((int)Math.Round(Conversion.Val(I)));
+        var num = checked((int)Math.Round(Conversion.Val(I)));
         return (num >= 30 && num < 50) || (num >= 70 && num < 90);
     }
 
@@ -198,10 +198,10 @@ public sealed class Functions
         {
             return Color.Black;
         }
-        double num = xS / 1000.0;
+        var num = xS / 1000.0;
         checked
         {
-            double num2 = (xL - 500) / 500.0;
+            var num2 = (xL - 500) / 500.0;
             double num4;
             double num5;
             double num3;
@@ -255,9 +255,9 @@ public sealed class Functions
 
     public static bool isFontInstalled(string f)
     {
-        InstalledFontCollection installedFontCollection = new InstalledFontCollection();
-        FontFamily[] families = installedFontCollection.Families;
-        foreach (FontFamily fontFamily in families)
+        var installedFontCollection = new InstalledFontCollection();
+        var families = installedFontCollection.Families;
+        foreach (var fontFamily in families)
         {
             if (f.Equals(fontFamily.Name, StringComparison.CurrentCultureIgnoreCase))
             {
@@ -269,10 +269,10 @@ public sealed class Functions
 
     public static Font StringToFont(string xStr, Font xDefault)
     {
-        string[] array = Microsoft.VisualBasic.Strings.Split(xStr, ",");
+        var array = Microsoft.VisualBasic.Strings.Split(xStr, ",");
         if (Information.UBound(array) == 2)
         {
-            FontStyle style = (FontStyle)checked((int)Math.Round(Conversion.Val(array[2])));
+            var style = (FontStyle)checked((int)Math.Round(Conversion.Val(array[2])));
             return new Font(array[0], (float)Conversion.Val(array[1]), style, GraphicsUnit.Pixel);
         }
         return xDefault;
@@ -280,9 +280,9 @@ public sealed class Functions
 
     public static string ArrayToString(int[] xInt)
     {
-        string text = "";
-        int num = Information.UBound(xInt);
-        for (int i = 0; i <= num; i = checked(i + 1))
+        var text = "";
+        var num = Information.UBound(xInt);
+        for (var i = 0; i <= num; i = checked(i + 1))
         {
             text = Conversions.ToString(Operators.ConcatenateObject(text, Operators.ConcatenateObject(xInt[i].ToString(), Interaction.IIf(i == Information.UBound(xInt), "", ","))));
         }
@@ -291,9 +291,9 @@ public sealed class Functions
 
     public static string ArrayToString(bool[] xBool)
     {
-        string text = "";
-        int num = Information.UBound(xBool);
-        for (int i = 0; i <= num; i = checked(i + 1))
+        var text = "";
+        var num = Information.UBound(xBool);
+        for (var i = 0; i <= num; i = checked(i + 1))
         {
             text = Conversions.ToString(Operators.ConcatenateObject(text, Operators.ConcatenateObject((0 - (xBool[i] ? 1 : 0)).ToString(), Interaction.IIf(i == Information.UBound(xBool), "", ","))));
         }
@@ -302,9 +302,9 @@ public sealed class Functions
 
     public static string ArrayToString(Color[] xColor)
     {
-        string text = "";
-        int num = Information.UBound(xColor);
-        for (int i = 0; i <= num; i = checked(i + 1))
+        var text = "";
+        var num = Information.UBound(xColor);
+        for (var i = 0; i <= num; i = checked(i + 1))
         {
             text = Conversions.ToString(Operators.ConcatenateObject(text, Operators.ConcatenateObject(xColor[i].ToArgb().ToString(), Interaction.IIf(i == Information.UBound(xColor), "", ","))));
         }
@@ -313,12 +313,12 @@ public sealed class Functions
 
     public static int[] StringToArrayInt(string xStr)
     {
-        string[] array = Microsoft.VisualBasic.Strings.Split(xStr, ",");
+        var array = Microsoft.VisualBasic.Strings.Split(xStr, ",");
         checked
         {
-            int[] array2 = new int[Information.UBound(array) + 1];
-            int num = Information.UBound(array2);
-            for (int i = 0; i <= num; i++)
+            var array2 = new int[Information.UBound(array) + 1];
+            var num = Information.UBound(array2);
+            for (var i = 0; i <= num; i++)
             {
                 array2[i] = (int)Math.Round(Conversion.Val(array[i]));
             }
@@ -328,12 +328,12 @@ public sealed class Functions
 
     public static bool[] StringToArrayBool(string xStr)
     {
-        string[] array = Microsoft.VisualBasic.Strings.Split(xStr, ",");
+        var array = Microsoft.VisualBasic.Strings.Split(xStr, ",");
         checked
         {
-            bool[] array2 = new bool[Information.UBound(array) + 1];
-            int num = Information.UBound(array2);
-            for (int i = 0; i <= num; i++)
+            var array2 = new bool[Information.UBound(array) + 1];
+            var num = Information.UBound(array2);
+            for (var i = 0; i <= num; i++)
             {
                 array2[i] = Conversion.Val(array[i]) != 0.0;
             }
@@ -343,17 +343,17 @@ public sealed class Functions
 
     public static long GetDenominator(double a, long maxDenom = 2147483647L)
     {
-        long num = 1L;
-        long num2 = 0L;
-        long num3 = 0L;
-        long num4 = 1L;
-        double num5 = a;
+        var num = 1L;
+        var num2 = 0L;
+        var num3 = 0L;
+        var num4 = 1L;
+        var num5 = a;
         checked
         {
-            long num6 = (long)Math.Round(Conversion.Int(num5));
+            var num6 = (long)Math.Round(Conversion.Int(num5));
             while (num3 * num6 + num4 <= maxDenom)
             {
-                long num7 = num * num6 + num2;
+                var num7 = num * num6 + num2;
                 num2 = num;
                 num = num7;
                 num7 = num3 * num6 + num4;
@@ -376,7 +376,7 @@ public sealed class Functions
 
     public static bool IsBase36(string str)
     {
-        bool lockTaken = false;
+        var lockTaken = false;
         try
         {
             Monitor.Enter(_0024STATIC_0024IsBase36_0024012E_0024re_0024Init, ref lockTaken);

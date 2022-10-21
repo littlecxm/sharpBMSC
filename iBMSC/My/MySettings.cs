@@ -26,9 +26,9 @@ internal sealed class MySettings : ApplicationSettingsBase
         {
             if (!addedHandler)
             {
-                object obj = addedHandlerLockObject;
+                var obj = addedHandlerLockObject;
                 ObjectFlowControl.CheckForSyncLockOnValueType(obj);
-                bool lockTaken = false;
+                var lockTaken = false;
                 try
                 {
                     Monitor.Enter(obj, ref lockTaken);
