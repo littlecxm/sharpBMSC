@@ -267,7 +267,7 @@ public partial  class diagFind : Form
             {
                 num *= 13;
             }
-            MyProject.Forms.MainWindow.fdrSelect(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, new decimal(10000L))), Convert.ToInt32(decimal.Multiply(vr2.Value, new decimal(10000L))), array);
+            MyProject.Forms.MainWindow.fdrSelect(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, 10000m)), Convert.ToInt32(decimal.Multiply(vr2.Value, 10000m)), array);
         }
     }
 
@@ -326,7 +326,7 @@ public partial  class diagFind : Form
             {
                 num *= 13;
             }
-            MyProject.Forms.MainWindow.fdrUnselect(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, new decimal(10000L))), Convert.ToInt32(decimal.Multiply(vr2.Value, new decimal(10000L))), array);
+            MyProject.Forms.MainWindow.fdrUnselect(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, 10000m)), Convert.ToInt32(decimal.Multiply(vr2.Value, 10000m)), array);
         }
     }
 
@@ -385,7 +385,7 @@ public partial  class diagFind : Form
             {
                 num *= 13;
             }
-            MyProject.Forms.MainWindow.fdrDelete(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, new decimal(10000L))), Convert.ToInt32(decimal.Multiply(vr2.Value, new decimal(10000L))), array);
+            MyProject.Forms.MainWindow.fdrDelete(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, 10000m)), Convert.ToInt32(decimal.Multiply(vr2.Value, 10000m)), array);
         }
     }
 
@@ -444,7 +444,7 @@ public partial  class diagFind : Form
             {
                 num *= 13;
             }
-            MyProject.Forms.MainWindow.fdrReplaceL(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, new decimal(10000L))), Convert.ToInt32(decimal.Multiply(vr2.Value, new decimal(10000L))), array, Ttl.Text);
+            MyProject.Forms.MainWindow.fdrReplaceL(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, 10000m)), Convert.ToInt32(decimal.Multiply(vr2.Value, 10000m)), array, Ttl.Text);
         }
     }
 
@@ -503,7 +503,7 @@ public partial  class diagFind : Form
             {
                 num *= 13;
             }
-            MyProject.Forms.MainWindow.fdrReplaceV(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, new decimal(10000L))), Convert.ToInt32(decimal.Multiply(vr2.Value, new decimal(10000L))), array, Convert.ToInt32(decimal.Multiply(Ttv.Value, new decimal(10000L))));
+            MyProject.Forms.MainWindow.fdrReplaceV(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, 10000m)), Convert.ToInt32(decimal.Multiply(vr2.Value, 10000m)), array, Convert.ToInt32(decimal.Multiply(Ttv.Value, 10000m)));
         }
     }
 }

@@ -6059,7 +6059,7 @@ IL_0952:
         THTitle.Text = "";
         THArtist.Text = "";
         THGenre.Text = "";
-        THBPM.Value = new decimal(120L);
+        THBPM.Value = 120m;
         if (CHPlayer.SelectedIndex == -1)
         {
             CHPlayer.SelectedIndex = 0;
@@ -6592,7 +6592,7 @@ IL_03ba:
             notes[num].ColumnIndex = 2;
             notes[num].VPosition = -1.0;
             notes[num].Value = 1200000L;
-            THBPM.Value = new decimal(120L);
+            THBPM.Value = 120m;
             LWAV.Items.Clear();
             int num2 = 1;
             do
@@ -6633,7 +6633,7 @@ IL_03ba:
             notes[num].ColumnIndex = 2;
             notes[num].VPosition = -1.0;
             notes[num].Value = 1200000L;
-            THBPM.Value = new decimal(120L);
+            THBPM.Value = 120m;
             SetFileName("Untitled.bms");
             SetIsSaved(isSaved: true);
             if (Interaction.MsgBox("Please copy your code to clipboard and click OK.", MsgBoxStyle.OkCancel, "Create from code") != MsgBoxResult.Cancel)
@@ -6961,7 +6961,7 @@ IL_03ba:
     private void CGHeight_ValueChanged(object sender, EventArgs e)
     {
         gxHeight = Convert.ToSingle(CGHeight.Value);
-        CGHeight2.Value = Conversions.ToInteger(Interaction.IIf(decimal.Compare(decimal.Multiply(CGHeight.Value, new decimal(4L)), new decimal(CGHeight2.Maximum)) < 0, decimal.Multiply(CGHeight.Value, new decimal(4L)), CGHeight2.Maximum));
+        CGHeight2.Value = Conversions.ToInteger(Interaction.IIf(decimal.Compare(decimal.Multiply(CGHeight.Value, 4m), CGHeight2.Maximum)) < 0, decimal.Multiply(CGHeight.Value, new decimal(4m), CGHeight2.Maximum));
         RefreshPanelAll();
     }
 
@@ -6973,7 +6973,7 @@ IL_03ba:
     private void CGWidth_ValueChanged(object sender, EventArgs e)
     {
         gxWidth = Convert.ToSingle(CGWidth.Value);
-        CGWidth2.Value = Conversions.ToInteger(Interaction.IIf(decimal.Compare(decimal.Multiply(CGWidth.Value, new decimal(4L)), new decimal(CGWidth2.Maximum)) < 0, decimal.Multiply(CGWidth.Value, new decimal(4L)), CGWidth2.Maximum));
+        CGWidth2.Value = Conversions.ToInteger(Interaction.IIf(decimal.Compare(decimal.Multiply(CGWidth.Value, 4m), CGWidth2.Maximum)) < 0, decimal.Multiply(CGWidth.Value, new decimal(4m), CGWidth2.Maximum));
         checked
         {
             HS.LargeChange = (int)Math.Round((float)PMainIn.Width / gxWidth);
@@ -8382,7 +8382,7 @@ IL_03ba:
     {
         if (Notes != null)
         {
-            Notes[0].Value = Convert.ToInt64(decimal.Multiply(THBPM.Value, new decimal(10000L)));
+            Notes[0].Value = Convert.ToInt64(decimal.Multiply(THBPM.Value, 10000m));
             RefreshPanelAll();
         }
         if (IsSaved)
@@ -8548,7 +8548,7 @@ IL_03ba:
 
     private void CGB_ValueChanged(object sender, EventArgs e)
     {
-        gColumns = Convert.ToInt32(decimal.Subtract(decimal.Add(new decimal(27L), CGB.Value), 1m));
+        gColumns = Convert.ToInt32(decimal.Subtract(decimal.Add(27m, CGB.Value), 1m));
         UpdateColumnsX();
         RefreshPanelAll();
     }

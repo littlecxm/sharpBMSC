@@ -12,7 +12,7 @@ using Microsoft.VisualBasic.CompilerServices;
 namespace iBMSC;
 
 [DesignerGenerated]
-public partial  class OpVisual : Form
+public partial class OpVisual : Form
 {
     public struct ColumnOptionSet
     {
@@ -108,7 +108,7 @@ public partial  class OpVisual : Form
                 NumericUpDown numericUpDown3 = numericUpDown2;
                 Point location = new Point(lLeft[i], 12);
                 numericUpDown3.Location = location;
-                numericUpDown2.Maximum = new decimal(999L);
+                numericUpDown2.Maximum = 999m;
                 NumericUpDown numericUpDown4 = numericUpDown2;
                 Size size = new Size(33, 23);
                 numericUpDown4.Size = size;

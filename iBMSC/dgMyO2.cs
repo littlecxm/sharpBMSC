@@ -59,7 +59,7 @@ public partial  class dgMyO2 : Form
 
     private void bApply1_Click(object sender, EventArgs e)
     {
-        MyProject.Forms.MainWindow.MyO2ConstBPM(Convert.ToInt32(decimal.Multiply(vBPM.Value, new decimal(10000L))));
+        MyProject.Forms.MainWindow.MyO2ConstBPM(Convert.ToInt32(decimal.Multiply(vBPM.Value, 10000m)));
     }
 
     private void bApply2_Click(object sender, EventArgs e)

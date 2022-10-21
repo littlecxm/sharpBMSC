@@ -77,43 +77,43 @@ public partial  class ColorPicker : Form
         case 0:
         {
             ref Point reference6 = ref mMain;
-            reference6 = new Point(Convert.ToInt32(decimal.Multiply(decimal.Divide(inS.Value, new decimal(1000L)), new decimal(255L))), Convert.ToInt32(decimal.Multiply(decimal.Divide(decimal.Subtract(new decimal(1000L), inL.Value), new decimal(1000L)), new decimal(255L))));
-            m1 = Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(new decimal(360L), inH.Value), new decimal(255L)), new decimal(360L)));
+            reference6 = new Point(Convert.ToInt32(decimal.Multiply(decimal.Divide(inS.Value, 1000m), 255m)), Convert.ToInt32(decimal.Multiply(decimal.Divide(decimal.Subtract(1000m, inL.Value), 1000m), 255m)));
+            m1 = Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(360m, inH.Value), 255m), 360m));
             break;
         }
         case 1:
         {
             ref Point reference5 = ref mMain;
-            reference5 = new Point(Convert.ToInt32(decimal.Divide(decimal.Multiply(inH.Value, new decimal(255L)), new decimal(360L))), Convert.ToInt32(decimal.Multiply(decimal.Divide(decimal.Subtract(new decimal(1000L), inL.Value), new decimal(1000L)), new decimal(255L))));
-            m1 = Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(new decimal(1000L), inS.Value), new decimal(255L)), new decimal(1000L)));
+            reference5 = new Point(Convert.ToInt32(decimal.Divide(decimal.Multiply(inH.Value, 255m), 360m)), Convert.ToInt32(decimal.Multiply(decimal.Divide(decimal.Subtract(1000m, inL.Value), 1000m), 255m)));
+            m1 = Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(1000m, inS.Value), 255m), 1000m));
             break;
         }
         case 2:
         {
             ref Point reference4 = ref mMain;
-            reference4 = new Point(Convert.ToInt32(decimal.Divide(decimal.Multiply(inH.Value, new decimal(255L)), new decimal(360L))), Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(new decimal(1000L), inS.Value), new decimal(255L)), new decimal(1000L))));
-            m1 = Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(new decimal(1000L), inL.Value), new decimal(255L)), new decimal(1000L)));
+            reference4 = new Point(Convert.ToInt32(decimal.Divide(decimal.Multiply(inH.Value, 255m), 360m)), Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(1000m, inS.Value), 255m), 1000m)));
+            m1 = Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(1000m, inL.Value), 255m), 1000m));
             break;
         }
         case 3:
         {
             ref Point reference3 = ref mMain;
-            reference3 = new Point(Convert.ToInt32(inB.Value), Convert.ToInt32(decimal.Subtract(new decimal(255L), inG.Value)));
-            m1 = Convert.ToInt32(decimal.Subtract(new decimal(255L), inR.Value));
+            reference3 = new Point(Convert.ToInt32(inB.Value), Convert.ToInt32(decimal.Subtract(255m, inG.Value)));
+            m1 = Convert.ToInt32(decimal.Subtract(255m, inR.Value));
             break;
         }
         case 4:
         {
             ref Point reference2 = ref mMain;
-            reference2 = new Point(Convert.ToInt32(inB.Value), Convert.ToInt32(decimal.Subtract(new decimal(255L), inR.Value)));
-            m1 = Convert.ToInt32(decimal.Subtract(new decimal(255L), inG.Value));
+            reference2 = new Point(Convert.ToInt32(inB.Value), Convert.ToInt32(decimal.Subtract(255m, inR.Value)));
+            m1 = Convert.ToInt32(decimal.Subtract(255m, inG.Value));
             break;
         }
         case 5:
         {
             ref Point reference = ref mMain;
-            reference = new Point(Convert.ToInt32(inG.Value), Convert.ToInt32(decimal.Subtract(new decimal(255L), inR.Value)));
-            m1 = Convert.ToInt32(decimal.Subtract(new decimal(255L), inB.Value));
+            reference = new Point(Convert.ToInt32(inG.Value), Convert.ToInt32(decimal.Subtract(255m, inR.Value)));
+            m1 = Convert.ToInt32(decimal.Subtract(255m, inB.Value));
             break;
         }
         }
@@ -346,7 +346,7 @@ public partial  class ColorPicker : Form
             bufferedGraphics.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             NewLateBinding.LateCall(bufferedGraphics.Graphics, null, "DrawEllipse", new object[5]
             {
-                RuntimeHelpers.GetObjectValue(Interaction.IIf(decimal.Compare(inL.Value, new decimal(500L)) > 0, Pens.Black, Pens.White)),
+                RuntimeHelpers.GetObjectValue(Interaction.IIf(decimal.Compare(inL.Value, 500m) > 0, Pens.Black, Pens.White)),
                 mMain.X - 4,
                 mMain.Y - 4,
                 8,
@@ -431,7 +431,7 @@ public partial  class ColorPicker : Form
 
     private void inH_ValueChanged(object sender, EventArgs e)
     {
-        if (decimal.Compare(inH.Value, new decimal(360L)) == 0)
+        if (decimal.Compare(inH.Value, 360m) == 0)
         {
             inH.Value = 0m;
         }
@@ -696,8 +696,8 @@ public partial  class ColorPicker : Form
             reference6 = point3;
             Point[] points2 = array;
             bufferedGraphics.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            bufferedGraphics.Graphics.FillPolygon((Brush)Interaction.IIf(decimal.Compare(inL.Value, new decimal(500L)) > 0, Brushes.Black, Brushes.White), points);
-            bufferedGraphics.Graphics.FillPolygon((Brush)Interaction.IIf(decimal.Compare(inL.Value, new decimal(500L)) > 0, Brushes.Black, Brushes.White), points2);
+            bufferedGraphics.Graphics.FillPolygon((Brush)Interaction.IIf(decimal.Compare(inL.Value, 500m) > 0, Brushes.Black, Brushes.White), points);
+            bufferedGraphics.Graphics.FillPolygon((Brush)Interaction.IIf(decimal.Compare(inL.Value, 500m) > 0, Brushes.Black, Brushes.White), points2);
             bufferedGraphics.Render(PC1.CreateGraphics());
             bufferedGraphics.Dispose();
         }
@@ -767,7 +767,7 @@ public partial  class ColorPicker : Form
             point = new Point(mAlpha + 2, num);
             reference6 = point;
             Point[] points2 = array;
-            i = Convert.ToInt32(decimal.Add(inL.Value, decimal.Divide(decimal.Multiply(decimal.Subtract(new decimal(255L), inA.Value), new decimal(1000L)), new decimal(255L))));
+            i = Convert.ToInt32(decimal.Add(inL.Value, decimal.Divide(decimal.Multiply(decimal.Subtract(255m, inA.Value), 1000m), 255m)));
             bufferedGraphics.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             bufferedGraphics.Graphics.FillPolygon((Brush)Interaction.IIf(i > 500, Brushes.Black, Brushes.White), points);
             bufferedGraphics.Graphics.FillPolygon((Brush)Interaction.IIf(i > 500, Brushes.Black, Brushes.White), points2);
