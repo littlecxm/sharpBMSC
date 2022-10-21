@@ -95,138 +95,135 @@ public partial class OpVisual : Form
         Extensions.SetValClamped(self, new decimal(vo.MiddleDeltaRelease));
         iMiddleSensitivity = self;
         col = (Column[])xcol.Clone();
-        checked
+        co = new ColumnOptionSet[Information.UBound(col) + 1];
+        var num = Information.UBound(col);
+        var color = default(Color);
+        for (var i = 0; i <= num; i++)
         {
-            co = new ColumnOptionSet[Information.UBound(col) + 1];
-            var num = Information.UBound(col);
-            var color = default(Color);
-            for (var i = 0; i <= num; i++)
-            {
-                var numericUpDown = new NumericUpDown();
-                var numericUpDown2 = numericUpDown;
-                numericUpDown2.BorderStyle = BorderStyle.FixedSingle;
-                var numericUpDown3 = numericUpDown2;
-                var location = new Point(lLeft[i], 12);
-                numericUpDown3.Location = location;
-                numericUpDown2.Maximum = 999m;
-                var numericUpDown4 = numericUpDown2;
-                var size = new Size(33, 23);
-                numericUpDown4.Size = size;
-                numericUpDown2.Value = new decimal(col[i].Width);
-                numericUpDown2 = null;
-                var textBox = new TextBox();
-                var textBox2 = textBox;
-                textBox2.BorderStyle = BorderStyle.FixedSingle;
-                var textBox3 = textBox2;
-                location = new Point(lLeft[i], 34);
-                textBox3.Location = location;
-                var textBox4 = textBox2;
-                size = new Size(33, 23);
-                textBox4.Size = size;
-                textBox2.Text = col[i].Title;
-                textBox2 = null;
-                var button = new Button();
-                var button2 = button;
-                button2.FlatStyle = FlatStyle.Popup;
-                button2.Font = monoFont;
-                var button3 = button2;
-                location = new Point(lLeft[i], 63);
-                button3.Location = location;
-                var button4 = button2;
-                size = new Size(33, 66);
-                button4.Size = size;
-                button2.BackColor = Color.FromArgb(col[i].cNote);
-                button2.ForeColor = col[i].cText;
-                button2.Text = To4Hex(col[i].cNote);
-                button2.Name = "cNote";
-                button2 = null;
-                var button5 = new Button();
-                var button6 = button5;
-                button6.FlatStyle = FlatStyle.Popup;
-                button6.Font = monoFont;
-                var button7 = button6;
-                location = new Point(lLeft[i], 128);
-                button7.Location = location;
-                var button8 = button6;
-                size = new Size(33, 66);
-                button8.Size = size;
-                button6.BackColor = Color.FromArgb(col[i].cNote);
-                button6.ForeColor = col[i].cText;
-                button6.Text = To4Hex(col[i].cText.ToArgb());
-                button6.Name = "cText";
-                button6 = null;
-                button.Tag = button5;
-                button5.Tag = button;
-                var button9 = new Button();
-                var button10 = button9;
-                button10.FlatStyle = FlatStyle.Popup;
-                button10.Font = monoFont;
-                var button11 = button10;
-                location = new Point(lLeft[i], 193);
-                button11.Location = location;
-                var button12 = button10;
-                size = new Size(33, 66);
-                button12.Size = size;
-                button10.BackColor = Color.FromArgb(col[i].cLNote);
-                button10.ForeColor = col[i].cLText;
-                button10.Text = To4Hex(col[i].cLNote);
-                button10.Name = "cNote";
-                button10 = null;
-                var button13 = new Button();
-                var button14 = button13;
-                button14.FlatStyle = FlatStyle.Popup;
-                button14.Font = monoFont;
-                var button15 = button14;
-                location = new Point(lLeft[i], 258);
-                button15.Location = location;
-                var button16 = button14;
-                size = new Size(33, 66);
-                button16.Size = size;
-                button14.BackColor = Color.FromArgb(col[i].cLNote);
-                button14.ForeColor = col[i].cLText;
-                button14.Text = To4Hex(col[i].cLText.ToArgb());
-                button14.Name = "cText";
-                button14 = null;
-                button9.Tag = button13;
-                button13.Tag = button9;
-                var button17 = new Button();
-                var button18 = button17;
-                button18.FlatStyle = FlatStyle.Popup;
-                button18.Font = monoFont;
-                var button19 = button18;
-                location = new Point(lLeft[i], 323);
-                button19.Location = location;
-                var button20 = button18;
-                size = new Size(33, 66);
-                button20.Size = size;
-                button18.BackColor = col[i].cBG;
-                var button21 = button18;
-                var obj = Interaction.IIf((int)Math.Round(col[i].cBG.GetBrightness() * 255f) + 255 - col[i].cBG.A >= 128, Color.Black, Color.White);
-                button21.ForeColor = obj != null ? (Color)obj : color;
-                button18.Text = To4Hex(col[i].cBG.ToArgb());
-                button18.Name = "cBG";
-                button18.Tag = null;
-                button18 = null;
-                Panel1.Controls.Add(numericUpDown);
-                Panel1.Controls.Add(textBox);
-                Panel1.Controls.Add(button);
-                Panel1.Controls.Add(button5);
-                Panel1.Controls.Add(button9);
-                Panel1.Controls.Add(button13);
-                Panel1.Controls.Add(button17);
-                co[i].Width = numericUpDown;
-                co[i].Title = textBox;
-                co[i].SNote = button;
-                co[i].SText = button5;
-                co[i].LNote = button9;
-                co[i].LText = button13;
-                co[i].BG = button17;
-                button.Click += ButtonClick;
-                button5.Click += ButtonClick;
-                button9.Click += ButtonClick;
-                button13.Click += ButtonClick;
-                button17.Click += ButtonClick;
-            }
+            var numericUpDown = new NumericUpDown();
+            var numericUpDown2 = numericUpDown;
+            numericUpDown2.BorderStyle = BorderStyle.FixedSingle;
+            var numericUpDown3 = numericUpDown2;
+            var location = new Point(lLeft[i], 12);
+            numericUpDown3.Location = location;
+            numericUpDown2.Maximum = 999m;
+            var numericUpDown4 = numericUpDown2;
+            var size = new Size(33, 23);
+            numericUpDown4.Size = size;
+            numericUpDown2.Value = new decimal(col[i].Width);
+            numericUpDown2 = null;
+            var textBox = new TextBox();
+            var textBox2 = textBox;
+            textBox2.BorderStyle = BorderStyle.FixedSingle;
+            var textBox3 = textBox2;
+            location = new Point(lLeft[i], 34);
+            textBox3.Location = location;
+            var textBox4 = textBox2;
+            size = new Size(33, 23);
+            textBox4.Size = size;
+            textBox2.Text = col[i].Title;
+            textBox2 = null;
+            var button = new Button();
+            var button2 = button;
+            button2.FlatStyle = FlatStyle.Popup;
+            button2.Font = monoFont;
+            var button3 = button2;
+            location = new Point(lLeft[i], 63);
+            button3.Location = location;
+            var button4 = button2;
+            size = new Size(33, 66);
+            button4.Size = size;
+            button2.BackColor = Color.FromArgb(col[i].cNote);
+            button2.ForeColor = col[i].cText;
+            button2.Text = To4Hex(col[i].cNote);
+            button2.Name = "cNote";
+            button2 = null;
+            var button5 = new Button();
+            var button6 = button5;
+            button6.FlatStyle = FlatStyle.Popup;
+            button6.Font = monoFont;
+            var button7 = button6;
+            location = new Point(lLeft[i], 128);
+            button7.Location = location;
+            var button8 = button6;
+            size = new Size(33, 66);
+            button8.Size = size;
+            button6.BackColor = Color.FromArgb(col[i].cNote);
+            button6.ForeColor = col[i].cText;
+            button6.Text = To4Hex(col[i].cText.ToArgb());
+            button6.Name = "cText";
+            button6 = null;
+            button.Tag = button5;
+            button5.Tag = button;
+            var button9 = new Button();
+            var button10 = button9;
+            button10.FlatStyle = FlatStyle.Popup;
+            button10.Font = monoFont;
+            var button11 = button10;
+            location = new Point(lLeft[i], 193);
+            button11.Location = location;
+            var button12 = button10;
+            size = new Size(33, 66);
+            button12.Size = size;
+            button10.BackColor = Color.FromArgb(col[i].cLNote);
+            button10.ForeColor = col[i].cLText;
+            button10.Text = To4Hex(col[i].cLNote);
+            button10.Name = "cNote";
+            button10 = null;
+            var button13 = new Button();
+            var button14 = button13;
+            button14.FlatStyle = FlatStyle.Popup;
+            button14.Font = monoFont;
+            var button15 = button14;
+            location = new Point(lLeft[i], 258);
+            button15.Location = location;
+            var button16 = button14;
+            size = new Size(33, 66);
+            button16.Size = size;
+            button14.BackColor = Color.FromArgb(col[i].cLNote);
+            button14.ForeColor = col[i].cLText;
+            button14.Text = To4Hex(col[i].cLText.ToArgb());
+            button14.Name = "cText";
+            button14 = null;
+            button9.Tag = button13;
+            button13.Tag = button9;
+            var button17 = new Button();
+            var button18 = button17;
+            button18.FlatStyle = FlatStyle.Popup;
+            button18.Font = monoFont;
+            var button19 = button18;
+            location = new Point(lLeft[i], 323);
+            button19.Location = location;
+            var button20 = button18;
+            size = new Size(33, 66);
+            button20.Size = size;
+            button18.BackColor = col[i].cBG;
+            var button21 = button18;
+            var obj = Interaction.IIf((int)Math.Round(col[i].cBG.GetBrightness() * 255f) + 255 - col[i].cBG.A >= 128, Color.Black, Color.White);
+            button21.ForeColor = obj != null ? (Color)obj : color;
+            button18.Text = To4Hex(col[i].cBG.ToArgb());
+            button18.Name = "cBG";
+            button18.Tag = null;
+            button18 = null;
+            Panel1.Controls.Add(numericUpDown);
+            Panel1.Controls.Add(textBox);
+            Panel1.Controls.Add(button);
+            Panel1.Controls.Add(button5);
+            Panel1.Controls.Add(button9);
+            Panel1.Controls.Add(button13);
+            Panel1.Controls.Add(button17);
+            co[i].Width = numericUpDown;
+            co[i].Title = textBox;
+            co[i].SNote = button;
+            co[i].SText = button5;
+            co[i].LNote = button9;
+            co[i].LText = button13;
+            co[i].BG = button17;
+            button.Click += ButtonClick;
+            button5.Click += ButtonClick;
+            button9.Click += ButtonClick;
+            button13.Click += ButtonClick;
+            button17.Click += ButtonClick;
         }
     }
 
@@ -234,12 +231,9 @@ public partial class OpVisual : Form
     {
         xbutton.Text = Conversion.Hex(c.ToArgb());
         xbutton.BackColor = c;
-        checked
-        {
-            var obj = Interaction.IIf((int)Math.Round(c.GetBrightness() * 255f) + 255 - c.A >= 128, Color.Black, Color.White);
-            var color = default(Color);
-            xbutton.ForeColor = obj != null ? (Color)obj : color;
-        }
+        var obj = Interaction.IIf((int)Math.Round(c.GetBrightness() * 255f) + 255 - c.A >= 128, Color.Black, Color.White);
+        var color = default(Color);
+        xbutton.ForeColor = obj != null ? (Color)obj : color;
     }
 
     private void fButtonChange(Button xbutton, Font f)
@@ -279,7 +273,7 @@ public partial class OpVisual : Form
         vo.MiddleDeltaRelease = Convert.ToInt32(iMiddleSensitivity.Value);
         MyProject.Forms.MainWindow.setVO(vo);
         var num = Information.UBound(co);
-        for (var i = 0; i <= num; i = checked(i + 1))
+        for (var i = 0; i <= num; i += 1)
         {
             col[i].Title = co[i].Title.Text;
             col[i].Width = Convert.ToInt32(co[i].Width.Value);
@@ -374,46 +368,40 @@ public partial class OpVisual : Form
         {
             colorPicker.SetOrigColor(button.BackColor);
         }
-        checked
+        if (colorPicker.ShowDialog(this) != DialogResult.Cancel)
         {
-            if (colorPicker.ShowDialog(this) != DialogResult.Cancel)
+            button.Text = To4Hex(colorPicker.NewColor.ToArgb());
+            switch (button.Name)
             {
-                button.Text = To4Hex(colorPicker.NewColor.ToArgb());
-                switch (button.Name)
-                {
-                    case "cNote":
+                case "cNote":
+                    button.BackColor = colorPicker.NewColor;
+                    ((Button)button.Tag).BackColor = colorPicker.NewColor;
+                    break;
+                case "cText":
+                    button.ForeColor = colorPicker.NewColor;
+                    ((Button)button.Tag).ForeColor = colorPicker.NewColor;
+                    break;
+                case "cBG":
+                    {
                         button.BackColor = colorPicker.NewColor;
-                        ((Button)button.Tag).BackColor = colorPicker.NewColor;
+                        var obj = Interaction.IIf((int)Math.Round(colorPicker.NewColor.GetBrightness() * 255f) + 255 - colorPicker.NewColor.A >= 128, Color.Black, Color.White);
+                        var color = default(Color);
+                        button.ForeColor = obj != null ? (Color)obj : color;
                         break;
-                    case "cText":
-                        button.ForeColor = colorPicker.NewColor;
-                        ((Button)button.Tag).ForeColor = colorPicker.NewColor;
-                        break;
-                    case "cBG":
-                        {
-                            button.BackColor = colorPicker.NewColor;
-                            var obj = Interaction.IIf((int)Math.Round(colorPicker.NewColor.GetBrightness() * 255f) + 255 - colorPicker.NewColor.A >= 128, Color.Black, Color.White);
-                            var color = default(Color);
-                            button.ForeColor = obj != null ? (Color)obj : color;
-                            break;
-                        }
-                }
+                    }
             }
         }
     }
 
     private int[] ColorArrayToIntArray(Color[] xC)
     {
-        checked
+        var array = new int[Information.UBound(xC) + 1];
+        var num = Information.UBound(array);
+        for (var i = 0; i <= num; i++)
         {
-            var array = new int[Information.UBound(xC) + 1];
-            var num = Information.UBound(array);
-            for (var i = 0; i <= num; i++)
-            {
-                array[i] = xC[i].ToArgb();
-            }
-            return array;
+            array[i] = xC[i].ToArgb();
         }
+        return array;
     }
 
     private string To4Hex(int xInt)

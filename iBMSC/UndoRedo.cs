@@ -350,24 +350,21 @@ public class UndoRedo
                 bytes2[2],
                 bytes2[3]
             };
-            checked
+            array = (byte[])Utils.CopyArray(array, new byte[12 + 4 * Indices.Length + 1]);
+            var num = Information.UBound(array);
+            for (var i = 13; i <= num; i += 4)
             {
-                array = (byte[])Utils.CopyArray(array, new byte[12 + 4 * Indices.Length + 1]);
-                var num = Information.UBound(array);
-                for (var i = 13; i <= num; i += 4)
+                byte[] bytes3;
+                unchecked
                 {
-                    byte[] bytes3;
-                    unchecked
-                    {
-                        bytes3 = BitConverter.GetBytes(Indices[checked(i - 13) / 4]);
-                    }
-                    array[i + 0] = bytes3[0];
-                    array[i + 1] = bytes3[1];
-                    array[i + 2] = bytes3[2];
-                    array[i + 3] = bytes3[3];
+                    bytes3 = BitConverter.GetBytes(Indices[(i - 13) / 4]);
                 }
-                return array;
+                array[i + 0] = bytes3[0];
+                array[i + 1] = bytes3[1];
+                array[i + 2] = bytes3[2];
+                array[i + 3] = bytes3[3];
             }
+            return array;
         }
 
         public ChangeMeasureLength(byte[] b)
@@ -376,10 +373,10 @@ public class UndoRedo
             Indices = Array.Empty<int>();
             Value = BitConverter.ToDouble(b, 1);
             var num = BitConverter.ToInt32(b, 9);
-            Indices = (int[])Utils.CopyArray(Indices, new int[checked(num + 1)]);
-            for (var i = 13; i <= num; i = checked(i + 4))
+            Indices = (int[])Utils.CopyArray(Indices, new int[num + 1]);
+            for (var i = 13; i <= num; i += 4)
             {
-                Indices[checked(i - 13) / 4] = BitConverter.ToInt32(b, i);
+                Indices[(i - 13) / 4] = BitConverter.ToInt32(b, i);
             }
         }
 
@@ -564,35 +561,20 @@ public class UndoRedo
     }
 
     public const byte opVoid = 0;
-
     public const byte opAddNote = 1;
-
     public const byte opRemoveNote = 2;
-
     public const byte opChangeNote = 3;
-
     public const byte opMoveNote = 4;
-
     public const byte opLongNoteModify = 5;
-
     public const byte opHiddenNoteModify = 6;
-
     public const byte opRelabelNote = 7;
-
     public const byte opRemoveAllNotes = 15;
-
     public const byte opChangeMeasureLength = 16;
-
     public const byte opChangeTimeSelection = 17;
-
     public const byte opNT = 18;
-
     public const byte opWavAutoincFlag = 20;
-
     public const byte opNoOperation = byte.MaxValue;
-
     private const byte trueByte = 1;
-
     private const byte falseByte = 0;
 
     public static LinkedURCmd fromBytes(byte[] b)

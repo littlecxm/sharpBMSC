@@ -66,20 +66,17 @@ public partial  class OpPlayer : Form
 
     private void BPrevAdd_Click(object sender, EventArgs e)
     {
-        checked
+        pArg = (MainWindow.PlayerArguments[])Utils.CopyArray(pArg, new MainWindow.PlayerArguments[Information.UBound(pArg) + 1 + 1]);
+        CurrPlayer++;
+        var num = Information.UBound(pArg);
+        var currPlayer = CurrPlayer;
+        for (var i = num; i >= currPlayer; i += -1)
         {
-            pArg = (MainWindow.PlayerArguments[])Utils.CopyArray(pArg, new MainWindow.PlayerArguments[Information.UBound(pArg) + 1 + 1]);
-            CurrPlayer++;
-            var num = Information.UBound(pArg);
-            var currPlayer = CurrPlayer;
-            for (var i = num; i >= currPlayer; i += -1)
-            {
-                ref var reference = ref pArg[i];
-                reference = pArg[i - 1];
-            }
-            LPlayer.Items.Insert(CurrPlayer, GetFileName(pArg[CurrPlayer - 1].Path));
-            LPlayer.SelectedIndex++;
+            ref var reference = ref pArg[i];
+            reference = pArg[i - 1];
         }
+        LPlayer.Items.Insert(CurrPlayer, GetFileName(pArg[CurrPlayer - 1].Path));
+        LPlayer.SelectedIndex++;
     }
 
     private void BPrevDelete_Click(object sender, EventArgs e)
@@ -90,20 +87,17 @@ public partial  class OpPlayer : Form
             return;
         }
         var currPlayer = CurrPlayer;
-        checked
+        var num = Information.UBound(pArg) - 1;
+        for (var i = currPlayer; i <= num; i++)
         {
-            var num = Information.UBound(pArg) - 1;
-            for (var i = currPlayer; i <= num; i++)
-            {
-                ref var reference = ref pArg[i];
-                reference = pArg[i + 1];
-            }
-            pArg = (MainWindow.PlayerArguments[])Utils.CopyArray(pArg, new MainWindow.PlayerArguments[Information.UBound(pArg) - 1 + 1]);
-            LPlayer.Items.RemoveAt(CurrPlayer);
-            LPlayer.SelectedIndex = Conversions.ToInteger(Interaction.IIf(CurrPlayer > Information.UBound(pArg), CurrPlayer - 1, CurrPlayer));
-            CurrPlayer = Math.Min(CurrPlayer, Information.UBound(pArg));
-            ShowInTextbox();
+            ref var reference = ref pArg[i];
+            reference = pArg[i + 1];
         }
+        pArg = (MainWindow.PlayerArguments[])Utils.CopyArray(pArg, new MainWindow.PlayerArguments[Information.UBound(pArg) - 1 + 1]);
+        LPlayer.Items.RemoveAt(CurrPlayer);
+        LPlayer.SelectedIndex = Conversions.ToInteger(Interaction.IIf(CurrPlayer > Information.UBound(pArg), CurrPlayer - 1, CurrPlayer));
+        CurrPlayer = Math.Min(CurrPlayer, Information.UBound(pArg));
+        ShowInTextbox();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
@@ -140,7 +134,7 @@ public partial  class OpPlayer : Form
     {
         LPlayer.Items.Clear();
         var num = Information.UBound(pArg);
-        for (var i = 0; i <= num; i = checked(i + 1))
+        for (var i = 0; i <= num; i += 1)
         {
             LPlayer.Items.Add(GetFileName(pArg[i].Path));
         }
