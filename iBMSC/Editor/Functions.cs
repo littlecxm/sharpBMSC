@@ -164,7 +164,7 @@ public sealed class Functions
         }
         checked
         {
-            return Color.FromArgb((int)Math.Round((float)unchecked((int)cStart.A) * iTransparency), (int)Math.Round(unchecked((double)((float)(int)cStart.R * (100f - Math.Abs(iPercent))) * 0.01 + (double)Math.Abs((float)(0 - ((iPercent >= 0f) ? 1 : 0)) * iPercent) * 2.55)), (int)Math.Round(unchecked((double)((float)(int)cStart.G * (100f - Math.Abs(iPercent))) * 0.01 + (double)Math.Abs((float)(0 - ((iPercent >= 0f) ? 1 : 0)) * iPercent) * 2.55)), (int)Math.Round(unchecked((double)((float)(int)cStart.B * (100f - Math.Abs(iPercent))) * 0.01 + (double)Math.Abs((float)(0 - ((iPercent >= 0f) ? 1 : 0)) * iPercent) * 2.55)));
+            return Color.FromArgb((int)Math.Round(unchecked(cStart.A) * iTransparency), (int)Math.Round(unchecked(cStart.R * (100f - Math.Abs(iPercent)) * 0.01 + Math.Abs((0 - ((iPercent >= 0f) ? 1 : 0)) * iPercent) * 2.55)), (int)Math.Round(unchecked(cStart.G * (100f - Math.Abs(iPercent)) * 0.01 + Math.Abs((0 - ((iPercent >= 0f) ? 1 : 0)) * iPercent) * 2.55)), (int)Math.Round(unchecked(cStart.B * (100f - Math.Abs(iPercent)) * 0.01 + Math.Abs((0 - ((iPercent >= 0f) ? 1 : 0)) * iPercent) * 2.55)));
         }
     }
 
@@ -198,10 +198,10 @@ public sealed class Functions
         {
             return Color.Black;
         }
-        double num = (double)xS / 1000.0;
+        double num = xS / 1000.0;
         checked
         {
-            double num2 = (double)(xL - 500) / 500.0;
+            double num2 = (xL - 500) / 500.0;
             double num4;
             double num5;
             double num3;
@@ -209,37 +209,37 @@ public sealed class Functions
             {
                 num3 = -1.0;
                 num4 = 1.0;
-                num5 = (double)(xH - 30) / 30.0;
+                num5 = (xH - 30) / 30.0;
             }
             else if (xH < 120)
             {
                 num3 = -1.0;
                 num5 = 1.0;
-                num4 = (double)(90 - xH) / 30.0;
+                num4 = (90 - xH) / 30.0;
             }
             else if (xH < 180)
             {
                 num4 = -1.0;
                 num5 = 1.0;
-                num3 = (double)(xH - 150) / 30.0;
+                num3 = (xH - 150) / 30.0;
             }
             else if (xH < 240)
             {
                 num4 = -1.0;
                 num3 = 1.0;
-                num5 = (double)(210 - xH) / 30.0;
+                num5 = (210 - xH) / 30.0;
             }
             else if (xH < 300)
             {
                 num5 = -1.0;
                 num3 = 1.0;
-                num4 = (double)(xH - 270) / 30.0;
+                num4 = (xH - 270) / 30.0;
             }
             else
             {
                 num5 = -1.0;
                 num4 = 1.0;
-                num3 = (double)(330 - xH) / 30.0;
+                num3 = (330 - xH) / 30.0;
             }
             num4 = (num4 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
             num5 = (num5 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
@@ -359,11 +359,11 @@ public sealed class Functions
                 num7 = num3 * num6 + num4;
                 num4 = num3;
                 num3 = num7;
-                if (num5 == (double)num6)
+                if (num5 == num6)
                 {
                     break;
                 }
-                num5 = 1.0 / (num5 - (double)num6);
+                num5 = 1.0 / (num5 - num6);
                 if (num5 > 9.223372036854776E+18)
                 {
                     break;

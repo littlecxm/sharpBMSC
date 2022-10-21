@@ -95,7 +95,7 @@ public partial  class fLoadFileProgress : Form
             }
             catch (Exception obj) when (num2 != 0 && num == 0)
             {
-                ProjectData.SetProjectError((Exception)obj);
+                ProjectData.SetProjectError(obj);
                 try0000_dispatch = 269;
                 continue;
             }

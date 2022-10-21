@@ -18,7 +18,7 @@ internal static class Audio
     public static void Initialize()
     {
         Output = new WasapiOut();
-        CodecFactory.Instance.Register("ogg", new CodecFactoryEntry((GetCodecAction)([SpecialName] (Stream s) => new NVorbisSource(s).ToWaveSource()), new string[1] { ".ogg" }));
+        CodecFactory.Instance.Register("ogg", new CodecFactoryEntry([SpecialName] (Stream s) => new NVorbisSource(s).ToWaveSource(), new string[1] { ".ogg" }));
     }
 
     public static void Finalize()
@@ -53,7 +53,7 @@ internal static class Audio
         if (Source != null)
         {
             Output.Stop();
-            ((IDisposable)Source).Dispose();
+            Source.Dispose();
             Source = null;
         }
         if ((object)filename != "")

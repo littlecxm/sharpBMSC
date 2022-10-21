@@ -82,36 +82,36 @@ public struct Column
 
     public Color getBright(float opacity)
     {
-        return Color.FromArgb((checked((int)Math.Round((float)((cCacheB >> 24) & 0xFF) * opacity)) << 24) | (cCacheB & 0xFFFFFF));
+        return Color.FromArgb((checked((int)Math.Round(((cCacheB >> 24) & 0xFF) * opacity)) << 24) | (cCacheB & 0xFFFFFF));
     }
 
     public Color getDark(float opacity)
     {
-        return Color.FromArgb((checked((int)Math.Round((float)((cCacheD >> 24) & 0xFF) * opacity)) << 24) | (cCacheD & 0xFFFFFF));
+        return Color.FromArgb((checked((int)Math.Round(((cCacheD >> 24) & 0xFF) * opacity)) << 24) | (cCacheD & 0xFFFFFF));
     }
 
     public Color getLongBright(float opacity)
     {
-        return Color.FromArgb((checked((int)Math.Round((float)((cCacheLB >> 24) & 0xFF) * opacity)) << 24) | (cCacheLB & 0xFFFFFF));
+        return Color.FromArgb((checked((int)Math.Round(((cCacheLB >> 24) & 0xFF) * opacity)) << 24) | (cCacheLB & 0xFFFFFF));
     }
 
     public Color getLongDark(float opacity)
     {
-        return Color.FromArgb((checked((int)Math.Round((float)((cCacheLD >> 24) & 0xFF) * opacity)) << 24) | (cCacheLD & 0xFFFFFF));
+        return Color.FromArgb((checked((int)Math.Round(((cCacheLD >> 24) & 0xFF) * opacity)) << 24) | (cCacheLD & 0xFFFFFF));
     }
 
     public void setNoteColor(int c)
     {
         cNote = c;
-        cCacheB = Functions.AdjustBrightness(Color.FromArgb(c), 50f, (float)((double)((c >> 24) & 0xFF) / 255.0)).ToArgb();
-        cCacheD = Functions.AdjustBrightness(Color.FromArgb(c), -25f, (float)((double)((c >> 24) & 0xFF) / 255.0)).ToArgb();
+        cCacheB = Functions.AdjustBrightness(Color.FromArgb(c), 50f, (float)(((c >> 24) & 0xFF) / 255.0)).ToArgb();
+        cCacheD = Functions.AdjustBrightness(Color.FromArgb(c), -25f, (float)(((c >> 24) & 0xFF) / 255.0)).ToArgb();
     }
 
     public void setLNoteColor(int c)
     {
         cLNote = c;
-        cCacheLB = Functions.AdjustBrightness(Color.FromArgb(c), 50f, (float)((double)((c >> 24) & 0xFF) / 255.0)).ToArgb();
-        cCacheLD = Functions.AdjustBrightness(Color.FromArgb(c), -25f, (float)((double)((c >> 24) & 0xFF) / 255.0)).ToArgb();
+        cCacheLB = Functions.AdjustBrightness(Color.FromArgb(c), 50f, (float)(((c >> 24) & 0xFF) / 255.0)).ToArgb();
+        cCacheLD = Functions.AdjustBrightness(Color.FromArgb(c), -25f, (float)(((c >> 24) & 0xFF) / 255.0)).ToArgb();
     }
 
     public Column(int xLeft, int xWidth, string xTitle, bool xNoteCol, bool xisNumeric, bool xVisible, int xIdentifier, int xcNote, int xcText, int xcLNote, int xcLText, int xcBG)

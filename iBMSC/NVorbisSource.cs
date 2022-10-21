@@ -21,13 +21,13 @@ internal class NVorbisSource : ISampleSource
 
     public WaveFormat WaveFormat => _waveFormat;
 
-    public long Length => Conversions.ToLong(Interaction.IIf(CanSeek, ((TimeSpan)_vorbisReader.TotalTime).TotalSeconds * (double)_waveFormat.SampleRate * (double)_waveFormat.Channels, 0));
+    public long Length => Conversions.ToLong(Interaction.IIf(CanSeek, _vorbisReader.TotalTime.TotalSeconds * _waveFormat.SampleRate * _waveFormat.Channels, 0));
 
     public long Position
     {
         get
         {
-            return Conversions.ToLong(Interaction.IIf(CanSeek, ((TimeSpan)_vorbisReader.DecodedTime).TotalSeconds * (double)_vorbisReader.SampleRate * (double)_vorbisReader.Channels, 0));
+            return Conversions.ToLong(Interaction.IIf(CanSeek, _vorbisReader.DecodedTime.TotalSeconds * _vorbisReader.SampleRate * _vorbisReader.Channels, 0));
         }
         set
         {
@@ -39,7 +39,7 @@ internal class NVorbisSource : ISampleSource
             {
                 throw new ArgumentOutOfRangeException("value");
             }
-            _vorbisReader.DecodedTime = (TimeSpan)TimeSpan.FromSeconds((double)value / (double)_vorbisReader.SampleRate / (double)_vorbisReader.Channels);
+            _vorbisReader.DecodedTime = TimeSpan.FromSeconds(value / (double)_vorbisReader.SampleRate / _vorbisReader.Channels);
         }
     }
 
@@ -50,7 +50,7 @@ internal class NVorbisSource : ISampleSource
             throw new ArgumentException("stream");
         }
         _stream = stream;
-        _vorbisReader = new VorbisReader((Stream)(object)stream, closeOnDispose: false);
+        _vorbisReader = new VorbisReader(stream, closeOnDispose: false);
         _waveFormat = new WaveFormat(_vorbisReader.SampleRate, 32, _vorbisReader.Channels, AudioEncoding.IeeeFloat);
     }
 

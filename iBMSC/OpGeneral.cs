@@ -427,7 +427,7 @@ IL_01b7:
                         goto IL_01c7;
 IL_01c7:
                         num = 50;
-                        if (((double)xAutoSave / 60000.0 > Convert.ToDouble(NAutoSave.Maximum)) | ((double)xAutoSave / 60000.0 < Convert.ToDouble(NAutoSave.Minimum)))
+                        if ((xAutoSave / 60000.0 > Convert.ToDouble(NAutoSave.Maximum)) | (xAutoSave / 60000.0 < Convert.ToDouble(NAutoSave.Minimum)))
                         {
                             goto IL_020c;
                         }
@@ -441,7 +441,7 @@ IL_021e:
                         goto IL_0222;
 IL_0222:
                         num = 54;
-                        NAutoSave.Value = new decimal((double)xAutoSave / 60000.0);
+                        NAutoSave.Value = new decimal(xAutoSave / 60000.0);
                         goto IL_0243;
 IL_0243:
                         num = 56;
@@ -469,7 +469,7 @@ end_IL_0006:;
             }
             catch (Exception obj) when (num3 != 0 && num2 == 0)
             {
-                ProjectData.SetProjectError((Exception)obj);
+                ProjectData.SetProjectError(obj);
                 try0006_dispatch = 950;
                 continue;
             }
