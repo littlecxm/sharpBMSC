@@ -8,13 +8,13 @@ internal static class BMS
 {
     public static bool IsChannelLongNote(string I)
     {
-        var num = checked((int)Math.Round(Conversion.Val(I)));
+        var num = (int)Math.Round(Conversion.Val(I));
         return num >= 50 && num < 90;
     }
 
     public static bool IsChannelHidden(string I)
     {
-        var num = checked((int)Math.Round(Conversion.Val(I)));
+        var num = (int)Math.Round(Conversion.Val(I));
         return (num >= 30 && num < 50) || (num >= 70 && num < 90);
     }
 

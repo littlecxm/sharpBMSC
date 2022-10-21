@@ -1,6 +1,4 @@
 using System;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.CompilerServices;
@@ -12,7 +10,7 @@ using Microsoft.VisualBasic.CompilerServices;
 namespace iBMSC;
 
 [DesignerGenerated]
-public partial  class ColorPicker : Form
+public partial class ColorPicker : Form
 {
     public Color OrigColor;
 
@@ -73,42 +71,42 @@ public partial  class ColorPicker : Form
     {
         switch (DrawingIndex)
         {
-        case 0:
-        {
-            mMain = new Point(Convert.ToInt32(decimal.Multiply(decimal.Divide(inS.Value, 1000m), 255m)), Convert.ToInt32(decimal.Multiply(decimal.Divide(decimal.Subtract(1000m, inL.Value), 1000m), 255m)));
-            m1 = Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(360m, inH.Value), 255m), 360m));
-            break;
-        }
-        case 1:
-        {
-            mMain = new Point(Convert.ToInt32(decimal.Divide(decimal.Multiply(inH.Value, 255m), 360m)), Convert.ToInt32(decimal.Multiply(decimal.Divide(decimal.Subtract(1000m, inL.Value), 1000m), 255m)));
-            m1 = Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(1000m, inS.Value), 255m), 1000m));
-            break;
-        }
-        case 2:
-        {
-            mMain = new Point(Convert.ToInt32(decimal.Divide(decimal.Multiply(inH.Value, 255m), 360m)), Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(1000m, inS.Value), 255m), 1000m)));
-            m1 = Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(1000m, inL.Value), 255m), 1000m));
-            break;
-        }
-        case 3:
-        {
-            mMain = new Point(Convert.ToInt32(inB.Value), Convert.ToInt32(decimal.Subtract(255m, inG.Value)));
-            m1 = Convert.ToInt32(decimal.Subtract(255m, inR.Value));
-            break;
-        }
-        case 4:
-        {
-            mMain = new Point(Convert.ToInt32(inB.Value), Convert.ToInt32(decimal.Subtract(255m, inR.Value)));
-            m1 = Convert.ToInt32(decimal.Subtract(255m, inG.Value));
-            break;
-        }
-        case 5:
-        {
-            mMain = new Point(Convert.ToInt32(inG.Value), Convert.ToInt32(decimal.Subtract(255m, inR.Value)));
-            m1 = Convert.ToInt32(decimal.Subtract(255m, inB.Value));
-            break;
-        }
+            case 0:
+                {
+                    mMain = new Point(Convert.ToInt32(decimal.Multiply(decimal.Divide(inS.Value, 1000m), 255m)), Convert.ToInt32(decimal.Multiply(decimal.Divide(decimal.Subtract(1000m, inL.Value), 1000m), 255m)));
+                    m1 = Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(360m, inH.Value), 255m), 360m));
+                    break;
+                }
+            case 1:
+                {
+                    mMain = new Point(Convert.ToInt32(decimal.Divide(decimal.Multiply(inH.Value, 255m), 360m)), Convert.ToInt32(decimal.Multiply(decimal.Divide(decimal.Subtract(1000m, inL.Value), 1000m), 255m)));
+                    m1 = Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(1000m, inS.Value), 255m), 1000m));
+                    break;
+                }
+            case 2:
+                {
+                    mMain = new Point(Convert.ToInt32(decimal.Divide(decimal.Multiply(inH.Value, 255m), 360m)), Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(1000m, inS.Value), 255m), 1000m)));
+                    m1 = Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(1000m, inL.Value), 255m), 1000m));
+                    break;
+                }
+            case 3:
+                {
+                    mMain = new Point(Convert.ToInt32(inB.Value), Convert.ToInt32(decimal.Subtract(255m, inG.Value)));
+                    m1 = Convert.ToInt32(decimal.Subtract(255m, inR.Value));
+                    break;
+                }
+            case 4:
+                {
+                    mMain = new Point(Convert.ToInt32(inB.Value), Convert.ToInt32(decimal.Subtract(255m, inR.Value)));
+                    m1 = Convert.ToInt32(decimal.Subtract(255m, inG.Value));
+                    break;
+                }
+            case 5:
+                {
+                    mMain = new Point(Convert.ToInt32(inG.Value), Convert.ToInt32(decimal.Subtract(255m, inR.Value)));
+                    m1 = Convert.ToInt32(decimal.Subtract(255m, inB.Value));
+                    break;
+                }
         }
         mAlpha = Convert.ToInt32(inA.Value);
     }
@@ -120,53 +118,50 @@ public partial  class ColorPicker : Form
             return Color.Black;
         }
         var num = xS / 1000.0;
-        checked
+        var num2 = (xL - 500) / 500.0;
+        double num4;
+        double num5;
+        double num3;
+        if (xH < 60)
         {
-            var num2 = (xL - 500) / 500.0;
-            double num4;
-            double num5;
-            double num3;
-            if (xH < 60)
-            {
-                num3 = -1.0;
-                num4 = 1.0;
-                num5 = (xH - 30) / 30.0;
-            }
-            else if (xH < 120)
-            {
-                num3 = -1.0;
-                num5 = 1.0;
-                num4 = (90 - xH) / 30.0;
-            }
-            else if (xH < 180)
-            {
-                num4 = -1.0;
-                num5 = 1.0;
-                num3 = (xH - 150) / 30.0;
-            }
-            else if (xH < 240)
-            {
-                num4 = -1.0;
-                num3 = 1.0;
-                num5 = (210 - xH) / 30.0;
-            }
-            else if (xH < 300)
-            {
-                num5 = -1.0;
-                num3 = 1.0;
-                num4 = (xH - 270) / 30.0;
-            }
-            else
-            {
-                num5 = -1.0;
-                num4 = 1.0;
-                num3 = (330 - xH) / 30.0;
-            }
-            num4 = (num4 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
-            num5 = (num5 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
-            num3 = (num3 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
-            return Color.FromArgb(xA, (int)Math.Round(num4), (int)Math.Round(num5), (int)Math.Round(num3));
+            num3 = -1.0;
+            num4 = 1.0;
+            num5 = (xH - 30) / 30.0;
         }
+        else if (xH < 120)
+        {
+            num3 = -1.0;
+            num5 = 1.0;
+            num4 = (90 - xH) / 30.0;
+        }
+        else if (xH < 180)
+        {
+            num4 = -1.0;
+            num5 = 1.0;
+            num3 = (xH - 150) / 30.0;
+        }
+        else if (xH < 240)
+        {
+            num4 = -1.0;
+            num3 = 1.0;
+            num5 = (210 - xH) / 30.0;
+        }
+        else if (xH < 300)
+        {
+            num5 = -1.0;
+            num3 = 1.0;
+            num4 = (xH - 270) / 30.0;
+        }
+        else
+        {
+            num5 = -1.0;
+            num4 = 1.0;
+            num3 = (330 - xH) / 30.0;
+        }
+        num4 = (num4 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
+        num5 = (num5 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
+        num3 = (num3 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
+        return Color.FromArgb(xA, (int)Math.Round(num4), (int)Math.Round(num5), (int)Math.Round(num3));
     }
 
     private void PCMain_MouseDown(object sender, MouseEventArgs e)
@@ -199,30 +194,30 @@ public partial  class ColorPicker : Form
                 }
                 switch (DrawingIndex)
                 {
-                case 0:
-                    inL.Value = new decimal(1000.0 - mMain.Y / 255.0 * 1000.0);
-                    inS.Value = new decimal(mMain.X / 255.0 * 1000.0);
-                    break;
-                case 1:
-                    inL.Value = new decimal(1000.0 - mMain.Y / 255.0 * 1000.0);
-                    inH.Value = new decimal(mMain.X / 255.0 * 360.0);
-                    break;
-                case 2:
-                    inS.Value = new decimal(1000.0 - mMain.Y / 255.0 * 1000.0);
-                    inH.Value = new decimal(mMain.X / 255.0 * 360.0);
-                    break;
-                case 3:
-                    inG.Value = new decimal(255 - mMain.Y);
-                    inB.Value = new decimal(mMain.X);
-                    break;
-                case 4:
-                    inR.Value = new decimal(255 - mMain.Y);
-                    inB.Value = new decimal(mMain.X);
-                    break;
-                case 5:
-                    inR.Value = new decimal(255 - mMain.Y);
-                    inG.Value = new decimal(mMain.X);
-                    break;
+                    case 0:
+                        inL.Value = new decimal(1000.0 - mMain.Y / 255.0 * 1000.0);
+                        inS.Value = new decimal(mMain.X / 255.0 * 1000.0);
+                        break;
+                    case 1:
+                        inL.Value = new decimal(1000.0 - mMain.Y / 255.0 * 1000.0);
+                        inH.Value = new decimal(mMain.X / 255.0 * 360.0);
+                        break;
+                    case 2:
+                        inS.Value = new decimal(1000.0 - mMain.Y / 255.0 * 1000.0);
+                        inH.Value = new decimal(mMain.X / 255.0 * 360.0);
+                        break;
+                    case 3:
+                        inG.Value = new decimal(255 - mMain.Y);
+                        inB.Value = new decimal(mMain.X);
+                        break;
+                    case 4:
+                        inR.Value = new decimal(255 - mMain.Y);
+                        inB.Value = new decimal(mMain.X);
+                        break;
+                    case 5:
+                        inR.Value = new decimal(255 - mMain.Y);
+                        inG.Value = new decimal(mMain.X);
+                        break;
                 }
             }
         }
@@ -241,93 +236,93 @@ public partial  class ColorPicker : Form
         {
             switch (DrawingIndex)
             {
-            case 0:
-            {
-                var xH = Convert.ToInt32(inH.Value);
-                for (var i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
-                {
-                    var graphics4 = bufferedGraphics.Graphics;
-                    var point3 = new Point(0, 0);
-                    var point6 = point3;
-                    var point = new Point(0, 128);
-                    graphics4.FillRectangle(new LinearGradientBrush(point6, point, Color.White, HSL2RGB(xH, (int)Math.Round(i / 255.0 * 1000.0), 500)), i, 0, value, 128);
-                    var graphics5 = bufferedGraphics.Graphics;
-                    point = new Point(0, 128);
-                    var point7 = point;
-                    point3 = new Point(0, 256);
-                    graphics5.FillRectangle(new LinearGradientBrush(point7, point3, HSL2RGB(xH, (int)Math.Round(i / 255.0 * 1000.0), 500), Color.Black), i, 128, value, 128);
-                }
-                break;
-            }
-            case 1:
-            {
-                var xS = Convert.ToInt32(inS.Value);
-                for (var i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
-                {
-                    var graphics7 = bufferedGraphics.Graphics;
-                    var point = new Point(0, 0);
-                    var point9 = point;
-                    var point3 = new Point(0, 128);
-                    graphics7.FillRectangle(new LinearGradientBrush(point9, point3, Color.White, HSL2RGB((int)Math.Round(i / 255.0 * 360.0), xS, 500)), i, 0, value, 128);
-                    var graphics8 = bufferedGraphics.Graphics;
-                    point = new Point(0, 128);
-                    var point10 = point;
-                    point3 = new Point(0, 256);
-                    graphics8.FillRectangle(new LinearGradientBrush(point10, point3, HSL2RGB((int)Math.Round(i / 255.0 * 360.0), xS, 500), Color.Black), i, 128, value, 128);
-                }
-                break;
-            }
-            case 2:
-            {
-                var xL = Convert.ToInt32(inL.Value);
-                for (var i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
-                {
-                    var graphics2 = bufferedGraphics.Graphics;
-                    var point = new Point(0, 0);
-                    var point3 = new Point(0, 256);
-                    graphics2.FillRectangle(new LinearGradientBrush(point, point3, HSL2RGB((int)Math.Round(i / 255.0 * 360.0), 1000, xL), HSL2RGB((int)Math.Round(i / 255.0 * 360.0), 0, xL)), i, 0, value, 256);
-                }
-                break;
-            }
-            case 3:
-            {
-                var red = Convert.ToInt32(inR.Value);
-                for (var i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
-                {
-                    var graphics6 = bufferedGraphics.Graphics;
-                    var point = new Point(0, 0);
-                    var point3 = new Point(0, 256);
-                    graphics6.FillRectangle(new LinearGradientBrush(point, point3, Color.FromArgb(red, 255, i), Color.FromArgb(red, 0, i)), i, 0, value, 256);
-                }
-                break;
-            }
-            case 4:
-            {
-                var green = Convert.ToInt32(inG.Value);
-                for (var i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
-                {
-                    var graphics3 = bufferedGraphics.Graphics;
-                    var point = new Point(0, 0);
-                    var point3 = new Point(0, 256);
-                    graphics3.FillRectangle(new LinearGradientBrush(point, point3, Color.FromArgb(255, green, i), Color.FromArgb(0, green, i)), i, 0, value, 256);
-                }
-                break;
-            }
-            case 5:
-            {
-                var blue = Convert.ToInt32(inB.Value);
-                for (var i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
-                {
-                    var graphics = bufferedGraphics.Graphics;
-                    var point = new Point(0, 0);
-                    var point3 = new Point(0, 256);
-                    graphics.FillRectangle(new LinearGradientBrush(point, point3, Color.FromArgb(255, i, blue), Color.FromArgb(0, i, blue)), i, 0, value, 256);
-                }
-                break;
-            }
+                case 0:
+                    {
+                        var xH = Convert.ToInt32(inH.Value);
+                        for (var i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
+                        {
+                            var graphics4 = bufferedGraphics.Graphics;
+                            var point3 = new Point(0, 0);
+                            var point6 = point3;
+                            var point = new Point(0, 128);
+                            graphics4.FillRectangle(new LinearGradientBrush(point6, point, Color.White, HSL2RGB(xH, (int)Math.Round(i / 255.0 * 1000.0), 500)), i, 0, value, 128);
+                            var graphics5 = bufferedGraphics.Graphics;
+                            point = new Point(0, 128);
+                            var point7 = point;
+                            point3 = new Point(0, 256);
+                            graphics5.FillRectangle(new LinearGradientBrush(point7, point3, HSL2RGB(xH, (int)Math.Round(i / 255.0 * 1000.0), 500), Color.Black), i, 128, value, 128);
+                        }
+                        break;
+                    }
+                case 1:
+                    {
+                        var xS = Convert.ToInt32(inS.Value);
+                        for (var i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
+                        {
+                            var graphics7 = bufferedGraphics.Graphics;
+                            var point = new Point(0, 0);
+                            var point9 = point;
+                            var point3 = new Point(0, 128);
+                            graphics7.FillRectangle(new LinearGradientBrush(point9, point3, Color.White, HSL2RGB((int)Math.Round(i / 255.0 * 360.0), xS, 500)), i, 0, value, 128);
+                            var graphics8 = bufferedGraphics.Graphics;
+                            point = new Point(0, 128);
+                            var point10 = point;
+                            point3 = new Point(0, 256);
+                            graphics8.FillRectangle(new LinearGradientBrush(point10, point3, HSL2RGB((int)Math.Round(i / 255.0 * 360.0), xS, 500), Color.Black), i, 128, value, 128);
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        var xL = Convert.ToInt32(inL.Value);
+                        for (var i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
+                        {
+                            var graphics2 = bufferedGraphics.Graphics;
+                            var point = new Point(0, 0);
+                            var point3 = new Point(0, 256);
+                            graphics2.FillRectangle(new LinearGradientBrush(point, point3, HSL2RGB((int)Math.Round(i / 255.0 * 360.0), 1000, xL), HSL2RGB((int)Math.Round(i / 255.0 * 360.0), 0, xL)), i, 0, value, 256);
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        var red = Convert.ToInt32(inR.Value);
+                        for (var i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
+                        {
+                            var graphics6 = bufferedGraphics.Graphics;
+                            var point = new Point(0, 0);
+                            var point3 = new Point(0, 256);
+                            graphics6.FillRectangle(new LinearGradientBrush(point, point3, Color.FromArgb(red, 255, i), Color.FromArgb(red, 0, i)), i, 0, value, 256);
+                        }
+                        break;
+                    }
+                case 4:
+                    {
+                        var green = Convert.ToInt32(inG.Value);
+                        for (var i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
+                        {
+                            var graphics3 = bufferedGraphics.Graphics;
+                            var point = new Point(0, 0);
+                            var point3 = new Point(0, 256);
+                            graphics3.FillRectangle(new LinearGradientBrush(point, point3, Color.FromArgb(255, green, i), Color.FromArgb(0, green, i)), i, 0, value, 256);
+                        }
+                        break;
+                    }
+                case 5:
+                    {
+                        var blue = Convert.ToInt32(inB.Value);
+                        for (var i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
+                        {
+                            var graphics = bufferedGraphics.Graphics;
+                            var point = new Point(0, 0);
+                            var point3 = new Point(0, 256);
+                            graphics.FillRectangle(new LinearGradientBrush(point, point3, Color.FromArgb(255, i, blue), Color.FromArgb(0, i, blue)), i, 0, value, 256);
+                        }
+                        break;
+                    }
             }
             bufferedGraphics.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            NewLateBinding.LateCall(bufferedGraphics.Graphics, null, "DrawEllipse", new object[]
+            NewLateBinding.LateCall(bufferedGraphics.Graphics, null, "DrawEllipse", new[]
             {
                 RuntimeHelpers.GetObjectValue(Interaction.IIf(decimal.Compare(inL.Value, 500m) > 0, Pens.Black, Pens.White)),
                 mMain.X - 4,
@@ -545,24 +540,24 @@ public partial  class ColorPicker : Form
                 }
                 switch (DrawingIndex)
                 {
-                case 0:
-                    inH.Value = new decimal(360.0 - m1 / 255.0 * 360.0);
-                    break;
-                case 1:
-                    inS.Value = new decimal(1000.0 - m1 / 255.0 * 1000.0);
-                    break;
-                case 2:
-                    inL.Value = new decimal(1000.0 - m1 / 255.0 * 1000.0);
-                    break;
-                case 3:
-                    inR.Value = new decimal(255 - m1);
-                    break;
-                case 4:
-                    inG.Value = new decimal(255 - m1);
-                    break;
-                case 5:
-                    inB.Value = new decimal(255 - m1);
-                    break;
+                    case 0:
+                        inH.Value = new decimal(360.0 - m1 / 255.0 * 360.0);
+                        break;
+                    case 1:
+                        inS.Value = new decimal(1000.0 - m1 / 255.0 * 1000.0);
+                        break;
+                    case 2:
+                        inL.Value = new decimal(1000.0 - m1 / 255.0 * 1000.0);
+                        break;
+                    case 3:
+                        inR.Value = new decimal(255 - m1);
+                        break;
+                    case 4:
+                        inG.Value = new decimal(255 - m1);
+                        break;
+                    case 5:
+                        inB.Value = new decimal(255 - m1);
+                        break;
                 }
             }
         }
@@ -584,76 +579,76 @@ public partial  class ColorPicker : Form
             Point point3;
             switch (DrawingIndex)
             {
-            case 0:
-            {
-                var xS2 = Convert.ToInt32(inS.Value);
-                var xL2 = Convert.ToInt32(inL.Value);
-                for (var i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
-                {
-                    bufferedGraphics.Graphics.FillRectangle(new SolidBrush(HSL2RGB((int)Math.Round((255 - i) / 255.0 * 360.0), xS2, xL2)), 0, i, num, value);
-                }
-                break;
-            }
-            case 1:
-            {
-                var xH2 = Convert.ToInt32(inH.Value);
-                var xL = Convert.ToInt32(inL.Value);
-                var graphics6 = bufferedGraphics.Graphics;
-                point3 = new Point(0, 0);
-                var point8 = point3;
-                point = new Point(0, 256);
-                graphics6.FillRectangle(new LinearGradientBrush(point8, point, HSL2RGB(xH2, 1000, xL), HSL2RGB(xH2, 0, xL)), 0, 0, num, 256);
-                break;
-            }
-            case 2:
-            {
-                var xH = Convert.ToInt32(inH.Value);
-                var xS = Convert.ToInt32(inS.Value);
-                var graphics4 = bufferedGraphics.Graphics;
-                point = new Point(0, 0);
-                var point6 = point;
-                point3 = new Point(0, 128);
-                graphics4.FillRectangle(new LinearGradientBrush(point6, point3, HSL2RGB(xH, xS, 1000), HSL2RGB(xH, xS, 500)), 0, 0, num, 128);
-                var graphics5 = bufferedGraphics.Graphics;
-                point = new Point(0, 128);
-                var point7 = point;
-                point3 = new Point(0, 256);
-                graphics5.FillRectangle(new LinearGradientBrush(point7, point3, HSL2RGB(xH, xS, 500), HSL2RGB(xH, xS, 0)), 0, 128, num, 128);
-                break;
-            }
-            case 3:
-            {
-                var green2 = Convert.ToInt32(inG.Value);
-                var blue2 = Convert.ToInt32(inB.Value);
-                var graphics3 = bufferedGraphics.Graphics;
-                point = new Point(0, 0);
-                var point5 = point;
-                point3 = new Point(0, 256);
-                graphics3.FillRectangle(new LinearGradientBrush(point5, point3, Color.FromArgb(255, green2, blue2), Color.FromArgb(0, green2, blue2)), 0, 0, num, 256);
-                break;
-            }
-            case 4:
-            {
-                var red2 = Convert.ToInt32(inR.Value);
-                var blue = Convert.ToInt32(inB.Value);
-                var graphics2 = bufferedGraphics.Graphics;
-                point = new Point(0, 0);
-                var point4 = point;
-                point3 = new Point(0, 256);
-                graphics2.FillRectangle(new LinearGradientBrush(point4, point3, Color.FromArgb(red2, 255, blue), Color.FromArgb(red2, 0, blue)), 0, 0, num, 256);
-                break;
-            }
-            case 5:
-            {
-                var red = Convert.ToInt32(inR.Value);
-                var green = Convert.ToInt32(inG.Value);
-                var graphics = bufferedGraphics.Graphics;
-                point = new Point(0, 0);
-                var point2 = point;
-                point3 = new Point(0, 256);
-                graphics.FillRectangle(new LinearGradientBrush(point2, point3, Color.FromArgb(red, green, 255), Color.FromArgb(red, green, 0)), 0, 0, num, 256);
-                break;
-            }
+                case 0:
+                    {
+                        var xS2 = Convert.ToInt32(inS.Value);
+                        var xL2 = Convert.ToInt32(inL.Value);
+                        for (var i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
+                        {
+                            bufferedGraphics.Graphics.FillRectangle(new SolidBrush(HSL2RGB((int)Math.Round((255 - i) / 255.0 * 360.0), xS2, xL2)), 0, i, num, value);
+                        }
+                        break;
+                    }
+                case 1:
+                    {
+                        var xH2 = Convert.ToInt32(inH.Value);
+                        var xL = Convert.ToInt32(inL.Value);
+                        var graphics6 = bufferedGraphics.Graphics;
+                        point3 = new Point(0, 0);
+                        var point8 = point3;
+                        point = new Point(0, 256);
+                        graphics6.FillRectangle(new LinearGradientBrush(point8, point, HSL2RGB(xH2, 1000, xL), HSL2RGB(xH2, 0, xL)), 0, 0, num, 256);
+                        break;
+                    }
+                case 2:
+                    {
+                        var xH = Convert.ToInt32(inH.Value);
+                        var xS = Convert.ToInt32(inS.Value);
+                        var graphics4 = bufferedGraphics.Graphics;
+                        point = new Point(0, 0);
+                        var point6 = point;
+                        point3 = new Point(0, 128);
+                        graphics4.FillRectangle(new LinearGradientBrush(point6, point3, HSL2RGB(xH, xS, 1000), HSL2RGB(xH, xS, 500)), 0, 0, num, 128);
+                        var graphics5 = bufferedGraphics.Graphics;
+                        point = new Point(0, 128);
+                        var point7 = point;
+                        point3 = new Point(0, 256);
+                        graphics5.FillRectangle(new LinearGradientBrush(point7, point3, HSL2RGB(xH, xS, 500), HSL2RGB(xH, xS, 0)), 0, 128, num, 128);
+                        break;
+                    }
+                case 3:
+                    {
+                        var green2 = Convert.ToInt32(inG.Value);
+                        var blue2 = Convert.ToInt32(inB.Value);
+                        var graphics3 = bufferedGraphics.Graphics;
+                        point = new Point(0, 0);
+                        var point5 = point;
+                        point3 = new Point(0, 256);
+                        graphics3.FillRectangle(new LinearGradientBrush(point5, point3, Color.FromArgb(255, green2, blue2), Color.FromArgb(0, green2, blue2)), 0, 0, num, 256);
+                        break;
+                    }
+                case 4:
+                    {
+                        var red2 = Convert.ToInt32(inR.Value);
+                        var blue = Convert.ToInt32(inB.Value);
+                        var graphics2 = bufferedGraphics.Graphics;
+                        point = new Point(0, 0);
+                        var point4 = point;
+                        point3 = new Point(0, 256);
+                        graphics2.FillRectangle(new LinearGradientBrush(point4, point3, Color.FromArgb(red2, 255, blue), Color.FromArgb(red2, 0, blue)), 0, 0, num, 256);
+                        break;
+                    }
+                case 5:
+                    {
+                        var red = Convert.ToInt32(inR.Value);
+                        var green = Convert.ToInt32(inG.Value);
+                        var graphics = bufferedGraphics.Graphics;
+                        point = new Point(0, 0);
+                        var point2 = point;
+                        point3 = new Point(0, 256);
+                        graphics.FillRectangle(new LinearGradientBrush(point2, point3, Color.FromArgb(red, green, 255), Color.FromArgb(red, green, 0)), 0, 0, num, 256);
+                        break;
+                    }
             }
             var array = new Point[3];
             ref var reference = ref array[0];
