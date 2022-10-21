@@ -202,7 +202,7 @@ public partial class OpVisual : Form
                 button18.BackColor = col[i].cBG;
                 var button21 = button18;
                 var obj = Interaction.IIf((int)Math.Round(col[i].cBG.GetBrightness() * 255f) + 255 - col[i].cBG.A >= 128, Color.Black, Color.White);
-                button21.ForeColor = ((obj != null) ? ((Color)obj) : color);
+                button21.ForeColor = obj != null ? (Color)obj : color;
                 button18.Text = To4Hex(col[i].cBG.ToArgb());
                 button18.Name = "cBG";
                 button18.Tag = null;
@@ -238,7 +238,7 @@ public partial class OpVisual : Form
         {
             var obj = Interaction.IIf((int)Math.Round(c.GetBrightness() * 255f) + 255 - c.A >= 128, Color.Black, Color.White);
             var color = default(Color);
-            xbutton.ForeColor = ((obj != null) ? ((Color)obj) : color);
+            xbutton.ForeColor = obj != null ? (Color)obj : color;
         }
     }
 
@@ -394,7 +394,7 @@ public partial class OpVisual : Form
                             button.BackColor = colorPicker.NewColor;
                             var obj = Interaction.IIf((int)Math.Round(colorPicker.NewColor.GetBrightness() * 255f) + 255 - colorPicker.NewColor.A >= 128, Color.Black, Color.White);
                             var color = default(Color);
-                            button.ForeColor = ((obj != null) ? ((Color)obj) : color);
+                            button.ForeColor = obj != null ? (Color)obj : color;
                             break;
                         }
                 }

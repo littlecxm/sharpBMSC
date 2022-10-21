@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -23,7 +22,7 @@ using Microsoft.VisualBasic.CompilerServices;
 namespace iBMSC;
 
 [DesignerGenerated]
-public partial  class MainWindow : Form
+public partial class MainWindow : Form
 {
     public struct PlayerArguments
     {
@@ -412,280 +411,278 @@ public partial  class MainWindow : Form
         notes[num].VPosition = -1.0;
         notes[num].Value = 1200000L;
         var num2 = 0;
-        checked
+
+        foreach (var text2 in array)
         {
-            foreach (var text2 in array)
+            var text3 = text2.Trim();
+            if (num2 <= 0)
             {
-                var text3 = text2.Trim();
-                if (num2 <= 0)
+                if (text3.StartsWith("#") & (Operators.CompareString(Microsoft.VisualBasic.Strings.Mid(text3, 5, 3), "02:", TextCompare: false) == 0))
                 {
-                    if (text3.StartsWith("#") & (Operators.CompareString(Microsoft.VisualBasic.Strings.Mid(text3, 5, 3), "02:", TextCompare: false) == 0))
-                    {
-                        var num3 = (int)Math.Round(Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, 2, 3)));
-                        var num4 = Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, 8));
-                        var denominator = Functions.GetDenominator(num4, 2147483647L);
-                        MeasureLength[num3] = num4 * 192.0;
-                        LBeat.Items[num3] = Operators.ConcatenateObject(string.Concat(Functions.Add3Zeros(num3) + ": ", Conversions.ToString(num4)), Interaction.IIf(denominator > 10000, "", " ( " + Conversions.ToString((long)Math.Round(num4 * (double)denominator)) + " / " + Conversions.ToString(denominator) + " ) "));
-                        continue;
-                    }
-                    if (text3.StartsWith("#WAV", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        hWAV[Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#WAV") + 1, 2))] = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#WAV") + 4);
-                        continue;
-                    }
-                    if (text3.StartsWith("#BPM", StringComparison.CurrentCultureIgnoreCase) & (Operators.CompareString(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#BPM") + 1, 1).Trim(), "", TextCompare: false) != 0))
-                    {
-                        hBPM[Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#BPM") + 1, 2))] = (long)Math.Round(Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#BPM") + 4)) * 10000.0);
-                        continue;
-                    }
-                    if (text3.StartsWith("#STOP", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        hSTOP[Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#STOP") + 1, 2))] = (long)Math.Round(Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#STOP") + 4)) * 10000.0);
-                        continue;
-                    }
-                    if (text3.StartsWith("#SCROLL", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        hSCROLL[Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#SCROLL") + 1, 2))] = (long)Math.Round(Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#SCROLL") + 4)) * 10000.0);
-                        continue;
-                    }
-                    if (text3.StartsWith("#TITLE", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        THTitle.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#TITLE") + 1).Trim();
-                        continue;
-                    }
-                    if (text3.StartsWith("#ARTIST", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        THArtist.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#ARTIST") + 1).Trim();
-                        continue;
-                    }
-                    if (text3.StartsWith("#GENRE", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        THGenre.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#GENRE") + 1).Trim();
-                        continue;
-                    }
-                    if (text3.StartsWith("#BPM", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        Notes[0].Value = (long)Math.Round(Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#BPM") + 1).Trim()) * 10000.0);
-                        THBPM.Value = new decimal((double)Notes[0].Value / 10000.0);
-                        continue;
-                    }
-                    if (text3.StartsWith("#PLAYER", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        var num5 = (int)Math.Round(Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#PLAYER") + 1).Trim()));
-                        if (unchecked(num5 >= 1 && num5 <= 4))
-                        {
-                            CHPlayer.SelectedIndex = num5 - 1;
-                        }
-                        continue;
-                    }
-                    if (text3.StartsWith("#RANK", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        var num6 = (int)Math.Round(Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#RANK") + 1).Trim()));
-                        if (unchecked(num6 >= 0 && num6 <= 4))
-                        {
-                            CHRank.SelectedIndex = num6;
-                        }
-                        continue;
-                    }
-                    if (text3.StartsWith("#PLAYLEVEL", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        THPlayLevel.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#PLAYLEVEL") + 1).Trim();
-                        continue;
-                    }
-                    if (text3.StartsWith("#SUBTITLE", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        THSubTitle.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#SUBTITLE") + 1).Trim();
-                        continue;
-                    }
-                    if (text3.StartsWith("#SUBARTIST", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        THSubArtist.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#SUBARTIST") + 1).Trim();
-                        continue;
-                    }
-                    if (text3.StartsWith("#STAGEFILE", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        THStageFile.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#STAGEFILE") + 1).Trim();
-                        continue;
-                    }
-                    if (text3.StartsWith("#BANNER", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        THBanner.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#BANNER") + 1).Trim();
-                        continue;
-                    }
-                    if (text3.StartsWith("#BACKBMP", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        THBackBMP.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#BACKBMP") + 1).Trim();
-                        continue;
-                    }
-                    if (text3.StartsWith("#DIFFICULTY", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        try
-                        {
-                            CHDifficulty.SelectedIndex = int.Parse(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#DIFFICULTY") + 1).Trim());
-                        }
-                        catch (Exception ex)
-                        {
-                            ProjectData.SetProjectError(ex);
-                            var ex2 = ex;
-                            ProjectData.ClearProjectError();
-                        }
-                        continue;
-                    }
-                    if (text3.StartsWith("#DEFEXRANK", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        THExRank.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#DEFEXRANK") + 1).Trim();
-                        continue;
-                    }
-                    if (text3.StartsWith("#TOTAL", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        var text4 = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#TOTAL") + 1).Trim();
-                        THTotal.Text = text4;
-                        continue;
-                    }
-                    if (text3.StartsWith("#COMMENT", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        var text5 = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#COMMENT") + 1).Trim();
-                        if (text5.StartsWith("\""))
-                        {
-                            text5 = Microsoft.VisualBasic.Strings.Mid(text5, 2);
-                        }
-                        if (text5.EndsWith("\""))
-                        {
-                            text5 = Microsoft.VisualBasic.Strings.Mid(text5, 1, Microsoft.VisualBasic.Strings.Len(text5) - 1);
-                        }
-                        THComment.Text = text5;
-                        continue;
-                    }
-                    if (text3.StartsWith("#LNTYPE", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        if (Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#LNTYPE") + 1).Trim()) == 1.0)
-                        {
-                            CHLnObj.SelectedIndex = 0;
-                        }
-                        continue;
-                    }
-                    if (text3.StartsWith("#LNOBJ", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        var selectedIndex = Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#LNOBJ") + 1).Trim());
-                        CHLnObj.SelectedIndex = selectedIndex;
-                        continue;
-                    }
-                    if (text3.StartsWith("#") & (Operators.CompareString(Microsoft.VisualBasic.Strings.Mid(text3, 7, 1), ":", TextCompare: false) == 0))
-                    {
-                        var i2 = Microsoft.VisualBasic.Strings.Mid(text3, 5, 2);
-                        if (BMSChannelToColumn(i2) != 0)
-                        {
-                            continue;
-                        }
-                        goto IL_0952;
-                    }
-                }
-                if (text3.StartsWith("#IF", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    num2++;
-                }
-                else if (text3.StartsWith("#ENDIF", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    num2--;
-                }
-                else if (text3.StartsWith("#SWITCH", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    num2++;
-                }
-                else if (text3.StartsWith("#SETSWITCH", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    num2++;
-                }
-                else if (text3.StartsWith("#ENDSW", StringComparison.CurrentCultureIgnoreCase))
-                {
-                    num2--;
-                }
-                else if (!text3.StartsWith("#"))
-                {
+                    var num3 = (int)Math.Round(Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, 2, 3)));
+                    var num4 = Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, 8));
+                    var denominator = Functions.GetDenominator(num4, 2147483647L);
+                    MeasureLength[num3] = num4 * 192.0;
+                    LBeat.Items[num3] = Operators.ConcatenateObject(string.Concat(Functions.Add3Zeros(num3) + ": ", Conversions.ToString(num4)), Interaction.IIf(denominator > 10000, "", " ( " + Conversions.ToString((long)Math.Round(num4 * denominator)) + " / " + Conversions.ToString(denominator) + " ) "));
                     continue;
                 }
-                goto IL_0952;
+                if (text3.StartsWith("#WAV", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    hWAV[Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#WAV") + 1, 2))] = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#WAV") + 4);
+                    continue;
+                }
+                if (text3.StartsWith("#BPM", StringComparison.CurrentCultureIgnoreCase) & (Operators.CompareString(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#BPM") + 1, 1).Trim(), "", TextCompare: false) != 0))
+                {
+                    hBPM[Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#BPM") + 1, 2))] = (long)Math.Round(Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#BPM") + 4)) * 10000.0);
+                    continue;
+                }
+                if (text3.StartsWith("#STOP", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    hSTOP[Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#STOP") + 1, 2))] = (long)Math.Round(Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#STOP") + 4)) * 10000.0);
+                    continue;
+                }
+                if (text3.StartsWith("#SCROLL", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    hSCROLL[Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#SCROLL") + 1, 2))] = (long)Math.Round(Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#SCROLL") + 4)) * 10000.0);
+                    continue;
+                }
+                if (text3.StartsWith("#TITLE", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    THTitle.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#TITLE") + 1).Trim();
+                    continue;
+                }
+                if (text3.StartsWith("#ARTIST", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    THArtist.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#ARTIST") + 1).Trim();
+                    continue;
+                }
+                if (text3.StartsWith("#GENRE", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    THGenre.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#GENRE") + 1).Trim();
+                    continue;
+                }
+                if (text3.StartsWith("#BPM", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    Notes[0].Value = (long)Math.Round(Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#BPM") + 1).Trim()) * 10000.0);
+                    THBPM.Value = new decimal(Notes[0].Value / 10000.0);
+                    continue;
+                }
+                if (text3.StartsWith("#PLAYER", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    var num5 = (int)Math.Round(Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#PLAYER") + 1).Trim()));
+                    if (num5 >= 1 && num5 <= 4)
+                    {
+                        CHPlayer.SelectedIndex = num5 - 1;
+                    }
+                    continue;
+                }
+                if (text3.StartsWith("#RANK", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    var num6 = (int)Math.Round(Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#RANK") + 1).Trim()));
+                    if (num6 >= 0 && num6 <= 4)
+                    {
+                        CHRank.SelectedIndex = num6;
+                    }
+                    continue;
+                }
+                if (text3.StartsWith("#PLAYLEVEL", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    THPlayLevel.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#PLAYLEVEL") + 1).Trim();
+                    continue;
+                }
+                if (text3.StartsWith("#SUBTITLE", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    THSubTitle.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#SUBTITLE") + 1).Trim();
+                    continue;
+                }
+                if (text3.StartsWith("#SUBARTIST", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    THSubArtist.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#SUBARTIST") + 1).Trim();
+                    continue;
+                }
+                if (text3.StartsWith("#STAGEFILE", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    THStageFile.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#STAGEFILE") + 1).Trim();
+                    continue;
+                }
+                if (text3.StartsWith("#BANNER", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    THBanner.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#BANNER") + 1).Trim();
+                    continue;
+                }
+                if (text3.StartsWith("#BACKBMP", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    THBackBMP.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#BACKBMP") + 1).Trim();
+                    continue;
+                }
+                if (text3.StartsWith("#DIFFICULTY", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    try
+                    {
+                        CHDifficulty.SelectedIndex = int.Parse(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#DIFFICULTY") + 1).Trim());
+                    }
+                    catch (Exception ex)
+                    {
+                        ProjectData.SetProjectError(ex);
+                        var ex2 = ex;
+                        ProjectData.ClearProjectError();
+                    }
+                    continue;
+                }
+                if (text3.StartsWith("#DEFEXRANK", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    THExRank.Text = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#DEFEXRANK") + 1).Trim();
+                    continue;
+                }
+                if (text3.StartsWith("#TOTAL", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    var text4 = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#TOTAL") + 1).Trim();
+                    THTotal.Text = text4;
+                    continue;
+                }
+                if (text3.StartsWith("#COMMENT", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    var text5 = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#COMMENT") + 1).Trim();
+                    if (text5.StartsWith("\""))
+                    {
+                        text5 = Microsoft.VisualBasic.Strings.Mid(text5, 2);
+                    }
+                    if (text5.EndsWith("\""))
+                    {
+                        text5 = Microsoft.VisualBasic.Strings.Mid(text5, 1, Microsoft.VisualBasic.Strings.Len(text5) - 1);
+                    }
+                    THComment.Text = text5;
+                    continue;
+                }
+                if (text3.StartsWith("#LNTYPE", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    if (Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#LNTYPE") + 1).Trim()) == 1.0)
+                    {
+                        CHLnObj.SelectedIndex = 0;
+                    }
+                    continue;
+                }
+                if (text3.StartsWith("#LNOBJ", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    var selectedIndex = Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.Len("#LNOBJ") + 1).Trim());
+                    CHLnObj.SelectedIndex = selectedIndex;
+                    continue;
+                }
+                if (text3.StartsWith("#") & (Operators.CompareString(Microsoft.VisualBasic.Strings.Mid(text3, 7, 1), ":", TextCompare: false) == 0))
+                {
+                    var i2 = Microsoft.VisualBasic.Strings.Mid(text3, 5, 2);
+                    if (BMSChannelToColumn(i2) != 0)
+                    {
+                        continue;
+                    }
+                    goto IL_0952;
+                }
+            }
+            if (text3.StartsWith("#IF", StringComparison.CurrentCultureIgnoreCase))
+            {
+                num2++;
+            }
+            else if (text3.StartsWith("#ENDIF", StringComparison.CurrentCultureIgnoreCase))
+            {
+                num2--;
+            }
+            else if (text3.StartsWith("#SWITCH", StringComparison.CurrentCultureIgnoreCase))
+            {
+                num2++;
+            }
+            else if (text3.StartsWith("#SETSWITCH", StringComparison.CurrentCultureIgnoreCase))
+            {
+                num2++;
+            }
+            else if (text3.StartsWith("#ENDSW", StringComparison.CurrentCultureIgnoreCase))
+            {
+                num2--;
+            }
+            else if (!text3.StartsWith("#"))
+            {
+                continue;
+            }
+            goto IL_0952;
 IL_0952:
-                text = text + text2 + "\r\n";
-            }
-            UpdateMeasureBottom();
-            num2 = 0;
-            int k;
-            foreach (var text2 in array)
+            text = text + text2 + "\r\n";
+        }
+        UpdateMeasureBottom();
+        num2 = 0;
+        int k;
+        foreach (var text2 in array)
+        {
+            var text6 = text2.Trim();
+            if (num2 > 0 || !(text6.StartsWith("#") & (Operators.CompareString(Microsoft.VisualBasic.Strings.Mid(text6, 7, 1), ":", TextCompare: false) == 0)))
             {
-                var text6 = text2.Trim();
-                if (num2 > 0 || !(text6.StartsWith("#") & (Operators.CompareString(Microsoft.VisualBasic.Strings.Mid(text6, 7, 1), ":", TextCompare: false) == 0)))
+                continue;
+            }
+            var num7 = (int)Math.Round(Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text6, 2, 3)));
+            var text7 = Microsoft.VisualBasic.Strings.Mid(text6, 5, 2);
+            if (BMSChannelToColumn(text7) == 0)
+            {
+                continue;
+            }
+            if (Operators.CompareString(text7, "01", TextCompare: false) == 0)
+            {
+                var array4 = mColumn;
+                array4[num7]++;
+            }
+            var num9 = Microsoft.VisualBasic.Strings.Len(text6) - 1;
+            for (k = 8; k <= num9; k += 2)
+            {
+                if (Operators.CompareString(Microsoft.VisualBasic.Strings.Mid(text6, k, 2), "00", TextCompare: false) != 0)
                 {
-                    continue;
-                }
-                var num7 = (int)Math.Round(Conversion.Val(Microsoft.VisualBasic.Strings.Mid(text6, 2, 3)));
-                var text7 = Microsoft.VisualBasic.Strings.Mid(text6, 5, 2);
-                if (BMSChannelToColumn(text7) == 0)
-                {
-                    continue;
-                }
-                if (Operators.CompareString(text7, "01", TextCompare: false) == 0)
-                {
-                    var array4 = mColumn;
-                    array4[num7]++;
-                }
-                var num9 = Microsoft.VisualBasic.Strings.Len(text6) - 1;
-                for (k = 8; k <= num9; k += 2)
-                {
-                    if (Operators.CompareString(Microsoft.VisualBasic.Strings.Mid(text6, k, 2), "00", TextCompare: false) != 0)
+                    Notes = (Note[])Utils.CopyArray(Notes, new Note[Notes.Length + 1]);
+                    var notes2 = Notes;
+                    var num10 = Information.UBound(Notes);
+                    notes2[num10].ColumnIndex = Conversions.ToInteger(Operators.AddObject(BMSChannelToColumn(text7), Operators.MultiplyObject(Interaction.IIf(Operators.CompareString(text7, "01", TextCompare: false) == 0, 1, 0), mColumn[num7] - 1)));
+                    notes2[num10].LongNote = BMS.IsChannelLongNote(text7);
+                    notes2[num10].Hidden = BMS.IsChannelHidden(text7);
+                    notes2[num10].Landmine = BMS.IsChannelLandmine(text7);
+                    notes2[num10].Selected = false;
+                    notes2[num10].VPosition = MeasureBottom[num7] + MeasureLength[num7] * (k / 2.0 - 4.0) / ((Microsoft.VisualBasic.Strings.Len(text6) - 7) / 2.0);
+                    notes2[num10].Value = Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text6, k, 2)) * 10000;
+                    if (Operators.CompareString(text7, "03", TextCompare: false) == 0)
                     {
-                        Notes = (Note[])Utils.CopyArray(Notes, new Note[Notes.Length + 1]);
-                        var notes2 = Notes;
-                        var num10 = Information.UBound(Notes);
-                        notes2[num10].ColumnIndex = Conversions.ToInteger(Operators.AddObject(BMSChannelToColumn(text7), Operators.MultiplyObject(Interaction.IIf(Operators.CompareString(text7, "01", TextCompare: false) == 0, 1, 0), mColumn[num7] - 1)));
-                        notes2[num10].LongNote = BMS.IsChannelLongNote(text7);
-                        notes2[num10].Hidden = BMS.IsChannelHidden(text7);
-                        notes2[num10].Landmine = BMS.IsChannelLandmine(text7);
-                        notes2[num10].Selected = false;
-                        notes2[num10].VPosition = MeasureBottom[num7] + MeasureLength[num7] * ((double)k / 2.0 - 4.0) / ((double)(Microsoft.VisualBasic.Strings.Len(text6) - 7) / 2.0);
-                        notes2[num10].Value = Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text6, k, 2)) * 10000;
-                        if (Operators.CompareString(text7, "03", TextCompare: false) == 0)
-                        {
-                            notes2[num10].Value = Convert.ToInt32(Microsoft.VisualBasic.Strings.Mid(text6, k, 2), 16) * 10000;
-                        }
-                        if (Operators.CompareString(text7, "08", TextCompare: false) == 0)
-                        {
-                            notes2[num10].Value = hBPM[Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text6, k, 2))];
-                        }
-                        if (Operators.CompareString(text7, "09", TextCompare: false) == 0)
-                        {
-                            notes2[num10].Value = hSTOP[Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text6, k, 2))];
-                        }
-                        if (Operators.CompareString(text7, "SC", TextCompare: false) == 0)
-                        {
-                            notes2[num10].Value = hSCROLL[Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text6, k, 2))];
-                        }
+                        notes2[num10].Value = Convert.ToInt32(Microsoft.VisualBasic.Strings.Mid(text6, k, 2), 16) * 10000;
+                    }
+                    if (Operators.CompareString(text7, "08", TextCompare: false) == 0)
+                    {
+                        notes2[num10].Value = hBPM[Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text6, k, 2))];
+                    }
+                    if (Operators.CompareString(text7, "09", TextCompare: false) == 0)
+                    {
+                        notes2[num10].Value = hSTOP[Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text6, k, 2))];
+                    }
+                    if (Operators.CompareString(text7, "SC", TextCompare: false) == 0)
+                    {
+                        notes2[num10].Value = hSCROLL[Functions.C36to10(Microsoft.VisualBasic.Strings.Mid(text6, k, 2))];
                     }
                 }
             }
-            if (NTInput)
-            {
-                ConvertBMSE2NT();
-            }
-            LWAV.Visible = false;
-            LWAV.Items.Clear();
-            k = 1;
-            do
-            {
-                LWAV.Items.Add(Functions.C10to36(k) + ": " + hWAV[k]);
-                k++;
-            }
-            while (k <= 1295);
-            LWAV.SelectedIndex = 0;
-            LWAV.Visible = true;
-            TExpansion.Text = text;
-            SortByVPositionQuick(0, Information.UBound(Notes));
-            UpdatePairing();
-            CalculateTotalPlayableNotes();
-            CalculateGreatestVPosition();
-            RefreshPanelAll();
-            POStatusRefresh();
         }
+        if (NTInput)
+        {
+            ConvertBMSE2NT();
+        }
+        LWAV.Visible = false;
+        LWAV.Items.Clear();
+        k = 1;
+        do
+        {
+            LWAV.Items.Add(Functions.C10to36(k) + ": " + hWAV[k]);
+            k++;
+        }
+        while (k <= 1295);
+        LWAV.SelectedIndex = 0;
+        LWAV.Visible = true;
+        TExpansion.Text = text;
+        SortByVPositionQuick(0, Information.UBound(Notes));
+        UpdatePairing();
+        CalculateTotalPlayableNotes();
+        CalculateGreatestVPosition();
+        RefreshPanelAll();
+        POStatusRefresh();
     }
 
     private string SaveBMS()
@@ -694,106 +691,104 @@ IL_0952:
         SortByVPositionInsertion();
         UpdatePairing();
         bool hasOverlapping = false;
-        checked
-        {
-            string[] array = new string[MeasureAtDisplacement(GreatestVPosition) + 1 + 1];
-            hBPM = new long[1];
-            hSTOP = new long[1];
-            hSCROLL = new long[1];
-            bool nTInput = NTInput;
-            Note[] notes = Notes;
-            if (nTInput)
-            {
-                NTInput = false;
-                ConvertNT2BMSE();
-            }
-            Note[] xprevNotes = Array.Empty<Note>();
-            int num = MeasureAtDisplacement(GreatestVPosition) + 1;
-            for (int i = 0; i <= num; i++)
-            {
-                array[i] = "\r\n";
-                string text = Functions.WriteDecimalWithDot(MeasureLength[i] / 192.0);
-                if (MeasureLength[i] != 192.0)
-                {
-                    array[i] = array[i] + "#" + Functions.Add3Zeros(i) + "02:" + text + "\r\n";
-                }
-                int LowerLimit = 0;
-                int UpperLimit = 0;
-                GetMeasureLimits(i, ref LowerLimit, ref UpperLimit);
-                if (UpperLimit - LowerLimit != 0)
-                {
-                    int num3 = Information.UBound(xprevNotes);
-                    Note[] array3 = new Note[UpperLimit - LowerLimit + num3 + 1];
-                    for (int j = 0; j <= num3; j++)
-                    {
-                        ref Note reference = ref array3[j];
-                        reference = xprevNotes[j];
-                    }
 
-                    int num6 = UpperLimit - 1;
-                    for (int k = LowerLimit; k <= num6; k++)
-                    {
-                        ref Note reference2 = ref array3[k - LowerLimit + xprevNotes.Length];
-                        reference2 = Notes[k];
-                    }
-                    int num7 = 0;
-                    for (int l = 0; l < array3.Length; l++)
-                    {
-                        Note note = array3[l];
-                        num7 = Math.Max(note.ColumnIndex, num7);
-                    }
-                    xprevNotes = Array.Empty<Note>();
-                    string[] array5 = array;
-                    string[] array6 = array5;
-                    int num2 = i;
-                    array6[num2] = array5[num2] + GenerateBackgroundTracks(i, ref hasOverlapping, array3, num7, ref xprevNotes);
-                    array5 = array;
-                    string[] array7 = array5;
-                    num2 = i;
-                    array7[num2] = array5[num2] + GenerateKeyTracks(i, ref hasOverlapping, array3, ref xprevNotes);
-                }
-            }
-            if (hasOverlapping)
-            {
-                Interaction.MsgBox(Strings.Messages.SaveWarning + "\r\n" + Strings.Messages.NoteOverlapError + "\r\n" + Strings.Messages.SavedFileWillContainErrors, MsgBoxStyle.Exclamation);
-            }
-            if (Operators.ConditionalCompareObjectGreater(Information.UBound(hBPM), Interaction.IIf(BPMx1296, 1295, 255), TextCompare: false))
-            {
-                Interaction.MsgBox(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(string.Concat(string.Concat(string.Concat(Strings.Messages.SaveWarning + "\r\n", Strings.Messages.BPMOverflowError), Conversions.ToString(Information.UBound(hBPM))), " > "), Interaction.IIf(BPMx1296, 1295, 255)), "\r\n"), Strings.Messages.SavedFileWillContainErrors), MsgBoxStyle.Exclamation);
-            }
-            if (Operators.ConditionalCompareObjectGreater(Information.UBound(hSTOP), Interaction.IIf(STOPx1296, 1295, 255), TextCompare: false))
-            {
-                Interaction.MsgBox(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(string.Concat(string.Concat(string.Concat(Strings.Messages.SaveWarning + "\r\n", Strings.Messages.STOPOverflowError), Conversions.ToString(Information.UBound(hSTOP))), " > "), Interaction.IIf(STOPx1296, 1295, 255)), "\r\n"), Strings.Messages.SavedFileWillContainErrors), MsgBoxStyle.Exclamation);
-            }
-            if (Information.UBound(hSCROLL) > 1295)
-            {
-                Interaction.MsgBox(Strings.Messages.SaveWarning + "\r\n" + Strings.Messages.SCROLLOverflowError + Conversions.ToString(Information.UBound(hSCROLL)) + " > " + Conversions.ToString(1295) + "\r\n" + Strings.Messages.SavedFileWillContainErrors, MsgBoxStyle.Exclamation);
-            }
-            string text2 = "\r\n*---------------------- EXPANSION FIELD\r\n" + TExpansion.Text + "\r\n\r\n";
-            if (Operators.CompareString(TExpansion.Text, "", TextCompare: false) == 0)
-            {
-                text2 = "";
-            }
-            string text3 = "*---------------------- MAIN DATA FIELD\r\n\r\n" + Microsoft.VisualBasic.Strings.Join(array, "") + "\r\n";
-            if (nTInput)
-            {
-                Notes = notes;
-                NTInput = true;
-            }
-            string text4 = GenerateHeaderMeta();
-            text4 += GenerateHeaderIndexedData();
-            return text4 + "\r\n" + text2 + "\r\n" + text3;
+        string[] array = new string[MeasureAtDisplacement(GreatestVPosition) + 1 + 1];
+        hBPM = new long[1];
+        hSTOP = new long[1];
+        hSCROLL = new long[1];
+        bool nTInput = NTInput;
+        Note[] notes = Notes;
+        if (nTInput)
+        {
+            NTInput = false;
+            ConvertNT2BMSE();
         }
+        Note[] xprevNotes = Array.Empty<Note>();
+        int num = MeasureAtDisplacement(GreatestVPosition) + 1;
+        for (int i = 0; i <= num; i++)
+        {
+            array[i] = "\r\n";
+            string text = Functions.WriteDecimalWithDot(MeasureLength[i] / 192.0);
+            if (MeasureLength[i] != 192.0)
+            {
+                array[i] = array[i] + "#" + Functions.Add3Zeros(i) + "02:" + text + "\r\n";
+            }
+            int LowerLimit = 0;
+            int UpperLimit = 0;
+            GetMeasureLimits(i, ref LowerLimit, ref UpperLimit);
+            if (UpperLimit - LowerLimit != 0)
+            {
+                int num3 = Information.UBound(xprevNotes);
+                Note[] array3 = new Note[UpperLimit - LowerLimit + num3 + 1];
+                for (int j = 0; j <= num3; j++)
+                {
+                    ref Note reference = ref array3[j];
+                    reference = xprevNotes[j];
+                }
+
+                int num6 = UpperLimit - 1;
+                for (int k = LowerLimit; k <= num6; k++)
+                {
+                    ref Note reference2 = ref array3[k - LowerLimit + xprevNotes.Length];
+                    reference2 = Notes[k];
+                }
+                int num7 = 0;
+                for (int l = 0; l < array3.Length; l++)
+                {
+                    Note note = array3[l];
+                    num7 = Math.Max(note.ColumnIndex, num7);
+                }
+                xprevNotes = Array.Empty<Note>();
+                string[] array5 = array;
+                string[] array6 = array5;
+                int num2 = i;
+                array6[num2] = array5[num2] + GenerateBackgroundTracks(i, ref hasOverlapping, array3, num7, ref xprevNotes);
+                array5 = array;
+                string[] array7 = array5;
+                num2 = i;
+                array7[num2] = array5[num2] + GenerateKeyTracks(i, ref hasOverlapping, array3, ref xprevNotes);
+            }
+        }
+        if (hasOverlapping)
+        {
+            Interaction.MsgBox(Strings.Messages.SaveWarning + "\r\n" + Strings.Messages.NoteOverlapError + "\r\n" + Strings.Messages.SavedFileWillContainErrors, MsgBoxStyle.Exclamation);
+        }
+        if (Operators.ConditionalCompareObjectGreater(Information.UBound(hBPM), Interaction.IIf(BPMx1296, 1295, 255), TextCompare: false))
+        {
+            Interaction.MsgBox(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(string.Concat(string.Concat(string.Concat(Strings.Messages.SaveWarning + "\r\n", Strings.Messages.BPMOverflowError), Conversions.ToString(Information.UBound(hBPM))), " > "), Interaction.IIf(BPMx1296, 1295, 255)), "\r\n"), Strings.Messages.SavedFileWillContainErrors), MsgBoxStyle.Exclamation);
+        }
+        if (Operators.ConditionalCompareObjectGreater(Information.UBound(hSTOP), Interaction.IIf(STOPx1296, 1295, 255), TextCompare: false))
+        {
+            Interaction.MsgBox(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(string.Concat(string.Concat(string.Concat(Strings.Messages.SaveWarning + "\r\n", Strings.Messages.STOPOverflowError), Conversions.ToString(Information.UBound(hSTOP))), " > "), Interaction.IIf(STOPx1296, 1295, 255)), "\r\n"), Strings.Messages.SavedFileWillContainErrors), MsgBoxStyle.Exclamation);
+        }
+        if (Information.UBound(hSCROLL) > 1295)
+        {
+            Interaction.MsgBox(Strings.Messages.SaveWarning + "\r\n" + Strings.Messages.SCROLLOverflowError + Conversions.ToString(Information.UBound(hSCROLL)) + " > " + Conversions.ToString(1295) + "\r\n" + Strings.Messages.SavedFileWillContainErrors, MsgBoxStyle.Exclamation);
+        }
+        string text2 = "\r\n*---------------------- EXPANSION FIELD\r\n" + TExpansion.Text + "\r\n\r\n";
+        if (Operators.CompareString(TExpansion.Text, "", TextCompare: false) == 0)
+        {
+            text2 = "";
+        }
+        string text3 = "*---------------------- MAIN DATA FIELD\r\n\r\n" + Microsoft.VisualBasic.Strings.Join(array, "") + "\r\n";
+        if (nTInput)
+        {
+            Notes = notes;
+            NTInput = true;
+        }
+        string text4 = GenerateHeaderMeta();
+        text4 += GenerateHeaderIndexedData();
+        return text4 + "\r\n" + text2 + "\r\n" + text3;
     }
 
     private string GenerateHeaderMeta()
     {
         string text = "\r\n*---------------------- HEADER FIELD\r\n\r\n";
-        text = text + "#PLAYER " + Conversions.ToString(checked(CHPlayer.SelectedIndex + 1)) + "\r\n";
+        text = text + "#PLAYER " + Conversions.ToString(CHPlayer.SelectedIndex + 1) + "\r\n";
         text = text + "#GENRE " + THGenre.Text + "\r\n";
         text = text + "#TITLE " + THTitle.Text + "\r\n";
         text = text + "#ARTIST " + THArtist.Text + "\r\n";
-        text = text + "#BPM " + Functions.WriteDecimalWithDot((double)Notes[0].Value / 10000.0) + "\r\n";
+        text = text + "#BPM " + Functions.WriteDecimalWithDot(Notes[0].Value / 10000.0) + "\r\n";
         text = text + "#PLAYLEVEL " + THPlayLevel.Text + "\r\n";
         text = text + "#RANK " + Conversions.ToString(CHRank.SelectedIndex) + "\r\n";
         text += "\r\n";
@@ -834,7 +829,7 @@ IL_0952:
         {
             text = text + "#COMMENT \"" + THComment.Text + "\"\r\n";
         }
-        text = ((CHLnObj.SelectedIndex <= 0) ? (text + "#LNTYPE 1\r\n") : (text + "#LNOBJ " + Functions.C10to36(CHLnObj.SelectedIndex) + "\r\n"));
+        text = CHLnObj.SelectedIndex <= 0 ? text + "#LNTYPE 1\r\n" : text + "#LNOBJ " + Functions.C10to36(CHLnObj.SelectedIndex) + "\r\n";
         return text + "\r\n";
     }
 
@@ -842,275 +837,267 @@ IL_0952:
     {
         string text = "";
         int num = Information.UBound(hWAV);
-        checked
+
+        for (int i = 1; i <= num; i++)
         {
-            for (int i = 1; i <= num; i++)
+            if (Operators.CompareString(hWAV[i], "", TextCompare: false) != 0)
             {
-                if (Operators.CompareString(hWAV[i], "", TextCompare: false) != 0)
-                {
-                    text = text + "#WAV" + Functions.C10to36(i) + " " + hWAV[i] + "\r\n";
-                }
+                text = text + "#WAV" + Functions.C10to36(i) + " " + hWAV[i] + "\r\n";
             }
-            int num2 = Information.UBound(hBPM);
-            for (int j = 1; j <= num2; j++)
-            {
-                text = Conversions.ToString(Operators.ConcatenateObject(text, Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject("#BPM", Interaction.IIf(BPMx1296, Functions.C10to36(j), Microsoft.VisualBasic.Strings.Mid("0" + Conversion.Hex(j), Microsoft.VisualBasic.Strings.Len(Conversion.Hex(j))))), " "), Functions.WriteDecimalWithDot((double)hBPM[j] / 10000.0)), "\r\n")));
-            }
-            int num3 = Information.UBound(hSTOP);
-            for (int k = 1; k <= num3; k++)
-            {
-                text = Conversions.ToString(Operators.ConcatenateObject(text, Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject("#STOP", Interaction.IIf(STOPx1296, Functions.C10to36(k), Microsoft.VisualBasic.Strings.Mid("0" + Conversion.Hex(k), Microsoft.VisualBasic.Strings.Len(Conversion.Hex(k))))), " "), Functions.WriteDecimalWithDot((double)hSTOP[k] / 10000.0)), "\r\n")));
-            }
-            int num4 = Information.UBound(hSCROLL);
-            for (int l = 1; l <= num4; l++)
-            {
-                text = text + "#SCROLL" + Functions.C10to36(l) + " " + Functions.WriteDecimalWithDot((double)hSCROLL[l] / 10000.0) + "\r\n";
-            }
-            return text;
         }
+        int num2 = Information.UBound(hBPM);
+        for (int j = 1; j <= num2; j++)
+        {
+            text = Conversions.ToString(Operators.ConcatenateObject(text, Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject("#BPM", Interaction.IIf(BPMx1296, Functions.C10to36(j), Microsoft.VisualBasic.Strings.Mid("0" + Conversion.Hex(j), Microsoft.VisualBasic.Strings.Len(Conversion.Hex(j))))), " "), Functions.WriteDecimalWithDot(hBPM[j] / 10000.0)), "\r\n")));
+        }
+        int num3 = Information.UBound(hSTOP);
+        for (int k = 1; k <= num3; k++)
+        {
+            text = Conversions.ToString(Operators.ConcatenateObject(text, Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject("#STOP", Interaction.IIf(STOPx1296, Functions.C10to36(k), Microsoft.VisualBasic.Strings.Mid("0" + Conversion.Hex(k), Microsoft.VisualBasic.Strings.Len(Conversion.Hex(k))))), " "), Functions.WriteDecimalWithDot(hSTOP[k] / 10000.0)), "\r\n")));
+        }
+        int num4 = Information.UBound(hSCROLL);
+        for (int l = 1; l <= num4; l++)
+        {
+            text = text + "#SCROLL" + Functions.C10to36(l) + " " + Functions.WriteDecimalWithDot(hSCROLL[l] / 10000.0) + "\r\n";
+        }
+        return text;
     }
 
     private void GetMeasureLimits(int MeasureIndex, ref int LowerLimit, ref int UpperLimit)
     {
         int num = Information.UBound(Notes);
         LowerLimit = 0;
-        checked
+
+        for (int i = 1; i <= num; i++)
         {
-            for (int i = 1; i <= num; i++)
+            if (MeasureAtDisplacement(Notes[i].VPosition) >= MeasureIndex)
             {
-                if (MeasureAtDisplacement(Notes[i].VPosition) >= MeasureIndex)
-                {
-                    LowerLimit = i;
-                    break;
-                }
+                LowerLimit = i;
+                break;
             }
-            UpperLimit = 0;
-            int num3 = LowerLimit;
-            for (int j = num3; j <= num; j++)
+        }
+        UpperLimit = 0;
+        int num3 = LowerLimit;
+        for (int j = num3; j <= num; j++)
+        {
+            if (MeasureAtDisplacement(Notes[j].VPosition) > MeasureIndex)
             {
-                if (MeasureAtDisplacement(Notes[j].VPosition) > MeasureIndex)
-                {
-                    UpperLimit = j;
-                    break;
-                }
+                UpperLimit = j;
+                break;
             }
-            if (UpperLimit < LowerLimit)
-            {
-                UpperLimit = num + 1;
-            }
+        }
+        if (UpperLimit < LowerLimit)
+        {
+            UpperLimit = num + 1;
         }
     }
 
     private string GenerateKeyTracks(int MeasureIndex, ref bool hasOverlapping, Note[] NotesInMeasure, ref Note[] xprevNotes)
     {
         string text = "";
-        checked
+
+        object CounterResult3 = default(object);
+        object LoopForResult3 = default(object);
+        object CounterResult2 = default(object);
+        object LoopForResult2 = default(object);
+        object CounterResult = default(object);
+        object LoopForResult = default(object);
+        foreach (string text2 in BMSChannelList)
         {
-            object CounterResult3 = default(object);
-            object LoopForResult3 = default(object);
-            object CounterResult2 = default(object);
-            object LoopForResult2 = default(object);
-            object CounterResult = default(object);
-            object LoopForResult = default(object);
-            foreach (string text2 in BMSChannelList)
+            object[] array = Array.Empty<object>();
+            object[] array2 = Array.Empty<object>();
+            if (Operators.CompareString(text2, "01", TextCompare: false) == 0)
             {
-                object[] array = Array.Empty<object>();
-                object[] array2 = Array.Empty<object>();
-                if (Operators.CompareString(text2, "01", TextCompare: false) == 0)
-                {
-                    continue;
-                }
-                int num = Information.UBound(NotesInMeasure);
-                for (int j = 0; j <= num; j++)
-                {
-                    Note note = NotesInMeasure[j];
-                    if (Operators.CompareString(GetBMSChannelBy(note), text2, TextCompare: false) != 0)
-                    {
-                        continue;
-                    }
-                    array = (object[])Utils.CopyArray(array, new object[Information.UBound(array) + 1 + 1]);
-                    array2 = (object[])Utils.CopyArray(array2, new object[Information.UBound(array2) + 1 + 1]);
-                    array[Information.UBound(array)] = note.VPosition - MeasureBottom[MeasureAtDisplacement(note.VPosition)];
-                    if (Operators.ConditionalCompareObjectLess(array[Information.UBound(array)], 0, TextCompare: false))
-                    {
-                        array[Information.UBound(array)] = 0;
-                    }
-                    switch (text2)
-                    {
-                        case "03":
-                            array2[Information.UBound(array2)] = unchecked(Microsoft.VisualBasic.Strings.Mid("0" + Conversion.Hex(note.Value / 10000), Microsoft.VisualBasic.Strings.Len(Conversion.Hex(note.Value / 10000))));
-                            break;
-                        case "08":
-                            if (ObjectFlowControl.ForLoopControl.ForLoopInitObj(CounterResult3, 1, Information.UBound(hBPM), 1, ref LoopForResult3, ref CounterResult3))
-                            {
-                                while (note.Value != hBPM[Conversions.ToInteger(CounterResult3)] && ObjectFlowControl.ForLoopControl.ForNextCheckObj(CounterResult3, LoopForResult3, ref CounterResult3))
-                                {
-                                }
-                            }
-                            if (Operators.ConditionalCompareObjectGreater(CounterResult3, Information.UBound(hBPM), TextCompare: false))
-                            {
-                                hBPM = (long[])Utils.CopyArray(hBPM, new long[Information.UBound(hBPM) + 1 + 1]);
-                                hBPM[Information.UBound(hBPM)] = note.Value;
-                            }
-                            array2[Information.UBound(array2)] = RuntimeHelpers.GetObjectValue(Interaction.IIf(BPMx1296, Functions.C10to36(Conversions.ToLong(CounterResult3)), Microsoft.VisualBasic.Strings.Mid("0" + Conversion.Hex(RuntimeHelpers.GetObjectValue(CounterResult3)), Microsoft.VisualBasic.Strings.Len(Conversion.Hex(RuntimeHelpers.GetObjectValue(CounterResult3))))));
-                            break;
-                        case "09":
-                            if (ObjectFlowControl.ForLoopControl.ForLoopInitObj(CounterResult2, 1, Information.UBound(hSTOP), 1, ref LoopForResult2, ref CounterResult2))
-                            {
-                                while (note.Value != hSTOP[Conversions.ToInteger(CounterResult2)] && ObjectFlowControl.ForLoopControl.ForNextCheckObj(CounterResult2, LoopForResult2, ref CounterResult2))
-                                {
-                                }
-                            }
-                            if (Operators.ConditionalCompareObjectGreater(CounterResult2, Information.UBound(hSTOP), TextCompare: false))
-                            {
-                                hSTOP = (long[])Utils.CopyArray(hSTOP, new long[Information.UBound(hSTOP) + 1 + 1]);
-                                hSTOP[Information.UBound(hSTOP)] = note.Value;
-                            }
-                            array2[Information.UBound(array2)] = RuntimeHelpers.GetObjectValue(Interaction.IIf(STOPx1296, Functions.C10to36(Conversions.ToLong(CounterResult2)), Microsoft.VisualBasic.Strings.Mid("0" + Conversion.Hex(RuntimeHelpers.GetObjectValue(CounterResult2)), Microsoft.VisualBasic.Strings.Len(Conversion.Hex(RuntimeHelpers.GetObjectValue(CounterResult2))))));
-                            break;
-                        case "SC":
-                            if (ObjectFlowControl.ForLoopControl.ForLoopInitObj(CounterResult, 1, Information.UBound(hSCROLL), 1, ref LoopForResult, ref CounterResult))
-                            {
-                                while (note.Value != hSCROLL[Conversions.ToInteger(CounterResult)] && ObjectFlowControl.ForLoopControl.ForNextCheckObj(CounterResult, LoopForResult, ref CounterResult))
-                                {
-                                }
-                            }
-                            if (Operators.ConditionalCompareObjectGreater(CounterResult, Information.UBound(hSCROLL), TextCompare: false))
-                            {
-                                hSCROLL = (long[])Utils.CopyArray(hSCROLL, new long[Information.UBound(hSCROLL) + 1 + 1]);
-                                hSCROLL[Information.UBound(hSCROLL)] = note.Value;
-                            }
-                            array2[Information.UBound(array2)] = Functions.C10to36(Conversions.ToLong(CounterResult));
-                            break;
-                        default:
-                            array2[Information.UBound(array2)] = Functions.C10to36(unchecked(note.Value / 10000));
-                            break;
-                    }
-                }
-                if (array.Length == 0)
-                {
-                    continue;
-                }
-                double num2 = MeasureLength[MeasureIndex];
-                int num3 = Information.UBound(array);
-                for (int k = 0; k <= num3; k++)
-                {
-                    if (Operators.ConditionalCompareObjectGreater(array[k], 0, TextCompare: false))
-                    {
-                        num2 = GCD(num2, Conversions.ToDouble(array[k]));
-                    }
-                }
-                string[] array3 = new string[(int)Math.Round(MeasureLength[MeasureIndex] / num2) - 1 + 1];
-                int num4 = Information.UBound(array3);
-                for (int l = 0; l <= num4; l++)
-                {
-                    array3[l] = "00";
-                }
-                int num5 = Information.UBound(array);
-                for (int m = 0; m <= num5; m++)
-                {
-                    if (Conversions.ToInteger(Operators.DivideObject(array[m], num2)) > Information.UBound(array3))
-                    {
-                        xprevNotes = (Note[])Utils.CopyArray(xprevNotes, new Note[Information.UBound(xprevNotes) + 1 + 1]);
-                        Note[] array4 = xprevNotes;
-                        int num6 = Information.UBound(xprevNotes);
-                        array4[num6].ColumnIndex = BMSChannelToColumn(BMSChannelList[Conversions.ToInteger(text2)]);
-                        array4[num6].LongNote = BMS.IsChannelLongNote(BMSChannelList[Conversions.ToInteger(text2)]);
-                        array4[num6].Hidden = BMS.IsChannelHidden(BMSChannelList[Conversions.ToInteger(text2)]);
-                        array4[num6].VPosition = MeasureBottom[MeasureIndex];
-                        array4[num6].Value = Functions.C36to10(Conversions.ToString(array2[m]));
-                        if (Operators.CompareString(BMSChannelList[Conversions.ToInteger(text2)], "08", TextCompare: false) == 0)
-                        {
-                            xprevNotes[Information.UBound(xprevNotes)].Value = Conversions.ToLong(Interaction.IIf(BPMx1296, hBPM[Functions.C36to10(Conversions.ToString(array2[m]))], hBPM[Convert.ToInt32(Conversions.ToString(array2[m]), 16)]));
-                        }
-                        if (Operators.CompareString(BMSChannelList[Conversions.ToInteger(text2)], "09", TextCompare: false) == 0)
-                        {
-                            xprevNotes[Information.UBound(xprevNotes)].Value = Conversions.ToLong(Interaction.IIf(STOPx1296, hSTOP[Functions.C36to10(Conversions.ToString(array2[m]))], hSTOP[Convert.ToInt32(Conversions.ToString(array2[m]), 16)]));
-                        }
-                        if (Operators.CompareString(BMSChannelList[Conversions.ToInteger(text2)], "SC", TextCompare: false) == 0)
-                        {
-                            xprevNotes[Information.UBound(xprevNotes)].Value = hSCROLL[Functions.C36to10(Conversions.ToString(array2[m]))];
-                        }
-                    }
-                    else
-                    {
-                        if (Operators.CompareString(array3[Conversions.ToInteger(Operators.DivideObject(array[m], num2))], "00", TextCompare: false) != 0)
-                        {
-                            hasOverlapping = true;
-                        }
-                        array3[Conversions.ToInteger(Operators.DivideObject(array[m], num2))] = Conversions.ToString(array2[m]);
-                    }
-                }
-                text = text + "#" + Functions.Add3Zeros(MeasureIndex) + text2 + ":" + Microsoft.VisualBasic.Strings.Join(array3, "") + "\r\n";
+                continue;
             }
-            return text;
+            int num = Information.UBound(NotesInMeasure);
+            for (int j = 0; j <= num; j++)
+            {
+                Note note = NotesInMeasure[j];
+                if (Operators.CompareString(GetBMSChannelBy(note), text2, TextCompare: false) != 0)
+                {
+                    continue;
+                }
+                array = (object[])Utils.CopyArray(array, new object[Information.UBound(array) + 1 + 1]);
+                array2 = (object[])Utils.CopyArray(array2, new object[Information.UBound(array2) + 1 + 1]);
+                array[Information.UBound(array)] = note.VPosition - MeasureBottom[MeasureAtDisplacement(note.VPosition)];
+                if (Operators.ConditionalCompareObjectLess(array[Information.UBound(array)], 0, TextCompare: false))
+                {
+                    array[Information.UBound(array)] = 0;
+                }
+                switch (text2)
+                {
+                    case "03":
+                        array2[Information.UBound(array2)] = Microsoft.VisualBasic.Strings.Mid("0" + Conversion.Hex(note.Value / 10000), Microsoft.VisualBasic.Strings.Len(Conversion.Hex(note.Value / 10000)));
+                        break;
+                    case "08":
+                        if (ObjectFlowControl.ForLoopControl.ForLoopInitObj(CounterResult3, 1, Information.UBound(hBPM), 1, ref LoopForResult3, ref CounterResult3))
+                        {
+                            while (note.Value != hBPM[Conversions.ToInteger(CounterResult3)] && ObjectFlowControl.ForLoopControl.ForNextCheckObj(CounterResult3, LoopForResult3, ref CounterResult3))
+                            {
+                            }
+                        }
+                        if (Operators.ConditionalCompareObjectGreater(CounterResult3, Information.UBound(hBPM), TextCompare: false))
+                        {
+                            hBPM = (long[])Utils.CopyArray(hBPM, new long[Information.UBound(hBPM) + 1 + 1]);
+                            hBPM[Information.UBound(hBPM)] = note.Value;
+                        }
+                        array2[Information.UBound(array2)] = RuntimeHelpers.GetObjectValue(Interaction.IIf(BPMx1296, Functions.C10to36(Conversions.ToLong(CounterResult3)), Microsoft.VisualBasic.Strings.Mid("0" + Conversion.Hex(RuntimeHelpers.GetObjectValue(CounterResult3)), Microsoft.VisualBasic.Strings.Len(Conversion.Hex(RuntimeHelpers.GetObjectValue(CounterResult3))))));
+                        break;
+                    case "09":
+                        if (ObjectFlowControl.ForLoopControl.ForLoopInitObj(CounterResult2, 1, Information.UBound(hSTOP), 1, ref LoopForResult2, ref CounterResult2))
+                        {
+                            while (note.Value != hSTOP[Conversions.ToInteger(CounterResult2)] && ObjectFlowControl.ForLoopControl.ForNextCheckObj(CounterResult2, LoopForResult2, ref CounterResult2))
+                            {
+                            }
+                        }
+                        if (Operators.ConditionalCompareObjectGreater(CounterResult2, Information.UBound(hSTOP), TextCompare: false))
+                        {
+                            hSTOP = (long[])Utils.CopyArray(hSTOP, new long[Information.UBound(hSTOP) + 1 + 1]);
+                            hSTOP[Information.UBound(hSTOP)] = note.Value;
+                        }
+                        array2[Information.UBound(array2)] = RuntimeHelpers.GetObjectValue(Interaction.IIf(STOPx1296, Functions.C10to36(Conversions.ToLong(CounterResult2)), Microsoft.VisualBasic.Strings.Mid("0" + Conversion.Hex(RuntimeHelpers.GetObjectValue(CounterResult2)), Microsoft.VisualBasic.Strings.Len(Conversion.Hex(RuntimeHelpers.GetObjectValue(CounterResult2))))));
+                        break;
+                    case "SC":
+                        if (ObjectFlowControl.ForLoopControl.ForLoopInitObj(CounterResult, 1, Information.UBound(hSCROLL), 1, ref LoopForResult, ref CounterResult))
+                        {
+                            while (note.Value != hSCROLL[Conversions.ToInteger(CounterResult)] && ObjectFlowControl.ForLoopControl.ForNextCheckObj(CounterResult, LoopForResult, ref CounterResult))
+                            {
+                            }
+                        }
+                        if (Operators.ConditionalCompareObjectGreater(CounterResult, Information.UBound(hSCROLL), TextCompare: false))
+                        {
+                            hSCROLL = (long[])Utils.CopyArray(hSCROLL, new long[Information.UBound(hSCROLL) + 1 + 1]);
+                            hSCROLL[Information.UBound(hSCROLL)] = note.Value;
+                        }
+                        array2[Information.UBound(array2)] = Functions.C10to36(Conversions.ToLong(CounterResult));
+                        break;
+                    default:
+                        array2[Information.UBound(array2)] = Functions.C10to36(note.Value / 10000);
+                        break;
+                }
+            }
+            if (array.Length == 0)
+            {
+                continue;
+            }
+            double num2 = MeasureLength[MeasureIndex];
+            int num3 = Information.UBound(array);
+            for (int k = 0; k <= num3; k++)
+            {
+                if (Operators.ConditionalCompareObjectGreater(array[k], 0, TextCompare: false))
+                {
+                    num2 = GCD(num2, Conversions.ToDouble(array[k]));
+                }
+            }
+            string[] array3 = new string[(int)Math.Round(MeasureLength[MeasureIndex] / num2) - 1 + 1];
+            int num4 = Information.UBound(array3);
+            for (int l = 0; l <= num4; l++)
+            {
+                array3[l] = "00";
+            }
+            int num5 = Information.UBound(array);
+            for (int m = 0; m <= num5; m++)
+            {
+                if (Conversions.ToInteger(Operators.DivideObject(array[m], num2)) > Information.UBound(array3))
+                {
+                    xprevNotes = (Note[])Utils.CopyArray(xprevNotes, new Note[Information.UBound(xprevNotes) + 1 + 1]);
+                    Note[] array4 = xprevNotes;
+                    int num6 = Information.UBound(xprevNotes);
+                    array4[num6].ColumnIndex = BMSChannelToColumn(BMSChannelList[Conversions.ToInteger(text2)]);
+                    array4[num6].LongNote = BMS.IsChannelLongNote(BMSChannelList[Conversions.ToInteger(text2)]);
+                    array4[num6].Hidden = BMS.IsChannelHidden(BMSChannelList[Conversions.ToInteger(text2)]);
+                    array4[num6].VPosition = MeasureBottom[MeasureIndex];
+                    array4[num6].Value = Functions.C36to10(Conversions.ToString(array2[m]));
+                    if (Operators.CompareString(BMSChannelList[Conversions.ToInteger(text2)], "08", TextCompare: false) == 0)
+                    {
+                        xprevNotes[Information.UBound(xprevNotes)].Value = Conversions.ToLong(Interaction.IIf(BPMx1296, hBPM[Functions.C36to10(Conversions.ToString(array2[m]))], hBPM[Convert.ToInt32(Conversions.ToString(array2[m]), 16)]));
+                    }
+                    if (Operators.CompareString(BMSChannelList[Conversions.ToInteger(text2)], "09", TextCompare: false) == 0)
+                    {
+                        xprevNotes[Information.UBound(xprevNotes)].Value = Conversions.ToLong(Interaction.IIf(STOPx1296, hSTOP[Functions.C36to10(Conversions.ToString(array2[m]))], hSTOP[Convert.ToInt32(Conversions.ToString(array2[m]), 16)]));
+                    }
+                    if (Operators.CompareString(BMSChannelList[Conversions.ToInteger(text2)], "SC", TextCompare: false) == 0)
+                    {
+                        xprevNotes[Information.UBound(xprevNotes)].Value = hSCROLL[Functions.C36to10(Conversions.ToString(array2[m]))];
+                    }
+                }
+                else
+                {
+                    if (Operators.CompareString(array3[Conversions.ToInteger(Operators.DivideObject(array[m], num2))], "00", TextCompare: false) != 0)
+                    {
+                        hasOverlapping = true;
+                    }
+                    array3[Conversions.ToInteger(Operators.DivideObject(array[m], num2))] = Conversions.ToString(array2[m]);
+                }
+            }
+            text = text + "#" + Functions.Add3Zeros(MeasureIndex) + text2 + ":" + Microsoft.VisualBasic.Strings.Join(array3, "") + "\r\n";
         }
+        return text;
     }
 
     private string GenerateBackgroundTracks(int MeasureIndex, ref bool hasOverlapping, Note[] NotesInMeasure, int GreatestColumn, ref Note[] xprevNotes)
     {
         string text = "";
-        checked
+
+        for (int i = 27; i <= GreatestColumn; i++)
         {
-            for (int i = 27; i <= GreatestColumn; i++)
+            double[] array = Array.Empty<double>();
+            string[] array2 = Array.Empty<string>();
+            int num = Information.UBound(NotesInMeasure);
+            for (int j = 0; j <= num; j++)
             {
-                double[] array = Array.Empty<double>();
-                string[] array2 = Array.Empty<string>();
-                int num = Information.UBound(NotesInMeasure);
-                for (int j = 0; j <= num; j++)
+                if (NotesInMeasure[j].ColumnIndex == i)
                 {
-                    if (NotesInMeasure[j].ColumnIndex == i)
+                    array = (double[])Utils.CopyArray(array, new double[Information.UBound(array) + 1 + 1]);
+                    array2 = (string[])Utils.CopyArray(array2, new string[Information.UBound(array2) + 1 + 1]);
+                    array[Information.UBound(array)] = NotesInMeasure[j].VPosition - MeasureBottom[MeasureAtDisplacement(NotesInMeasure[j].VPosition)];
+                    if (array[Information.UBound(array)] < 0.0)
                     {
-                        array = (double[])Utils.CopyArray(array, new double[Information.UBound(array) + 1 + 1]);
-                        array2 = (string[])Utils.CopyArray(array2, new string[Information.UBound(array2) + 1 + 1]);
-                        array[Information.UBound(array)] = NotesInMeasure[j].VPosition - MeasureBottom[MeasureAtDisplacement(NotesInMeasure[j].VPosition)];
-                        if (array[Information.UBound(array)] < 0.0)
-                        {
-                            array[Information.UBound(array)] = 0.0;
-                        }
-                        array2[Information.UBound(array2)] = Functions.C10to36(unchecked(NotesInMeasure[j].Value / 10000));
+                        array[Information.UBound(array)] = 0.0;
                     }
+                    array2[Information.UBound(array2)] = Functions.C10to36(NotesInMeasure[j].Value / 10000);
                 }
-                double num2 = MeasureLength[MeasureIndex];
-                int num3 = Information.UBound(array);
-                for (int k = 0; k <= num3; k++)
-                {
-                    if (array[k] > 0.0)
-                    {
-                        num2 = GCD(num2, array[k]);
-                    }
-                }
-                string[] array3 = new string[(int)Math.Round(MeasureLength[MeasureIndex] / num2) - 1 + 1];
-                int num4 = Information.UBound(array3);
-                for (int l = 0; l <= num4; l++)
-                {
-                    array3[l] = "00";
-                }
-                int num5 = Information.UBound(array);
-                for (int m = 0; m <= num5; m++)
-                {
-                    if ((int)Math.Round(array[m] / num2) > Information.UBound(array3))
-                    {
-                        xprevNotes = (Note[])Utils.CopyArray(xprevNotes, new Note[Information.UBound(xprevNotes) + 1 + 1]);
-                        Note[] array4 = xprevNotes;
-                        int num6 = Information.UBound(xprevNotes);
-                        array4[num6].ColumnIndex = i;
-                        array4[num6].VPosition = MeasureBottom[MeasureIndex];
-                        array4[num6].Value = Functions.C36to10(array2[m]);
-                    }
-                    else
-                    {
-                        if (Operators.CompareString(array3[(int)Math.Round(array[m] / num2)], "00", TextCompare: false) != 0)
-                        {
-                            hasOverlapping = true;
-                        }
-                        array3[(int)Math.Round(array[m] / num2)] = array2[m];
-                    }
-                }
-                text = text + "#" + Functions.Add3Zeros(MeasureIndex) + "01:" + Microsoft.VisualBasic.Strings.Join(array3, "") + "\r\n";
             }
-            return text;
+            double num2 = MeasureLength[MeasureIndex];
+            int num3 = Information.UBound(array);
+            for (int k = 0; k <= num3; k++)
+            {
+                if (array[k] > 0.0)
+                {
+                    num2 = GCD(num2, array[k]);
+                }
+            }
+            string[] array3 = new string[(int)Math.Round(MeasureLength[MeasureIndex] / num2) - 1 + 1];
+            int num4 = Information.UBound(array3);
+            for (int l = 0; l <= num4; l++)
+            {
+                array3[l] = "00";
+            }
+            int num5 = Information.UBound(array);
+            for (int m = 0; m <= num5; m++)
+            {
+                if ((int)Math.Round(array[m] / num2) > Information.UBound(array3))
+                {
+                    xprevNotes = (Note[])Utils.CopyArray(xprevNotes, new Note[Information.UBound(xprevNotes) + 1 + 1]);
+                    Note[] array4 = xprevNotes;
+                    int num6 = Information.UBound(xprevNotes);
+                    array4[num6].ColumnIndex = i;
+                    array4[num6].VPosition = MeasureBottom[MeasureIndex];
+                    array4[num6].Value = Functions.C36to10(array2[m]);
+                }
+                else
+                {
+                    if (Operators.CompareString(array3[(int)Math.Round(array[m] / num2)], "00", TextCompare: false) != 0)
+                    {
+                        hasOverlapping = true;
+                    }
+                    array3[(int)Math.Round(array[m] / num2)] = array2[m];
+                }
+            }
+            text = text + "#" + Functions.Add3Zeros(MeasureIndex) + "01:" + Microsoft.VisualBasic.Strings.Join(array3, "") + "\r\n";
         }
+        return text;
     }
 
     private bool OpenSM(string xStrAll)
@@ -1118,413 +1105,409 @@ IL_0952:
         KMouseOver = -1;
         string[] array = Microsoft.VisualBasic.Strings.Split(xStrAll, "\r\n");
         int num = Information.UBound(array);
-        checked
+
+        for (int i = 0; i <= num; i++)
         {
-            for (int i = 0; i <= num; i++)
+            if (array[i].Contains("//"))
             {
-                if (array[i].Contains("//"))
+                array[i] = Microsoft.VisualBasic.Strings.Mid(array[i], 1, Microsoft.VisualBasic.Strings.InStr(array[i], "//") - 1);
+            }
+        }
+        xStrAll = Microsoft.VisualBasic.Strings.Join(array, "");
+        array = Microsoft.VisualBasic.Strings.Split(xStrAll, ";");
+        int num2 = 0;
+        int num3 = 0;
+        string[] array2 = Microsoft.VisualBasic.Strings.Split(xStrAll, "#NOTES:");
+        string[] array3 = Array.Empty<string>();
+        if (array2.Length > 2)
+        {
+            array3 = (string[])Utils.CopyArray(array3, new string[Information.UBound(array2) - 1 + 1]);
+            int num4 = Information.UBound(array2);
+            for (int j = 1; j <= num4; j++)
+            {
+                array2[j] = Microsoft.VisualBasic.Strings.Mid(array2[j], Microsoft.VisualBasic.Strings.InStr(array2[j], ":") + 1);
+                array2[j] = Microsoft.VisualBasic.Strings.Mid(array2[j], Microsoft.VisualBasic.Strings.InStr(array2[j], ":") + 1).Trim();
+                array3[j - 1] = Microsoft.VisualBasic.Strings.Mid(array2[j], 1, Microsoft.VisualBasic.Strings.InStr(array2[j], ":") - 1);
+                array2[j] = Microsoft.VisualBasic.Strings.Mid(array2[j], Microsoft.VisualBasic.Strings.InStr(array2[j], ":") + 1).Trim();
+                int num5 = j - 1;
+                array3[num5] = array3[num5] + " : " + Microsoft.VisualBasic.Strings.Mid(array2[j], 1, Microsoft.VisualBasic.Strings.InStr(array2[j], ":") - 1);
+            }
+            dgImportSM dgImportSM2 = new dgImportSM(array3);
+            if (dgImportSM2.ShowDialog() == DialogResult.Cancel)
+            {
+                return true;
+            }
+            num2 = dgImportSM2.iResult;
+        }
+        Notes = new Note[1];
+        mColumn = new int[1000];
+        hWAV = new string[1296];
+        hBPM = new long[1296];
+        hSTOP = new long[1296];
+        hSCROLL = new long[1296];
+        InitializeNewBMS();
+        Note[] notes = Notes;
+        int num6 = 0;
+        notes[num6].ColumnIndex = 2;
+        notes[num6].VPosition = -1.0;
+        notes[num6].Value = 1200000L;
+        string[] array5 = array;
+        foreach (string text in array5)
+        {
+            if (Microsoft.VisualBasic.Strings.UCase(text).StartsWith("#TITLE:"))
+            {
+                THTitle.Text = Microsoft.VisualBasic.Strings.Mid(text, Microsoft.VisualBasic.Strings.Len("#TITLE:") + 1);
+            }
+            else if (Microsoft.VisualBasic.Strings.UCase(text).StartsWith("#SUBTITLE:"))
+            {
+                if (!Microsoft.VisualBasic.Strings.UCase(text).EndsWith("#SUBTITLE:"))
                 {
-                    array[i] = Microsoft.VisualBasic.Strings.Mid(array[i], 1, Microsoft.VisualBasic.Strings.InStr(array[i], "//") - 1);
+                    TextBox tHTitle = THTitle;
+                    tHTitle.Text = tHTitle.Text + " " + Microsoft.VisualBasic.Strings.Mid(text, Microsoft.VisualBasic.Strings.Len("#SUBTITLE:") + 1);
                 }
             }
-            xStrAll = Microsoft.VisualBasic.Strings.Join(array, "");
-            array = Microsoft.VisualBasic.Strings.Split(xStrAll, ";");
-            int num2 = 0;
-            int num3 = 0;
-            string[] array2 = Microsoft.VisualBasic.Strings.Split(xStrAll, "#NOTES:");
-            string[] array3 = Array.Empty<string>();
-            if (array2.Length > 2)
+            else if (Microsoft.VisualBasic.Strings.UCase(text).StartsWith("#ARTIST:"))
             {
-                array3 = (string[])Utils.CopyArray(array3, new string[Information.UBound(array2) - 1 + 1]);
-                int num4 = Information.UBound(array2);
-                for (int j = 1; j <= num4; j++)
-                {
-                    array2[j] = Microsoft.VisualBasic.Strings.Mid(array2[j], Microsoft.VisualBasic.Strings.InStr(array2[j], ":") + 1);
-                    array2[j] = Microsoft.VisualBasic.Strings.Mid(array2[j], Microsoft.VisualBasic.Strings.InStr(array2[j], ":") + 1).Trim();
-                    array3[j - 1] = Microsoft.VisualBasic.Strings.Mid(array2[j], 1, Microsoft.VisualBasic.Strings.InStr(array2[j], ":") - 1);
-                    array2[j] = Microsoft.VisualBasic.Strings.Mid(array2[j], Microsoft.VisualBasic.Strings.InStr(array2[j], ":") + 1).Trim();
-                    int num5 = j - 1;
-                    array3[num5] = array3[num5] + " : " + Microsoft.VisualBasic.Strings.Mid(array2[j], 1, Microsoft.VisualBasic.Strings.InStr(array2[j], ":") - 1);
-                }
-                dgImportSM dgImportSM2 = new dgImportSM(array3);
-                if (dgImportSM2.ShowDialog() == DialogResult.Cancel)
-                {
-                    return true;
-                }
-                num2 = dgImportSM2.iResult;
+                THArtist.Text = Microsoft.VisualBasic.Strings.Mid(text, Microsoft.VisualBasic.Strings.Len("#ARTIST:") + 1);
             }
-            Notes = new Note[1];
-            mColumn = new int[1000];
-            hWAV = new string[1296];
-            hBPM = new long[1296];
-            hSTOP = new long[1296];
-            hSCROLL = new long[1296];
-            InitializeNewBMS();
-            Note[] notes = Notes;
-            int num6 = 0;
-            notes[num6].ColumnIndex = 2;
-            notes[num6].VPosition = -1.0;
-            notes[num6].Value = 1200000L;
-            string[] array5 = array;
-            foreach (string text in array5)
+            else if (Microsoft.VisualBasic.Strings.UCase(text).StartsWith("#GENRE:"))
             {
-                if (Microsoft.VisualBasic.Strings.UCase(text).StartsWith("#TITLE:"))
+                THGenre.Text = Microsoft.VisualBasic.Strings.Mid(text, Microsoft.VisualBasic.Strings.Len("#GENRE:") + 1);
+            }
+            else if (Microsoft.VisualBasic.Strings.UCase(text).StartsWith("#BPMS:"))
+            {
+                string expression = Microsoft.VisualBasic.Strings.Mid(text, Microsoft.VisualBasic.Strings.Len("#BPMS:") + 1);
+                string[] array6 = Microsoft.VisualBasic.Strings.Split(expression, ",");
+                int num7 = Information.UBound(array6);
+                for (int l = 0; l <= num7; l++)
                 {
-                    THTitle.Text = Microsoft.VisualBasic.Strings.Mid(text, Microsoft.VisualBasic.Strings.Len("#TITLE:") + 1);
-                }
-                else if (Microsoft.VisualBasic.Strings.UCase(text).StartsWith("#SUBTITLE:"))
-                {
-                    if (!Microsoft.VisualBasic.Strings.UCase(text).EndsWith("#SUBTITLE:"))
+                    double num8 = Conversions.ToDouble(Microsoft.VisualBasic.Strings.Mid(array6[l], 1, Microsoft.VisualBasic.Strings.InStr(array6[l], "=") - 1));
+                    double num9 = Conversions.ToDouble(Microsoft.VisualBasic.Strings.Mid(array6[l], Microsoft.VisualBasic.Strings.InStr(array6[l], "=") + 1));
+                    if (num8 != 0.0)
                     {
-                        TextBox tHTitle = THTitle;
-                        tHTitle.Text = tHTitle.Text + " " + Microsoft.VisualBasic.Strings.Mid(text, Microsoft.VisualBasic.Strings.Len("#SUBTITLE:") + 1);
+                        Notes = (Note[])Utils.CopyArray(Notes, new Note[Notes.Length + 1]);
+                        Note[] notes2 = Notes;
+                        int num10 = Information.UBound(Notes);
+                        notes2[num10].ColumnIndex = 2;
+                        notes2[num10].VPosition = num8 * 48.0;
+                        notes2[num10].Value = (long)Math.Round(num9 * 10000.0);
+                    }
+                    else
+                    {
+                        Notes[0].Value = (long)Math.Round(num9 * 10000.0);
                     }
                 }
-                else if (Microsoft.VisualBasic.Strings.UCase(text).StartsWith("#ARTIST:"))
+            }
+            else
+            {
+                if (!Microsoft.VisualBasic.Strings.UCase(text).StartsWith("#NOTES:"))
                 {
-                    THArtist.Text = Microsoft.VisualBasic.Strings.Mid(text, Microsoft.VisualBasic.Strings.Len("#ARTIST:") + 1);
+                    continue;
                 }
-                else if (Microsoft.VisualBasic.Strings.UCase(text).StartsWith("#GENRE:"))
+                if (num3 != num2)
                 {
-                    THGenre.Text = Microsoft.VisualBasic.Strings.Mid(text, Microsoft.VisualBasic.Strings.Len("#GENRE:") + 1);
+                    num3++;
+                    continue;
                 }
-                else if (Microsoft.VisualBasic.Strings.UCase(text).StartsWith("#BPMS:"))
+                num3++;
+                string expression2 = Microsoft.VisualBasic.Strings.Mid(text, Microsoft.VisualBasic.Strings.Len("#NOTES:") + 1);
+                string[] array7 = Microsoft.VisualBasic.Strings.Split(expression2, ":");
+                int num11 = Information.UBound(array7);
+                for (int m = 0; m <= num11; m++)
                 {
-                    string expression = Microsoft.VisualBasic.Strings.Mid(text, Microsoft.VisualBasic.Strings.Len("#BPMS:") + 1);
-                    string[] array6 = Microsoft.VisualBasic.Strings.Split(expression, ",");
-                    int num7 = Information.UBound(array6);
-                    for (int l = 0; l <= num7; l++)
+                    array7[m] = array7[m].Trim();
+                }
+                if (array7.Length != 6)
+                {
+                    continue;
+                }
+                THPlayLevel.Text = array7[3];
+                string[] array8 = Microsoft.VisualBasic.Strings.Split(array7[5], ",");
+                int num12 = Information.UBound(array8);
+                for (int n = 0; n <= num12; n++)
+                {
+                    array8[n] = array8[n].Trim();
+                }
+                int num13 = Information.UBound(array8);
+                for (int num14 = 0; num14 <= num13; num14++)
+                {
+                    int num15 = Microsoft.VisualBasic.Strings.Len(array8[num14]) - 1;
+                    for (int num16 = 0; num16 <= num15; num16 += 4)
                     {
-                        double num8 = Conversions.ToDouble(Microsoft.VisualBasic.Strings.Mid(array6[l], 1, Microsoft.VisualBasic.Strings.InStr(array6[l], "=") - 1));
-                        double num9 = Conversions.ToDouble(Microsoft.VisualBasic.Strings.Mid(array6[l], Microsoft.VisualBasic.Strings.InStr(array6[l], "=") + 1));
-                        if (num8 != 0.0)
+                        if (Operators.CompareString(Conversions.ToString(array8[num14][num16]), "0", TextCompare: false) != 0)
                         {
                             Notes = (Note[])Utils.CopyArray(Notes, new Note[Notes.Length + 1]);
-                            Note[] notes2 = Notes;
-                            int num10 = Information.UBound(Notes);
-                            notes2[num10].ColumnIndex = 2;
-                            notes2[num10].VPosition = num8 * 48.0;
-                            notes2[num10].Value = (long)Math.Round(num9 * 10000.0);
+                            Note[] notes3 = Notes;
+                            int num17 = Information.UBound(Notes);
+                            notes3[num17].ColumnIndex = 5;
+                            notes3[num17].LongNote = (Operators.CompareString(Conversions.ToString(array8[num14][num16]), "2", TextCompare: false) == 0) | (Operators.CompareString(Conversions.ToString(array8[num14][num16]), "3", TextCompare: false) == 0);
+                            notes3[num17].VPosition = 192 / (Microsoft.VisualBasic.Strings.Len(array8[num14]) / 4) * num16 / 4 + num14 * 192;
+                            notes3[num17].Value = 10000L;
                         }
-                        else
+                        if (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 1]), "0", TextCompare: false) != 0)
                         {
-                            Notes[0].Value = (long)Math.Round(num9 * 10000.0);
+                            Notes = (Note[])Utils.CopyArray(Notes, new Note[Notes.Length + 1]);
+                            Note[] notes4 = Notes;
+                            int num18 = Information.UBound(Notes);
+                            notes4[num18].ColumnIndex = 6;
+                            notes4[num18].LongNote = (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 1]), "2", TextCompare: false) == 0) | (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 1]), "3", TextCompare: false) == 0);
+                            notes4[num18].VPosition = 192 / (Microsoft.VisualBasic.Strings.Len(array8[num14]) / 4) * num16 / 4 + num14 * 192;
+                            notes4[num18].Value = 10000L;
                         }
-                    }
-                }
-                else
-                {
-                    if (!Microsoft.VisualBasic.Strings.UCase(text).StartsWith("#NOTES:"))
-                    {
-                        continue;
-                    }
-                    if (num3 != num2)
-                    {
-                        num3++;
-                        continue;
-                    }
-                    num3++;
-                    string expression2 = Microsoft.VisualBasic.Strings.Mid(text, Microsoft.VisualBasic.Strings.Len("#NOTES:") + 1);
-                    string[] array7 = Microsoft.VisualBasic.Strings.Split(expression2, ":");
-                    int num11 = Information.UBound(array7);
-                    for (int m = 0; m <= num11; m++)
-                    {
-                        array7[m] = array7[m].Trim();
-                    }
-                    if (array7.Length != 6)
-                    {
-                        continue;
-                    }
-                    THPlayLevel.Text = array7[3];
-                    string[] array8 = Microsoft.VisualBasic.Strings.Split(array7[5], ",");
-                    int num12 = Information.UBound(array8);
-                    for (int n = 0; n <= num12; n++)
-                    {
-                        array8[n] = array8[n].Trim();
-                    }
-                    int num13 = Information.UBound(array8);
-                    for (int num14 = 0; num14 <= num13; num14++)
-                    {
-                        int num15 = Microsoft.VisualBasic.Strings.Len(array8[num14]) - 1;
-                        for (int num16 = 0; num16 <= num15; num16 += 4)
+                        if (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 2]), "0", TextCompare: false) != 0)
                         {
-                            if (Operators.CompareString(Conversions.ToString(array8[num14][num16]), "0", TextCompare: false) != 0)
-                            {
-                                Notes = (Note[])Utils.CopyArray(Notes, new Note[Notes.Length + 1]);
-                                Note[] notes3 = Notes;
-                                int num17 = Information.UBound(Notes);
-                                notes3[num17].ColumnIndex = 5;
-                                notes3[num17].LongNote = (Operators.CompareString(Conversions.ToString(array8[num14][num16]), "2", TextCompare: false) == 0) | (Operators.CompareString(Conversions.ToString(array8[num14][num16]), "3", TextCompare: false) == 0);
-                                notes3[num17].VPosition = unchecked(checked(unchecked(192 / (Microsoft.VisualBasic.Strings.Len(array8[num14]) / 4)) * num16) / 4) + num14 * 192;
-                                notes3[num17].Value = 10000L;
-                            }
-                            if (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 1]), "0", TextCompare: false) != 0)
-                            {
-                                Notes = (Note[])Utils.CopyArray(Notes, new Note[Notes.Length + 1]);
-                                Note[] notes4 = Notes;
-                                int num18 = Information.UBound(Notes);
-                                notes4[num18].ColumnIndex = 6;
-                                notes4[num18].LongNote = (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 1]), "2", TextCompare: false) == 0) | (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 1]), "3", TextCompare: false) == 0);
-                                notes4[num18].VPosition = unchecked(checked(unchecked(192 / (Microsoft.VisualBasic.Strings.Len(array8[num14]) / 4)) * num16) / 4) + num14 * 192;
-                                notes4[num18].Value = 10000L;
-                            }
-                            if (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 2]), "0", TextCompare: false) != 0)
-                            {
-                                Notes = (Note[])Utils.CopyArray(Notes, new Note[Notes.Length + 1]);
-                                Note[] notes5 = Notes;
-                                int num19 = Information.UBound(Notes);
-                                notes5[num19].ColumnIndex = 7;
-                                notes5[num19].LongNote = (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 2]), "2", TextCompare: false) == 0) | (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 2]), "3", TextCompare: false) == 0);
-                                notes5[num19].VPosition = unchecked(checked(unchecked(192 / (Microsoft.VisualBasic.Strings.Len(array8[num14]) / 4)) * num16) / 4) + num14 * 192;
-                                notes5[num19].Value = 10000L;
-                            }
-                            if (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 3]), "0", TextCompare: false) != 0)
-                            {
-                                Notes = (Note[])Utils.CopyArray(Notes, new Note[Notes.Length + 1]);
-                                Note[] notes6 = Notes;
-                                int num20 = Information.UBound(Notes);
-                                notes6[num20].ColumnIndex = 8;
-                                notes6[num20].LongNote = (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 3]), "2", TextCompare: false) == 0) | (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 3]), "3", TextCompare: false) == 0);
-                                notes6[num20].VPosition = unchecked(checked(unchecked(192 / (Microsoft.VisualBasic.Strings.Len(array8[num14]) / 4)) * num16) / 4) + num14 * 192;
-                                notes6[num20].Value = 10000L;
-                            }
+                            Notes = (Note[])Utils.CopyArray(Notes, new Note[Notes.Length + 1]);
+                            Note[] notes5 = Notes;
+                            int num19 = Information.UBound(Notes);
+                            notes5[num19].ColumnIndex = 7;
+                            notes5[num19].LongNote = (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 2]), "2", TextCompare: false) == 0) | (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 2]), "3", TextCompare: false) == 0);
+                            notes5[num19].VPosition = 192 / (Microsoft.VisualBasic.Strings.Len(array8[num14]) / 4) * num16 / 4 + num14 * 192;
+                            notes5[num19].Value = 10000L;
+                        }
+                        if (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 3]), "0", TextCompare: false) != 0)
+                        {
+                            Notes = (Note[])Utils.CopyArray(Notes, new Note[Notes.Length + 1]);
+                            Note[] notes6 = Notes;
+                            int num20 = Information.UBound(Notes);
+                            notes6[num20].ColumnIndex = 8;
+                            notes6[num20].LongNote = (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 3]), "2", TextCompare: false) == 0) | (Operators.CompareString(Conversions.ToString(array8[num14][num16 + 3]), "3", TextCompare: false) == 0);
+                            notes6[num20].VPosition = 192 / (Microsoft.VisualBasic.Strings.Len(array8[num14]) / 4) * num16 / 4 + num14 * 192;
+                            notes6[num20].Value = 10000L;
                         }
                     }
                 }
             }
-            if (NTInput)
-            {
-                ConvertBMSE2NT();
-            }
-            LWAV.Visible = false;
-            LWAV.Items.Clear();
-            int num21 = 1;
-            do
-            {
-                LWAV.Items.Add(Functions.C10to36(num21) + ": " + hWAV[num21]);
-                num21++;
-            }
-            while (num21 <= 1295);
-            LWAV.SelectedIndex = 0;
-            LWAV.Visible = true;
-            THBPM.Value = new decimal((double)Notes[0].Value / 10000.0);
-            SortByVPositionQuick(0, Information.UBound(Notes));
-            UpdatePairing();
-            CalculateTotalPlayableNotes();
-            CalculateGreatestVPosition();
-            RefreshPanelAll();
-            POStatusRefresh();
-            return false;
         }
+        if (NTInput)
+        {
+            ConvertBMSE2NT();
+        }
+        LWAV.Visible = false;
+        LWAV.Items.Clear();
+        int num21 = 1;
+        do
+        {
+            LWAV.Items.Add(Functions.C10to36(num21) + ": " + hWAV[num21]);
+            num21++;
+        }
+        while (num21 <= 1295);
+        LWAV.SelectedIndex = 0;
+        LWAV.Visible = true;
+        THBPM.Value = new decimal(Notes[0].Value / 10000.0);
+        SortByVPositionQuick(0, Information.UBound(Notes));
+        UpdatePairing();
+        CalculateTotalPlayableNotes();
+        CalculateGreatestVPosition();
+        RefreshPanelAll();
+        POStatusRefresh();
+        return false;
     }
 
     private void OpeniBMSC(string Path)
     {
         KMouseOver = -1;
         BinaryReader br = new BinaryReader(new FileStream(Path, FileMode.Open, FileAccess.Read), Encoding.Unicode);
-        checked
+
+        if (br.ReadInt32() == 1397572201 && br.ReadByte() == 67)
         {
-            if (br.ReadInt32() == 1397572201 && br.ReadByte() == 67)
+            int num = br.ReadByte();
+            int num2 = br.ReadByte();
+            int num3 = br.ReadByte();
+            ClearUndo();
+            Notes = new Note[1];
+            mColumn = new int[1000];
+            hWAV = new string[1296];
+            InitializeNewBMS();
+            InitializeOpenBMS();
+            Note[] notes = Notes;
+            int num4 = 0;
+            notes[num4].ColumnIndex = 2;
+            notes[num4].VPosition = -1.0;
+            notes[num4].Value = 1200000L;
+            while (br.BaseStream.Position < br.BaseStream.Length)
             {
-                int num = br.ReadByte();
-                int num2 = br.ReadByte();
-                int num3 = br.ReadByte();
-                ClearUndo();
-                Notes = new Note[1];
-                mColumn = new int[1000];
-                hWAV = new string[1296];
-                InitializeNewBMS();
-                InitializeOpenBMS();
-                Note[] notes = Notes;
-                int num4 = 0;
-                notes[num4].ColumnIndex = 2;
-                notes[num4].VPosition = -1.0;
-                notes[num4].Value = 1200000L;
-                while (br.BaseStream.Position < br.BaseStream.Length)
+                switch (br.ReadInt32())
                 {
-                    switch (br.ReadInt32())
-                    {
-                        case 1717924432:
-                            {
-                                int num17 = br.ReadInt32();
-                                NTInput = (num17 & 1) != 0;
-                                TBNTInput.Checked = NTInput;
-                                mnNTInput.Checked = NTInput;
-                                POBLong.Enabled = !NTInput;
-                                POBLongShort.Enabled = !NTInput;
-                                ErrorCheck = (num17 & 2) != 0;
-                                TBErrorCheck.Checked = ErrorCheck;
-                                TBErrorCheck_Click(TBErrorCheck, new EventArgs());
-                                PreviewOnClick = (num17 & 4) != 0;
-                                TBPreviewOnClick.Checked = PreviewOnClick;
-                                TBPreviewOnClick_Click(TBPreviewOnClick, new EventArgs());
-                                ShowFileName = (num17 & 8) != 0;
-                                TBShowFileName.Checked = ShowFileName;
-                                TBShowFileName_Click(TBShowFileName, new EventArgs());
-                                mnSMenu.Checked = (num17 & 0x100) != 0;
-                                mnSTB.Checked = (num17 & 0x200) != 0;
-                                mnSOP.Checked = (num17 & 0x400) != 0;
-                                mnSStatus.Checked = (num17 & 0x800) != 0;
-                                mnSLSplitter.Checked = (num17 & 0x1000) != 0;
-                                mnSRSplitter.Checked = (num17 & 0x2000) != 0;
-                                CGShow.Checked = (num17 & 0x4000) != 0;
-                                CGShowS.Checked = (num17 & 0x8000) != 0;
-                                CGShowBG.Checked = (num17 & 0x10000) != 0;
-                                CGShowM.Checked = (num17 & 0x20000) != 0;
-                                CGShowMB.Checked = (num17 & 0x40000) != 0;
-                                CGShowV.Checked = (num17 & 0x80000) != 0;
-                                CGShowC.Checked = (num17 & 0x100000) != 0;
-                                CGBLP.Checked = (num17 & 0x200000) != 0;
-                                CGSTOP.Checked = (num17 & 0x400000) != 0;
-                                CGSCROLL.Checked = (num17 & 0x20000000) != 0;
-                                CGBPM.Checked = (num17 & 0x800000) != 0;
-                                CGSnap.Checked = (num17 & 0x1000000) != 0;
-                                CGDisableVertical.Checked = (num17 & 0x2000000) != 0;
-                                cVSLockL.Checked = (num17 & 0x4000000) != 0;
-                                cVSLock.Checked = (num17 & 0x8000000) != 0;
-                                cVSLockR.Checked = (num17 & 0x10000000) != 0;
-                                CGDivide.Value = new decimal(br.ReadInt32());
-                                CGSub.Value = new decimal(br.ReadInt32());
-                                gSlash = br.ReadInt32();
-                                CGHeight.Value = new decimal(br.ReadSingle());
-                                CGWidth.Value = new decimal(br.ReadSingle());
-                                CGB.Value = new decimal(br.ReadInt32());
-                                break;
-                            }
-                        case 1684104520:
-                            {
-                                THTitle.Text = br.ReadString();
-                                THArtist.Text = br.ReadString();
-                                THGenre.Text = br.ReadString();
-                                Notes[0].Value = br.ReadInt64();
-                                int num23 = br.ReadByte();
-                                THPlayLevel.Text = br.ReadString();
-                                CHPlayer.SelectedIndex = num23 & 0xF;
-                                CHRank.SelectedIndex = num23 >> 4;
-                                THSubTitle.Text = br.ReadString();
-                                THSubArtist.Text = br.ReadString();
-                                THStageFile.Text = br.ReadString();
-                                THBanner.Text = br.ReadString();
-                                THBackBMP.Text = br.ReadString();
-                                CHDifficulty.SelectedIndex = br.ReadByte();
-                                THExRank.Text = br.ReadString();
-                                THTotal.Text = br.ReadString();
-                                THComment.Text = br.ReadString();
-                                CHLnObj.SelectedIndex = br.ReadInt16();
-                                break;
-                            }
-                        case 5652823:
-                            {
-                                int num11 = br.ReadByte();
-                                WAVMultiSelect = (num11 & 1) != 0;
-                                CWAVMultiSelect.Checked = WAVMultiSelect;
-                                CWAVMultiSelect_CheckedChanged(CWAVMultiSelect, new EventArgs());
-                                WAVChangeLabel = (num11 & 2) != 0;
-                                CWAVChangeLabel.Checked = WAVChangeLabel;
-                                CWAVChangeLabel_CheckedChanged(CWAVChangeLabel, new EventArgs());
-                                int num12 = br.ReadInt32();
-                                for (int k = 1; k <= num12; k++)
-                                {
-                                    int num14 = br.ReadInt16();
-                                    hWAV[num14] = br.ReadString();
-                                }
-                                break;
-                            }
-                        case 1952539970:
-                            {
-                                nBeatN.Value = new decimal(br.ReadInt16());
-                                nBeatD.Value = new decimal(br.ReadInt16());
-                                int num18 = br.ReadByte();
-                                RadioButton[] array = new RadioButton[4] { CBeatPreserve, CBeatMeasure, CBeatCut, CBeatScale };
-                                array[num18].Checked = true;
-                                CBeatPreserve_Click(array[num18], new EventArgs());
-                                int num19 = br.ReadInt32();
-                                for (int m = 1; m <= num19; m++)
-                                {
-                                    int num21 = br.ReadInt16();
-                                    MeasureLength[num21] = br.ReadDouble();
-                                    double num22 = MeasureLength[num21] / 192.0;
-                                    long denominator = Functions.GetDenominator(num22, 2147483647L);
-                                    LBeat.Items[num21] = Operators.ConcatenateObject(string.Concat(Functions.Add3Zeros(num21) + ": ", Conversions.ToString(num22)), Interaction.IIf(denominator > 10000, "", " ( " + Conversions.ToString((long)Math.Round(num22 * (double)denominator)) + " / " + Conversions.ToString(denominator) + " ) "));
-                                }
-                                break;
-                            }
-                        case 1852864581:
-                            TExpansion.Text = br.ReadString();
+                    case 1717924432:
+                        {
+                            int num17 = br.ReadInt32();
+                            NTInput = (num17 & 1) != 0;
+                            TBNTInput.Checked = NTInput;
+                            mnNTInput.Checked = NTInput;
+                            POBLong.Enabled = !NTInput;
+                            POBLongShort.Enabled = !NTInput;
+                            ErrorCheck = (num17 & 2) != 0;
+                            TBErrorCheck.Checked = ErrorCheck;
+                            TBErrorCheck_Click(TBErrorCheck, new EventArgs());
+                            PreviewOnClick = (num17 & 4) != 0;
+                            TBPreviewOnClick.Checked = PreviewOnClick;
+                            TBPreviewOnClick_Click(TBPreviewOnClick, new EventArgs());
+                            ShowFileName = (num17 & 8) != 0;
+                            TBShowFileName.Checked = ShowFileName;
+                            TBShowFileName_Click(TBShowFileName, new EventArgs());
+                            mnSMenu.Checked = (num17 & 0x100) != 0;
+                            mnSTB.Checked = (num17 & 0x200) != 0;
+                            mnSOP.Checked = (num17 & 0x400) != 0;
+                            mnSStatus.Checked = (num17 & 0x800) != 0;
+                            mnSLSplitter.Checked = (num17 & 0x1000) != 0;
+                            mnSRSplitter.Checked = (num17 & 0x2000) != 0;
+                            CGShow.Checked = (num17 & 0x4000) != 0;
+                            CGShowS.Checked = (num17 & 0x8000) != 0;
+                            CGShowBG.Checked = (num17 & 0x10000) != 0;
+                            CGShowM.Checked = (num17 & 0x20000) != 0;
+                            CGShowMB.Checked = (num17 & 0x40000) != 0;
+                            CGShowV.Checked = (num17 & 0x80000) != 0;
+                            CGShowC.Checked = (num17 & 0x100000) != 0;
+                            CGBLP.Checked = (num17 & 0x200000) != 0;
+                            CGSTOP.Checked = (num17 & 0x400000) != 0;
+                            CGSCROLL.Checked = (num17 & 0x20000000) != 0;
+                            CGBPM.Checked = (num17 & 0x800000) != 0;
+                            CGSnap.Checked = (num17 & 0x1000000) != 0;
+                            CGDisableVertical.Checked = (num17 & 0x2000000) != 0;
+                            cVSLockL.Checked = (num17 & 0x4000000) != 0;
+                            cVSLock.Checked = (num17 & 0x8000000) != 0;
+                            cVSLockR.Checked = (num17 & 0x10000000) != 0;
+                            CGDivide.Value = new decimal(br.ReadInt32());
+                            CGSub.Value = new decimal(br.ReadInt32());
+                            gSlash = br.ReadInt32();
+                            CGHeight.Value = new decimal(br.ReadSingle());
+                            CGWidth.Value = new decimal(br.ReadSingle());
+                            CGB.Value = new decimal(br.ReadInt32());
                             break;
-                        case 1702129486:
+                        }
+                    case 1684104520:
+                        {
+                            THTitle.Text = br.ReadString();
+                            THArtist.Text = br.ReadString();
+                            THGenre.Text = br.ReadString();
+                            Notes[0].Value = br.ReadInt64();
+                            int num23 = br.ReadByte();
+                            THPlayLevel.Text = br.ReadString();
+                            CHPlayer.SelectedIndex = num23 & 0xF;
+                            CHRank.SelectedIndex = num23 >> 4;
+                            THSubTitle.Text = br.ReadString();
+                            THSubArtist.Text = br.ReadString();
+                            THStageFile.Text = br.ReadString();
+                            THBanner.Text = br.ReadString();
+                            THBackBMP.Text = br.ReadString();
+                            CHDifficulty.SelectedIndex = br.ReadByte();
+                            THExRank.Text = br.ReadString();
+                            THTotal.Text = br.ReadString();
+                            THComment.Text = br.ReadString();
+                            CHLnObj.SelectedIndex = br.ReadInt16();
+                            break;
+                        }
+                    case 5652823:
+                        {
+                            int num11 = br.ReadByte();
+                            WAVMultiSelect = (num11 & 1) != 0;
+                            CWAVMultiSelect.Checked = WAVMultiSelect;
+                            CWAVMultiSelect_CheckedChanged(CWAVMultiSelect, new EventArgs());
+                            WAVChangeLabel = (num11 & 2) != 0;
+                            CWAVChangeLabel.Checked = WAVChangeLabel;
+                            CWAVChangeLabel_CheckedChanged(CWAVChangeLabel, new EventArgs());
+                            int num12 = br.ReadInt32();
+                            for (int k = 1; k <= num12; k++)
                             {
-                                int num15 = br.ReadInt32();
-                                Notes = (Note[])Utils.CopyArray(Notes, new Note[num15 + 1]);
-                                int num16 = Information.UBound(Notes);
-                                for (int l = 1; l <= num16; l++)
-                                {
-                                    Notes[l].FromBinReader(ref br);
-                                }
-                                break;
+                                int num14 = br.ReadInt16();
+                                hWAV[num14] = br.ReadString();
                             }
-                        case 1868852821:
+                            break;
+                        }
+                    case 1952539970:
+                        {
+                            nBeatN.Value = new decimal(br.ReadInt16());
+                            nBeatD.Value = new decimal(br.ReadInt16());
+                            int num18 = br.ReadByte();
+                            RadioButton[] array = new RadioButton[4] { CBeatPreserve, CBeatMeasure, CBeatCut, CBeatScale };
+                            array[num18].Checked = true;
+                            CBeatPreserve_Click(array[num18], new EventArgs());
+                            int num19 = br.ReadInt32();
+                            for (int m = 1; m <= num19; m++)
                             {
-                                int num5 = br.ReadInt32();
-                                sI = br.ReadInt32();
-                                int num6 = 0;
-                                do
-                                {
-                                    int num7 = br.ReadInt32();
-                                    UndoRedo.Void @void = new UndoRedo.Void();
-                                    UndoRedo.LinkedURCmd linkedURCmd = @void;
-                                    for (int i = 1; i <= num7; i++)
-                                    {
-                                        int count = br.ReadInt32();
-                                        byte[] b = br.ReadBytes(count);
-                                        linkedURCmd.Next = UndoRedo.fromBytes(b);
-                                        linkedURCmd = linkedURCmd.Next;
-                                    }
-                                    sUndo[num6] = @void.Next;
-                                    int num9 = br.ReadInt32();
-                                    UndoRedo.Void void2 = new UndoRedo.Void();
-                                    UndoRedo.LinkedURCmd linkedURCmd2 = void2;
-                                    for (int j = 1; j <= num9; j++)
-                                    {
-                                        int count2 = br.ReadInt32();
-                                        byte[] b2 = br.ReadBytes(count2);
-                                        linkedURCmd2.Next = UndoRedo.fromBytes(b2);
-                                        linkedURCmd2 = linkedURCmd2.Next;
-                                    }
-                                    sRedo[num6] = void2.Next;
-                                    num6++;
-                                }
-                                while (num6 <= 99);
-                                break;
+                                int num21 = br.ReadInt16();
+                                MeasureLength[num21] = br.ReadDouble();
+                                double num22 = MeasureLength[num21] / 192.0;
+                                long denominator = Functions.GetDenominator(num22, 2147483647L);
+                                LBeat.Items[num21] = Operators.ConcatenateObject(string.Concat(Functions.Add3Zeros(num21) + ": ", Conversions.ToString(num22)), Interaction.IIf(denominator > 10000, "", " ( " + Conversions.ToString((long)Math.Round(num22 * denominator)) + " / " + Conversions.ToString(denominator) + " ) "));
                             }
-                    }
+                            break;
+                        }
+                    case 1852864581:
+                        TExpansion.Text = br.ReadString();
+                        break;
+                    case 1702129486:
+                        {
+                            int num15 = br.ReadInt32();
+                            Notes = (Note[])Utils.CopyArray(Notes, new Note[num15 + 1]);
+                            int num16 = Information.UBound(Notes);
+                            for (int l = 1; l <= num16; l++)
+                            {
+                                Notes[l].FromBinReader(ref br);
+                            }
+                            break;
+                        }
+                    case 1868852821:
+                        {
+                            int num5 = br.ReadInt32();
+                            sI = br.ReadInt32();
+                            int num6 = 0;
+                            do
+                            {
+                                int num7 = br.ReadInt32();
+                                UndoRedo.Void @void = new UndoRedo.Void();
+                                UndoRedo.LinkedURCmd linkedURCmd = @void;
+                                for (int i = 1; i <= num7; i++)
+                                {
+                                    int count = br.ReadInt32();
+                                    byte[] b = br.ReadBytes(count);
+                                    linkedURCmd.Next = UndoRedo.fromBytes(b);
+                                    linkedURCmd = linkedURCmd.Next;
+                                }
+                                sUndo[num6] = @void.Next;
+                                int num9 = br.ReadInt32();
+                                UndoRedo.Void void2 = new UndoRedo.Void();
+                                UndoRedo.LinkedURCmd linkedURCmd2 = void2;
+                                for (int j = 1; j <= num9; j++)
+                                {
+                                    int count2 = br.ReadInt32();
+                                    byte[] b2 = br.ReadBytes(count2);
+                                    linkedURCmd2.Next = UndoRedo.fromBytes(b2);
+                                    linkedURCmd2 = linkedURCmd2.Next;
+                                }
+                                sRedo[num6] = void2.Next;
+                                num6++;
+                            }
+                            while (num6 <= 99);
+                            break;
+                        }
                 }
             }
-            br.Close();
-            TBUndo.Enabled = sUndo[sI].ofType() != byte.MaxValue;
-            TBRedo.Enabled = sRedo[sIA()].ofType() != byte.MaxValue;
-            mnUndo.Enabled = sUndo[sI].ofType() != byte.MaxValue;
-            mnRedo.Enabled = sRedo[sIA()].ofType() != byte.MaxValue;
-            LWAV.Visible = false;
-            LWAV.Items.Clear();
-            int num24 = 1;
-            do
-            {
-                LWAV.Items.Add(Functions.C10to36(num24) + ": " + hWAV[num24]);
-                num24++;
-            }
-            while (num24 <= 1295);
-            LWAV.SelectedIndex = 0;
-            LWAV.Visible = true;
-            THBPM.Value = new decimal((double)Notes[0].Value / 10000.0);
-            SortByVPositionQuick(0, Information.UBound(Notes));
-            UpdatePairing();
-            UpdateMeasureBottom();
-            CalculateTotalPlayableNotes();
-            CalculateGreatestVPosition();
-            RefreshPanelAll();
-            POStatusRefresh();
         }
+        br.Close();
+        TBUndo.Enabled = sUndo[sI].ofType() != byte.MaxValue;
+        TBRedo.Enabled = sRedo[sIA()].ofType() != byte.MaxValue;
+        mnUndo.Enabled = sUndo[sI].ofType() != byte.MaxValue;
+        mnRedo.Enabled = sRedo[sIA()].ofType() != byte.MaxValue;
+        LWAV.Visible = false;
+        LWAV.Items.Clear();
+        int num24 = 1;
+        do
+        {
+            LWAV.Items.Add(Functions.C10to36(num24) + ": " + hWAV[num24]);
+            num24++;
+        }
+        while (num24 <= 1295);
+        LWAV.SelectedIndex = 0;
+        LWAV.Visible = true;
+        THBPM.Value = new decimal(Notes[0].Value / 10000.0);
+        SortByVPositionQuick(0, Information.UBound(Notes));
+        UpdatePairing();
+        UpdateMeasureBottom();
+        CalculateTotalPlayableNotes();
+        CalculateGreatestVPosition();
+        RefreshPanelAll();
+        POStatusRefresh();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
@@ -1533,259 +1516,257 @@ IL_0952:
         CalculateGreatestVPosition();
         SortByVPositionInsertion();
         UpdatePairing();
-        checked
+
+        try
         {
-            try
+            BinaryWriter bw = new BinaryWriter(new FileStream(Path, FileMode.Create), Encoding.Unicode);
+            bw.Write(1397572201);
+            bw.Write((byte)67);
+            bw.Write((byte)MyProject.Application.Info.Version.Major);
+            bw.Write((byte)MyProject.Application.Info.Version.Minor);
+            bw.Write((byte)MyProject.Application.Info.Version.Build);
+            bw.Write(1717924432);
+            int num = 0;
+            if (NTInput)
             {
-                BinaryWriter bw = new BinaryWriter(new FileStream(Path, FileMode.Create), Encoding.Unicode);
-                bw.Write(1397572201);
-                bw.Write((byte)67);
-                bw.Write((byte)MyProject.Application.Info.Version.Major);
-                bw.Write((byte)MyProject.Application.Info.Version.Minor);
-                bw.Write((byte)MyProject.Application.Info.Version.Build);
-                bw.Write(1717924432);
-                int num = 0;
-                if (NTInput)
-                {
-                    num |= 1;
-                }
-                if (ErrorCheck)
-                {
-                    num |= 2;
-                }
-                if (PreviewOnClick)
-                {
-                    num |= 4;
-                }
-                if (ShowFileName)
-                {
-                    num |= 8;
-                }
-                if (mnSMenu.Checked)
-                {
-                    num |= 0x100;
-                }
-                if (mnSTB.Checked)
-                {
-                    num |= 0x200;
-                }
-                if (mnSOP.Checked)
-                {
-                    num |= 0x400;
-                }
-                if (mnSStatus.Checked)
-                {
-                    num |= 0x800;
-                }
-                if (mnSLSplitter.Checked)
-                {
-                    num |= 0x1000;
-                }
-                if (mnSRSplitter.Checked)
-                {
-                    num |= 0x2000;
-                }
-                if (gShowGrid)
-                {
-                    num |= 0x4000;
-                }
-                if (gShowSubGrid)
-                {
-                    num |= 0x8000;
-                }
-                if (gShowBG)
-                {
-                    num |= 0x10000;
-                }
-                if (gShowMeasureNumber)
-                {
-                    num |= 0x20000;
-                }
-                if (gShowMeasureBar)
-                {
-                    num |= 0x40000;
-                }
-                if (gShowVerticalLine)
-                {
-                    num |= 0x80000;
-                }
-                if (gShowC)
-                {
-                    num |= 0x100000;
-                }
-                if (gDisplayBGAColumn)
-                {
-                    num |= 0x200000;
-                }
-                if (gSTOP)
-                {
-                    num |= 0x400000;
-                }
-                if (gBPM)
-                {
-                    num |= 0x800000;
-                }
-                if (gSCROLL)
-                {
-                    num |= 0x20000000;
-                }
-                if (gSnap)
-                {
-                    num |= 0x1000000;
-                }
-                if (DisableVerticalMove)
-                {
-                    num |= 0x2000000;
-                }
-                if (spLock[0])
-                {
-                    num |= 0x4000000;
-                }
-                if (spLock[1])
-                {
-                    num |= 0x8000000;
-                }
-                if (spLock[2])
-                {
-                    num |= 0x10000000;
-                }
-                bw.Write(num);
-                bw.Write(BitConverter.GetBytes(gDivide));
-                bw.Write(BitConverter.GetBytes(gSub));
-                bw.Write(BitConverter.GetBytes(gSlash));
-                bw.Write(BitConverter.GetBytes(gxHeight));
-                bw.Write(BitConverter.GetBytes(gxWidth));
-                bw.Write(BitConverter.GetBytes(gColumns));
-                bw.Write(1684104520);
-                bw.Write(THTitle.Text);
-                bw.Write(THArtist.Text);
-                bw.Write(THGenre.Text);
-                bw.Write(Notes[0].Value);
-                int selectedIndex = CHPlayer.SelectedIndex;
-                int num2 = CHRank.SelectedIndex << 4;
-                bw.Write((byte)(selectedIndex | num2));
-                bw.Write(THPlayLevel.Text);
-                bw.Write(THSubTitle.Text);
-                bw.Write(THSubArtist.Text);
-                bw.Write(THStageFile.Text);
-                bw.Write(THBanner.Text);
-                bw.Write(THBackBMP.Text);
-                bw.Write((byte)CHDifficulty.SelectedIndex);
-                bw.Write(THExRank.Text);
-                bw.Write(THTotal.Text);
-                bw.Write(THComment.Text);
-                bw.Write((short)CHLnObj.SelectedIndex);
-                bw.Write(5652823);
-                int num3 = 0;
-                if (WAVMultiSelect)
-                {
-                    num3 |= 1;
-                }
-                if (WAVChangeLabel)
-                {
-                    num3 |= 2;
-                }
-                bw.Write((byte)num3);
-                int num4 = 0;
-                int num5 = Information.UBound(hWAV);
-                for (int i = 1; i <= num5; i++)
-                {
-                    if (Operators.CompareString(hWAV[i], "", TextCompare: false) != 0)
-                    {
-                        num4++;
-                    }
-                }
-                bw.Write(num4);
-                int num6 = Information.UBound(hWAV);
-                for (int j = 1; j <= num6; j++)
-                {
-                    if (Operators.CompareString(hWAV[j], "", TextCompare: false) != 0)
-                    {
-                        bw.Write((short)j);
-                        bw.Write(hWAV[j]);
-                    }
-                }
-                bw.Write(1952539970);
-                bw.Write(Convert.ToInt16(nBeatN.Value));
-                bw.Write(Convert.ToInt16(nBeatD.Value));
-                bw.Write((byte)BeatChangeMode);
-                int num7 = 0;
-                int num8 = Information.UBound(MeasureLength);
-                for (int k = 0; k <= num8; k++)
-                {
-                    if (MeasureLength[k] != 192.0)
-                    {
-                        num7++;
-                    }
-                }
-                bw.Write(num7);
-                int num9 = Information.UBound(MeasureLength);
-                for (int l = 0; l <= num9; l++)
-                {
-                    if (MeasureLength[l] != 192.0)
-                    {
-                        bw.Write((short)l);
-                        bw.Write(MeasureLength[l]);
-                    }
-                }
-                bw.Write(1852864581);
-                bw.Write(TExpansion.Text);
-                bw.Write(1702129486);
-                bw.Write(Information.UBound(Notes));
-                int num10 = Information.UBound(Notes);
-                for (int m = 1; m <= num10; m++)
-                {
-                    Notes[m].WriteBinWriter(ref bw);
-                }
-                bw.Write(1868852821);
-                bw.Write(100);
-                bw.Write(sI);
-                int num11 = 0;
-                do
-                {
-                    int num12 = 0;
-                    UndoRedo.LinkedURCmd linkedURCmd;
-                    for (linkedURCmd = sUndo[num11]; linkedURCmd != null; linkedURCmd = linkedURCmd.Next)
-                    {
-                        num12++;
-                    }
-                    bw.Write(num12);
-                    linkedURCmd = sUndo[num11];
-                    int num13 = num12;
-                    for (int n = 1; n <= num13; n++)
-                    {
-                        byte[] array = linkedURCmd.toBytes();
-                        bw.Write(array.Length);
-                        bw.Write(array);
-                        linkedURCmd = linkedURCmd.Next;
-                    }
-                    int num14 = 0;
-                    UndoRedo.LinkedURCmd linkedURCmd2;
-                    for (linkedURCmd2 = sRedo[num11]; linkedURCmd2 != null; linkedURCmd2 = linkedURCmd2.Next)
-                    {
-                        num14++;
-                    }
-                    bw.Write(num14);
-                    linkedURCmd2 = sRedo[num11];
-                    int num15 = num14;
-                    for (int num16 = 1; num16 <= num15; num16++)
-                    {
-                        byte[] array2 = linkedURCmd2.toBytes();
-                        bw.Write(array2.Length);
-                        bw.Write(array2);
-                        linkedURCmd2 = linkedURCmd2.Next;
-                    }
-                    num11++;
-                }
-                while (num11 <= 99);
-                bw.Close();
+                num |= 1;
             }
-            catch (Exception ex)
+            if (ErrorCheck)
             {
-                ProjectData.SetProjectError(ex);
-                Interaction.MsgBox(ex.Message);
-                ProjectData.ClearProjectError();
+                num |= 2;
             }
+            if (PreviewOnClick)
+            {
+                num |= 4;
+            }
+            if (ShowFileName)
+            {
+                num |= 8;
+            }
+            if (mnSMenu.Checked)
+            {
+                num |= 0x100;
+            }
+            if (mnSTB.Checked)
+            {
+                num |= 0x200;
+            }
+            if (mnSOP.Checked)
+            {
+                num |= 0x400;
+            }
+            if (mnSStatus.Checked)
+            {
+                num |= 0x800;
+            }
+            if (mnSLSplitter.Checked)
+            {
+                num |= 0x1000;
+            }
+            if (mnSRSplitter.Checked)
+            {
+                num |= 0x2000;
+            }
+            if (gShowGrid)
+            {
+                num |= 0x4000;
+            }
+            if (gShowSubGrid)
+            {
+                num |= 0x8000;
+            }
+            if (gShowBG)
+            {
+                num |= 0x10000;
+            }
+            if (gShowMeasureNumber)
+            {
+                num |= 0x20000;
+            }
+            if (gShowMeasureBar)
+            {
+                num |= 0x40000;
+            }
+            if (gShowVerticalLine)
+            {
+                num |= 0x80000;
+            }
+            if (gShowC)
+            {
+                num |= 0x100000;
+            }
+            if (gDisplayBGAColumn)
+            {
+                num |= 0x200000;
+            }
+            if (gSTOP)
+            {
+                num |= 0x400000;
+            }
+            if (gBPM)
+            {
+                num |= 0x800000;
+            }
+            if (gSCROLL)
+            {
+                num |= 0x20000000;
+            }
+            if (gSnap)
+            {
+                num |= 0x1000000;
+            }
+            if (DisableVerticalMove)
+            {
+                num |= 0x2000000;
+            }
+            if (spLock[0])
+            {
+                num |= 0x4000000;
+            }
+            if (spLock[1])
+            {
+                num |= 0x8000000;
+            }
+            if (spLock[2])
+            {
+                num |= 0x10000000;
+            }
+            bw.Write(num);
+            bw.Write(BitConverter.GetBytes(gDivide));
+            bw.Write(BitConverter.GetBytes(gSub));
+            bw.Write(BitConverter.GetBytes(gSlash));
+            bw.Write(BitConverter.GetBytes(gxHeight));
+            bw.Write(BitConverter.GetBytes(gxWidth));
+            bw.Write(BitConverter.GetBytes(gColumns));
+            bw.Write(1684104520);
+            bw.Write(THTitle.Text);
+            bw.Write(THArtist.Text);
+            bw.Write(THGenre.Text);
+            bw.Write(Notes[0].Value);
+            int selectedIndex = CHPlayer.SelectedIndex;
+            int num2 = CHRank.SelectedIndex << 4;
+            bw.Write((byte)(selectedIndex | num2));
+            bw.Write(THPlayLevel.Text);
+            bw.Write(THSubTitle.Text);
+            bw.Write(THSubArtist.Text);
+            bw.Write(THStageFile.Text);
+            bw.Write(THBanner.Text);
+            bw.Write(THBackBMP.Text);
+            bw.Write((byte)CHDifficulty.SelectedIndex);
+            bw.Write(THExRank.Text);
+            bw.Write(THTotal.Text);
+            bw.Write(THComment.Text);
+            bw.Write((short)CHLnObj.SelectedIndex);
+            bw.Write(5652823);
+            int num3 = 0;
+            if (WAVMultiSelect)
+            {
+                num3 |= 1;
+            }
+            if (WAVChangeLabel)
+            {
+                num3 |= 2;
+            }
+            bw.Write((byte)num3);
+            int num4 = 0;
+            int num5 = Information.UBound(hWAV);
+            for (int i = 1; i <= num5; i++)
+            {
+                if (Operators.CompareString(hWAV[i], "", TextCompare: false) != 0)
+                {
+                    num4++;
+                }
+            }
+            bw.Write(num4);
+            int num6 = Information.UBound(hWAV);
+            for (int j = 1; j <= num6; j++)
+            {
+                if (Operators.CompareString(hWAV[j], "", TextCompare: false) != 0)
+                {
+                    bw.Write((short)j);
+                    bw.Write(hWAV[j]);
+                }
+            }
+            bw.Write(1952539970);
+            bw.Write(Convert.ToInt16(nBeatN.Value));
+            bw.Write(Convert.ToInt16(nBeatD.Value));
+            bw.Write((byte)BeatChangeMode);
+            int num7 = 0;
+            int num8 = Information.UBound(MeasureLength);
+            for (int k = 0; k <= num8; k++)
+            {
+                if (MeasureLength[k] != 192.0)
+                {
+                    num7++;
+                }
+            }
+            bw.Write(num7);
+            int num9 = Information.UBound(MeasureLength);
+            for (int l = 0; l <= num9; l++)
+            {
+                if (MeasureLength[l] != 192.0)
+                {
+                    bw.Write((short)l);
+                    bw.Write(MeasureLength[l]);
+                }
+            }
+            bw.Write(1852864581);
+            bw.Write(TExpansion.Text);
+            bw.Write(1702129486);
+            bw.Write(Information.UBound(Notes));
+            int num10 = Information.UBound(Notes);
+            for (int m = 1; m <= num10; m++)
+            {
+                Notes[m].WriteBinWriter(ref bw);
+            }
+            bw.Write(1868852821);
+            bw.Write(100);
+            bw.Write(sI);
+            int num11 = 0;
+            do
+            {
+                int num12 = 0;
+                UndoRedo.LinkedURCmd linkedURCmd;
+                for (linkedURCmd = sUndo[num11]; linkedURCmd != null; linkedURCmd = linkedURCmd.Next)
+                {
+                    num12++;
+                }
+                bw.Write(num12);
+                linkedURCmd = sUndo[num11];
+                int num13 = num12;
+                for (int n = 1; n <= num13; n++)
+                {
+                    byte[] array = linkedURCmd.toBytes();
+                    bw.Write(array.Length);
+                    bw.Write(array);
+                    linkedURCmd = linkedURCmd.Next;
+                }
+                int num14 = 0;
+                UndoRedo.LinkedURCmd linkedURCmd2;
+                for (linkedURCmd2 = sRedo[num11]; linkedURCmd2 != null; linkedURCmd2 = linkedURCmd2.Next)
+                {
+                    num14++;
+                }
+                bw.Write(num14);
+                linkedURCmd2 = sRedo[num11];
+                int num15 = num14;
+                for (int num16 = 1; num16 <= num15; num16++)
+                {
+                    byte[] array2 = linkedURCmd2.toBytes();
+                    bw.Write(array2.Length);
+                    bw.Write(array2);
+                    linkedURCmd2 = linkedURCmd2.Next;
+                }
+                num11++;
+            }
+            while (num11 <= 99);
+            bw.Close();
+        }
+        catch (Exception ex)
+        {
+            ProjectData.SetProjectError(ex);
+            Interaction.MsgBox(ex.Message);
+            ProjectData.ClearProjectError();
         }
     }
 
@@ -1797,9 +1778,9 @@ IL_0952:
         var hidden = note.Hidden;
         var num = GetColumn(columnIndex).Identifier;
         var landmine = note.Landmine;
-        if (columnIndex == 2 && ((double)value / 10000.0 != (double)(value / 10000) || value >= 2560000 || value < 0))
+        if (columnIndex == 2 && (value / 10000.0 != value / 10000 || value >= 2560000 || value < 0))
         {
-            num = checked(num + 5);
+            num += 5;
         }
         if (columnIndex == 1)
         {
@@ -1807,38 +1788,36 @@ IL_0952:
         }
         if (columnIndex >= 5 && columnIndex <= 12)
         {
-            checked
+            if (longNote)
             {
-                if (longNote)
-                {
-                    return Conversion.Hex(num + Convert.ToInt32("50", 16) - 10);
-                }
-                if (hidden)
-                {
-                    return Conversion.Hex(num + Convert.ToInt32("30", 16) - 10);
-                }
-                if (landmine)
-                {
-                    return Conversion.Hex(num + Convert.ToInt32("D0", 16) - 10);
-                }
+                return Conversion.Hex(num + Convert.ToInt32("50", 16) - 10);
+            }
+
+            if (hidden)
+            {
+                return Conversion.Hex(num + Convert.ToInt32("30", 16) - 10);
+            }
+
+            if (landmine)
+            {
+                return Conversion.Hex(num + Convert.ToInt32("D0", 16) - 10);
             }
         }
         if (columnIndex >= 14 && columnIndex <= 21)
         {
-            checked
+            if (longNote)
             {
-                if (longNote)
-                {
-                    return Conversion.Hex(num + Convert.ToInt32("60", 16) - 20);
-                }
-                if (hidden)
-                {
-                    return Conversion.Hex(num + Convert.ToInt32("40", 16) - 20);
-                }
-                if (landmine)
-                {
-                    return Conversion.Hex(num + Convert.ToInt32("E0", 16) - 20);
-                }
+                return Conversion.Hex(num + Convert.ToInt32("60", 16) - 20);
+            }
+
+            if (hidden)
+            {
+                return Conversion.Hex(num + Convert.ToInt32("40", 16) - 20);
+            }
+
+            if (landmine)
+            {
+                return Conversion.Hex(num + Convert.ToInt32("E0", 16) - 20);
             }
         }
         return Functions.Add2Zeros(num);
@@ -1850,7 +1829,7 @@ IL_0952:
         {
             return column[iCol].Left;
         }
-        return checked(column[27].Left + (iCol - 27) * column[27].Width);
+        return column[27].Left + (iCol - 27) * column[27].Width;
     }
 
     private int GetColumnWidth(int iCol)
@@ -1872,7 +1851,7 @@ IL_0952:
         {
             return column[iCol].Title;
         }
-        return column[27].Title + checked(iCol - 27 + 1);
+        return column[27].Title + (iCol - 27 + 1);
     }
 
     private bool nEnabled(int iCol)
@@ -2083,137 +2062,135 @@ IL_0952:
         xmlTextWriter2.WriteAttributeString("Major", Conversions.ToString(MyProject.Application.Info.Version.Major));
         xmlTextWriter2.WriteAttributeString("Minor", Conversions.ToString(MyProject.Application.Info.Version.Minor));
         xmlTextWriter2.WriteAttributeString("Build", Conversions.ToString(MyProject.Application.Info.Version.Build));
-        checked
+
+        if (!ThemeOnly)
         {
-            if (!ThemeOnly)
+            xmlTextWriter2.WriteStartElement("Form");
+            xmlTextWriter2.WriteAttributeString("WindowState", Conversions.ToString(Interaction.IIf(isFullScreen, previousWindowState, WindowState)));
+            xmlTextWriter2.WriteAttributeString("Width", Conversions.ToString(Interaction.IIf(isFullScreen, previousWindowPosition.Width, Width)));
+            xmlTextWriter2.WriteAttributeString("Height", Conversions.ToString(Interaction.IIf(isFullScreen, previousWindowPosition.Height, Height)));
+            xmlTextWriter2.WriteAttributeString("Top", Conversions.ToString(Interaction.IIf(isFullScreen, previousWindowPosition.Top, Top)));
+            xmlTextWriter2.WriteAttributeString("Left", Conversions.ToString(Interaction.IIf(isFullScreen, previousWindowPosition.Left, Left)));
+            xmlTextWriter2.WriteEndElement();
+            xmlTextWriter2.WriteStartElement("Recent");
+            xmlTextWriter2.WriteAttributeString("Recent0", Recent[0]);
+            xmlTextWriter2.WriteAttributeString("Recent1", Recent[1]);
+            xmlTextWriter2.WriteAttributeString("Recent2", Recent[2]);
+            xmlTextWriter2.WriteAttributeString("Recent3", Recent[3]);
+            xmlTextWriter2.WriteAttributeString("Recent4", Recent[4]);
+            xmlTextWriter2.WriteEndElement();
+            xmlTextWriter2.WriteStartElement("Edit");
+            xmlTextWriter2.WriteAttributeString("NTInput", Conversions.ToString(NTInput));
+            xmlTextWriter2.WriteAttributeString("Language", DispLang);
+            xmlTextWriter2.WriteAttributeString("ErrorCheck", Conversions.ToString(ErrorCheck));
+            xmlTextWriter2.WriteAttributeString("AutoFocusMouseEnter", Conversions.ToString(AutoFocusMouseEnter));
+            xmlTextWriter2.WriteAttributeString("FirstClickDisabled", Conversions.ToString(FirstClickDisabled));
+            xmlTextWriter2.WriteAttributeString("ShowFileName", Conversions.ToString(ShowFileName));
+            xmlTextWriter2.WriteAttributeString("MiddleButtonMoveMethod", Conversions.ToString(MiddleButtonMoveMethod));
+            xmlTextWriter2.WriteAttributeString("AutoSaveInterval", Conversions.ToString(AutoSaveInterval));
+            xmlTextWriter2.WriteAttributeString("PreviewOnClick", Conversions.ToString(PreviewOnClick));
+            xmlTextWriter2.WriteAttributeString("ClickStopPreview", Conversions.ToString(ClickStopPreview));
+            xmlTextWriter2.WriteEndElement();
+            xmlTextWriter2.WriteStartElement("Save");
+            xmlTextWriter2.WriteAttributeString("TextEncoding", Functions.EncodingToString(TextEncoding));
+            xmlTextWriter2.WriteAttributeString("BMSGridLimit", Conversions.ToString(BMSGridLimit));
+            xmlTextWriter2.WriteAttributeString("BeepWhileSaved", Conversions.ToString(BeepWhileSaved));
+            xmlTextWriter2.WriteAttributeString("BPMx1296", Conversions.ToString(BPMx1296));
+            xmlTextWriter2.WriteAttributeString("STOPx1296", Conversions.ToString(STOPx1296));
+            xmlTextWriter2.WriteEndElement();
+            xmlTextWriter2.WriteStartElement("WAV");
+            xmlTextWriter2.WriteAttributeString("WAVMultiSelect", Conversions.ToString(WAVMultiSelect));
+            xmlTextWriter2.WriteAttributeString("WAVChangeLabel", Conversions.ToString(WAVChangeLabel));
+            xmlTextWriter2.WriteAttributeString("BeatChangeMode", Conversions.ToString(BeatChangeMode));
+            xmlTextWriter2.WriteEndElement();
+            xmlTextWriter2.WriteStartElement("ShowHide");
+            xmlTextWriter2.WriteAttributeString("showMenu", Conversions.ToString(mnSMenu.Checked));
+            xmlTextWriter2.WriteAttributeString("showTB", Conversions.ToString(mnSTB.Checked));
+            xmlTextWriter2.WriteAttributeString("showOpPanel", Conversions.ToString(mnSOP.Checked));
+            xmlTextWriter2.WriteAttributeString("showStatus", Conversions.ToString(mnSStatus.Checked));
+            xmlTextWriter2.WriteAttributeString("showLSplit", Conversions.ToString(mnSLSplitter.Checked));
+            xmlTextWriter2.WriteAttributeString("showRSplit", Conversions.ToString(mnSRSplitter.Checked));
+            xmlTextWriter2.WriteEndElement();
+            xmlTextWriter2.WriteStartElement("Grid");
+            xmlTextWriter2.WriteAttributeString("gSnap", Conversions.ToString(gSnap));
+            xmlTextWriter2.WriteAttributeString("gWheel", Conversions.ToString(gWheel));
+            xmlTextWriter2.WriteAttributeString("gPgUpDn", Conversions.ToString(gPgUpDn));
+            xmlTextWriter2.WriteAttributeString("gShow", Conversions.ToString(gShowGrid));
+            xmlTextWriter2.WriteAttributeString("gShowS", Conversions.ToString(gShowSubGrid));
+            xmlTextWriter2.WriteAttributeString("gShowBG", Conversions.ToString(gShowBG));
+            xmlTextWriter2.WriteAttributeString("gShowM", Conversions.ToString(gShowMeasureNumber));
+            xmlTextWriter2.WriteAttributeString("gShowV", Conversions.ToString(gShowVerticalLine));
+            xmlTextWriter2.WriteAttributeString("gShowMB", Conversions.ToString(gShowMeasureBar));
+            xmlTextWriter2.WriteAttributeString("gShowC", Conversions.ToString(gShowC));
+            xmlTextWriter2.WriteAttributeString("gBPM", Conversions.ToString(gBPM));
+            xmlTextWriter2.WriteAttributeString("gSTOP", Conversions.ToString(gSTOP));
+            xmlTextWriter2.WriteAttributeString("gSCROLL", Conversions.ToString(gSCROLL));
+            xmlTextWriter2.WriteAttributeString("gBLP", Conversions.ToString(gDisplayBGAColumn));
+            xmlTextWriter2.WriteAttributeString("gP2", Conversions.ToString(CHPlayer.SelectedIndex));
+            xmlTextWriter2.WriteAttributeString("gCol", Conversions.ToString(CGB.Value));
+            xmlTextWriter2.WriteAttributeString("gDivide", Conversions.ToString(gDivide));
+            xmlTextWriter2.WriteAttributeString("gSub", Conversions.ToString(gSub));
+            xmlTextWriter2.WriteAttributeString("gSlash", Conversions.ToString(gSlash));
+            xmlTextWriter2.WriteAttributeString("gxHeight", Conversions.ToString(gxHeight));
+            xmlTextWriter2.WriteAttributeString("gxWidth", Conversions.ToString(gxWidth));
+            xmlTextWriter2.WriteEndElement();
+            xmlTextWriter2.WriteStartElement("WaveForm");
+            xmlTextWriter2.WriteAttributeString("wLock", Conversions.ToString(wLock));
+            xmlTextWriter2.WriteAttributeString("wPosition", Conversions.ToString(wPosition));
+            xmlTextWriter2.WriteAttributeString("wLeft", Conversions.ToString(wLeft));
+            xmlTextWriter2.WriteAttributeString("wWidth", Conversions.ToString(wWidth));
+            xmlTextWriter2.WriteAttributeString("wPrecision", Conversions.ToString(wPrecision));
+            xmlTextWriter2.WriteEndElement();
+            xmlTextWriter2.WriteStartElement("Player");
+            xmlTextWriter2.WriteAttributeString("Count", Conversions.ToString(pArgs.Length));
+            xmlTextWriter2.WriteAttributeString("CurrentPlayer", Conversions.ToString(CurrentPlayer));
+            int num = Information.UBound(pArgs);
+            for (int i = 0; i <= num; i++)
             {
-                xmlTextWriter2.WriteStartElement("Form");
-                xmlTextWriter2.WriteAttributeString("WindowState", Conversions.ToString(Interaction.IIf(isFullScreen, previousWindowState, WindowState)));
-                xmlTextWriter2.WriteAttributeString("Width", Conversions.ToString(Interaction.IIf(isFullScreen, previousWindowPosition.Width, Width)));
-                xmlTextWriter2.WriteAttributeString("Height", Conversions.ToString(Interaction.IIf(isFullScreen, previousWindowPosition.Height, Height)));
-                xmlTextWriter2.WriteAttributeString("Top", Conversions.ToString(Interaction.IIf(isFullScreen, previousWindowPosition.Top, Top)));
-                xmlTextWriter2.WriteAttributeString("Left", Conversions.ToString(Interaction.IIf(isFullScreen, previousWindowPosition.Left, Left)));
-                xmlTextWriter2.WriteEndElement();
-                xmlTextWriter2.WriteStartElement("Recent");
-                xmlTextWriter2.WriteAttributeString("Recent0", Recent[0]);
-                xmlTextWriter2.WriteAttributeString("Recent1", Recent[1]);
-                xmlTextWriter2.WriteAttributeString("Recent2", Recent[2]);
-                xmlTextWriter2.WriteAttributeString("Recent3", Recent[3]);
-                xmlTextWriter2.WriteAttributeString("Recent4", Recent[4]);
-                xmlTextWriter2.WriteEndElement();
-                xmlTextWriter2.WriteStartElement("Edit");
-                xmlTextWriter2.WriteAttributeString("NTInput", Conversions.ToString(NTInput));
-                xmlTextWriter2.WriteAttributeString("Language", DispLang);
-                xmlTextWriter2.WriteAttributeString("ErrorCheck", Conversions.ToString(ErrorCheck));
-                xmlTextWriter2.WriteAttributeString("AutoFocusMouseEnter", Conversions.ToString(AutoFocusMouseEnter));
-                xmlTextWriter2.WriteAttributeString("FirstClickDisabled", Conversions.ToString(FirstClickDisabled));
-                xmlTextWriter2.WriteAttributeString("ShowFileName", Conversions.ToString(ShowFileName));
-                xmlTextWriter2.WriteAttributeString("MiddleButtonMoveMethod", Conversions.ToString(MiddleButtonMoveMethod));
-                xmlTextWriter2.WriteAttributeString("AutoSaveInterval", Conversions.ToString(AutoSaveInterval));
-                xmlTextWriter2.WriteAttributeString("PreviewOnClick", Conversions.ToString(PreviewOnClick));
-                xmlTextWriter2.WriteAttributeString("ClickStopPreview", Conversions.ToString(ClickStopPreview));
-                xmlTextWriter2.WriteEndElement();
-                xmlTextWriter2.WriteStartElement("Save");
-                xmlTextWriter2.WriteAttributeString("TextEncoding", Functions.EncodingToString(TextEncoding));
-                xmlTextWriter2.WriteAttributeString("BMSGridLimit", Conversions.ToString(BMSGridLimit));
-                xmlTextWriter2.WriteAttributeString("BeepWhileSaved", Conversions.ToString(BeepWhileSaved));
-                xmlTextWriter2.WriteAttributeString("BPMx1296", Conversions.ToString(BPMx1296));
-                xmlTextWriter2.WriteAttributeString("STOPx1296", Conversions.ToString(STOPx1296));
-                xmlTextWriter2.WriteEndElement();
-                xmlTextWriter2.WriteStartElement("WAV");
-                xmlTextWriter2.WriteAttributeString("WAVMultiSelect", Conversions.ToString(WAVMultiSelect));
-                xmlTextWriter2.WriteAttributeString("WAVChangeLabel", Conversions.ToString(WAVChangeLabel));
-                xmlTextWriter2.WriteAttributeString("BeatChangeMode", Conversions.ToString(BeatChangeMode));
-                xmlTextWriter2.WriteEndElement();
-                xmlTextWriter2.WriteStartElement("ShowHide");
-                xmlTextWriter2.WriteAttributeString("showMenu", Conversions.ToString(mnSMenu.Checked));
-                xmlTextWriter2.WriteAttributeString("showTB", Conversions.ToString(mnSTB.Checked));
-                xmlTextWriter2.WriteAttributeString("showOpPanel", Conversions.ToString(mnSOP.Checked));
-                xmlTextWriter2.WriteAttributeString("showStatus", Conversions.ToString(mnSStatus.Checked));
-                xmlTextWriter2.WriteAttributeString("showLSplit", Conversions.ToString(mnSLSplitter.Checked));
-                xmlTextWriter2.WriteAttributeString("showRSplit", Conversions.ToString(mnSRSplitter.Checked));
-                xmlTextWriter2.WriteEndElement();
-                xmlTextWriter2.WriteStartElement("Grid");
-                xmlTextWriter2.WriteAttributeString("gSnap", Conversions.ToString(gSnap));
-                xmlTextWriter2.WriteAttributeString("gWheel", Conversions.ToString(gWheel));
-                xmlTextWriter2.WriteAttributeString("gPgUpDn", Conversions.ToString(gPgUpDn));
-                xmlTextWriter2.WriteAttributeString("gShow", Conversions.ToString(gShowGrid));
-                xmlTextWriter2.WriteAttributeString("gShowS", Conversions.ToString(gShowSubGrid));
-                xmlTextWriter2.WriteAttributeString("gShowBG", Conversions.ToString(gShowBG));
-                xmlTextWriter2.WriteAttributeString("gShowM", Conversions.ToString(gShowMeasureNumber));
-                xmlTextWriter2.WriteAttributeString("gShowV", Conversions.ToString(gShowVerticalLine));
-                xmlTextWriter2.WriteAttributeString("gShowMB", Conversions.ToString(gShowMeasureBar));
-                xmlTextWriter2.WriteAttributeString("gShowC", Conversions.ToString(gShowC));
-                xmlTextWriter2.WriteAttributeString("gBPM", Conversions.ToString(gBPM));
-                xmlTextWriter2.WriteAttributeString("gSTOP", Conversions.ToString(gSTOP));
-                xmlTextWriter2.WriteAttributeString("gSCROLL", Conversions.ToString(gSCROLL));
-                xmlTextWriter2.WriteAttributeString("gBLP", Conversions.ToString(gDisplayBGAColumn));
-                xmlTextWriter2.WriteAttributeString("gP2", Conversions.ToString(CHPlayer.SelectedIndex));
-                xmlTextWriter2.WriteAttributeString("gCol", Conversions.ToString(CGB.Value));
-                xmlTextWriter2.WriteAttributeString("gDivide", Conversions.ToString(gDivide));
-                xmlTextWriter2.WriteAttributeString("gSub", Conversions.ToString(gSub));
-                xmlTextWriter2.WriteAttributeString("gSlash", Conversions.ToString(gSlash));
-                xmlTextWriter2.WriteAttributeString("gxHeight", Conversions.ToString(gxHeight));
-                xmlTextWriter2.WriteAttributeString("gxWidth", Conversions.ToString(gxWidth));
-                xmlTextWriter2.WriteEndElement();
-                xmlTextWriter2.WriteStartElement("WaveForm");
-                xmlTextWriter2.WriteAttributeString("wLock", Conversions.ToString(wLock));
-                xmlTextWriter2.WriteAttributeString("wPosition", Conversions.ToString(wPosition));
-                xmlTextWriter2.WriteAttributeString("wLeft", Conversions.ToString(wLeft));
-                xmlTextWriter2.WriteAttributeString("wWidth", Conversions.ToString(wWidth));
-                xmlTextWriter2.WriteAttributeString("wPrecision", Conversions.ToString(wPrecision));
-                xmlTextWriter2.WriteEndElement();
-                xmlTextWriter2.WriteStartElement("Player");
-                xmlTextWriter2.WriteAttributeString("Count", Conversions.ToString(pArgs.Length));
-                xmlTextWriter2.WriteAttributeString("CurrentPlayer", Conversions.ToString(CurrentPlayer));
-                int num = Information.UBound(pArgs);
-                for (int i = 0; i <= num; i++)
-                {
-                    XMLWritePlayerArguments(xmlTextWriter, i);
-                }
-                xmlTextWriter2.WriteEndElement();
-            }
-            xmlTextWriter2.WriteStartElement("Columns");
-            int num2 = Information.UBound(column);
-            for (int j = 0; j <= num2; j++)
-            {
-                XMLWriteColumn(xmlTextWriter, j);
+                XMLWritePlayerArguments(xmlTextWriter, i);
             }
             xmlTextWriter2.WriteEndElement();
-            xmlTextWriter2.WriteStartElement("VisualSettings");
-            XMLUtil.XMLWriteValue(xmlTextWriter, "ColumnTitle", Conversions.ToString(vo.ColumnTitle.Color.ToArgb()));
-            XMLWriteFont(xmlTextWriter, "ColumnTitleFont", vo.ColumnTitleFont);
-            XMLUtil.XMLWriteValue(xmlTextWriter, "Bg", Conversions.ToString(vo.Bg.Color.ToArgb()));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "Grid", Conversions.ToString(vo.pGrid.Color.ToArgb()));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "Sub", Conversions.ToString(vo.pSub.Color.ToArgb()));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "VLine", Conversions.ToString(vo.pVLine.Color.ToArgb()));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "MLine", Conversions.ToString(vo.pMLine.Color.ToArgb()));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "BGMWav", Conversions.ToString(vo.pBGMWav.Color.ToArgb()));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "SelBox", Conversions.ToString(vo.SelBox.Color.ToArgb()));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "TSCursor", Conversions.ToString(vo.PECursor.Color.ToArgb()));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "TSHalf", Conversions.ToString(vo.PEHalf.Color.ToArgb()));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "TSDeltaMouseOver", Conversions.ToString(vo.PEDeltaMouseOver));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "TSMouseOver", Conversions.ToString(vo.PEMouseOver.Color.ToArgb()));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "TSSel", Conversions.ToString(vo.PESel.Color.ToArgb()));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "TSBPM", Conversions.ToString(vo.PEBPM.Color.ToArgb()));
-            XMLWriteFont(xmlTextWriter, "TSBPMFont", vo.PEBPMFont);
-            XMLUtil.XMLWriteValue(xmlTextWriter, "MiddleDeltaRelease", Conversions.ToString(vo.MiddleDeltaRelease));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "kHeight", Conversions.ToString(vo.kHeight));
-            XMLWriteFont(xmlTextWriter, "kFont", vo.kFont);
-            XMLWriteFont(xmlTextWriter, "kMFont", vo.kMFont);
-            XMLUtil.XMLWriteValue(xmlTextWriter, "kLabelVShift", Conversions.ToString(vo.kLabelVShift));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "kLabelHShift", Conversions.ToString(vo.kLabelHShift));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "kLabelHShiftL", Conversions.ToString(vo.kLabelHShiftL));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "kMouseOver", Conversions.ToString(vo.kMouseOver.Color.ToArgb()));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "kMouseOverE", Conversions.ToString(vo.kMouseOverE.Color.ToArgb()));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "kSelected", Conversions.ToString(vo.kSelected.Color.ToArgb()));
-            XMLUtil.XMLWriteValue(xmlTextWriter, "kOpacity", Conversions.ToString(vo.kOpacity));
-            xmlTextWriter2.WriteEndElement();
-            xmlTextWriter2.WriteEndElement();
-            xmlTextWriter2.WriteEndDocument();
-            xmlTextWriter2.Close();
-            xmlTextWriter2 = null;
         }
+        xmlTextWriter2.WriteStartElement("Columns");
+        int num2 = Information.UBound(column);
+        for (int j = 0; j <= num2; j++)
+        {
+            XMLWriteColumn(xmlTextWriter, j);
+        }
+        xmlTextWriter2.WriteEndElement();
+        xmlTextWriter2.WriteStartElement("VisualSettings");
+        XMLUtil.XMLWriteValue(xmlTextWriter, "ColumnTitle", Conversions.ToString(vo.ColumnTitle.Color.ToArgb()));
+        XMLWriteFont(xmlTextWriter, "ColumnTitleFont", vo.ColumnTitleFont);
+        XMLUtil.XMLWriteValue(xmlTextWriter, "Bg", Conversions.ToString(vo.Bg.Color.ToArgb()));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "Grid", Conversions.ToString(vo.pGrid.Color.ToArgb()));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "Sub", Conversions.ToString(vo.pSub.Color.ToArgb()));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "VLine", Conversions.ToString(vo.pVLine.Color.ToArgb()));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "MLine", Conversions.ToString(vo.pMLine.Color.ToArgb()));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "BGMWav", Conversions.ToString(vo.pBGMWav.Color.ToArgb()));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "SelBox", Conversions.ToString(vo.SelBox.Color.ToArgb()));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "TSCursor", Conversions.ToString(vo.PECursor.Color.ToArgb()));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "TSHalf", Conversions.ToString(vo.PEHalf.Color.ToArgb()));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "TSDeltaMouseOver", Conversions.ToString(vo.PEDeltaMouseOver));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "TSMouseOver", Conversions.ToString(vo.PEMouseOver.Color.ToArgb()));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "TSSel", Conversions.ToString(vo.PESel.Color.ToArgb()));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "TSBPM", Conversions.ToString(vo.PEBPM.Color.ToArgb()));
+        XMLWriteFont(xmlTextWriter, "TSBPMFont", vo.PEBPMFont);
+        XMLUtil.XMLWriteValue(xmlTextWriter, "MiddleDeltaRelease", Conversions.ToString(vo.MiddleDeltaRelease));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "kHeight", Conversions.ToString(vo.kHeight));
+        XMLWriteFont(xmlTextWriter, "kFont", vo.kFont);
+        XMLWriteFont(xmlTextWriter, "kMFont", vo.kMFont);
+        XMLUtil.XMLWriteValue(xmlTextWriter, "kLabelVShift", Conversions.ToString(vo.kLabelVShift));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "kLabelHShift", Conversions.ToString(vo.kLabelHShift));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "kLabelHShiftL", Conversions.ToString(vo.kLabelHShiftL));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "kMouseOver", Conversions.ToString(vo.kMouseOver.Color.ToArgb()));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "kMouseOverE", Conversions.ToString(vo.kMouseOverE.Color.ToArgb()));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "kSelected", Conversions.ToString(vo.kSelected.Color.ToArgb()));
+        XMLUtil.XMLWriteValue(xmlTextWriter, "kOpacity", Conversions.ToString(vo.kOpacity));
+        xmlTextWriter2.WriteEndElement();
+        xmlTextWriter2.WriteEndElement();
+        xmlTextWriter2.WriteEndDocument();
+        xmlTextWriter2.Close();
+        xmlTextWriter2 = null;
     }
 
     private void XMLLoadElementValue(XmlElement n, ref int v)
@@ -2245,7 +2222,7 @@ IL_0952:
         if (n != null)
         {
             string v2 = Font.FontFamily.Name;
-            int v3 = checked((int)Math.Round(Font.Size));
+            int v3 = (int)Math.Round(Font.Size);
             int v4 = (int)Font.Style;
             XMLUtil.XMLLoadAttribute(n.GetAttribute("Name"), ref v2);
             XMLUtil.XMLLoadAttribute(n.GetAttribute("Size"), ref v3);
@@ -2304,489 +2281,487 @@ IL_0952:
         FileStream fileStream = new FileStream(Path, FileMode.Open, FileAccess.Read);
         xmlDocument.Load(fileStream);
         XmlElement xmlElement = xmlDocument["iBMSC"];
-        checked
+
+        if (xmlElement != null)
         {
-            if (xmlElement != null)
+            int major = MyProject.Application.Info.Version.Major;
+            int minor = MyProject.Application.Info.Version.Minor;
+            int build = MyProject.Application.Info.Version.Build;
+            try
             {
-                int major = MyProject.Application.Info.Version.Major;
-                int minor = MyProject.Application.Info.Version.Minor;
-                int build = MyProject.Application.Info.Version.Build;
+                int num = (int)Math.Round(Conversion.Val(xmlElement.Attributes["Major"].Value));
+                int num2 = (int)Math.Round(Conversion.Val(xmlElement.Attributes["Minor"].Value));
+                int num3 = (int)Math.Round(Conversion.Val(xmlElement.Attributes["Build"].Value));
+                major = num;
+                minor = num2;
+                build = num3;
+            }
+            catch (Exception ex)
+            {
+                ProjectData.SetProjectError(ex);
+                Exception ex2 = ex;
+                ProjectData.ClearProjectError();
+            }
+            XmlElement xmlElement2 = xmlElement["Form"];
+            if (xmlElement2 != null)
+            {
+                XmlElement xmlElement3 = xmlElement2;
+                double num4 = Conversion.Val(xmlElement3.GetAttribute("WindowState"));
+                if (num4 == 0.0)
+                {
+                    WindowState = FormWindowState.Normal;
+                    string attribute = xmlElement3.GetAttribute("Width");
+                    int v = Width;
+                    XMLUtil.XMLLoadAttribute(attribute, ref v);
+                    Width = v;
+                    string attribute2 = xmlElement3.GetAttribute("Height");
+                    v = Height;
+                    XMLUtil.XMLLoadAttribute(attribute2, ref v);
+                    Height = v;
+                    string attribute3 = xmlElement3.GetAttribute("Top");
+                    v = Top;
+                    XMLUtil.XMLLoadAttribute(attribute3, ref v);
+                    Top = v;
+                    string attribute4 = xmlElement3.GetAttribute("Left");
+                    v = Left;
+                    XMLUtil.XMLLoadAttribute(attribute4, ref v);
+                    Left = v;
+                }
+                else if (num4 == 2.0)
+                {
+                    WindowState = FormWindowState.Maximized;
+                }
+                xmlElement3 = null;
+            }
+            XmlElement xmlElement4 = xmlElement["Recent"];
+            if (xmlElement4 != null)
+            {
+                XmlElement xmlElement5 = xmlElement4;
+                XMLUtil.XMLLoadAttribute(xmlElement5.GetAttribute("Recent0"), ref Recent[0]);
+                SetRecent(0, Recent[0]);
+                XMLUtil.XMLLoadAttribute(xmlElement5.GetAttribute("Recent1"), ref Recent[1]);
+                SetRecent(1, Recent[1]);
+                XMLUtil.XMLLoadAttribute(xmlElement5.GetAttribute("Recent2"), ref Recent[2]);
+                SetRecent(2, Recent[2]);
+                XMLUtil.XMLLoadAttribute(xmlElement5.GetAttribute("Recent3"), ref Recent[3]);
+                SetRecent(3, Recent[3]);
+                XMLUtil.XMLLoadAttribute(xmlElement5.GetAttribute("Recent4"), ref Recent[4]);
+                SetRecent(4, Recent[4]);
+                xmlElement5 = null;
+            }
+            XmlElement xmlElement6 = xmlElement["Edit"];
+            if (xmlElement6 != null)
+            {
+                XmlElement xmlElement7 = xmlElement6;
+                XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("NTInput"), ref NTInput);
+                TBNTInput.Checked = NTInput;
+                mnNTInput.Checked = NTInput;
+                POBLong.Enabled = !NTInput;
+                POBLongShort.Enabled = !NTInput;
+                LoadLocale(MyProject.Application.Info.DirectoryPath + "\\" + xmlElement7.GetAttribute("Language"));
+                XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("ErrorCheck"), ref ErrorCheck);
+                TBErrorCheck.Checked = ErrorCheck;
+                TBErrorCheck_Click(TBErrorCheck, new EventArgs());
+                XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("ShowFileName"), ref ShowFileName);
+                TBShowFileName.Checked = ShowFileName;
+                TBShowFileName_Click(TBShowFileName, new EventArgs());
+                XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("MiddleButtonMoveMethod"), ref MiddleButtonMoveMethod);
+                XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("AutoFocusMouseEnter"), ref AutoFocusMouseEnter);
+                XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("FirstClickDisabled"), ref FirstClickDisabled);
+                XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("AutoSaveInterval"), ref AutoSaveInterval);
+                if (AutoSaveInterval != 0)
+                {
+                    AutoSaveTimer.Interval = AutoSaveInterval;
+                }
+                else
+                {
+                    AutoSaveTimer.Enabled = false;
+                }
+                XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("PreviewOnClick"), ref PreviewOnClick);
+                TBPreviewOnClick.Checked = PreviewOnClick;
+                TBPreviewOnClick_Click(TBPreviewOnClick, new EventArgs());
+                XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("ClickStopPreview"), ref ClickStopPreview);
+                xmlElement7 = null;
+            }
+            XmlElement xmlElement8 = xmlElement["Save"];
+            if (xmlElement8 != null)
+            {
+                XmlElement xmlElement9 = xmlElement8;
+                switch (Microsoft.VisualBasic.Strings.UCase(xmlElement9.GetAttribute("TextEncoding")))
+                {
+                    case "SYSTEM ANSI":
+                        TextEncoding = Encoding.Default;
+                        break;
+                    case "LITTLE ENDIAN UTF16":
+                        TextEncoding = Encoding.Unicode;
+                        break;
+                    case "ASCII":
+                        TextEncoding = Encoding.ASCII;
+                        break;
+                    case "BIG ENDIAN UTF16":
+                        TextEncoding = Encoding.BigEndianUnicode;
+                        break;
+                    case "LITTLE ENDIAN UTF32":
+                        TextEncoding = Encoding.UTF32;
+                        break;
+                    case "UTF7":
+                        TextEncoding = Encoding.UTF7;
+                        break;
+                    case "UTF8":
+                        TextEncoding = Encoding.UTF8;
+                        break;
+                    case "SJIS":
+                        TextEncoding = Encoding.GetEncoding(932);
+                        break;
+                    case "EUC-KR":
+                        TextEncoding = Encoding.GetEncoding(51949);
+                        break;
+                }
+                XMLUtil.XMLLoadAttribute(xmlElement9.GetAttribute("BMSGridLimit"), ref BMSGridLimit);
+                XMLUtil.XMLLoadAttribute(xmlElement9.GetAttribute("BeepWhileSaved"), ref BeepWhileSaved);
+                XMLUtil.XMLLoadAttribute(xmlElement9.GetAttribute("BPMx1296"), ref BPMx1296);
+                XMLUtil.XMLLoadAttribute(xmlElement9.GetAttribute("STOPx1296"), ref STOPx1296);
+                xmlElement9 = null;
+            }
+            XmlElement xmlElement10 = xmlElement["WAV"];
+            if (xmlElement10 != null)
+            {
+                XmlElement xmlElement11 = xmlElement10;
+                XMLUtil.XMLLoadAttribute(xmlElement11.GetAttribute("WAVMultiSelect"), ref WAVMultiSelect);
+                CWAVMultiSelect.Checked = WAVMultiSelect;
+                CWAVMultiSelect_CheckedChanged(CWAVMultiSelect, new EventArgs());
+                XMLUtil.XMLLoadAttribute(xmlElement11.GetAttribute("WAVChangeLabel"), ref WAVChangeLabel);
+                CWAVChangeLabel.Checked = WAVChangeLabel;
+                CWAVChangeLabel_CheckedChanged(CWAVChangeLabel, new EventArgs());
+                int num5 = Conversions.ToInteger(xmlElement11.GetAttribute("BeatChangeMode"));
+                RadioButton[] array = new RadioButton[4] { CBeatPreserve, CBeatMeasure, CBeatCut, CBeatScale };
+                if ((num5 >= 0) & (num5 < array.Length))
+                {
+                    array[num5].Checked = true;
+                    CBeatPreserve_Click(array[num5], new EventArgs());
+                }
+                xmlElement11 = null;
+            }
+            XmlElement xmlElement12 = xmlElement["ShowHide"];
+            if (xmlElement12 != null)
+            {
+                XmlElement xmlElement13 = xmlElement12;
+                string attribute5 = xmlElement13.GetAttribute("showMenu");
+                ToolStripMenuItem toolStripMenuItem = mnSMenu;
+                bool v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute5, ref v2);
+                toolStripMenuItem.Checked = v2;
+                string attribute6 = xmlElement13.GetAttribute("showTB");
+                toolStripMenuItem = mnSTB;
+                v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute6, ref v2);
+                toolStripMenuItem.Checked = v2;
+                string attribute7 = xmlElement13.GetAttribute("showOpPanel");
+                toolStripMenuItem = mnSOP;
+                v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute7, ref v2);
+                toolStripMenuItem.Checked = v2;
+                string attribute8 = xmlElement13.GetAttribute("showStatus");
+                toolStripMenuItem = mnSStatus;
+                v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute8, ref v2);
+                toolStripMenuItem.Checked = v2;
+                string attribute9 = xmlElement13.GetAttribute("showLSplit");
+                toolStripMenuItem = mnSLSplitter;
+                v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute9, ref v2);
+                toolStripMenuItem.Checked = v2;
+                string attribute10 = xmlElement13.GetAttribute("showRSplit");
+                toolStripMenuItem = mnSRSplitter;
+                v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute10, ref v2);
+                toolStripMenuItem.Checked = v2;
+                xmlElement13 = null;
+            }
+            XmlElement xmlElement14 = xmlElement["Grid"];
+            if (xmlElement14 != null)
+            {
+                XmlElement xmlElement15 = xmlElement14;
+                string attribute11 = xmlElement15.GetAttribute("gSnap");
+                CheckBox cGSnap = CGSnap;
+                bool v2 = cGSnap.Checked;
+                XMLUtil.XMLLoadAttribute(attribute11, ref v2);
+                cGSnap.Checked = v2;
+                XMLUtil.XMLLoadAttribute(xmlElement15.GetAttribute("gWheel"), ref gWheel);
+                XMLUtil.XMLLoadAttribute(xmlElement15.GetAttribute("gPgUpDn"), ref gPgUpDn);
+                string attribute12 = xmlElement15.GetAttribute("gShow");
+                ToolStripMenuItem toolStripMenuItem = CGShow;
+                v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute12, ref v2);
+                toolStripMenuItem.Checked = v2;
+                string attribute13 = xmlElement15.GetAttribute("gShowS");
+                toolStripMenuItem = CGShowS;
+                v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute13, ref v2);
+                toolStripMenuItem.Checked = v2;
+                string attribute14 = xmlElement15.GetAttribute("gShowBG");
+                toolStripMenuItem = CGShowBG;
+                v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute14, ref v2);
+                toolStripMenuItem.Checked = v2;
+                string attribute15 = xmlElement15.GetAttribute("gShowM");
+                toolStripMenuItem = CGShowM;
+                v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute15, ref v2);
+                toolStripMenuItem.Checked = v2;
+                string attribute16 = xmlElement15.GetAttribute("gShowV");
+                toolStripMenuItem = CGShowV;
+                v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute16, ref v2);
+                toolStripMenuItem.Checked = v2;
+                string attribute17 = xmlElement15.GetAttribute("gShowMB");
+                toolStripMenuItem = CGShowMB;
+                v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute17, ref v2);
+                toolStripMenuItem.Checked = v2;
+                string attribute18 = xmlElement15.GetAttribute("gShowC");
+                toolStripMenuItem = CGShowC;
+                v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute18, ref v2);
+                toolStripMenuItem.Checked = v2;
+                string attribute19 = xmlElement15.GetAttribute("gBPM");
+                toolStripMenuItem = CGBPM;
+                v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute19, ref v2);
+                toolStripMenuItem.Checked = v2;
+                string attribute20 = xmlElement15.GetAttribute("gSTOP");
+                toolStripMenuItem = CGSTOP;
+                v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute20, ref v2);
+                toolStripMenuItem.Checked = v2;
+                string attribute21 = xmlElement15.GetAttribute("gSCROLL");
+                toolStripMenuItem = CGSCROLL;
+                v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute21, ref v2);
+                toolStripMenuItem.Checked = v2;
+                string attribute22 = xmlElement15.GetAttribute("gBLP");
+                toolStripMenuItem = CGBLP;
+                v2 = toolStripMenuItem.Checked;
+                XMLUtil.XMLLoadAttribute(attribute22, ref v2);
+                toolStripMenuItem.Checked = v2;
+                string attribute23 = xmlElement15.GetAttribute("gP2");
+                ComboBox cHPlayer = CHPlayer;
+                int v = cHPlayer.SelectedIndex;
+                XMLUtil.XMLLoadAttribute(attribute23, ref v);
+                cHPlayer.SelectedIndex = v;
+                string attribute24 = xmlElement15.GetAttribute("gCol");
+                NumericUpDown cGB = CGB;
+                decimal v3 = cGB.Value;
+                XMLUtil.XMLLoadAttribute(attribute24, ref v3);
+                cGB.Value = v3;
+                string attribute25 = xmlElement15.GetAttribute("gxHeight");
+                cGB = CGHeight;
+                v3 = cGB.Value;
+                XMLUtil.XMLLoadAttribute(attribute25, ref v3);
+                cGB.Value = v3;
+                string attribute26 = xmlElement15.GetAttribute("gxWidth");
+                cGB = CGWidth;
+                v3 = cGB.Value;
+                XMLUtil.XMLLoadAttribute(attribute26, ref v3);
+                cGB.Value = v3;
+                XMLUtil.XMLLoadAttribute(xmlElement15.GetAttribute("gSlash"), ref gSlash);
+                int value = Conversions.ToInteger(xmlElement15.GetAttribute("gDivide"));
+                if ((decimal.Compare(new decimal(value), CGDivide.Minimum) >= 0) & (decimal.Compare(new decimal(value), CGDivide.Maximum) <= 0))
+                {
+                    CGDivide.Value = new decimal(value);
+                }
+                int value2 = Conversions.ToInteger(xmlElement15.GetAttribute("gSub"));
+                if ((decimal.Compare(new decimal(value2), CGSub.Minimum) >= 0) & (decimal.Compare(new decimal(value2), CGSub.Maximum) <= 0))
+                {
+                    CGSub.Value = new decimal(value2);
+                }
+                xmlElement15 = null;
+            }
+            XmlElement xmlElement16 = xmlElement["WaveForm"];
+            if (xmlElement16 != null)
+            {
+                XmlElement xmlElement17 = xmlElement16;
+                string attribute27 = xmlElement17.GetAttribute("wLock");
+                CheckBox cGSnap = BWLock;
+                bool v2 = cGSnap.Checked;
+                XMLUtil.XMLLoadAttribute(attribute27, ref v2);
+                cGSnap.Checked = v2;
+                string attribute28 = xmlElement17.GetAttribute("wPosition");
+                NumericUpDown cGB = TWPosition;
+                decimal v3 = cGB.Value;
+                XMLUtil.XMLLoadAttribute(attribute28, ref v3);
+                cGB.Value = v3;
+                string attribute29 = xmlElement17.GetAttribute("wLeft");
+                cGB = TWLeft;
+                v3 = cGB.Value;
+                XMLUtil.XMLLoadAttribute(attribute29, ref v3);
+                cGB.Value = v3;
+                string attribute30 = xmlElement17.GetAttribute("wWidth");
+                cGB = TWWidth;
+                v3 = cGB.Value;
+                XMLUtil.XMLLoadAttribute(attribute30, ref v3);
+                cGB.Value = v3;
+                string attribute31 = xmlElement17.GetAttribute("wPrecision");
+                cGB = TWPrecision;
+                v3 = cGB.Value;
+                XMLUtil.XMLLoadAttribute(attribute31, ref v3);
+                cGB.Value = v3;
+                xmlElement17 = null;
+            }
+            XmlElement xmlElement18 = xmlElement["Player"];
+            if (xmlElement18 != null)
+            {
+                XmlElement xmlElement19 = xmlElement18;
+                XMLUtil.XMLLoadAttribute(xmlElement19.GetAttribute("CurrentPlayer"), ref CurrentPlayer);
+                int num6 = Conversions.ToInteger(xmlElement19.GetAttribute("Count"));
+                if (num6 > 0)
+                {
+                    pArgs = (PlayerArguments[])Utils.CopyArray(pArgs, new PlayerArguments[num6 - 1 + 1]);
+                }
+                xmlElement19 = null;
+                IEnumerator enumerator = default(IEnumerator);
                 try
                 {
-                    int num = (int)Math.Round(Conversion.Val(xmlElement.Attributes["Major"].Value));
-                    int num2 = (int)Math.Round(Conversion.Val(xmlElement.Attributes["Minor"].Value));
-                    int num3 = (int)Math.Round(Conversion.Val(xmlElement.Attributes["Build"].Value));
-                    major = num;
-                    minor = num2;
-                    build = num3;
-                }
-                catch (Exception ex)
-                {
-                    ProjectData.SetProjectError(ex);
-                    Exception ex2 = ex;
-                    ProjectData.ClearProjectError();
-                }
-                XmlElement xmlElement2 = xmlElement["Form"];
-                if (xmlElement2 != null)
-                {
-                    XmlElement xmlElement3 = xmlElement2;
-                    double num4 = Conversion.Val(xmlElement3.GetAttribute("WindowState"));
-                    if (num4 == 0.0)
+                    enumerator = xmlElement18.ChildNodes.GetEnumerator();
+                    while (enumerator.MoveNext())
                     {
-                        WindowState = FormWindowState.Normal;
-                        string attribute = xmlElement3.GetAttribute("Width");
-                        int v = Width;
-                        XMLUtil.XMLLoadAttribute(attribute, ref v);
-                        Width = v;
-                        string attribute2 = xmlElement3.GetAttribute("Height");
-                        v = Height;
-                        XMLUtil.XMLLoadAttribute(attribute2, ref v);
-                        Height = v;
-                        string attribute3 = xmlElement3.GetAttribute("Top");
-                        v = Top;
-                        XMLUtil.XMLLoadAttribute(attribute3, ref v);
-                        Top = v;
-                        string attribute4 = xmlElement3.GetAttribute("Left");
-                        v = Left;
-                        XMLUtil.XMLLoadAttribute(attribute4, ref v);
-                        Left = v;
-                    }
-                    else if (num4 == 2.0)
-                    {
-                        WindowState = FormWindowState.Maximized;
-                    }
-                    xmlElement3 = null;
-                }
-                XmlElement xmlElement4 = xmlElement["Recent"];
-                if (xmlElement4 != null)
-                {
-                    XmlElement xmlElement5 = xmlElement4;
-                    XMLUtil.XMLLoadAttribute(xmlElement5.GetAttribute("Recent0"), ref Recent[0]);
-                    SetRecent(0, Recent[0]);
-                    XMLUtil.XMLLoadAttribute(xmlElement5.GetAttribute("Recent1"), ref Recent[1]);
-                    SetRecent(1, Recent[1]);
-                    XMLUtil.XMLLoadAttribute(xmlElement5.GetAttribute("Recent2"), ref Recent[2]);
-                    SetRecent(2, Recent[2]);
-                    XMLUtil.XMLLoadAttribute(xmlElement5.GetAttribute("Recent3"), ref Recent[3]);
-                    SetRecent(3, Recent[3]);
-                    XMLUtil.XMLLoadAttribute(xmlElement5.GetAttribute("Recent4"), ref Recent[4]);
-                    SetRecent(4, Recent[4]);
-                    xmlElement5 = null;
-                }
-                XmlElement xmlElement6 = xmlElement["Edit"];
-                if (xmlElement6 != null)
-                {
-                    XmlElement xmlElement7 = xmlElement6;
-                    XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("NTInput"), ref NTInput);
-                    TBNTInput.Checked = NTInput;
-                    mnNTInput.Checked = NTInput;
-                    POBLong.Enabled = !NTInput;
-                    POBLongShort.Enabled = !NTInput;
-                    LoadLocale(MyProject.Application.Info.DirectoryPath + "\\" + xmlElement7.GetAttribute("Language"));
-                    XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("ErrorCheck"), ref ErrorCheck);
-                    TBErrorCheck.Checked = ErrorCheck;
-                    TBErrorCheck_Click(TBErrorCheck, new EventArgs());
-                    XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("ShowFileName"), ref ShowFileName);
-                    TBShowFileName.Checked = ShowFileName;
-                    TBShowFileName_Click(TBShowFileName, new EventArgs());
-                    XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("MiddleButtonMoveMethod"), ref MiddleButtonMoveMethod);
-                    XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("AutoFocusMouseEnter"), ref AutoFocusMouseEnter);
-                    XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("FirstClickDisabled"), ref FirstClickDisabled);
-                    XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("AutoSaveInterval"), ref AutoSaveInterval);
-                    if (AutoSaveInterval != 0)
-                    {
-                        AutoSaveTimer.Interval = AutoSaveInterval;
-                    }
-                    else
-                    {
-                        AutoSaveTimer.Enabled = false;
-                    }
-                    XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("PreviewOnClick"), ref PreviewOnClick);
-                    TBPreviewOnClick.Checked = PreviewOnClick;
-                    TBPreviewOnClick_Click(TBPreviewOnClick, new EventArgs());
-                    XMLUtil.XMLLoadAttribute(xmlElement7.GetAttribute("ClickStopPreview"), ref ClickStopPreview);
-                    xmlElement7 = null;
-                }
-                XmlElement xmlElement8 = xmlElement["Save"];
-                if (xmlElement8 != null)
-                {
-                    XmlElement xmlElement9 = xmlElement8;
-                    switch (Microsoft.VisualBasic.Strings.UCase(xmlElement9.GetAttribute("TextEncoding")))
-                    {
-                        case "SYSTEM ANSI":
-                            TextEncoding = Encoding.Default;
-                            break;
-                        case "LITTLE ENDIAN UTF16":
-                            TextEncoding = Encoding.Unicode;
-                            break;
-                        case "ASCII":
-                            TextEncoding = Encoding.ASCII;
-                            break;
-                        case "BIG ENDIAN UTF16":
-                            TextEncoding = Encoding.BigEndianUnicode;
-                            break;
-                        case "LITTLE ENDIAN UTF32":
-                            TextEncoding = Encoding.UTF32;
-                            break;
-                        case "UTF7":
-                            TextEncoding = Encoding.UTF7;
-                            break;
-                        case "UTF8":
-                            TextEncoding = Encoding.UTF8;
-                            break;
-                        case "SJIS":
-                            TextEncoding = Encoding.GetEncoding(932);
-                            break;
-                        case "EUC-KR":
-                            TextEncoding = Encoding.GetEncoding(51949);
-                            break;
-                    }
-                    XMLUtil.XMLLoadAttribute(xmlElement9.GetAttribute("BMSGridLimit"), ref BMSGridLimit);
-                    XMLUtil.XMLLoadAttribute(xmlElement9.GetAttribute("BeepWhileSaved"), ref BeepWhileSaved);
-                    XMLUtil.XMLLoadAttribute(xmlElement9.GetAttribute("BPMx1296"), ref BPMx1296);
-                    XMLUtil.XMLLoadAttribute(xmlElement9.GetAttribute("STOPx1296"), ref STOPx1296);
-                    xmlElement9 = null;
-                }
-                XmlElement xmlElement10 = xmlElement["WAV"];
-                if (xmlElement10 != null)
-                {
-                    XmlElement xmlElement11 = xmlElement10;
-                    XMLUtil.XMLLoadAttribute(xmlElement11.GetAttribute("WAVMultiSelect"), ref WAVMultiSelect);
-                    CWAVMultiSelect.Checked = WAVMultiSelect;
-                    CWAVMultiSelect_CheckedChanged(CWAVMultiSelect, new EventArgs());
-                    XMLUtil.XMLLoadAttribute(xmlElement11.GetAttribute("WAVChangeLabel"), ref WAVChangeLabel);
-                    CWAVChangeLabel.Checked = WAVChangeLabel;
-                    CWAVChangeLabel_CheckedChanged(CWAVChangeLabel, new EventArgs());
-                    int num5 = Conversions.ToInteger(xmlElement11.GetAttribute("BeatChangeMode"));
-                    RadioButton[] array = new RadioButton[4] { CBeatPreserve, CBeatMeasure, CBeatCut, CBeatScale };
-                    if ((num5 >= 0) & (num5 < array.Length))
-                    {
-                        array[num5].Checked = true;
-                        CBeatPreserve_Click(array[num5], new EventArgs());
-                    }
-                    xmlElement11 = null;
-                }
-                XmlElement xmlElement12 = xmlElement["ShowHide"];
-                if (xmlElement12 != null)
-                {
-                    XmlElement xmlElement13 = xmlElement12;
-                    string attribute5 = xmlElement13.GetAttribute("showMenu");
-                    ToolStripMenuItem toolStripMenuItem = mnSMenu;
-                    bool v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute5, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    string attribute6 = xmlElement13.GetAttribute("showTB");
-                    toolStripMenuItem = mnSTB;
-                    v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute6, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    string attribute7 = xmlElement13.GetAttribute("showOpPanel");
-                    toolStripMenuItem = mnSOP;
-                    v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute7, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    string attribute8 = xmlElement13.GetAttribute("showStatus");
-                    toolStripMenuItem = mnSStatus;
-                    v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute8, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    string attribute9 = xmlElement13.GetAttribute("showLSplit");
-                    toolStripMenuItem = mnSLSplitter;
-                    v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute9, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    string attribute10 = xmlElement13.GetAttribute("showRSplit");
-                    toolStripMenuItem = mnSRSplitter;
-                    v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute10, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    xmlElement13 = null;
-                }
-                XmlElement xmlElement14 = xmlElement["Grid"];
-                if (xmlElement14 != null)
-                {
-                    XmlElement xmlElement15 = xmlElement14;
-                    string attribute11 = xmlElement15.GetAttribute("gSnap");
-                    CheckBox cGSnap = CGSnap;
-                    bool v2 = cGSnap.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute11, ref v2);
-                    cGSnap.Checked = v2;
-                    XMLUtil.XMLLoadAttribute(xmlElement15.GetAttribute("gWheel"), ref gWheel);
-                    XMLUtil.XMLLoadAttribute(xmlElement15.GetAttribute("gPgUpDn"), ref gPgUpDn);
-                    string attribute12 = xmlElement15.GetAttribute("gShow");
-                    ToolStripMenuItem toolStripMenuItem = CGShow;
-                    v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute12, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    string attribute13 = xmlElement15.GetAttribute("gShowS");
-                    toolStripMenuItem = CGShowS;
-                    v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute13, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    string attribute14 = xmlElement15.GetAttribute("gShowBG");
-                    toolStripMenuItem = CGShowBG;
-                    v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute14, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    string attribute15 = xmlElement15.GetAttribute("gShowM");
-                    toolStripMenuItem = CGShowM;
-                    v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute15, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    string attribute16 = xmlElement15.GetAttribute("gShowV");
-                    toolStripMenuItem = CGShowV;
-                    v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute16, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    string attribute17 = xmlElement15.GetAttribute("gShowMB");
-                    toolStripMenuItem = CGShowMB;
-                    v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute17, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    string attribute18 = xmlElement15.GetAttribute("gShowC");
-                    toolStripMenuItem = CGShowC;
-                    v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute18, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    string attribute19 = xmlElement15.GetAttribute("gBPM");
-                    toolStripMenuItem = CGBPM;
-                    v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute19, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    string attribute20 = xmlElement15.GetAttribute("gSTOP");
-                    toolStripMenuItem = CGSTOP;
-                    v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute20, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    string attribute21 = xmlElement15.GetAttribute("gSCROLL");
-                    toolStripMenuItem = CGSCROLL;
-                    v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute21, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    string attribute22 = xmlElement15.GetAttribute("gBLP");
-                    toolStripMenuItem = CGBLP;
-                    v2 = toolStripMenuItem.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute22, ref v2);
-                    toolStripMenuItem.Checked = v2;
-                    string attribute23 = xmlElement15.GetAttribute("gP2");
-                    ComboBox cHPlayer = CHPlayer;
-                    int v = cHPlayer.SelectedIndex;
-                    XMLUtil.XMLLoadAttribute(attribute23, ref v);
-                    cHPlayer.SelectedIndex = v;
-                    string attribute24 = xmlElement15.GetAttribute("gCol");
-                    NumericUpDown cGB = CGB;
-                    decimal v3 = cGB.Value;
-                    XMLUtil.XMLLoadAttribute(attribute24, ref v3);
-                    cGB.Value = v3;
-                    string attribute25 = xmlElement15.GetAttribute("gxHeight");
-                    cGB = CGHeight;
-                    v3 = cGB.Value;
-                    XMLUtil.XMLLoadAttribute(attribute25, ref v3);
-                    cGB.Value = v3;
-                    string attribute26 = xmlElement15.GetAttribute("gxWidth");
-                    cGB = CGWidth;
-                    v3 = cGB.Value;
-                    XMLUtil.XMLLoadAttribute(attribute26, ref v3);
-                    cGB.Value = v3;
-                    XMLUtil.XMLLoadAttribute(xmlElement15.GetAttribute("gSlash"), ref gSlash);
-                    int value = Conversions.ToInteger(xmlElement15.GetAttribute("gDivide"));
-                    if ((decimal.Compare(new decimal(value), CGDivide.Minimum) >= 0) & (decimal.Compare(new decimal(value), CGDivide.Maximum) <= 0))
-                    {
-                        CGDivide.Value = new decimal(value);
-                    }
-                    int value2 = Conversions.ToInteger(xmlElement15.GetAttribute("gSub"));
-                    if ((decimal.Compare(new decimal(value2), CGSub.Minimum) >= 0) & (decimal.Compare(new decimal(value2), CGSub.Maximum) <= 0))
-                    {
-                        CGSub.Value = new decimal(value2);
-                    }
-                    xmlElement15 = null;
-                }
-                XmlElement xmlElement16 = xmlElement["WaveForm"];
-                if (xmlElement16 != null)
-                {
-                    XmlElement xmlElement17 = xmlElement16;
-                    string attribute27 = xmlElement17.GetAttribute("wLock");
-                    CheckBox cGSnap = BWLock;
-                    bool v2 = cGSnap.Checked;
-                    XMLUtil.XMLLoadAttribute(attribute27, ref v2);
-                    cGSnap.Checked = v2;
-                    string attribute28 = xmlElement17.GetAttribute("wPosition");
-                    NumericUpDown cGB = TWPosition;
-                    decimal v3 = cGB.Value;
-                    XMLUtil.XMLLoadAttribute(attribute28, ref v3);
-                    cGB.Value = v3;
-                    string attribute29 = xmlElement17.GetAttribute("wLeft");
-                    cGB = TWLeft;
-                    v3 = cGB.Value;
-                    XMLUtil.XMLLoadAttribute(attribute29, ref v3);
-                    cGB.Value = v3;
-                    string attribute30 = xmlElement17.GetAttribute("wWidth");
-                    cGB = TWWidth;
-                    v3 = cGB.Value;
-                    XMLUtil.XMLLoadAttribute(attribute30, ref v3);
-                    cGB.Value = v3;
-                    string attribute31 = xmlElement17.GetAttribute("wPrecision");
-                    cGB = TWPrecision;
-                    v3 = cGB.Value;
-                    XMLUtil.XMLLoadAttribute(attribute31, ref v3);
-                    cGB.Value = v3;
-                    xmlElement17 = null;
-                }
-                XmlElement xmlElement18 = xmlElement["Player"];
-                if (xmlElement18 != null)
-                {
-                    XmlElement xmlElement19 = xmlElement18;
-                    XMLUtil.XMLLoadAttribute(xmlElement19.GetAttribute("CurrentPlayer"), ref CurrentPlayer);
-                    int num6 = Conversions.ToInteger(xmlElement19.GetAttribute("Count"));
-                    if (num6 > 0)
-                    {
-                        pArgs = (PlayerArguments[])Utils.CopyArray(pArgs, new PlayerArguments[num6 - 1 + 1]);
-                    }
-                    xmlElement19 = null;
-                    IEnumerator enumerator = default(IEnumerator);
-                    try
-                    {
-                        enumerator = xmlElement18.ChildNodes.GetEnumerator();
-                        while (enumerator.MoveNext())
-                        {
-                            XmlElement n = (XmlElement)enumerator.Current;
-                            XMLLoadPlayer(n);
-                        }
-                    }
-                    finally
-                    {
-                        if (enumerator is IDisposable)
-                        {
-                            (enumerator as IDisposable).Dispose();
-                        }
+                        XmlElement n = (XmlElement)enumerator.Current;
+                        XMLLoadPlayer(n);
                     }
                 }
-                XmlElement xmlElement20 = xmlElement["Columns"];
-                if (xmlElement20 != null)
+                finally
                 {
-                    IEnumerator enumerator2 = default(IEnumerator);
-                    try
+                    if (enumerator is IDisposable)
                     {
-                        enumerator2 = xmlElement20.ChildNodes.GetEnumerator();
-                        while (enumerator2.MoveNext())
-                        {
-                            XmlElement n2 = (XmlElement)enumerator2.Current;
-                            XMLLoadColumn(n2);
-                        }
+                        (enumerator as IDisposable).Dispose();
                     }
-                    finally
-                    {
-                        if (enumerator2 is IDisposable)
-                        {
-                            (enumerator2 as IDisposable).Dispose();
-                        }
-                    }
-                }
-                XmlElement xmlElement21 = xmlElement["VisualSettings"];
-                if (xmlElement21 != null)
-                {
-                    XmlElement xmlElement22 = xmlElement21;
-                    XmlElement n3 = xmlElement22["ColumnTitle"];
-                    SolidBrush columnTitle = vo.ColumnTitle;
-                    Color v4 = columnTitle.Color;
-                    XMLLoadElementValue(n3, ref v4);
-                    columnTitle.Color = v4;
-                    XMLLoadElementValue(xmlElement22["ColumnTitleFont"], ref vo.ColumnTitleFont);
-                    XmlElement n4 = xmlElement22["Bg"];
-                    columnTitle = vo.Bg;
-                    v4 = columnTitle.Color;
-                    XMLLoadElementValue(n4, ref v4);
-                    columnTitle.Color = v4;
-                    XmlElement n5 = xmlElement22["Grid"];
-                    Pen pGrid = vo.pGrid;
-                    v4 = pGrid.Color;
-                    XMLLoadElementValue(n5, ref v4);
-                    pGrid.Color = v4;
-                    XmlElement n6 = xmlElement22["Sub"];
-                    pGrid = vo.pSub;
-                    v4 = pGrid.Color;
-                    XMLLoadElementValue(n6, ref v4);
-                    pGrid.Color = v4;
-                    XmlElement n7 = xmlElement22["VLine"];
-                    pGrid = vo.pVLine;
-                    v4 = pGrid.Color;
-                    XMLLoadElementValue(n7, ref v4);
-                    pGrid.Color = v4;
-                    XmlElement n8 = xmlElement22["MLine"];
-                    pGrid = vo.pMLine;
-                    v4 = pGrid.Color;
-                    XMLLoadElementValue(n8, ref v4);
-                    pGrid.Color = v4;
-                    XmlElement n9 = xmlElement22["BGMWav"];
-                    pGrid = vo.pBGMWav;
-                    v4 = pGrid.Color;
-                    XMLLoadElementValue(n9, ref v4);
-                    pGrid.Color = v4;
-                    TWTransparency.Value = new decimal(vo.pBGMWav.Color.A);
-                    TWTransparency2.Value = vo.pBGMWav.Color.A;
-                    TWSaturation.Value = new decimal(vo.pBGMWav.Color.GetSaturation() * 1000f);
-                    TWSaturation2.Value = (int)Math.Round(vo.pBGMWav.Color.GetSaturation() * 1000f);
-                    XmlElement n10 = xmlElement22["SelBox"];
-                    pGrid = vo.SelBox;
-                    v4 = pGrid.Color;
-                    XMLLoadElementValue(n10, ref v4);
-                    pGrid.Color = v4;
-                    XmlElement n11 = xmlElement22["TSCursor"];
-                    pGrid = vo.PECursor;
-                    v4 = pGrid.Color;
-                    XMLLoadElementValue(n11, ref v4);
-                    pGrid.Color = v4;
-                    XmlElement n12 = xmlElement22["TSHalf"];
-                    pGrid = vo.PEHalf;
-                    v4 = pGrid.Color;
-                    XMLLoadElementValue(n12, ref v4);
-                    pGrid.Color = v4;
-                    XMLLoadElementValue(xmlElement22["TSDeltaMouseOver"], ref vo.PEDeltaMouseOver);
-                    XmlElement n13 = xmlElement22["TSMouseOver"];
-                    pGrid = vo.PEMouseOver;
-                    v4 = pGrid.Color;
-                    XMLLoadElementValue(n13, ref v4);
-                    pGrid.Color = v4;
-                    XmlElement n14 = xmlElement22["TSSel"];
-                    columnTitle = vo.PESel;
-                    v4 = columnTitle.Color;
-                    XMLLoadElementValue(n14, ref v4);
-                    columnTitle.Color = v4;
-                    XmlElement n15 = xmlElement22["TSBPM"];
-                    columnTitle = vo.PEBPM;
-                    v4 = columnTitle.Color;
-                    XMLLoadElementValue(n15, ref v4);
-                    columnTitle.Color = v4;
-                    XMLLoadElementValue(xmlElement22["TSBPMFont"], ref vo.PEBPMFont);
-                    XMLLoadElementValue(xmlElement22["MiddleDeltaRelease"], ref vo.MiddleDeltaRelease);
-                    XMLLoadElementValue(xmlElement22["kHeight"], ref vo.kHeight);
-                    XMLLoadElementValue(xmlElement22["kFont"], ref vo.kFont);
-                    XMLLoadElementValue(xmlElement22["kMFont"], ref vo.kMFont);
-                    XMLLoadElementValue(xmlElement22["kLabelVShift"], ref vo.kLabelVShift);
-                    XMLLoadElementValue(xmlElement22["kLabelHShift"], ref vo.kLabelHShift);
-                    XMLLoadElementValue(xmlElement22["kLabelHShiftL"], ref vo.kLabelHShiftL);
-                    XmlElement n16 = xmlElement22["kMouseOver"];
-                    pGrid = vo.kMouseOver;
-                    v4 = pGrid.Color;
-                    XMLLoadElementValue(n16, ref v4);
-                    pGrid.Color = v4;
-                    XmlElement n17 = xmlElement22["kMouseOverE"];
-                    pGrid = vo.kMouseOverE;
-                    v4 = pGrid.Color;
-                    XMLLoadElementValue(n17, ref v4);
-                    pGrid.Color = v4;
-                    XmlElement n18 = xmlElement22["kSelected"];
-                    pGrid = vo.kSelected;
-                    v4 = pGrid.Color;
-                    XMLLoadElementValue(n18, ref v4);
-                    pGrid.Color = v4;
-                    XMLLoadElementValue(xmlElement22["kOpacity"], ref vo.kOpacity);
-                    xmlElement22 = null;
                 }
             }
-            UpdateColumnsX();
-            fileStream.Close();
+            XmlElement xmlElement20 = xmlElement["Columns"];
+            if (xmlElement20 != null)
+            {
+                IEnumerator enumerator2 = default(IEnumerator);
+                try
+                {
+                    enumerator2 = xmlElement20.ChildNodes.GetEnumerator();
+                    while (enumerator2.MoveNext())
+                    {
+                        XmlElement n2 = (XmlElement)enumerator2.Current;
+                        XMLLoadColumn(n2);
+                    }
+                }
+                finally
+                {
+                    if (enumerator2 is IDisposable)
+                    {
+                        (enumerator2 as IDisposable).Dispose();
+                    }
+                }
+            }
+            XmlElement xmlElement21 = xmlElement["VisualSettings"];
+            if (xmlElement21 != null)
+            {
+                XmlElement xmlElement22 = xmlElement21;
+                XmlElement n3 = xmlElement22["ColumnTitle"];
+                SolidBrush columnTitle = vo.ColumnTitle;
+                Color v4 = columnTitle.Color;
+                XMLLoadElementValue(n3, ref v4);
+                columnTitle.Color = v4;
+                XMLLoadElementValue(xmlElement22["ColumnTitleFont"], ref vo.ColumnTitleFont);
+                XmlElement n4 = xmlElement22["Bg"];
+                columnTitle = vo.Bg;
+                v4 = columnTitle.Color;
+                XMLLoadElementValue(n4, ref v4);
+                columnTitle.Color = v4;
+                XmlElement n5 = xmlElement22["Grid"];
+                Pen pGrid = vo.pGrid;
+                v4 = pGrid.Color;
+                XMLLoadElementValue(n5, ref v4);
+                pGrid.Color = v4;
+                XmlElement n6 = xmlElement22["Sub"];
+                pGrid = vo.pSub;
+                v4 = pGrid.Color;
+                XMLLoadElementValue(n6, ref v4);
+                pGrid.Color = v4;
+                XmlElement n7 = xmlElement22["VLine"];
+                pGrid = vo.pVLine;
+                v4 = pGrid.Color;
+                XMLLoadElementValue(n7, ref v4);
+                pGrid.Color = v4;
+                XmlElement n8 = xmlElement22["MLine"];
+                pGrid = vo.pMLine;
+                v4 = pGrid.Color;
+                XMLLoadElementValue(n8, ref v4);
+                pGrid.Color = v4;
+                XmlElement n9 = xmlElement22["BGMWav"];
+                pGrid = vo.pBGMWav;
+                v4 = pGrid.Color;
+                XMLLoadElementValue(n9, ref v4);
+                pGrid.Color = v4;
+                TWTransparency.Value = new decimal(vo.pBGMWav.Color.A);
+                TWTransparency2.Value = vo.pBGMWav.Color.A;
+                TWSaturation.Value = new decimal(vo.pBGMWav.Color.GetSaturation() * 1000f);
+                TWSaturation2.Value = (int)Math.Round(vo.pBGMWav.Color.GetSaturation() * 1000f);
+                XmlElement n10 = xmlElement22["SelBox"];
+                pGrid = vo.SelBox;
+                v4 = pGrid.Color;
+                XMLLoadElementValue(n10, ref v4);
+                pGrid.Color = v4;
+                XmlElement n11 = xmlElement22["TSCursor"];
+                pGrid = vo.PECursor;
+                v4 = pGrid.Color;
+                XMLLoadElementValue(n11, ref v4);
+                pGrid.Color = v4;
+                XmlElement n12 = xmlElement22["TSHalf"];
+                pGrid = vo.PEHalf;
+                v4 = pGrid.Color;
+                XMLLoadElementValue(n12, ref v4);
+                pGrid.Color = v4;
+                XMLLoadElementValue(xmlElement22["TSDeltaMouseOver"], ref vo.PEDeltaMouseOver);
+                XmlElement n13 = xmlElement22["TSMouseOver"];
+                pGrid = vo.PEMouseOver;
+                v4 = pGrid.Color;
+                XMLLoadElementValue(n13, ref v4);
+                pGrid.Color = v4;
+                XmlElement n14 = xmlElement22["TSSel"];
+                columnTitle = vo.PESel;
+                v4 = columnTitle.Color;
+                XMLLoadElementValue(n14, ref v4);
+                columnTitle.Color = v4;
+                XmlElement n15 = xmlElement22["TSBPM"];
+                columnTitle = vo.PEBPM;
+                v4 = columnTitle.Color;
+                XMLLoadElementValue(n15, ref v4);
+                columnTitle.Color = v4;
+                XMLLoadElementValue(xmlElement22["TSBPMFont"], ref vo.PEBPMFont);
+                XMLLoadElementValue(xmlElement22["MiddleDeltaRelease"], ref vo.MiddleDeltaRelease);
+                XMLLoadElementValue(xmlElement22["kHeight"], ref vo.kHeight);
+                XMLLoadElementValue(xmlElement22["kFont"], ref vo.kFont);
+                XMLLoadElementValue(xmlElement22["kMFont"], ref vo.kMFont);
+                XMLLoadElementValue(xmlElement22["kLabelVShift"], ref vo.kLabelVShift);
+                XMLLoadElementValue(xmlElement22["kLabelHShift"], ref vo.kLabelHShift);
+                XMLLoadElementValue(xmlElement22["kLabelHShiftL"], ref vo.kLabelHShiftL);
+                XmlElement n16 = xmlElement22["kMouseOver"];
+                pGrid = vo.kMouseOver;
+                v4 = pGrid.Color;
+                XMLLoadElementValue(n16, ref v4);
+                pGrid.Color = v4;
+                XmlElement n17 = xmlElement22["kMouseOverE"];
+                pGrid = vo.kMouseOverE;
+                v4 = pGrid.Color;
+                XMLLoadElementValue(n17, ref v4);
+                pGrid.Color = v4;
+                XmlElement n18 = xmlElement22["kSelected"];
+                pGrid = vo.kSelected;
+                v4 = pGrid.Color;
+                XMLLoadElementValue(n18, ref v4);
+                pGrid.Color = v4;
+                XMLLoadElementValue(xmlElement22["kOpacity"], ref vo.kOpacity);
+                xmlElement22 = null;
+            }
         }
+        UpdateColumnsX();
+        fileStream.Close();
     }
 
     private void XMLLoadLocaleMenu(XmlElement n, ref string target)
@@ -2835,1505 +2810,1500 @@ IL_0952:
         POHeaderPart2.Visible = true;
         POGridPart2.Visible = true;
         POWaveFormPart2.Visible = true;
-        checked
+
+        try
         {
-            try
+            xmlDocument = new XmlDocument();
+            fileStream = new FileStream(Path, FileMode.Open, FileAccess.Read);
+            xmlDocument.Load(fileStream);
+            XmlElement xmlElement = xmlDocument["iBMSC.Locale"];
+            if (xmlElement == null)
             {
-                xmlDocument = new XmlDocument();
-                fileStream = new FileStream(Path, FileMode.Open, FileAccess.Read);
-                xmlDocument.Load(fileStream);
-                XmlElement xmlElement = xmlDocument["iBMSC.Locale"];
-                if (xmlElement == null)
+                throw new NullReferenceException();
+            }
+            XMLLoadLocale(xmlElement["OK"], ref Strings.OK);
+            XMLLoadLocale(xmlElement["Cancel"], ref Strings.Cancel);
+            XMLLoadLocale(xmlElement["None"], ref Strings.None);
+            XmlElement xmlElement2 = xmlElement["Font"];
+            if (xmlElement2 != null)
+            {
+                int num = 9;
+                if (xmlElement2.HasAttribute("Size"))
                 {
-                    throw new NullReferenceException();
+                    num = (int)Math.Round(Conversion.Val(xmlElement2.GetAttribute("Size")));
                 }
-                XMLLoadLocale(xmlElement["OK"], ref Strings.OK);
-                XMLLoadLocale(xmlElement["Cancel"], ref Strings.Cancel);
-                XMLLoadLocale(xmlElement["None"], ref Strings.None);
-                XmlElement xmlElement2 = xmlElement["Font"];
-                if (xmlElement2 != null)
+                Font font = new Font(Font.FontFamily, num, FontStyle.Regular);
+                XmlNode xmlNode = xmlElement2.LastChild;
+                while (xmlNode != null)
                 {
-                    int num = 9;
-                    if (xmlElement2.HasAttribute("Size"))
+                    if (Operators.CompareString(xmlNode.LocalName, "Family", TextCompare: false) == 0)
                     {
-                        num = (int)Math.Round(Conversion.Val(xmlElement2.GetAttribute("Size")));
-                    }
-                    Font font = new Font(Font.FontFamily, num, FontStyle.Regular);
-                    XmlNode xmlNode = xmlElement2.LastChild;
-                    while (xmlNode != null)
-                    {
-                        if (Operators.CompareString(xmlNode.LocalName, "Family", TextCompare: false) == 0)
+                        if (Functions.isFontInstalled(xmlNode.InnerText))
                         {
-                            if (Functions.isFontInstalled(xmlNode.InnerText))
-                            {
-                                font = new Font(xmlNode.InnerText, num);
-                            }
-                            xmlNode = xmlNode.PreviousSibling;
+                            font = new Font(xmlNode.InnerText, num);
                         }
+                        xmlNode = xmlNode.PreviousSibling;
                     }
-                    object[] array = new object[10] { this, mnSys, Menu1, mnMain, cmnLanguage, cmnTheme, cmnConversion, TBMain, FStatus, FStatus2 };
-                    for (int i = 0; i < array.Length; i++)
+                }
+                object[] array = new object[10] { this, mnSys, Menu1, mnMain, cmnLanguage, cmnTheme, cmnConversion, TBMain, FStatus, FStatus2 };
+                for (int i = 0; i < array.Length; i++)
+                {
+                    object objectValue = RuntimeHelpers.GetObjectValue(array[i]);
+                    try
                     {
-                        object objectValue = RuntimeHelpers.GetObjectValue(array[i]);
-                        try
-                        {
-                            NewLateBinding.LateSet(objectValue, null, "Font", new object[1] { font }, null, null);
-                        }
-                        catch (Exception ex)
-                        {
-                            ProjectData.SetProjectError(ex);
-                            Exception ex2 = ex;
-                            ProjectData.ClearProjectError();
-                        }
+                        NewLateBinding.LateSet(objectValue, null, "Font", new object[1] { font }, null, null);
                     }
-                    Font font2 = new Font(font, FontStyle.Bold);
-                    object[] array3 = new object[16]
+                    catch (Exception ex)
                     {
+                        ProjectData.SetProjectError(ex);
+                        Exception ex2 = ex;
+                        ProjectData.ClearProjectError();
+                    }
+                }
+                Font font2 = new Font(font, FontStyle.Bold);
+                object[] array3 = new object[16]
+                {
                         TBStatistics, FSSS, FSSL, FSSH, TVCM, TVCD, TVCBPM, FSP1, FSP3, FSP2,
                         PMain, PMainIn, PMainR, PMainInR, PMainL, PMainInL
-                    };
-                    for (int j = 0; j < array3.Length; j++)
+                };
+                for (int j = 0; j < array3.Length; j++)
+                {
+                    object objectValue2 = RuntimeHelpers.GetObjectValue(array3[j]);
+                    try
                     {
-                        object objectValue2 = RuntimeHelpers.GetObjectValue(array3[j]);
-                        try
-                        {
-                            NewLateBinding.LateSet(objectValue2, null, "Font", new object[1] { font2 }, null, null);
-                        }
-                        catch (Exception ex3)
-                        {
-                            ProjectData.SetProjectError(ex3);
-                            Exception ex4 = ex3;
-                            ProjectData.ClearProjectError();
-                        }
+                        NewLateBinding.LateSet(objectValue2, null, "Font", new object[1] { font2 }, null, null);
+                    }
+                    catch (Exception ex3)
+                    {
+                        ProjectData.SetProjectError(ex3);
+                        Exception ex4 = ex3;
+                        ProjectData.ClearProjectError();
                     }
                 }
-                XmlElement xmlElement3 = xmlElement["MonoFont"];
-                if (xmlElement3 != null)
+            }
+            XmlElement xmlElement3 = xmlElement["MonoFont"];
+            if (xmlElement3 != null)
+            {
+                int num2 = 9;
+                if (xmlElement3.HasAttribute("Size"))
                 {
-                    int num2 = 9;
-                    if (xmlElement3.HasAttribute("Size"))
+                    num2 = (int)Math.Round(Conversion.Val(xmlElement3.GetAttribute("Size")));
+                }
+                Font font3 = new Font(POWAVInner.Font.FontFamily, num2);
+                XmlNode xmlNode2 = xmlElement3.LastChild;
+                while (xmlNode2 != null)
+                {
+                    if (Operators.CompareString(xmlNode2.LocalName, "Family", TextCompare: false) == 0)
                     {
-                        num2 = (int)Math.Round(Conversion.Val(xmlElement3.GetAttribute("Size")));
-                    }
-                    Font font3 = new Font(POWAVInner.Font.FontFamily, num2);
-                    XmlNode xmlNode2 = xmlElement3.LastChild;
-                    while (xmlNode2 != null)
-                    {
-                        if (Operators.CompareString(xmlNode2.LocalName, "Family", TextCompare: false) == 0)
+                        if (Functions.isFontInstalled(xmlNode2.InnerText))
                         {
-                            if (Functions.isFontInstalled(xmlNode2.InnerText))
-                            {
-                                font3 = new Font(xmlNode2.InnerText, num2);
-                            }
-                            xmlNode2 = xmlNode2.PreviousSibling;
+                            font3 = new Font(xmlNode2.InnerText, num2);
                         }
-                    }
-                    object[] array5 = new object[3] { LWAV, LBeat, TExpansion };
-                    for (int k = 0; k < array5.Length; k++)
-                    {
-                        object objectValue3 = RuntimeHelpers.GetObjectValue(array5[k]);
-                        try
-                        {
-                            NewLateBinding.LateSet(objectValue3, null, "font", new object[1] { font3 }, null, null);
-                        }
-                        catch (Exception ex5)
-                        {
-                            ProjectData.SetProjectError(ex5);
-                            Exception ex6 = ex5;
-                            ProjectData.ClearProjectError();
-                        }
+                        xmlNode2 = xmlNode2.PreviousSibling;
                     }
                 }
-                XmlElement xmlElement4 = xmlElement["Menu"];
-                if (xmlElement4 != null)
+                object[] array5 = new object[3] { LWAV, LBeat, TExpansion };
+                for (int k = 0; k < array5.Length; k++)
                 {
-                    XmlElement xmlElement5 = xmlElement4["File"];
-                    ToolStripMenuItem toolStripMenuItem;
-                    string target;
-                    if (xmlElement5 != null)
+                    object objectValue3 = RuntimeHelpers.GetObjectValue(array5[k]);
+                    try
                     {
-                        XmlElement n = xmlElement5["Title"];
-                        toolStripMenuItem = mnFile;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n2 = xmlElement5["New"];
-                        toolStripMenuItem = mnNew;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n2, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n3 = xmlElement5["Open"];
-                        toolStripMenuItem = mnOpen;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n3, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n4 = xmlElement5["ImportSM"];
-                        toolStripMenuItem = mnImportSM;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n4, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n5 = xmlElement5["ImportIBMSC"];
-                        toolStripMenuItem = mnImportIBMSC;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n5, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n6 = xmlElement5["Save"];
-                        toolStripMenuItem = mnSave;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n6, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n7 = xmlElement5["SaveAs"];
-                        toolStripMenuItem = mnSaveAs;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n7, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n8 = xmlElement5["ExportIBMSC"];
-                        toolStripMenuItem = mnExport;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n8, ref target);
-                        toolStripMenuItem.Text = target;
-                        if (Operators.CompareString(Recent[0], "", TextCompare: false) == 0)
-                        {
-                            XmlElement n9 = xmlElement5["Recent0"];
-                            toolStripMenuItem = mnOpenR0;
-                            target = toolStripMenuItem.Text;
-                            XMLLoadLocaleMenu(n9, ref target);
-                            toolStripMenuItem.Text = target;
-                        }
-                        if (Operators.CompareString(Recent[1], "", TextCompare: false) == 0)
-                        {
-                            XmlElement n10 = xmlElement5["Recent1"];
-                            toolStripMenuItem = mnOpenR1;
-                            target = toolStripMenuItem.Text;
-                            XMLLoadLocaleMenu(n10, ref target);
-                            toolStripMenuItem.Text = target;
-                        }
-                        if (Operators.CompareString(Recent[2], "", TextCompare: false) == 0)
-                        {
-                            XmlElement n11 = xmlElement5["Recent2"];
-                            toolStripMenuItem = mnOpenR2;
-                            target = toolStripMenuItem.Text;
-                            XMLLoadLocaleMenu(n11, ref target);
-                            toolStripMenuItem.Text = target;
-                        }
-                        if (Operators.CompareString(Recent[3], "", TextCompare: false) == 0)
-                        {
-                            XmlElement n12 = xmlElement5["Recent3"];
-                            toolStripMenuItem = mnOpenR3;
-                            target = toolStripMenuItem.Text;
-                            XMLLoadLocaleMenu(n12, ref target);
-                            toolStripMenuItem.Text = target;
-                        }
-                        if (Operators.CompareString(Recent[4], "", TextCompare: false) == 0)
-                        {
-                            XmlElement n13 = xmlElement5["Recent4"];
-                            toolStripMenuItem = mnOpenR4;
-                            target = toolStripMenuItem.Text;
-                            XMLLoadLocaleMenu(n13, ref target);
-                            toolStripMenuItem.Text = target;
-                        }
-                        XmlElement n14 = xmlElement5["Quit"];
-                        toolStripMenuItem = mnQuit;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n14, ref target);
-                        toolStripMenuItem.Text = target;
+                        NewLateBinding.LateSet(objectValue3, null, "font", new object[1] { font3 }, null, null);
                     }
-                    XmlElement xmlElement6 = xmlElement4["Edit"];
-                    if (xmlElement6 != null)
+                    catch (Exception ex5)
                     {
-                        XmlElement n15 = xmlElement6["Title"];
-                        toolStripMenuItem = mnEdit;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n15, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n16 = xmlElement6["Undo"];
-                        toolStripMenuItem = mnUndo;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n16, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n17 = xmlElement6["Redo"];
-                        toolStripMenuItem = mnRedo;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n17, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n18 = xmlElement6["Cut"];
-                        toolStripMenuItem = mnCut;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n18, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n19 = xmlElement6["Copy"];
-                        toolStripMenuItem = mnCopy;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n19, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n20 = xmlElement6["Paste"];
-                        toolStripMenuItem = mnPaste;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n20, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n21 = xmlElement6["Delete"];
-                        toolStripMenuItem = mnDelete;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n21, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n22 = xmlElement6["SelectAll"];
-                        toolStripMenuItem = mnSelectAll;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n22, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n23 = xmlElement6["Find"];
-                        toolStripMenuItem = mnFind;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n23, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n24 = xmlElement6["Stat"];
-                        toolStripMenuItem = mnStatistics;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n24, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n25 = xmlElement6["TimeSelectionTool"];
-                        toolStripMenuItem = mnTimeSelect;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n25, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n26 = xmlElement6["SelectTool"];
-                        toolStripMenuItem = mnSelect;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n26, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n27 = xmlElement6["WriteTool"];
-                        toolStripMenuItem = mnWrite;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n27, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n28 = xmlElement6["MyO2"];
-                        toolStripMenuItem = mnMyO2;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n28, ref target);
-                        toolStripMenuItem.Text = target;
+                        ProjectData.SetProjectError(ex5);
+                        Exception ex6 = ex5;
+                        ProjectData.ClearProjectError();
                     }
-                    XmlElement xmlElement7 = xmlElement4["View"];
-                    if (xmlElement7 != null)
-                    {
-                        XmlElement n29 = xmlElement7["Title"];
-                        toolStripMenuItem = mnSys;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n29, ref target);
-                        toolStripMenuItem.Text = target;
-                    }
-                    XmlElement xmlElement8 = xmlElement4["Options"];
-                    if (xmlElement8 != null)
-                    {
-                        XmlElement n30 = xmlElement8["Title"];
-                        toolStripMenuItem = mnOptions;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n30, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n31 = xmlElement8["NT"];
-                        toolStripMenuItem = mnNTInput;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n31, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n32 = xmlElement8["ErrorCheck"];
-                        toolStripMenuItem = mnErrorCheck;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n32, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n33 = xmlElement8["PreviewOnClick"];
-                        toolStripMenuItem = mnPreviewOnClick;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n33, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n34 = xmlElement8["ShowFileName"];
-                        toolStripMenuItem = mnShowFileName;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n34, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n35 = xmlElement8["GeneralOptions"];
-                        toolStripMenuItem = mnGOptions;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n35, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n36 = xmlElement8["VisualOptions"];
-                        toolStripMenuItem = mnVOptions;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n36, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n37 = xmlElement8["PlayerOptions"];
-                        toolStripMenuItem = mnPOptions;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n37, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n38 = xmlElement8["Language"];
-                        toolStripMenuItem = mnLanguage;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n38, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n39 = xmlElement8["Theme"];
-                        toolStripMenuItem = mnTheme;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n39, ref target);
-                        toolStripMenuItem.Text = target;
-                    }
-                    XmlElement n40 = xmlElement4["Conversion"];
-                    toolStripMenuItem = mnConversion;
+                }
+            }
+            XmlElement xmlElement4 = xmlElement["Menu"];
+            if (xmlElement4 != null)
+            {
+                XmlElement xmlElement5 = xmlElement4["File"];
+                ToolStripMenuItem toolStripMenuItem;
+                string target;
+                if (xmlElement5 != null)
+                {
+                    XmlElement n = xmlElement5["Title"];
+                    toolStripMenuItem = mnFile;
                     target = toolStripMenuItem.Text;
-                    XMLLoadLocaleMenu(n40, ref target);
+                    XMLLoadLocaleMenu(n, ref target);
                     toolStripMenuItem.Text = target;
-                    XmlElement xmlElement9 = xmlElement4["Preview"];
-                    if (xmlElement9 != null)
+                    XmlElement n2 = xmlElement5["New"];
+                    toolStripMenuItem = mnNew;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n2, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n3 = xmlElement5["Open"];
+                    toolStripMenuItem = mnOpen;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n3, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n4 = xmlElement5["ImportSM"];
+                    toolStripMenuItem = mnImportSM;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n4, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n5 = xmlElement5["ImportIBMSC"];
+                    toolStripMenuItem = mnImportIBMSC;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n5, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n6 = xmlElement5["Save"];
+                    toolStripMenuItem = mnSave;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n6, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n7 = xmlElement5["SaveAs"];
+                    toolStripMenuItem = mnSaveAs;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n7, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n8 = xmlElement5["ExportIBMSC"];
+                    toolStripMenuItem = mnExport;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n8, ref target);
+                    toolStripMenuItem.Text = target;
+                    if (Operators.CompareString(Recent[0], "", TextCompare: false) == 0)
                     {
-                        XmlElement n41 = xmlElement9["Title"];
-                        toolStripMenuItem = mnPreview;
+                        XmlElement n9 = xmlElement5["Recent0"];
+                        toolStripMenuItem = mnOpenR0;
                         target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n41, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n42 = xmlElement9["PlayBegin"];
-                        toolStripMenuItem = mnPlayB;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n42, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n43 = xmlElement9["PlayHere"];
-                        toolStripMenuItem = mnPlay;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n43, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n44 = xmlElement9["PlayStop"];
-                        toolStripMenuItem = mnStop;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n44, ref target);
+                        XMLLoadLocaleMenu(n9, ref target);
                         toolStripMenuItem.Text = target;
                     }
-                    XmlElement xmlElement10 = xmlElement4["About"];
+                    if (Operators.CompareString(Recent[1], "", TextCompare: false) == 0)
+                    {
+                        XmlElement n10 = xmlElement5["Recent1"];
+                        toolStripMenuItem = mnOpenR1;
+                        target = toolStripMenuItem.Text;
+                        XMLLoadLocaleMenu(n10, ref target);
+                        toolStripMenuItem.Text = target;
+                    }
+                    if (Operators.CompareString(Recent[2], "", TextCompare: false) == 0)
+                    {
+                        XmlElement n11 = xmlElement5["Recent2"];
+                        toolStripMenuItem = mnOpenR2;
+                        target = toolStripMenuItem.Text;
+                        XMLLoadLocaleMenu(n11, ref target);
+                        toolStripMenuItem.Text = target;
+                    }
+                    if (Operators.CompareString(Recent[3], "", TextCompare: false) == 0)
+                    {
+                        XmlElement n12 = xmlElement5["Recent3"];
+                        toolStripMenuItem = mnOpenR3;
+                        target = toolStripMenuItem.Text;
+                        XMLLoadLocaleMenu(n12, ref target);
+                        toolStripMenuItem.Text = target;
+                    }
+                    if (Operators.CompareString(Recent[4], "", TextCompare: false) == 0)
+                    {
+                        XmlElement n13 = xmlElement5["Recent4"];
+                        toolStripMenuItem = mnOpenR4;
+                        target = toolStripMenuItem.Text;
+                        XMLLoadLocaleMenu(n13, ref target);
+                        toolStripMenuItem.Text = target;
+                    }
+                    XmlElement n14 = xmlElement5["Quit"];
+                    toolStripMenuItem = mnQuit;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n14, ref target);
+                    toolStripMenuItem.Text = target;
                 }
-                XmlElement xmlElement11 = xmlElement["ToolBar"];
-                if (xmlElement11 != null)
+                XmlElement xmlElement6 = xmlElement4["Edit"];
+                if (xmlElement6 != null)
                 {
-                    XmlElement n45 = xmlElement11["New"];
-                    ToolStripButton tBNew = TBNew;
-                    string target = tBNew.Text;
-                    XMLLoadLocale(n45, ref target);
-                    tBNew.Text = target;
-                    XmlElement n46 = xmlElement11["Open"];
-                    ToolStripSplitButton tBOpen = TBOpen;
-                    target = tBOpen.Text;
-                    XMLLoadLocale(n46, ref target);
-                    tBOpen.Text = target;
-                    XmlElement n47 = xmlElement11["Save"];
-                    tBOpen = TBSave;
-                    target = tBOpen.Text;
-                    XMLLoadLocale(n47, ref target);
-                    tBOpen.Text = target;
-                    XmlElement n48 = xmlElement11["Cut"];
-                    tBNew = TBCut;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n48, ref target);
-                    tBNew.Text = target;
-                    XmlElement n49 = xmlElement11["Copy"];
-                    tBNew = TBCopy;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n49, ref target);
-                    tBNew.Text = target;
-                    XmlElement n50 = xmlElement11["Paste"];
-                    tBNew = TBPaste;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n50, ref target);
-                    tBNew.Text = target;
-                    XmlElement n51 = xmlElement11["Find"];
-                    tBNew = TBFind;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n51, ref target);
-                    tBNew.Text = target;
-                    XmlElement n52 = xmlElement11["Stat"];
-                    tBNew = TBStatistics;
-                    target = tBNew.ToolTipText;
-                    XMLLoadLocale(n52, ref target);
-                    tBNew.ToolTipText = target;
-                    XmlElement n53 = xmlElement11["Conversion"];
-                    ToolStripDropDownButton pOConvert = POConvert;
-                    target = pOConvert.Text;
-                    XMLLoadLocale(n53, ref target);
-                    pOConvert.Text = target;
-                    XmlElement n54 = xmlElement11["MyO2"];
-                    tBNew = TBMyO2;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n54, ref target);
-                    tBNew.Text = target;
-                    XmlElement n55 = xmlElement11["ErrorCheck"];
-                    tBNew = TBErrorCheck;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n55, ref target);
-                    tBNew.Text = target;
-                    XmlElement n56 = xmlElement11["PreviewOnClick"];
-                    tBNew = TBPreviewOnClick;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n56, ref target);
-                    tBNew.Text = target;
-                    XmlElement n57 = xmlElement11["ShowFileName"];
-                    tBNew = TBShowFileName;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n57, ref target);
-                    tBNew.Text = target;
-                    XmlElement n58 = xmlElement11["Undo"];
-                    tBNew = TBUndo;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n58, ref target);
-                    tBNew.Text = target;
-                    XmlElement n59 = xmlElement11["Redo"];
-                    tBNew = TBRedo;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n59, ref target);
-                    tBNew.Text = target;
-                    XmlElement n60 = xmlElement11["NT"];
-                    tBNew = TBNTInput;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n60, ref target);
-                    tBNew.Text = target;
-                    XmlElement n61 = xmlElement11["TimeSelectionTool"];
-                    tBNew = TBTimeSelect;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n61, ref target);
-                    tBNew.Text = target;
-                    XmlElement n62 = xmlElement11["SelectTool"];
-                    tBNew = TBSelect;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n62, ref target);
-                    tBNew.Text = target;
-                    XmlElement n63 = xmlElement11["WriteTool"];
-                    tBNew = TBWrite;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n63, ref target);
-                    tBNew.Text = target;
-                    XmlElement n64 = xmlElement11["PlayBegin"];
-                    tBNew = TBPlayB;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n64, ref target);
-                    tBNew.Text = target;
-                    XmlElement n65 = xmlElement11["PlayHere"];
-                    tBNew = TBPlay;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n65, ref target);
-                    tBNew.Text = target;
-                    XmlElement n66 = xmlElement11["PlayStop"];
-                    tBNew = TBStop;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n66, ref target);
-                    tBNew.Text = target;
-                    XmlElement n67 = xmlElement11["PlayerOptions"];
-                    tBNew = TBPOptions;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n67, ref target);
-                    tBNew.Text = target;
-                    XmlElement n68 = xmlElement11["VisualOptions"];
-                    tBNew = TBVOptions;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n68, ref target);
-                    tBNew.Text = target;
-                    XmlElement n69 = xmlElement11["GeneralOptions"];
-                    tBNew = TBGOptions;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n69, ref target);
-                    tBNew.Text = target;
-                    XmlElement n70 = xmlElement11["Language"];
-                    pOConvert = TBLanguage;
-                    target = pOConvert.Text;
-                    XMLLoadLocale(n70, ref target);
-                    pOConvert.Text = target;
-                    XmlElement n71 = xmlElement11["Theme"];
-                    pOConvert = TBTheme;
-                    target = pOConvert.Text;
-                    XMLLoadLocale(n71, ref target);
-                    pOConvert.Text = target;
+                    XmlElement n15 = xmlElement6["Title"];
+                    toolStripMenuItem = mnEdit;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n15, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n16 = xmlElement6["Undo"];
+                    toolStripMenuItem = mnUndo;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n16, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n17 = xmlElement6["Redo"];
+                    toolStripMenuItem = mnRedo;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n17, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n18 = xmlElement6["Cut"];
+                    toolStripMenuItem = mnCut;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n18, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n19 = xmlElement6["Copy"];
+                    toolStripMenuItem = mnCopy;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n19, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n20 = xmlElement6["Paste"];
+                    toolStripMenuItem = mnPaste;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n20, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n21 = xmlElement6["Delete"];
+                    toolStripMenuItem = mnDelete;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n21, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n22 = xmlElement6["SelectAll"];
+                    toolStripMenuItem = mnSelectAll;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n22, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n23 = xmlElement6["Find"];
+                    toolStripMenuItem = mnFind;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n23, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n24 = xmlElement6["Stat"];
+                    toolStripMenuItem = mnStatistics;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n24, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n25 = xmlElement6["TimeSelectionTool"];
+                    toolStripMenuItem = mnTimeSelect;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n25, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n26 = xmlElement6["SelectTool"];
+                    toolStripMenuItem = mnSelect;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n26, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n27 = xmlElement6["WriteTool"];
+                    toolStripMenuItem = mnWrite;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n27, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n28 = xmlElement6["MyO2"];
+                    toolStripMenuItem = mnMyO2;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n28, ref target);
+                    toolStripMenuItem.Text = target;
                 }
-                XmlElement xmlElement12 = xmlElement["StatusBar"];
-                if (xmlElement12 != null)
+                XmlElement xmlElement7 = xmlElement4["View"];
+                if (xmlElement7 != null)
                 {
-                    XmlElement n72 = xmlElement12["ColumnCaption"];
-                    ToolStripStatusLabel fSC = FSC;
-                    string target = fSC.ToolTipText;
-                    XMLLoadLocale(n72, ref target);
-                    fSC.ToolTipText = target;
-                    XmlElement n73 = xmlElement12["NoteIndex"];
-                    fSC = FSW;
-                    target = fSC.ToolTipText;
-                    XMLLoadLocale(n73, ref target);
-                    fSC.ToolTipText = target;
-                    XmlElement n74 = xmlElement12["MeasureIndex"];
-                    fSC = FSM;
-                    target = fSC.ToolTipText;
-                    XMLLoadLocale(n74, ref target);
-                    fSC.ToolTipText = target;
-                    XmlElement n75 = xmlElement12["GridResolution"];
-                    fSC = FSP1;
-                    target = fSC.ToolTipText;
-                    XMLLoadLocale(n75, ref target);
-                    fSC.ToolTipText = target;
-                    XmlElement n76 = xmlElement12["ReducedResolution"];
-                    fSC = FSP3;
-                    target = fSC.ToolTipText;
-                    XMLLoadLocale(n76, ref target);
-                    fSC.ToolTipText = target;
-                    XmlElement n77 = xmlElement12["MeasureResolution"];
-                    fSC = FSP2;
-                    target = fSC.ToolTipText;
-                    XMLLoadLocale(n77, ref target);
-                    fSC.ToolTipText = target;
-                    XmlElement n78 = xmlElement12["AbsolutePosition"];
-                    fSC = FSP4;
-                    target = fSC.ToolTipText;
-                    XMLLoadLocale(n78, ref target);
-                    fSC.ToolTipText = target;
-                    XMLLoadLocale(xmlElement12["Length"], ref Strings.StatusBar.Length);
-                    XMLLoadLocale(xmlElement12["LongNote"], ref Strings.StatusBar.LongNote);
-                    XMLLoadLocale(xmlElement12["Hidden"], ref Strings.StatusBar.Hidden);
-                    XMLLoadLocale(xmlElement12["Error"], ref Strings.StatusBar.Err);
-                    XmlElement n79 = xmlElement12["SelStart"];
-                    ToolStripButton tBNew = FSSS;
-                    target = tBNew.ToolTipText;
-                    XMLLoadLocale(n79, ref target);
-                    tBNew.ToolTipText = target;
-                    XmlElement n80 = xmlElement12["SelLength"];
-                    tBNew = FSSL;
-                    target = tBNew.ToolTipText;
-                    XMLLoadLocale(n80, ref target);
-                    tBNew.ToolTipText = target;
-                    XmlElement n81 = xmlElement12["SelSplit"];
-                    tBNew = FSSH;
-                    target = tBNew.ToolTipText;
-                    XMLLoadLocale(n81, ref target);
-                    tBNew.ToolTipText = target;
-                    XmlElement n82 = xmlElement12["Reverse"];
-                    tBNew = BVCReverse;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n82, ref target);
-                    tBNew.Text = target;
-                    XmlElement n83 = xmlElement12["ByMultiple"];
-                    tBNew = BVCApply;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n83, ref target);
-                    tBNew.Text = target;
-                    XmlElement n84 = xmlElement12["ByValue"];
-                    tBNew = BVCCalculate;
-                    target = tBNew.Text;
-                    XMLLoadLocale(n84, ref target);
-                    tBNew.Text = target;
+                    XmlElement n29 = xmlElement7["Title"];
+                    toolStripMenuItem = mnSys;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n29, ref target);
+                    toolStripMenuItem.Text = target;
                 }
-                XmlElement xmlElement13 = xmlElement["SubMenu"];
-                if (xmlElement13 != null)
+                XmlElement xmlElement8 = xmlElement4["Options"];
+                if (xmlElement8 != null)
                 {
-                    XmlElement xmlElement14 = xmlElement13["ShowHide"];
-                    if (xmlElement14 != null)
-                    {
-                        XmlElement n85 = xmlElement14["Menu"];
-                        ToolStripMenuItem toolStripMenuItem = mnSMenu;
-                        string target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n85, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n86 = xmlElement14["ToolBar"];
-                        toolStripMenuItem = mnSTB;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n86, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n87 = xmlElement14["OptionsPanel"];
-                        toolStripMenuItem = mnSOP;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n87, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n88 = xmlElement14["StatusBar"];
-                        toolStripMenuItem = mnSStatus;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n88, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n89 = xmlElement14["LSplit"];
-                        toolStripMenuItem = mnSLSplitter;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n89, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n90 = xmlElement14["RSplit"];
-                        toolStripMenuItem = mnSRSplitter;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n90, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n91 = xmlElement14["Grid"];
-                        toolStripMenuItem = CGShow;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n91, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n92 = xmlElement14["Sub"];
-                        toolStripMenuItem = CGShowS;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n92, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n93 = xmlElement14["BG"];
-                        toolStripMenuItem = CGShowBG;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n93, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n94 = xmlElement14["MeasureIndex"];
-                        toolStripMenuItem = CGShowM;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n94, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n95 = xmlElement14["MeasureLine"];
-                        toolStripMenuItem = CGShowMB;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n95, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n96 = xmlElement14["Vertical"];
-                        toolStripMenuItem = CGShowV;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n96, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n97 = xmlElement14["ColumnCaption"];
-                        toolStripMenuItem = CGShowC;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n97, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n98 = xmlElement14["BPM"];
-                        toolStripMenuItem = CGBPM;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n98, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n99 = xmlElement14["STOP"];
-                        toolStripMenuItem = CGSTOP;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n99, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n100 = xmlElement14["SCROLL"];
-                        toolStripMenuItem = CGSCROLL;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n100, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n101 = xmlElement14["BLP"];
-                        toolStripMenuItem = CGBLP;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n101, ref target);
-                        toolStripMenuItem.Text = target;
-                    }
-                    XmlElement xmlElement15 = xmlElement13["InsertMeasure"];
-                    if (xmlElement15 != null)
-                    {
-                        XmlElement n102 = xmlElement15["Insert"];
-                        ToolStripMenuItem toolStripMenuItem = MInsert;
-                        string target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n102, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n103 = xmlElement15["Remove"];
-                        toolStripMenuItem = MRemove;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n103, ref target);
-                        toolStripMenuItem.Text = target;
-                    }
-                    XmlElement xmlElement16 = xmlElement13["Language"];
-                    if (xmlElement16 != null)
-                    {
-                        XmlElement n104 = xmlElement16["Default"];
-                        ToolStripMenuItem toolStripMenuItem = TBLangDef;
-                        string target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n104, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n105 = xmlElement16["Refresh"];
-                        toolStripMenuItem = TBLangRefresh;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n105, ref target);
-                        toolStripMenuItem.Text = target;
-                    }
-                    XmlElement xmlElement17 = xmlElement13["Theme"];
-                    if (xmlElement17 != null)
-                    {
-                        XmlElement n106 = xmlElement17["Default"];
-                        ToolStripMenuItem toolStripMenuItem = TBThemeDef;
-                        string target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n106, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n107 = xmlElement17["Save"];
-                        toolStripMenuItem = TBThemeSave;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n107, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n108 = xmlElement17["Refresh"];
-                        toolStripMenuItem = TBThemeRefresh;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n108, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n109 = xmlElement17["LoadComptability"];
-                        toolStripMenuItem = TBThemeLoadComptability;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n109, ref target);
-                        toolStripMenuItem.Text = target;
-                    }
-                    XmlElement xmlElement18 = xmlElement13["Convert"];
-                    if (xmlElement18 != null)
-                    {
-                        XmlElement n110 = xmlElement18["Long"];
-                        ToolStripMenuItem toolStripMenuItem = POBLong;
-                        string target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n110, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n111 = xmlElement18["Short"];
-                        toolStripMenuItem = POBShort;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n111, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n112 = xmlElement18["LongShort"];
-                        toolStripMenuItem = POBLongShort;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n112, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n113 = xmlElement18["Hidden"];
-                        toolStripMenuItem = POBHidden;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n113, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n114 = xmlElement18["Visible"];
-                        toolStripMenuItem = POBVisible;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n114, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n115 = xmlElement18["HiddenVisible"];
-                        toolStripMenuItem = POBHiddenVisible;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n115, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n116 = xmlElement18["Relabel"];
-                        toolStripMenuItem = POBModify;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n116, ref target);
-                        toolStripMenuItem.Text = target;
-                        XmlElement n117 = xmlElement18["Mirror"];
-                        toolStripMenuItem = POBMirror;
-                        target = toolStripMenuItem.Text;
-                        XMLLoadLocaleMenu(n117, ref target);
-                        toolStripMenuItem.Text = target;
-                    }
-                    XmlElement xmlElement19 = xmlElement13["WAV"];
-                    if (xmlElement19 != null)
-                    {
-                        XmlElement n118 = xmlElement19["MultiSelection"];
-                        CheckBox cWAVMultiSelect = CWAVMultiSelect;
-                        string target = cWAVMultiSelect.Text;
-                        XMLLoadLocaleMenu(n118, ref target);
-                        cWAVMultiSelect.Text = target;
-                        XmlElement n119 = xmlElement19["Synchronize"];
-                        cWAVMultiSelect = CWAVChangeLabel;
-                        target = cWAVMultiSelect.Text;
-                        XMLLoadLocaleMenu(n119, ref target);
-                        cWAVMultiSelect.Text = target;
-                    }
-                    XmlElement xmlElement20 = xmlElement13["Beat"];
-                    if (xmlElement20 != null)
-                    {
-                        XmlElement n120 = xmlElement20["Absolute"];
-                        RadioButton cBeatPreserve = CBeatPreserve;
-                        string target = cBeatPreserve.Text;
-                        XMLLoadLocaleMenu(n120, ref target);
-                        cBeatPreserve.Text = target;
-                        XmlElement n121 = xmlElement20["Measure"];
-                        cBeatPreserve = CBeatMeasure;
-                        target = cBeatPreserve.Text;
-                        XMLLoadLocaleMenu(n121, ref target);
-                        cBeatPreserve.Text = target;
-                        XmlElement n122 = xmlElement20["Cut"];
-                        cBeatPreserve = CBeatCut;
-                        target = cBeatPreserve.Text;
-                        XMLLoadLocaleMenu(n122, ref target);
-                        cBeatPreserve.Text = target;
-                        XmlElement n123 = xmlElement20["Scale"];
-                        cBeatPreserve = CBeatScale;
-                        target = cBeatPreserve.Text;
-                        XMLLoadLocaleMenu(n123, ref target);
-                        cBeatPreserve.Text = target;
-                    }
+                    XmlElement n30 = xmlElement8["Title"];
+                    toolStripMenuItem = mnOptions;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n30, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n31 = xmlElement8["NT"];
+                    toolStripMenuItem = mnNTInput;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n31, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n32 = xmlElement8["ErrorCheck"];
+                    toolStripMenuItem = mnErrorCheck;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n32, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n33 = xmlElement8["PreviewOnClick"];
+                    toolStripMenuItem = mnPreviewOnClick;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n33, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n34 = xmlElement8["ShowFileName"];
+                    toolStripMenuItem = mnShowFileName;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n34, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n35 = xmlElement8["GeneralOptions"];
+                    toolStripMenuItem = mnGOptions;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n35, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n36 = xmlElement8["VisualOptions"];
+                    toolStripMenuItem = mnVOptions;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n36, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n37 = xmlElement8["PlayerOptions"];
+                    toolStripMenuItem = mnPOptions;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n37, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n38 = xmlElement8["Language"];
+                    toolStripMenuItem = mnLanguage;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n38, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n39 = xmlElement8["Theme"];
+                    toolStripMenuItem = mnTheme;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n39, ref target);
+                    toolStripMenuItem.Text = target;
                 }
-                XmlElement xmlElement21 = xmlElement["OptionsPanel"];
-                if (xmlElement21 != null)
+                XmlElement n40 = xmlElement4["Conversion"];
+                toolStripMenuItem = mnConversion;
+                target = toolStripMenuItem.Text;
+                XMLLoadLocaleMenu(n40, ref target);
+                toolStripMenuItem.Text = target;
+                XmlElement xmlElement9 = xmlElement4["Preview"];
+                if (xmlElement9 != null)
                 {
-                    XmlElement xmlElement22 = xmlElement21["Header"];
-                    CheckBox cWAVMultiSelect;
-                    string target;
-                    if (xmlElement22 != null)
-                    {
-                        XmlElement n124 = xmlElement22["Header"];
-                        cWAVMultiSelect = POHeaderSwitch;
-                        target = cWAVMultiSelect.Text;
-                        XMLLoadLocale(n124, ref target);
-                        cWAVMultiSelect.Text = target;
-                        XmlElement n125 = xmlElement22["Title"];
-                        Label label = Label3;
-                        target = label.Text;
-                        XMLLoadLocale(n125, ref target);
-                        label.Text = target;
-                        XmlElement n126 = xmlElement22["Artist"];
-                        label = Label4;
-                        target = label.Text;
-                        XMLLoadLocale(n126, ref target);
-                        label.Text = target;
-                        XmlElement n127 = xmlElement22["Genre"];
-                        label = Label2;
-                        target = label.Text;
-                        XMLLoadLocale(n127, ref target);
-                        label.Text = target;
-                        XmlElement n128 = xmlElement22["BPM"];
-                        label = Label9;
-                        target = label.Text;
-                        XMLLoadLocale(n128, ref target);
-                        label.Text = target;
-                        XmlElement n129 = xmlElement22["Player"];
-                        label = Label8;
-                        target = label.Text;
-                        XMLLoadLocale(n129, ref target);
-                        label.Text = target;
-                        XmlElement n130 = xmlElement22["Rank"];
-                        label = Label10;
-                        target = label.Text;
-                        XMLLoadLocale(n130, ref target);
-                        label.Text = target;
-                        XmlElement n131 = xmlElement22["PlayLevel"];
-                        label = Label6;
-                        target = label.Text;
-                        XMLLoadLocale(n131, ref target);
-                        label.Text = target;
-                        XmlElement n132 = xmlElement22["SubTitle"];
-                        label = Label15;
-                        target = label.Text;
-                        XMLLoadLocale(n132, ref target);
-                        label.Text = target;
-                        XmlElement n133 = xmlElement22["SubArtist"];
-                        label = Label17;
-                        target = label.Text;
-                        XMLLoadLocale(n133, ref target);
-                        label.Text = target;
-                        XmlElement n134 = xmlElement22["StageFile"];
-                        label = Label16;
-                        target = label.Text;
-                        XMLLoadLocale(n134, ref target);
-                        label.Text = target;
-                        XmlElement n135 = xmlElement22["Banner"];
-                        label = Label12;
-                        target = label.Text;
-                        XMLLoadLocale(n135, ref target);
-                        label.Text = target;
-                        XmlElement n136 = xmlElement22["BackBMP"];
-                        label = Label11;
-                        target = label.Text;
-                        XMLLoadLocale(n136, ref target);
-                        label.Text = target;
-                        XmlElement n137 = xmlElement22["Difficulty"];
-                        label = Label21;
-                        target = label.Text;
-                        XMLLoadLocale(n137, ref target);
-                        label.Text = target;
-                        XmlElement n138 = xmlElement22["ExRank"];
-                        label = Label23;
-                        target = label.Text;
-                        XMLLoadLocale(n138, ref target);
-                        label.Text = target;
-                        XmlElement n139 = xmlElement22["Total"];
-                        label = Label20;
-                        target = label.Text;
-                        XMLLoadLocale(n139, ref target);
-                        label.Text = target;
-                        XmlElement n140 = xmlElement22["Comment"];
-                        label = Label19;
-                        target = label.Text;
-                        XMLLoadLocale(n140, ref target);
-                        label.Text = target;
-                        XmlElement n141 = xmlElement22["LnObj"];
-                        label = Label24;
-                        target = label.Text;
-                        XMLLoadLocale(n141, ref target);
-                        label.Text = target;
-                        CHPlayer.SelectedIndexChanged -= CHPlayer_SelectedIndexChanged;
-                        XmlElement n142 = xmlElement22["Player1"];
-                        ComboBox.ObjectCollection items = CHPlayer.Items;
-                        ComboBox.ObjectCollection objectCollection = items;
-                        int index = 0;
-                        target = Conversions.ToString(objectCollection[index]);
-                        XMLLoadLocale(n142, ref target);
-                        items[index] = target;
-                        XmlElement n143 = xmlElement22["Player2"];
-                        items = CHPlayer.Items;
-                        ComboBox.ObjectCollection objectCollection2 = items;
-                        index = 1;
-                        target = Conversions.ToString(objectCollection2[index]);
-                        XMLLoadLocale(n143, ref target);
-                        items[index] = target;
-                        XmlElement n144 = xmlElement22["Player3"];
-                        items = CHPlayer.Items;
-                        ComboBox.ObjectCollection objectCollection3 = items;
-                        index = 2;
-                        target = Conversions.ToString(objectCollection3[index]);
-                        XMLLoadLocale(n144, ref target);
-                        items[index] = target;
-                        CHPlayer.SelectedIndexChanged += CHPlayer_SelectedIndexChanged;
-                        CHRank.SelectedIndexChanged -= THGenre_TextChanged;
-                        XmlElement n145 = xmlElement22["Rank0"];
-                        items = CHRank.Items;
-                        ComboBox.ObjectCollection objectCollection4 = items;
-                        index = 0;
-                        target = Conversions.ToString(objectCollection4[index]);
-                        XMLLoadLocale(n145, ref target);
-                        items[index] = target;
-                        XmlElement n146 = xmlElement22["Rank1"];
-                        items = CHRank.Items;
-                        ComboBox.ObjectCollection objectCollection5 = items;
-                        index = 1;
-                        target = Conversions.ToString(objectCollection5[index]);
-                        XMLLoadLocale(n146, ref target);
-                        items[index] = target;
-                        XmlElement n147 = xmlElement22["Rank2"];
-                        items = CHRank.Items;
-                        ComboBox.ObjectCollection objectCollection6 = items;
-                        index = 2;
-                        target = Conversions.ToString(objectCollection6[index]);
-                        XMLLoadLocale(n147, ref target);
-                        items[index] = target;
-                        XmlElement n148 = xmlElement22["Rank3"];
-                        items = CHRank.Items;
-                        ComboBox.ObjectCollection objectCollection7 = items;
-                        index = 3;
-                        target = Conversions.ToString(objectCollection7[index]);
-                        XMLLoadLocale(n148, ref target);
-                        items[index] = target;
-                        XmlElement n149 = xmlElement22["Rank4"];
-                        items = CHRank.Items;
-                        ComboBox.ObjectCollection objectCollection8 = items;
-                        index = 4;
-                        target = Conversions.ToString(objectCollection8[index]);
-                        XMLLoadLocale(n149, ref target);
-                        items[index] = target;
-                        CHRank.SelectedIndexChanged += THGenre_TextChanged;
-                        CHDifficulty.SelectedIndexChanged -= THGenre_TextChanged;
-                        XmlElement n150 = xmlElement22["Difficulty0"];
-                        items = CHDifficulty.Items;
-                        ComboBox.ObjectCollection objectCollection9 = items;
-                        index = 0;
-                        target = Conversions.ToString(objectCollection9[index]);
-                        XMLLoadLocale(n150, ref target);
-                        items[index] = target;
-                        XmlElement n151 = xmlElement22["Difficulty1"];
-                        items = CHDifficulty.Items;
-                        ComboBox.ObjectCollection objectCollection10 = items;
-                        index = 1;
-                        target = Conversions.ToString(objectCollection10[index]);
-                        XMLLoadLocale(n151, ref target);
-                        items[index] = target;
-                        XmlElement n152 = xmlElement22["Difficulty2"];
-                        items = CHDifficulty.Items;
-                        ComboBox.ObjectCollection objectCollection11 = items;
-                        index = 2;
-                        target = Conversions.ToString(objectCollection11[index]);
-                        XMLLoadLocale(n152, ref target);
-                        items[index] = target;
-                        XmlElement n153 = xmlElement22["Difficulty3"];
-                        items = CHDifficulty.Items;
-                        ComboBox.ObjectCollection objectCollection12 = items;
-                        index = 3;
-                        target = Conversions.ToString(objectCollection12[index]);
-                        XMLLoadLocale(n153, ref target);
-                        items[index] = target;
-                        XmlElement n154 = xmlElement22["Difficulty4"];
-                        items = CHDifficulty.Items;
-                        ComboBox.ObjectCollection objectCollection13 = items;
-                        index = 4;
-                        target = Conversions.ToString(objectCollection13[index]);
-                        XMLLoadLocale(n154, ref target);
-                        items[index] = target;
-                        XmlElement n155 = xmlElement22["Difficulty5"];
-                        items = CHDifficulty.Items;
-                        ComboBox.ObjectCollection objectCollection14 = items;
-                        index = 5;
-                        target = Conversions.ToString(objectCollection14[index]);
-                        XMLLoadLocale(n155, ref target);
-                        items[index] = target;
-                        CHDifficulty.SelectedIndexChanged += THGenre_TextChanged;
-                    }
-                    XmlElement xmlElement23 = xmlElement21["Grid"];
-                    if (xmlElement23 != null)
-                    {
-                        XmlElement n156 = xmlElement23["Title"];
-                        cWAVMultiSelect = POGridSwitch;
-                        target = cWAVMultiSelect.Text;
-                        XMLLoadLocale(n156, ref target);
-                        cWAVMultiSelect.Text = target;
-                        XmlElement n157 = xmlElement23["Snap"];
-                        cWAVMultiSelect = CGSnap;
-                        target = cWAVMultiSelect.Text;
-                        XMLLoadLocale(n157, ref target);
-                        cWAVMultiSelect.Text = target;
-                        XmlElement n158 = xmlElement23["BCols"];
-                        Label label = Label1;
-                        target = label.Text;
-                        XMLLoadLocale(n158, ref target);
-                        label.Text = target;
-                        XmlElement n159 = xmlElement23["DisableVertical"];
-                        cWAVMultiSelect = CGDisableVertical;
-                        target = cWAVMultiSelect.Text;
-                        XMLLoadLocale(n159, ref target);
-                        cWAVMultiSelect.Text = target;
-                        XmlElement n160 = xmlElement23["Scroll"];
-                        label = Label5;
-                        target = label.Text;
-                        XMLLoadLocale(n160, ref target);
-                        label.Text = target;
-                        XMLLoadLocaleToolTipUniversal(xmlElement23["LockLeft"], cVSLockL);
-                        XMLLoadLocaleToolTipUniversal(xmlElement23["LockMiddle"], cVSLock);
-                        XMLLoadLocaleToolTipUniversal(xmlElement23["LockRight"], cVSLockR);
-                    }
-                    XmlElement xmlElement24 = xmlElement21["WaveForm"];
-                    if (xmlElement24 != null)
-                    {
-                        XmlElement n161 = xmlElement24["Title"];
-                        cWAVMultiSelect = POWaveFormSwitch;
-                        target = cWAVMultiSelect.Text;
-                        XMLLoadLocale(n161, ref target);
-                        cWAVMultiSelect.Text = target;
-                        XMLLoadLocaleToolTipUniversal(xmlElement24["Load"], BWLoad);
-                        XMLLoadLocaleToolTipUniversal(xmlElement24["Clear"], BWClear);
-                        XMLLoadLocaleToolTipUniversal(xmlElement24["Lock"], BWLock);
-                    }
-                    XmlElement xmlElement25 = xmlElement21["WAV"];
-                    if (xmlElement25 != null)
-                    {
-                        XmlElement n162 = xmlElement25["Title"];
-                        cWAVMultiSelect = POWAVSwitch;
-                        target = cWAVMultiSelect.Text;
-                        XMLLoadLocale(n162, ref target);
-                        cWAVMultiSelect.Text = target;
-                        XMLLoadLocaleToolTipUniversal(xmlElement25["MoveUp"], BWAVUp);
-                        XMLLoadLocaleToolTipUniversal(xmlElement25["MoveDown"], BWAVDown);
-                        XMLLoadLocaleToolTipUniversal(xmlElement25["Browse"], BWAVBrowse);
-                        XMLLoadLocaleToolTipUniversal(xmlElement25["Remove"], BWAVRemove);
-                    }
-                    XmlElement n163 = xmlElement21["Beat"];
-                    cWAVMultiSelect = POBeatSwitch;
-                    target = cWAVMultiSelect.Text;
-                    XMLLoadLocale(n163, ref target);
+                    XmlElement n41 = xmlElement9["Title"];
+                    toolStripMenuItem = mnPreview;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n41, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n42 = xmlElement9["PlayBegin"];
+                    toolStripMenuItem = mnPlayB;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n42, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n43 = xmlElement9["PlayHere"];
+                    toolStripMenuItem = mnPlay;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n43, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n44 = xmlElement9["PlayStop"];
+                    toolStripMenuItem = mnStop;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n44, ref target);
+                    toolStripMenuItem.Text = target;
+                }
+                XmlElement xmlElement10 = xmlElement4["About"];
+            }
+            XmlElement xmlElement11 = xmlElement["ToolBar"];
+            if (xmlElement11 != null)
+            {
+                XmlElement n45 = xmlElement11["New"];
+                ToolStripButton tBNew = TBNew;
+                string target = tBNew.Text;
+                XMLLoadLocale(n45, ref target);
+                tBNew.Text = target;
+                XmlElement n46 = xmlElement11["Open"];
+                ToolStripSplitButton tBOpen = TBOpen;
+                target = tBOpen.Text;
+                XMLLoadLocale(n46, ref target);
+                tBOpen.Text = target;
+                XmlElement n47 = xmlElement11["Save"];
+                tBOpen = TBSave;
+                target = tBOpen.Text;
+                XMLLoadLocale(n47, ref target);
+                tBOpen.Text = target;
+                XmlElement n48 = xmlElement11["Cut"];
+                tBNew = TBCut;
+                target = tBNew.Text;
+                XMLLoadLocale(n48, ref target);
+                tBNew.Text = target;
+                XmlElement n49 = xmlElement11["Copy"];
+                tBNew = TBCopy;
+                target = tBNew.Text;
+                XMLLoadLocale(n49, ref target);
+                tBNew.Text = target;
+                XmlElement n50 = xmlElement11["Paste"];
+                tBNew = TBPaste;
+                target = tBNew.Text;
+                XMLLoadLocale(n50, ref target);
+                tBNew.Text = target;
+                XmlElement n51 = xmlElement11["Find"];
+                tBNew = TBFind;
+                target = tBNew.Text;
+                XMLLoadLocale(n51, ref target);
+                tBNew.Text = target;
+                XmlElement n52 = xmlElement11["Stat"];
+                tBNew = TBStatistics;
+                target = tBNew.ToolTipText;
+                XMLLoadLocale(n52, ref target);
+                tBNew.ToolTipText = target;
+                XmlElement n53 = xmlElement11["Conversion"];
+                ToolStripDropDownButton pOConvert = POConvert;
+                target = pOConvert.Text;
+                XMLLoadLocale(n53, ref target);
+                pOConvert.Text = target;
+                XmlElement n54 = xmlElement11["MyO2"];
+                tBNew = TBMyO2;
+                target = tBNew.Text;
+                XMLLoadLocale(n54, ref target);
+                tBNew.Text = target;
+                XmlElement n55 = xmlElement11["ErrorCheck"];
+                tBNew = TBErrorCheck;
+                target = tBNew.Text;
+                XMLLoadLocale(n55, ref target);
+                tBNew.Text = target;
+                XmlElement n56 = xmlElement11["PreviewOnClick"];
+                tBNew = TBPreviewOnClick;
+                target = tBNew.Text;
+                XMLLoadLocale(n56, ref target);
+                tBNew.Text = target;
+                XmlElement n57 = xmlElement11["ShowFileName"];
+                tBNew = TBShowFileName;
+                target = tBNew.Text;
+                XMLLoadLocale(n57, ref target);
+                tBNew.Text = target;
+                XmlElement n58 = xmlElement11["Undo"];
+                tBNew = TBUndo;
+                target = tBNew.Text;
+                XMLLoadLocale(n58, ref target);
+                tBNew.Text = target;
+                XmlElement n59 = xmlElement11["Redo"];
+                tBNew = TBRedo;
+                target = tBNew.Text;
+                XMLLoadLocale(n59, ref target);
+                tBNew.Text = target;
+                XmlElement n60 = xmlElement11["NT"];
+                tBNew = TBNTInput;
+                target = tBNew.Text;
+                XMLLoadLocale(n60, ref target);
+                tBNew.Text = target;
+                XmlElement n61 = xmlElement11["TimeSelectionTool"];
+                tBNew = TBTimeSelect;
+                target = tBNew.Text;
+                XMLLoadLocale(n61, ref target);
+                tBNew.Text = target;
+                XmlElement n62 = xmlElement11["SelectTool"];
+                tBNew = TBSelect;
+                target = tBNew.Text;
+                XMLLoadLocale(n62, ref target);
+                tBNew.Text = target;
+                XmlElement n63 = xmlElement11["WriteTool"];
+                tBNew = TBWrite;
+                target = tBNew.Text;
+                XMLLoadLocale(n63, ref target);
+                tBNew.Text = target;
+                XmlElement n64 = xmlElement11["PlayBegin"];
+                tBNew = TBPlayB;
+                target = tBNew.Text;
+                XMLLoadLocale(n64, ref target);
+                tBNew.Text = target;
+                XmlElement n65 = xmlElement11["PlayHere"];
+                tBNew = TBPlay;
+                target = tBNew.Text;
+                XMLLoadLocale(n65, ref target);
+                tBNew.Text = target;
+                XmlElement n66 = xmlElement11["PlayStop"];
+                tBNew = TBStop;
+                target = tBNew.Text;
+                XMLLoadLocale(n66, ref target);
+                tBNew.Text = target;
+                XmlElement n67 = xmlElement11["PlayerOptions"];
+                tBNew = TBPOptions;
+                target = tBNew.Text;
+                XMLLoadLocale(n67, ref target);
+                tBNew.Text = target;
+                XmlElement n68 = xmlElement11["VisualOptions"];
+                tBNew = TBVOptions;
+                target = tBNew.Text;
+                XMLLoadLocale(n68, ref target);
+                tBNew.Text = target;
+                XmlElement n69 = xmlElement11["GeneralOptions"];
+                tBNew = TBGOptions;
+                target = tBNew.Text;
+                XMLLoadLocale(n69, ref target);
+                tBNew.Text = target;
+                XmlElement n70 = xmlElement11["Language"];
+                pOConvert = TBLanguage;
+                target = pOConvert.Text;
+                XMLLoadLocale(n70, ref target);
+                pOConvert.Text = target;
+                XmlElement n71 = xmlElement11["Theme"];
+                pOConvert = TBTheme;
+                target = pOConvert.Text;
+                XMLLoadLocale(n71, ref target);
+                pOConvert.Text = target;
+            }
+            XmlElement xmlElement12 = xmlElement["StatusBar"];
+            if (xmlElement12 != null)
+            {
+                XmlElement n72 = xmlElement12["ColumnCaption"];
+                ToolStripStatusLabel fSC = FSC;
+                string target = fSC.ToolTipText;
+                XMLLoadLocale(n72, ref target);
+                fSC.ToolTipText = target;
+                XmlElement n73 = xmlElement12["NoteIndex"];
+                fSC = FSW;
+                target = fSC.ToolTipText;
+                XMLLoadLocale(n73, ref target);
+                fSC.ToolTipText = target;
+                XmlElement n74 = xmlElement12["MeasureIndex"];
+                fSC = FSM;
+                target = fSC.ToolTipText;
+                XMLLoadLocale(n74, ref target);
+                fSC.ToolTipText = target;
+                XmlElement n75 = xmlElement12["GridResolution"];
+                fSC = FSP1;
+                target = fSC.ToolTipText;
+                XMLLoadLocale(n75, ref target);
+                fSC.ToolTipText = target;
+                XmlElement n76 = xmlElement12["ReducedResolution"];
+                fSC = FSP3;
+                target = fSC.ToolTipText;
+                XMLLoadLocale(n76, ref target);
+                fSC.ToolTipText = target;
+                XmlElement n77 = xmlElement12["MeasureResolution"];
+                fSC = FSP2;
+                target = fSC.ToolTipText;
+                XMLLoadLocale(n77, ref target);
+                fSC.ToolTipText = target;
+                XmlElement n78 = xmlElement12["AbsolutePosition"];
+                fSC = FSP4;
+                target = fSC.ToolTipText;
+                XMLLoadLocale(n78, ref target);
+                fSC.ToolTipText = target;
+                XMLLoadLocale(xmlElement12["Length"], ref Strings.StatusBar.Length);
+                XMLLoadLocale(xmlElement12["LongNote"], ref Strings.StatusBar.LongNote);
+                XMLLoadLocale(xmlElement12["Hidden"], ref Strings.StatusBar.Hidden);
+                XMLLoadLocale(xmlElement12["Error"], ref Strings.StatusBar.Err);
+                XmlElement n79 = xmlElement12["SelStart"];
+                ToolStripButton tBNew = FSSS;
+                target = tBNew.ToolTipText;
+                XMLLoadLocale(n79, ref target);
+                tBNew.ToolTipText = target;
+                XmlElement n80 = xmlElement12["SelLength"];
+                tBNew = FSSL;
+                target = tBNew.ToolTipText;
+                XMLLoadLocale(n80, ref target);
+                tBNew.ToolTipText = target;
+                XmlElement n81 = xmlElement12["SelSplit"];
+                tBNew = FSSH;
+                target = tBNew.ToolTipText;
+                XMLLoadLocale(n81, ref target);
+                tBNew.ToolTipText = target;
+                XmlElement n82 = xmlElement12["Reverse"];
+                tBNew = BVCReverse;
+                target = tBNew.Text;
+                XMLLoadLocale(n82, ref target);
+                tBNew.Text = target;
+                XmlElement n83 = xmlElement12["ByMultiple"];
+                tBNew = BVCApply;
+                target = tBNew.Text;
+                XMLLoadLocale(n83, ref target);
+                tBNew.Text = target;
+                XmlElement n84 = xmlElement12["ByValue"];
+                tBNew = BVCCalculate;
+                target = tBNew.Text;
+                XMLLoadLocale(n84, ref target);
+                tBNew.Text = target;
+            }
+            XmlElement xmlElement13 = xmlElement["SubMenu"];
+            if (xmlElement13 != null)
+            {
+                XmlElement xmlElement14 = xmlElement13["ShowHide"];
+                if (xmlElement14 != null)
+                {
+                    XmlElement n85 = xmlElement14["Menu"];
+                    ToolStripMenuItem toolStripMenuItem = mnSMenu;
+                    string target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n85, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n86 = xmlElement14["ToolBar"];
+                    toolStripMenuItem = mnSTB;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n86, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n87 = xmlElement14["OptionsPanel"];
+                    toolStripMenuItem = mnSOP;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n87, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n88 = xmlElement14["StatusBar"];
+                    toolStripMenuItem = mnSStatus;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n88, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n89 = xmlElement14["LSplit"];
+                    toolStripMenuItem = mnSLSplitter;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n89, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n90 = xmlElement14["RSplit"];
+                    toolStripMenuItem = mnSRSplitter;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n90, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n91 = xmlElement14["Grid"];
+                    toolStripMenuItem = CGShow;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n91, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n92 = xmlElement14["Sub"];
+                    toolStripMenuItem = CGShowS;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n92, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n93 = xmlElement14["BG"];
+                    toolStripMenuItem = CGShowBG;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n93, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n94 = xmlElement14["MeasureIndex"];
+                    toolStripMenuItem = CGShowM;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n94, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n95 = xmlElement14["MeasureLine"];
+                    toolStripMenuItem = CGShowMB;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n95, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n96 = xmlElement14["Vertical"];
+                    toolStripMenuItem = CGShowV;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n96, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n97 = xmlElement14["ColumnCaption"];
+                    toolStripMenuItem = CGShowC;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n97, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n98 = xmlElement14["BPM"];
+                    toolStripMenuItem = CGBPM;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n98, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n99 = xmlElement14["STOP"];
+                    toolStripMenuItem = CGSTOP;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n99, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n100 = xmlElement14["SCROLL"];
+                    toolStripMenuItem = CGSCROLL;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n100, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n101 = xmlElement14["BLP"];
+                    toolStripMenuItem = CGBLP;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n101, ref target);
+                    toolStripMenuItem.Text = target;
+                }
+                XmlElement xmlElement15 = xmlElement13["InsertMeasure"];
+                if (xmlElement15 != null)
+                {
+                    XmlElement n102 = xmlElement15["Insert"];
+                    ToolStripMenuItem toolStripMenuItem = MInsert;
+                    string target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n102, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n103 = xmlElement15["Remove"];
+                    toolStripMenuItem = MRemove;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n103, ref target);
+                    toolStripMenuItem.Text = target;
+                }
+                XmlElement xmlElement16 = xmlElement13["Language"];
+                if (xmlElement16 != null)
+                {
+                    XmlElement n104 = xmlElement16["Default"];
+                    ToolStripMenuItem toolStripMenuItem = TBLangDef;
+                    string target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n104, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n105 = xmlElement16["Refresh"];
+                    toolStripMenuItem = TBLangRefresh;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n105, ref target);
+                    toolStripMenuItem.Text = target;
+                }
+                XmlElement xmlElement17 = xmlElement13["Theme"];
+                if (xmlElement17 != null)
+                {
+                    XmlElement n106 = xmlElement17["Default"];
+                    ToolStripMenuItem toolStripMenuItem = TBThemeDef;
+                    string target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n106, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n107 = xmlElement17["Save"];
+                    toolStripMenuItem = TBThemeSave;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n107, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n108 = xmlElement17["Refresh"];
+                    toolStripMenuItem = TBThemeRefresh;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n108, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n109 = xmlElement17["LoadComptability"];
+                    toolStripMenuItem = TBThemeLoadComptability;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n109, ref target);
+                    toolStripMenuItem.Text = target;
+                }
+                XmlElement xmlElement18 = xmlElement13["Convert"];
+                if (xmlElement18 != null)
+                {
+                    XmlElement n110 = xmlElement18["Long"];
+                    ToolStripMenuItem toolStripMenuItem = POBLong;
+                    string target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n110, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n111 = xmlElement18["Short"];
+                    toolStripMenuItem = POBShort;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n111, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n112 = xmlElement18["LongShort"];
+                    toolStripMenuItem = POBLongShort;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n112, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n113 = xmlElement18["Hidden"];
+                    toolStripMenuItem = POBHidden;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n113, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n114 = xmlElement18["Visible"];
+                    toolStripMenuItem = POBVisible;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n114, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n115 = xmlElement18["HiddenVisible"];
+                    toolStripMenuItem = POBHiddenVisible;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n115, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n116 = xmlElement18["Relabel"];
+                    toolStripMenuItem = POBModify;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n116, ref target);
+                    toolStripMenuItem.Text = target;
+                    XmlElement n117 = xmlElement18["Mirror"];
+                    toolStripMenuItem = POBMirror;
+                    target = toolStripMenuItem.Text;
+                    XMLLoadLocaleMenu(n117, ref target);
+                    toolStripMenuItem.Text = target;
+                }
+                XmlElement xmlElement19 = xmlElement13["WAV"];
+                if (xmlElement19 != null)
+                {
+                    XmlElement n118 = xmlElement19["MultiSelection"];
+                    CheckBox cWAVMultiSelect = CWAVMultiSelect;
+                    string target = cWAVMultiSelect.Text;
+                    XMLLoadLocaleMenu(n118, ref target);
                     cWAVMultiSelect.Text = target;
-                    XmlElement n164 = xmlElement21["Beat.Apply"];
-                    Button bBeatApply = BBeatApply;
-                    target = bBeatApply.Text;
-                    XMLLoadLocale(n164, ref target);
-                    bBeatApply.Text = target;
-                    XmlElement n165 = xmlElement21["Beat.Apply"];
-                    bBeatApply = BBeatApplyV;
-                    target = bBeatApply.Text;
-                    XMLLoadLocale(n165, ref target);
-                    bBeatApply.Text = target;
-                    XmlElement n166 = xmlElement21["Expansion"];
-                    cWAVMultiSelect = POExpansionSwitch;
+                    XmlElement n119 = xmlElement19["Synchronize"];
+                    cWAVMultiSelect = CWAVChangeLabel;
                     target = cWAVMultiSelect.Text;
-                    XMLLoadLocale(n166, ref target);
+                    XMLLoadLocaleMenu(n119, ref target);
                     cWAVMultiSelect.Text = target;
                 }
-                XmlElement xmlElement26 = xmlElement["Messages"];
-                if (xmlElement26 != null)
+                XmlElement xmlElement20 = xmlElement13["Beat"];
+                if (xmlElement20 != null)
                 {
-                    XMLLoadLocale(xmlElement26["Err"], ref Strings.Messages.Err);
-                    XMLLoadLocale(xmlElement26["SaveOnExit"], ref Strings.Messages.SaveOnExit);
-                    XMLLoadLocale(xmlElement26["SaveOnExit1"], ref Strings.Messages.SaveOnExit1);
-                    XMLLoadLocale(xmlElement26["SaveOnExit2"], ref Strings.Messages.SaveOnExit2);
-                    XMLLoadLocale(xmlElement26["PromptEnter"], ref Strings.Messages.PromptEnter);
-                    XMLLoadLocale(xmlElement26["PromptEnterNumeric"], ref Strings.Messages.PromptEnterNumeric);
-                    XMLLoadLocale(xmlElement26["PromptEnterBPM"], ref Strings.Messages.PromptEnterBPM);
-                    XMLLoadLocale(xmlElement26["PromptEnterSTOP"], ref Strings.Messages.PromptEnterSTOP);
-                    XMLLoadLocale(xmlElement26["PromptEnterSCROLL"], ref Strings.Messages.PromptEnterSCROLL);
-                    XMLLoadLocale(xmlElement26["PromptSlashValue"], ref Strings.Messages.PromptSlashValue);
-                    XMLLoadLocale(xmlElement26["InvalidLabel"], ref Strings.Messages.InvalidLabel);
-                    XMLLoadLocale(xmlElement26["CannotFind"], ref Strings.Messages.CannotFind);
-                    XMLLoadLocale(xmlElement26["PleaseRespecifyPath"], ref Strings.Messages.PleaseRespecifyPath);
-                    XMLLoadLocale(xmlElement26["PlayerNotFound"], ref Strings.Messages.PlayerNotFound);
-                    XMLLoadLocale(xmlElement26["PreviewDelError"], ref Strings.Messages.PreviewDelError);
-                    XMLLoadLocale(xmlElement26["NegativeFactorError"], ref Strings.Messages.NegativeFactorError);
-                    XMLLoadLocale(xmlElement26["NegativeDivisorError"], ref Strings.Messages.NegativeDivisorError);
-                    XMLLoadLocale(xmlElement26["PreferencePostpone"], ref Strings.Messages.PreferencePostpone);
-                    XMLLoadLocale(xmlElement26["EraserObsolete"], ref Strings.Messages.EraserObsolete);
-                    XMLLoadLocale(xmlElement26["SaveWarning"], ref Strings.Messages.SaveWarning);
-                    XMLLoadLocale(xmlElement26["NoteOverlapError"], ref Strings.Messages.NoteOverlapError);
-                    XMLLoadLocale(xmlElement26["BPMOverflowError"], ref Strings.Messages.BPMOverflowError);
-                    XMLLoadLocale(xmlElement26["STOPOverflowError"], ref Strings.Messages.STOPOverflowError);
-                    XMLLoadLocale(xmlElement26["SCROLLOverflowError"], ref Strings.Messages.SCROLLOverflowError);
-                    XMLLoadLocale(xmlElement26["SavedFileWillContainErrors"], ref Strings.Messages.SavedFileWillContainErrors);
-                    XMLLoadLocale(xmlElement26["FileAssociationPrompt"], ref Strings.Messages.FileAssociationPrompt);
-                    XMLLoadLocale(xmlElement26["FileAssociationError"], ref Strings.Messages.FileAssociationError);
-                    XMLLoadLocale(xmlElement26["RestoreDefaultSettings"], ref Strings.Messages.RestoreDefaultSettings);
-                    XMLLoadLocale(xmlElement26["RestoreAutosavedFile"], ref Strings.Messages.RestoreAutosavedFile);
+                    XmlElement n120 = xmlElement20["Absolute"];
+                    RadioButton cBeatPreserve = CBeatPreserve;
+                    string target = cBeatPreserve.Text;
+                    XMLLoadLocaleMenu(n120, ref target);
+                    cBeatPreserve.Text = target;
+                    XmlElement n121 = xmlElement20["Measure"];
+                    cBeatPreserve = CBeatMeasure;
+                    target = cBeatPreserve.Text;
+                    XMLLoadLocaleMenu(n121, ref target);
+                    cBeatPreserve.Text = target;
+                    XmlElement n122 = xmlElement20["Cut"];
+                    cBeatPreserve = CBeatCut;
+                    target = cBeatPreserve.Text;
+                    XMLLoadLocaleMenu(n122, ref target);
+                    cBeatPreserve.Text = target;
+                    XmlElement n123 = xmlElement20["Scale"];
+                    cBeatPreserve = CBeatScale;
+                    target = cBeatPreserve.Text;
+                    XMLLoadLocaleMenu(n123, ref target);
+                    cBeatPreserve.Text = target;
                 }
-                XmlElement xmlElement27 = xmlElement["FileType"];
-                if (xmlElement27 != null)
-                {
-                    XMLLoadLocale(xmlElement27["_all"], ref Strings.FileType._all);
-                    XMLLoadLocale(xmlElement27["_bms"], ref Strings.FileType._bms);
-                    XMLLoadLocale(xmlElement27["BMS"], ref Strings.FileType.BMS);
-                    XMLLoadLocale(xmlElement27["BME"], ref Strings.FileType.BME);
-                    XMLLoadLocale(xmlElement27["BML"], ref Strings.FileType.BML);
-                    XMLLoadLocale(xmlElement27["PMS"], ref Strings.FileType.PMS);
-                    XMLLoadLocale(xmlElement27["TXT"], ref Strings.FileType.TXT);
-                    XMLLoadLocale(xmlElement27["SM"], ref Strings.FileType.SM);
-                    XMLLoadLocale(xmlElement27["IBMSC"], ref Strings.FileType.IBMSC);
-                    XMLLoadLocale(xmlElement27["XML"], ref Strings.FileType.XML);
-                    XMLLoadLocale(xmlElement27["THEME_XML"], ref Strings.FileType.THEME_XML);
-                    XMLLoadLocale(xmlElement27["TH"], ref Strings.FileType.TH);
-                    XMLLoadLocale(xmlElement27["_audio"], ref Strings.FileType._audio);
-                    XMLLoadLocale(xmlElement27["_wave"], ref Strings.FileType._wave);
-                    XMLLoadLocale(xmlElement27["WAV"], ref Strings.FileType.WAV);
-                    XMLLoadLocale(xmlElement27["OGG"], ref Strings.FileType.OGG);
-                    XMLLoadLocale(xmlElement27["MP3"], ref Strings.FileType.MP3);
-                    XMLLoadLocale(xmlElement27["MID"], ref Strings.FileType.MID);
-                    XMLLoadLocale(xmlElement27["_image"], ref Strings.FileType._image);
-                    XMLLoadLocale(xmlElement27["EXE"], ref Strings.FileType.EXE);
-                }
-                XmlElement xmlElement28 = xmlElement["Statistics"];
-                if (xmlElement28 != null)
-                {
-                    XMLLoadLocale(xmlElement28["Title"], ref Strings.fStatistics.Title);
-                    XMLLoadLocale(xmlElement28["lBPM"], ref Strings.fStatistics.lBPM);
-                    XMLLoadLocale(xmlElement28["lSTOP"], ref Strings.fStatistics.lSTOP);
-                    XMLLoadLocale(xmlElement28["lSCROLL"], ref Strings.fStatistics.lSCROLL);
-                    XMLLoadLocale(xmlElement28["lA"], ref Strings.fStatistics.lA);
-                    XMLLoadLocale(xmlElement28["lD"], ref Strings.fStatistics.lD);
-                    XMLLoadLocale(xmlElement28["lBGM"], ref Strings.fStatistics.lBGM);
-                    XMLLoadLocale(xmlElement28["lTotal"], ref Strings.fStatistics.lTotal);
-                    XMLLoadLocale(xmlElement28["lShort"], ref Strings.fStatistics.lShort);
-                    XMLLoadLocale(xmlElement28["lLong"], ref Strings.fStatistics.lLong);
-                    XMLLoadLocale(xmlElement28["lLnObj"], ref Strings.fStatistics.lLnObj);
-                    XMLLoadLocale(xmlElement28["lHidden"], ref Strings.fStatistics.lHidden);
-                    XMLLoadLocale(xmlElement28["lErrors"], ref Strings.fStatistics.lErrors);
-                }
-                XmlElement xmlElement29 = xmlElement["PlayerOptions"];
-                if (xmlElement29 != null)
-                {
-                    XMLLoadLocale(xmlElement29["Title"], ref Strings.fopPlayer.Title);
-                    XMLLoadLocale(xmlElement29["Add"], ref Strings.fopPlayer.Add);
-                    XMLLoadLocale(xmlElement29["Remove"], ref Strings.fopPlayer.Remove);
-                    XMLLoadLocale(xmlElement29["Path"], ref Strings.fopPlayer.Path);
-                    XMLLoadLocale(xmlElement29["PlayFromBeginning"], ref Strings.fopPlayer.PlayFromBeginning);
-                    XMLLoadLocale(xmlElement29["PlayFromHere"], ref Strings.fopPlayer.PlayFromHere);
-                    XMLLoadLocale(xmlElement29["StopPlaying"], ref Strings.fopPlayer.StopPlaying);
-                    XMLLoadLocale(xmlElement29["References"], ref Strings.fopPlayer.References);
-                    XMLLoadLocale(xmlElement29["DirectoryOfApp"], ref Strings.fopPlayer.DirectoryOfApp);
-                    XMLLoadLocale(xmlElement29["CurrMeasure"], ref Strings.fopPlayer.CurrMeasure);
-                    XMLLoadLocale(xmlElement29["FileName"], ref Strings.fopPlayer.FileName);
-                    XMLLoadLocale(xmlElement29["RestoreDefault"], ref Strings.fopPlayer.RestoreDefault);
-                }
-                XmlElement xmlElement30 = xmlElement["VisualOptions"];
-                if (xmlElement30 != null)
-                {
-                    XMLLoadLocale(xmlElement30["Title"], ref Strings.fopVisual.Title);
-                    XMLLoadLocale(xmlElement30["Width"], ref Strings.fopVisual.Width);
-                    XMLLoadLocale(xmlElement30["Caption"], ref Strings.fopVisual.Caption);
-                    XMLLoadLocale(xmlElement30["Note"], ref Strings.fopVisual.Note);
-                    XMLLoadLocale(xmlElement30["Label"], ref Strings.fopVisual.Label);
-                    XMLLoadLocale(xmlElement30["LongNote"], ref Strings.fopVisual.LongNote);
-                    XMLLoadLocale(xmlElement30["LongNoteLabel"], ref Strings.fopVisual.LongNoteLabel);
-                    XMLLoadLocale(xmlElement30["Bg"], ref Strings.fopVisual.Bg);
-                    XMLLoadLocale(xmlElement30["ColumnCaption"], ref Strings.fopVisual.ColumnCaption);
-                    XMLLoadLocale(xmlElement30["ColumnCaptionFont"], ref Strings.fopVisual.ColumnCaptionFont);
-                    XMLLoadLocale(xmlElement30["Background"], ref Strings.fopVisual.Background);
-                    XMLLoadLocale(xmlElement30["Grid"], ref Strings.fopVisual.Grid);
-                    XMLLoadLocale(xmlElement30["SubGrid"], ref Strings.fopVisual.SubGrid);
-                    XMLLoadLocale(xmlElement30["VerticalLine"], ref Strings.fopVisual.VerticalLine);
-                    XMLLoadLocale(xmlElement30["MeasureBarLine"], ref Strings.fopVisual.MeasureBarLine);
-                    XMLLoadLocale(xmlElement30["BGMWaveform"], ref Strings.fopVisual.BGMWaveform);
-                    XMLLoadLocale(xmlElement30["NoteHeight"], ref Strings.fopVisual.NoteHeight);
-                    XMLLoadLocale(xmlElement30["NoteLabel"], ref Strings.fopVisual.NoteLabel);
-                    XMLLoadLocale(xmlElement30["MeasureLabel"], ref Strings.fopVisual.MeasureLabel);
-                    XMLLoadLocale(xmlElement30["LabelVerticalShift"], ref Strings.fopVisual.LabelVerticalShift);
-                    XMLLoadLocale(xmlElement30["LabelHorizontalShift"], ref Strings.fopVisual.LabelHorizontalShift);
-                    XMLLoadLocale(xmlElement30["LongNoteLabelHorizontalShift"], ref Strings.fopVisual.LongNoteLabelHorizontalShift);
-                    XMLLoadLocale(xmlElement30["HiddenNoteOpacity"], ref Strings.fopVisual.HiddenNoteOpacity);
-                    XMLLoadLocale(xmlElement30["NoteBorderOnMouseOver"], ref Strings.fopVisual.NoteBorderOnMouseOver);
-                    XMLLoadLocale(xmlElement30["NoteBorderOnSelection"], ref Strings.fopVisual.NoteBorderOnSelection);
-                    XMLLoadLocale(xmlElement30["NoteBorderOnAdjustingLength"], ref Strings.fopVisual.NoteBorderOnAdjustingLength);
-                    XMLLoadLocale(xmlElement30["SelectionBoxBorder"], ref Strings.fopVisual.SelectionBoxBorder);
-                    XMLLoadLocale(xmlElement30["TSCursor"], ref Strings.fopVisual.TSCursor);
-                    XMLLoadLocale(xmlElement30["TSSplitter"], ref Strings.fopVisual.TSSplitter);
-                    XMLLoadLocale(xmlElement30["TSCursorSensitivity"], ref Strings.fopVisual.TSCursorSensitivity);
-                    XMLLoadLocale(xmlElement30["TSMouseOverBorder"], ref Strings.fopVisual.TSMouseOverBorder);
-                    XMLLoadLocale(xmlElement30["TSFill"], ref Strings.fopVisual.TSFill);
-                    XMLLoadLocale(xmlElement30["TSBPM"], ref Strings.fopVisual.TSBPM);
-                    XMLLoadLocale(xmlElement30["TSBPMFont"], ref Strings.fopVisual.TSBPMFont);
-                    XMLLoadLocale(xmlElement30["MiddleSensitivity"], ref Strings.fopVisual.MiddleSensitivity);
-                }
-                XmlElement xmlElement31 = xmlElement["GeneralOptions"];
-                if (xmlElement31 != null)
-                {
-                    XMLLoadLocale(xmlElement31["Title"], ref Strings.fopGeneral.Title);
-                    XMLLoadLocale(xmlElement31["MouseWheel"], ref Strings.fopGeneral.MouseWheel);
-                    XMLLoadLocale(xmlElement31["TextEncoding"], ref Strings.fopGeneral.TextEncoding);
-                    XMLLoadLocale(xmlElement31["PageUpDown"], ref Strings.fopGeneral.PageUpDown);
-                    XMLLoadLocale(xmlElement31["MiddleButton"], ref Strings.fopGeneral.MiddleButton);
-                    XMLLoadLocale(xmlElement31["MiddleButtonAuto"], ref Strings.fopGeneral.MiddleButtonAuto);
-                    XMLLoadLocale(xmlElement31["MiddleButtonDrag"], ref Strings.fopGeneral.MiddleButtonDrag);
-                    XMLLoadLocale(xmlElement31["AssociateFileType"], ref Strings.fopGeneral.AssociateFileType);
-                    XMLLoadLocale(xmlElement31["MaxGridPartition"], ref Strings.fopGeneral.MaxGridPartition);
-                    XMLLoadLocale(xmlElement31["BeepWhileSaved"], ref Strings.fopGeneral.BeepWhileSaved);
-                    XMLLoadLocale(xmlElement31["ExtendBPM"], ref Strings.fopGeneral.ExtendBPM);
-                    XMLLoadLocale(xmlElement31["ExtendSTOP"], ref Strings.fopGeneral.ExtendSTOP);
-                    XMLLoadLocale(xmlElement31["AutoFocusOnMouseEnter"], ref Strings.fopGeneral.AutoFocusOnMouseEnter);
-                    XMLLoadLocale(xmlElement31["DisableFirstClick"], ref Strings.fopGeneral.DisableFirstClick);
-                    XMLLoadLocale(xmlElement31["AutoSave"], ref Strings.fopGeneral.AutoSave);
-                    XMLLoadLocale(xmlElement31["minutes"], ref Strings.fopGeneral.minutes);
-                    XMLLoadLocale(xmlElement31["StopPreviewOnClick"], ref Strings.fopGeneral.StopPreviewOnClick);
-                }
-                XmlElement xmlElement32 = xmlElement["Find"];
-                if (xmlElement32 != null)
-                {
-                    XMLLoadLocale(xmlElement32["NoteRange"], ref Strings.fFind.NoteRange);
-                    XMLLoadLocale(xmlElement32["MeasureRange"], ref Strings.fFind.MeasureRange);
-                    XMLLoadLocale(xmlElement32["LabelRange"], ref Strings.fFind.LabelRange);
-                    XMLLoadLocale(xmlElement32["ValueRange"], ref Strings.fFind.ValueRange);
-                    XMLLoadLocale(xmlElement32["to"], ref Strings.fFind.to_);
-                    XMLLoadLocale(xmlElement32["Selected"], ref Strings.fFind.Selected);
-                    XMLLoadLocale(xmlElement32["UnSelected"], ref Strings.fFind.UnSelected);
-                    XMLLoadLocale(xmlElement32["ShortNote"], ref Strings.fFind.ShortNote);
-                    XMLLoadLocale(xmlElement32["LongNote"], ref Strings.fFind.LongNote);
-                    XMLLoadLocale(xmlElement32["Hidden"], ref Strings.fFind.Hidden);
-                    XMLLoadLocale(xmlElement32["Visible"], ref Strings.fFind.Visible);
-                    XMLLoadLocale(xmlElement32["Column"], ref Strings.fFind.Column);
-                    XMLLoadLocale(xmlElement32["SelectAll"], ref Strings.fFind.SelectAll);
-                    XMLLoadLocale(xmlElement32["SelectInverse"], ref Strings.fFind.SelectInverse);
-                    XMLLoadLocale(xmlElement32["UnselectAll"], ref Strings.fFind.UnselectAll);
-                    XMLLoadLocale(xmlElement32["Operation"], ref Strings.fFind.Operation);
-                    XMLLoadLocale(xmlElement32["ReplaceWithLabel"], ref Strings.fFind.ReplaceWithLabel);
-                    XMLLoadLocale(xmlElement32["ReplaceWithValue"], ref Strings.fFind.ReplaceWithValue);
-                    XMLLoadLocale(xmlElement32["Select"], ref Strings.fFind.Select_);
-                    XMLLoadLocale(xmlElement32["Unselect"], ref Strings.fFind.Unselect_);
-                    XMLLoadLocale(xmlElement32["Delete"], ref Strings.fFind.Delete_);
-                    XMLLoadLocale(xmlElement32["Close"], ref Strings.fFind.Close_);
-                }
-                XmlElement xmlElement33 = xmlElement["ImportSM"];
-                if (xmlElement33 != null)
-                {
-                    XMLLoadLocale(xmlElement33["Title"], ref Strings.fImportSM.Title);
-                    XMLLoadLocale(xmlElement33["Difficulty"], ref Strings.fImportSM.Difficulty);
-                    XMLLoadLocale(xmlElement33["Note"], ref Strings.fImportSM.Note);
-                }
-                XmlElement xmlElement34 = xmlElement["FileAssociation"];
-                if (xmlElement34 != null)
-                {
-                    XMLLoadLocale(xmlElement34["BMS"], ref Strings.FileAssociation.BMS);
-                    XMLLoadLocale(xmlElement34["BME"], ref Strings.FileAssociation.BME);
-                    XMLLoadLocale(xmlElement34["BML"], ref Strings.FileAssociation.BML);
-                    XMLLoadLocale(xmlElement34["PMS"], ref Strings.FileAssociation.PMS);
-                    XMLLoadLocale(xmlElement34["IBMSC"], ref Strings.FileAssociation.IBMSC);
-                    XMLLoadLocale(xmlElement34["Open"], ref Strings.FileAssociation.Open);
-                    XMLLoadLocale(xmlElement34["Preview"], ref Strings.FileAssociation.Preview);
-                    XMLLoadLocale(xmlElement34["ViewCode"], ref Strings.FileAssociation.ViewCode);
-                }
-                DispLang = Path.Replace(MyProject.Application.Info.DirectoryPath + "\\", "");
             }
-            catch (Exception ex7)
+            XmlElement xmlElement21 = xmlElement["OptionsPanel"];
+            if (xmlElement21 != null)
             {
-                ProjectData.SetProjectError(ex7);
-                Interaction.MsgBox(Path + "\r\n\r\n" + ex7.Message, MsgBoxStyle.Exclamation);
-                ProjectData.ClearProjectError();
+                XmlElement xmlElement22 = xmlElement21["Header"];
+                CheckBox cWAVMultiSelect;
+                string target;
+                if (xmlElement22 != null)
+                {
+                    XmlElement n124 = xmlElement22["Header"];
+                    cWAVMultiSelect = POHeaderSwitch;
+                    target = cWAVMultiSelect.Text;
+                    XMLLoadLocale(n124, ref target);
+                    cWAVMultiSelect.Text = target;
+                    XmlElement n125 = xmlElement22["Title"];
+                    Label label = Label3;
+                    target = label.Text;
+                    XMLLoadLocale(n125, ref target);
+                    label.Text = target;
+                    XmlElement n126 = xmlElement22["Artist"];
+                    label = Label4;
+                    target = label.Text;
+                    XMLLoadLocale(n126, ref target);
+                    label.Text = target;
+                    XmlElement n127 = xmlElement22["Genre"];
+                    label = Label2;
+                    target = label.Text;
+                    XMLLoadLocale(n127, ref target);
+                    label.Text = target;
+                    XmlElement n128 = xmlElement22["BPM"];
+                    label = Label9;
+                    target = label.Text;
+                    XMLLoadLocale(n128, ref target);
+                    label.Text = target;
+                    XmlElement n129 = xmlElement22["Player"];
+                    label = Label8;
+                    target = label.Text;
+                    XMLLoadLocale(n129, ref target);
+                    label.Text = target;
+                    XmlElement n130 = xmlElement22["Rank"];
+                    label = Label10;
+                    target = label.Text;
+                    XMLLoadLocale(n130, ref target);
+                    label.Text = target;
+                    XmlElement n131 = xmlElement22["PlayLevel"];
+                    label = Label6;
+                    target = label.Text;
+                    XMLLoadLocale(n131, ref target);
+                    label.Text = target;
+                    XmlElement n132 = xmlElement22["SubTitle"];
+                    label = Label15;
+                    target = label.Text;
+                    XMLLoadLocale(n132, ref target);
+                    label.Text = target;
+                    XmlElement n133 = xmlElement22["SubArtist"];
+                    label = Label17;
+                    target = label.Text;
+                    XMLLoadLocale(n133, ref target);
+                    label.Text = target;
+                    XmlElement n134 = xmlElement22["StageFile"];
+                    label = Label16;
+                    target = label.Text;
+                    XMLLoadLocale(n134, ref target);
+                    label.Text = target;
+                    XmlElement n135 = xmlElement22["Banner"];
+                    label = Label12;
+                    target = label.Text;
+                    XMLLoadLocale(n135, ref target);
+                    label.Text = target;
+                    XmlElement n136 = xmlElement22["BackBMP"];
+                    label = Label11;
+                    target = label.Text;
+                    XMLLoadLocale(n136, ref target);
+                    label.Text = target;
+                    XmlElement n137 = xmlElement22["Difficulty"];
+                    label = Label21;
+                    target = label.Text;
+                    XMLLoadLocale(n137, ref target);
+                    label.Text = target;
+                    XmlElement n138 = xmlElement22["ExRank"];
+                    label = Label23;
+                    target = label.Text;
+                    XMLLoadLocale(n138, ref target);
+                    label.Text = target;
+                    XmlElement n139 = xmlElement22["Total"];
+                    label = Label20;
+                    target = label.Text;
+                    XMLLoadLocale(n139, ref target);
+                    label.Text = target;
+                    XmlElement n140 = xmlElement22["Comment"];
+                    label = Label19;
+                    target = label.Text;
+                    XMLLoadLocale(n140, ref target);
+                    label.Text = target;
+                    XmlElement n141 = xmlElement22["LnObj"];
+                    label = Label24;
+                    target = label.Text;
+                    XMLLoadLocale(n141, ref target);
+                    label.Text = target;
+                    CHPlayer.SelectedIndexChanged -= CHPlayer_SelectedIndexChanged;
+                    XmlElement n142 = xmlElement22["Player1"];
+                    ComboBox.ObjectCollection items = CHPlayer.Items;
+                    ComboBox.ObjectCollection objectCollection = items;
+                    int index = 0;
+                    target = Conversions.ToString(objectCollection[index]);
+                    XMLLoadLocale(n142, ref target);
+                    items[index] = target;
+                    XmlElement n143 = xmlElement22["Player2"];
+                    items = CHPlayer.Items;
+                    ComboBox.ObjectCollection objectCollection2 = items;
+                    index = 1;
+                    target = Conversions.ToString(objectCollection2[index]);
+                    XMLLoadLocale(n143, ref target);
+                    items[index] = target;
+                    XmlElement n144 = xmlElement22["Player3"];
+                    items = CHPlayer.Items;
+                    ComboBox.ObjectCollection objectCollection3 = items;
+                    index = 2;
+                    target = Conversions.ToString(objectCollection3[index]);
+                    XMLLoadLocale(n144, ref target);
+                    items[index] = target;
+                    CHPlayer.SelectedIndexChanged += CHPlayer_SelectedIndexChanged;
+                    CHRank.SelectedIndexChanged -= THGenre_TextChanged;
+                    XmlElement n145 = xmlElement22["Rank0"];
+                    items = CHRank.Items;
+                    ComboBox.ObjectCollection objectCollection4 = items;
+                    index = 0;
+                    target = Conversions.ToString(objectCollection4[index]);
+                    XMLLoadLocale(n145, ref target);
+                    items[index] = target;
+                    XmlElement n146 = xmlElement22["Rank1"];
+                    items = CHRank.Items;
+                    ComboBox.ObjectCollection objectCollection5 = items;
+                    index = 1;
+                    target = Conversions.ToString(objectCollection5[index]);
+                    XMLLoadLocale(n146, ref target);
+                    items[index] = target;
+                    XmlElement n147 = xmlElement22["Rank2"];
+                    items = CHRank.Items;
+                    ComboBox.ObjectCollection objectCollection6 = items;
+                    index = 2;
+                    target = Conversions.ToString(objectCollection6[index]);
+                    XMLLoadLocale(n147, ref target);
+                    items[index] = target;
+                    XmlElement n148 = xmlElement22["Rank3"];
+                    items = CHRank.Items;
+                    ComboBox.ObjectCollection objectCollection7 = items;
+                    index = 3;
+                    target = Conversions.ToString(objectCollection7[index]);
+                    XMLLoadLocale(n148, ref target);
+                    items[index] = target;
+                    XmlElement n149 = xmlElement22["Rank4"];
+                    items = CHRank.Items;
+                    ComboBox.ObjectCollection objectCollection8 = items;
+                    index = 4;
+                    target = Conversions.ToString(objectCollection8[index]);
+                    XMLLoadLocale(n149, ref target);
+                    items[index] = target;
+                    CHRank.SelectedIndexChanged += THGenre_TextChanged;
+                    CHDifficulty.SelectedIndexChanged -= THGenre_TextChanged;
+                    XmlElement n150 = xmlElement22["Difficulty0"];
+                    items = CHDifficulty.Items;
+                    ComboBox.ObjectCollection objectCollection9 = items;
+                    index = 0;
+                    target = Conversions.ToString(objectCollection9[index]);
+                    XMLLoadLocale(n150, ref target);
+                    items[index] = target;
+                    XmlElement n151 = xmlElement22["Difficulty1"];
+                    items = CHDifficulty.Items;
+                    ComboBox.ObjectCollection objectCollection10 = items;
+                    index = 1;
+                    target = Conversions.ToString(objectCollection10[index]);
+                    XMLLoadLocale(n151, ref target);
+                    items[index] = target;
+                    XmlElement n152 = xmlElement22["Difficulty2"];
+                    items = CHDifficulty.Items;
+                    ComboBox.ObjectCollection objectCollection11 = items;
+                    index = 2;
+                    target = Conversions.ToString(objectCollection11[index]);
+                    XMLLoadLocale(n152, ref target);
+                    items[index] = target;
+                    XmlElement n153 = xmlElement22["Difficulty3"];
+                    items = CHDifficulty.Items;
+                    ComboBox.ObjectCollection objectCollection12 = items;
+                    index = 3;
+                    target = Conversions.ToString(objectCollection12[index]);
+                    XMLLoadLocale(n153, ref target);
+                    items[index] = target;
+                    XmlElement n154 = xmlElement22["Difficulty4"];
+                    items = CHDifficulty.Items;
+                    ComboBox.ObjectCollection objectCollection13 = items;
+                    index = 4;
+                    target = Conversions.ToString(objectCollection13[index]);
+                    XMLLoadLocale(n154, ref target);
+                    items[index] = target;
+                    XmlElement n155 = xmlElement22["Difficulty5"];
+                    items = CHDifficulty.Items;
+                    ComboBox.ObjectCollection objectCollection14 = items;
+                    index = 5;
+                    target = Conversions.ToString(objectCollection14[index]);
+                    XMLLoadLocale(n155, ref target);
+                    items[index] = target;
+                    CHDifficulty.SelectedIndexChanged += THGenre_TextChanged;
+                }
+                XmlElement xmlElement23 = xmlElement21["Grid"];
+                if (xmlElement23 != null)
+                {
+                    XmlElement n156 = xmlElement23["Title"];
+                    cWAVMultiSelect = POGridSwitch;
+                    target = cWAVMultiSelect.Text;
+                    XMLLoadLocale(n156, ref target);
+                    cWAVMultiSelect.Text = target;
+                    XmlElement n157 = xmlElement23["Snap"];
+                    cWAVMultiSelect = CGSnap;
+                    target = cWAVMultiSelect.Text;
+                    XMLLoadLocale(n157, ref target);
+                    cWAVMultiSelect.Text = target;
+                    XmlElement n158 = xmlElement23["BCols"];
+                    Label label = Label1;
+                    target = label.Text;
+                    XMLLoadLocale(n158, ref target);
+                    label.Text = target;
+                    XmlElement n159 = xmlElement23["DisableVertical"];
+                    cWAVMultiSelect = CGDisableVertical;
+                    target = cWAVMultiSelect.Text;
+                    XMLLoadLocale(n159, ref target);
+                    cWAVMultiSelect.Text = target;
+                    XmlElement n160 = xmlElement23["Scroll"];
+                    label = Label5;
+                    target = label.Text;
+                    XMLLoadLocale(n160, ref target);
+                    label.Text = target;
+                    XMLLoadLocaleToolTipUniversal(xmlElement23["LockLeft"], cVSLockL);
+                    XMLLoadLocaleToolTipUniversal(xmlElement23["LockMiddle"], cVSLock);
+                    XMLLoadLocaleToolTipUniversal(xmlElement23["LockRight"], cVSLockR);
+                }
+                XmlElement xmlElement24 = xmlElement21["WaveForm"];
+                if (xmlElement24 != null)
+                {
+                    XmlElement n161 = xmlElement24["Title"];
+                    cWAVMultiSelect = POWaveFormSwitch;
+                    target = cWAVMultiSelect.Text;
+                    XMLLoadLocale(n161, ref target);
+                    cWAVMultiSelect.Text = target;
+                    XMLLoadLocaleToolTipUniversal(xmlElement24["Load"], BWLoad);
+                    XMLLoadLocaleToolTipUniversal(xmlElement24["Clear"], BWClear);
+                    XMLLoadLocaleToolTipUniversal(xmlElement24["Lock"], BWLock);
+                }
+                XmlElement xmlElement25 = xmlElement21["WAV"];
+                if (xmlElement25 != null)
+                {
+                    XmlElement n162 = xmlElement25["Title"];
+                    cWAVMultiSelect = POWAVSwitch;
+                    target = cWAVMultiSelect.Text;
+                    XMLLoadLocale(n162, ref target);
+                    cWAVMultiSelect.Text = target;
+                    XMLLoadLocaleToolTipUniversal(xmlElement25["MoveUp"], BWAVUp);
+                    XMLLoadLocaleToolTipUniversal(xmlElement25["MoveDown"], BWAVDown);
+                    XMLLoadLocaleToolTipUniversal(xmlElement25["Browse"], BWAVBrowse);
+                    XMLLoadLocaleToolTipUniversal(xmlElement25["Remove"], BWAVRemove);
+                }
+                XmlElement n163 = xmlElement21["Beat"];
+                cWAVMultiSelect = POBeatSwitch;
+                target = cWAVMultiSelect.Text;
+                XMLLoadLocale(n163, ref target);
+                cWAVMultiSelect.Text = target;
+                XmlElement n164 = xmlElement21["Beat.Apply"];
+                Button bBeatApply = BBeatApply;
+                target = bBeatApply.Text;
+                XMLLoadLocale(n164, ref target);
+                bBeatApply.Text = target;
+                XmlElement n165 = xmlElement21["Beat.Apply"];
+                bBeatApply = BBeatApplyV;
+                target = bBeatApply.Text;
+                XMLLoadLocale(n165, ref target);
+                bBeatApply.Text = target;
+                XmlElement n166 = xmlElement21["Expansion"];
+                cWAVMultiSelect = POExpansionSwitch;
+                target = cWAVMultiSelect.Text;
+                XMLLoadLocale(n166, ref target);
+                cWAVMultiSelect.Text = target;
             }
-            finally
+            XmlElement xmlElement26 = xmlElement["Messages"];
+            if (xmlElement26 != null)
             {
-                fileStream?.Close();
-                POHeaderPart2.Visible = visible;
-                POGridPart2.Visible = visible2;
-                POWaveFormPart2.Visible = visible3;
+                XMLLoadLocale(xmlElement26["Err"], ref Strings.Messages.Err);
+                XMLLoadLocale(xmlElement26["SaveOnExit"], ref Strings.Messages.SaveOnExit);
+                XMLLoadLocale(xmlElement26["SaveOnExit1"], ref Strings.Messages.SaveOnExit1);
+                XMLLoadLocale(xmlElement26["SaveOnExit2"], ref Strings.Messages.SaveOnExit2);
+                XMLLoadLocale(xmlElement26["PromptEnter"], ref Strings.Messages.PromptEnter);
+                XMLLoadLocale(xmlElement26["PromptEnterNumeric"], ref Strings.Messages.PromptEnterNumeric);
+                XMLLoadLocale(xmlElement26["PromptEnterBPM"], ref Strings.Messages.PromptEnterBPM);
+                XMLLoadLocale(xmlElement26["PromptEnterSTOP"], ref Strings.Messages.PromptEnterSTOP);
+                XMLLoadLocale(xmlElement26["PromptEnterSCROLL"], ref Strings.Messages.PromptEnterSCROLL);
+                XMLLoadLocale(xmlElement26["PromptSlashValue"], ref Strings.Messages.PromptSlashValue);
+                XMLLoadLocale(xmlElement26["InvalidLabel"], ref Strings.Messages.InvalidLabel);
+                XMLLoadLocale(xmlElement26["CannotFind"], ref Strings.Messages.CannotFind);
+                XMLLoadLocale(xmlElement26["PleaseRespecifyPath"], ref Strings.Messages.PleaseRespecifyPath);
+                XMLLoadLocale(xmlElement26["PlayerNotFound"], ref Strings.Messages.PlayerNotFound);
+                XMLLoadLocale(xmlElement26["PreviewDelError"], ref Strings.Messages.PreviewDelError);
+                XMLLoadLocale(xmlElement26["NegativeFactorError"], ref Strings.Messages.NegativeFactorError);
+                XMLLoadLocale(xmlElement26["NegativeDivisorError"], ref Strings.Messages.NegativeDivisorError);
+                XMLLoadLocale(xmlElement26["PreferencePostpone"], ref Strings.Messages.PreferencePostpone);
+                XMLLoadLocale(xmlElement26["EraserObsolete"], ref Strings.Messages.EraserObsolete);
+                XMLLoadLocale(xmlElement26["SaveWarning"], ref Strings.Messages.SaveWarning);
+                XMLLoadLocale(xmlElement26["NoteOverlapError"], ref Strings.Messages.NoteOverlapError);
+                XMLLoadLocale(xmlElement26["BPMOverflowError"], ref Strings.Messages.BPMOverflowError);
+                XMLLoadLocale(xmlElement26["STOPOverflowError"], ref Strings.Messages.STOPOverflowError);
+                XMLLoadLocale(xmlElement26["SCROLLOverflowError"], ref Strings.Messages.SCROLLOverflowError);
+                XMLLoadLocale(xmlElement26["SavedFileWillContainErrors"], ref Strings.Messages.SavedFileWillContainErrors);
+                XMLLoadLocale(xmlElement26["FileAssociationPrompt"], ref Strings.Messages.FileAssociationPrompt);
+                XMLLoadLocale(xmlElement26["FileAssociationError"], ref Strings.Messages.FileAssociationError);
+                XMLLoadLocale(xmlElement26["RestoreDefaultSettings"], ref Strings.Messages.RestoreDefaultSettings);
+                XMLLoadLocale(xmlElement26["RestoreAutosavedFile"], ref Strings.Messages.RestoreAutosavedFile);
             }
+            XmlElement xmlElement27 = xmlElement["FileType"];
+            if (xmlElement27 != null)
+            {
+                XMLLoadLocale(xmlElement27["_all"], ref Strings.FileType._all);
+                XMLLoadLocale(xmlElement27["_bms"], ref Strings.FileType._bms);
+                XMLLoadLocale(xmlElement27["BMS"], ref Strings.FileType.BMS);
+                XMLLoadLocale(xmlElement27["BME"], ref Strings.FileType.BME);
+                XMLLoadLocale(xmlElement27["BML"], ref Strings.FileType.BML);
+                XMLLoadLocale(xmlElement27["PMS"], ref Strings.FileType.PMS);
+                XMLLoadLocale(xmlElement27["TXT"], ref Strings.FileType.TXT);
+                XMLLoadLocale(xmlElement27["SM"], ref Strings.FileType.SM);
+                XMLLoadLocale(xmlElement27["IBMSC"], ref Strings.FileType.IBMSC);
+                XMLLoadLocale(xmlElement27["XML"], ref Strings.FileType.XML);
+                XMLLoadLocale(xmlElement27["THEME_XML"], ref Strings.FileType.THEME_XML);
+                XMLLoadLocale(xmlElement27["TH"], ref Strings.FileType.TH);
+                XMLLoadLocale(xmlElement27["_audio"], ref Strings.FileType._audio);
+                XMLLoadLocale(xmlElement27["_wave"], ref Strings.FileType._wave);
+                XMLLoadLocale(xmlElement27["WAV"], ref Strings.FileType.WAV);
+                XMLLoadLocale(xmlElement27["OGG"], ref Strings.FileType.OGG);
+                XMLLoadLocale(xmlElement27["MP3"], ref Strings.FileType.MP3);
+                XMLLoadLocale(xmlElement27["MID"], ref Strings.FileType.MID);
+                XMLLoadLocale(xmlElement27["_image"], ref Strings.FileType._image);
+                XMLLoadLocale(xmlElement27["EXE"], ref Strings.FileType.EXE);
+            }
+            XmlElement xmlElement28 = xmlElement["Statistics"];
+            if (xmlElement28 != null)
+            {
+                XMLLoadLocale(xmlElement28["Title"], ref Strings.fStatistics.Title);
+                XMLLoadLocale(xmlElement28["lBPM"], ref Strings.fStatistics.lBPM);
+                XMLLoadLocale(xmlElement28["lSTOP"], ref Strings.fStatistics.lSTOP);
+                XMLLoadLocale(xmlElement28["lSCROLL"], ref Strings.fStatistics.lSCROLL);
+                XMLLoadLocale(xmlElement28["lA"], ref Strings.fStatistics.lA);
+                XMLLoadLocale(xmlElement28["lD"], ref Strings.fStatistics.lD);
+                XMLLoadLocale(xmlElement28["lBGM"], ref Strings.fStatistics.lBGM);
+                XMLLoadLocale(xmlElement28["lTotal"], ref Strings.fStatistics.lTotal);
+                XMLLoadLocale(xmlElement28["lShort"], ref Strings.fStatistics.lShort);
+                XMLLoadLocale(xmlElement28["lLong"], ref Strings.fStatistics.lLong);
+                XMLLoadLocale(xmlElement28["lLnObj"], ref Strings.fStatistics.lLnObj);
+                XMLLoadLocale(xmlElement28["lHidden"], ref Strings.fStatistics.lHidden);
+                XMLLoadLocale(xmlElement28["lErrors"], ref Strings.fStatistics.lErrors);
+            }
+            XmlElement xmlElement29 = xmlElement["PlayerOptions"];
+            if (xmlElement29 != null)
+            {
+                XMLLoadLocale(xmlElement29["Title"], ref Strings.fopPlayer.Title);
+                XMLLoadLocale(xmlElement29["Add"], ref Strings.fopPlayer.Add);
+                XMLLoadLocale(xmlElement29["Remove"], ref Strings.fopPlayer.Remove);
+                XMLLoadLocale(xmlElement29["Path"], ref Strings.fopPlayer.Path);
+                XMLLoadLocale(xmlElement29["PlayFromBeginning"], ref Strings.fopPlayer.PlayFromBeginning);
+                XMLLoadLocale(xmlElement29["PlayFromHere"], ref Strings.fopPlayer.PlayFromHere);
+                XMLLoadLocale(xmlElement29["StopPlaying"], ref Strings.fopPlayer.StopPlaying);
+                XMLLoadLocale(xmlElement29["References"], ref Strings.fopPlayer.References);
+                XMLLoadLocale(xmlElement29["DirectoryOfApp"], ref Strings.fopPlayer.DirectoryOfApp);
+                XMLLoadLocale(xmlElement29["CurrMeasure"], ref Strings.fopPlayer.CurrMeasure);
+                XMLLoadLocale(xmlElement29["FileName"], ref Strings.fopPlayer.FileName);
+                XMLLoadLocale(xmlElement29["RestoreDefault"], ref Strings.fopPlayer.RestoreDefault);
+            }
+            XmlElement xmlElement30 = xmlElement["VisualOptions"];
+            if (xmlElement30 != null)
+            {
+                XMLLoadLocale(xmlElement30["Title"], ref Strings.fopVisual.Title);
+                XMLLoadLocale(xmlElement30["Width"], ref Strings.fopVisual.Width);
+                XMLLoadLocale(xmlElement30["Caption"], ref Strings.fopVisual.Caption);
+                XMLLoadLocale(xmlElement30["Note"], ref Strings.fopVisual.Note);
+                XMLLoadLocale(xmlElement30["Label"], ref Strings.fopVisual.Label);
+                XMLLoadLocale(xmlElement30["LongNote"], ref Strings.fopVisual.LongNote);
+                XMLLoadLocale(xmlElement30["LongNoteLabel"], ref Strings.fopVisual.LongNoteLabel);
+                XMLLoadLocale(xmlElement30["Bg"], ref Strings.fopVisual.Bg);
+                XMLLoadLocale(xmlElement30["ColumnCaption"], ref Strings.fopVisual.ColumnCaption);
+                XMLLoadLocale(xmlElement30["ColumnCaptionFont"], ref Strings.fopVisual.ColumnCaptionFont);
+                XMLLoadLocale(xmlElement30["Background"], ref Strings.fopVisual.Background);
+                XMLLoadLocale(xmlElement30["Grid"], ref Strings.fopVisual.Grid);
+                XMLLoadLocale(xmlElement30["SubGrid"], ref Strings.fopVisual.SubGrid);
+                XMLLoadLocale(xmlElement30["VerticalLine"], ref Strings.fopVisual.VerticalLine);
+                XMLLoadLocale(xmlElement30["MeasureBarLine"], ref Strings.fopVisual.MeasureBarLine);
+                XMLLoadLocale(xmlElement30["BGMWaveform"], ref Strings.fopVisual.BGMWaveform);
+                XMLLoadLocale(xmlElement30["NoteHeight"], ref Strings.fopVisual.NoteHeight);
+                XMLLoadLocale(xmlElement30["NoteLabel"], ref Strings.fopVisual.NoteLabel);
+                XMLLoadLocale(xmlElement30["MeasureLabel"], ref Strings.fopVisual.MeasureLabel);
+                XMLLoadLocale(xmlElement30["LabelVerticalShift"], ref Strings.fopVisual.LabelVerticalShift);
+                XMLLoadLocale(xmlElement30["LabelHorizontalShift"], ref Strings.fopVisual.LabelHorizontalShift);
+                XMLLoadLocale(xmlElement30["LongNoteLabelHorizontalShift"], ref Strings.fopVisual.LongNoteLabelHorizontalShift);
+                XMLLoadLocale(xmlElement30["HiddenNoteOpacity"], ref Strings.fopVisual.HiddenNoteOpacity);
+                XMLLoadLocale(xmlElement30["NoteBorderOnMouseOver"], ref Strings.fopVisual.NoteBorderOnMouseOver);
+                XMLLoadLocale(xmlElement30["NoteBorderOnSelection"], ref Strings.fopVisual.NoteBorderOnSelection);
+                XMLLoadLocale(xmlElement30["NoteBorderOnAdjustingLength"], ref Strings.fopVisual.NoteBorderOnAdjustingLength);
+                XMLLoadLocale(xmlElement30["SelectionBoxBorder"], ref Strings.fopVisual.SelectionBoxBorder);
+                XMLLoadLocale(xmlElement30["TSCursor"], ref Strings.fopVisual.TSCursor);
+                XMLLoadLocale(xmlElement30["TSSplitter"], ref Strings.fopVisual.TSSplitter);
+                XMLLoadLocale(xmlElement30["TSCursorSensitivity"], ref Strings.fopVisual.TSCursorSensitivity);
+                XMLLoadLocale(xmlElement30["TSMouseOverBorder"], ref Strings.fopVisual.TSMouseOverBorder);
+                XMLLoadLocale(xmlElement30["TSFill"], ref Strings.fopVisual.TSFill);
+                XMLLoadLocale(xmlElement30["TSBPM"], ref Strings.fopVisual.TSBPM);
+                XMLLoadLocale(xmlElement30["TSBPMFont"], ref Strings.fopVisual.TSBPMFont);
+                XMLLoadLocale(xmlElement30["MiddleSensitivity"], ref Strings.fopVisual.MiddleSensitivity);
+            }
+            XmlElement xmlElement31 = xmlElement["GeneralOptions"];
+            if (xmlElement31 != null)
+            {
+                XMLLoadLocale(xmlElement31["Title"], ref Strings.fopGeneral.Title);
+                XMLLoadLocale(xmlElement31["MouseWheel"], ref Strings.fopGeneral.MouseWheel);
+                XMLLoadLocale(xmlElement31["TextEncoding"], ref Strings.fopGeneral.TextEncoding);
+                XMLLoadLocale(xmlElement31["PageUpDown"], ref Strings.fopGeneral.PageUpDown);
+                XMLLoadLocale(xmlElement31["MiddleButton"], ref Strings.fopGeneral.MiddleButton);
+                XMLLoadLocale(xmlElement31["MiddleButtonAuto"], ref Strings.fopGeneral.MiddleButtonAuto);
+                XMLLoadLocale(xmlElement31["MiddleButtonDrag"], ref Strings.fopGeneral.MiddleButtonDrag);
+                XMLLoadLocale(xmlElement31["AssociateFileType"], ref Strings.fopGeneral.AssociateFileType);
+                XMLLoadLocale(xmlElement31["MaxGridPartition"], ref Strings.fopGeneral.MaxGridPartition);
+                XMLLoadLocale(xmlElement31["BeepWhileSaved"], ref Strings.fopGeneral.BeepWhileSaved);
+                XMLLoadLocale(xmlElement31["ExtendBPM"], ref Strings.fopGeneral.ExtendBPM);
+                XMLLoadLocale(xmlElement31["ExtendSTOP"], ref Strings.fopGeneral.ExtendSTOP);
+                XMLLoadLocale(xmlElement31["AutoFocusOnMouseEnter"], ref Strings.fopGeneral.AutoFocusOnMouseEnter);
+                XMLLoadLocale(xmlElement31["DisableFirstClick"], ref Strings.fopGeneral.DisableFirstClick);
+                XMLLoadLocale(xmlElement31["AutoSave"], ref Strings.fopGeneral.AutoSave);
+                XMLLoadLocale(xmlElement31["minutes"], ref Strings.fopGeneral.minutes);
+                XMLLoadLocale(xmlElement31["StopPreviewOnClick"], ref Strings.fopGeneral.StopPreviewOnClick);
+            }
+            XmlElement xmlElement32 = xmlElement["Find"];
+            if (xmlElement32 != null)
+            {
+                XMLLoadLocale(xmlElement32["NoteRange"], ref Strings.fFind.NoteRange);
+                XMLLoadLocale(xmlElement32["MeasureRange"], ref Strings.fFind.MeasureRange);
+                XMLLoadLocale(xmlElement32["LabelRange"], ref Strings.fFind.LabelRange);
+                XMLLoadLocale(xmlElement32["ValueRange"], ref Strings.fFind.ValueRange);
+                XMLLoadLocale(xmlElement32["to"], ref Strings.fFind.to_);
+                XMLLoadLocale(xmlElement32["Selected"], ref Strings.fFind.Selected);
+                XMLLoadLocale(xmlElement32["UnSelected"], ref Strings.fFind.UnSelected);
+                XMLLoadLocale(xmlElement32["ShortNote"], ref Strings.fFind.ShortNote);
+                XMLLoadLocale(xmlElement32["LongNote"], ref Strings.fFind.LongNote);
+                XMLLoadLocale(xmlElement32["Hidden"], ref Strings.fFind.Hidden);
+                XMLLoadLocale(xmlElement32["Visible"], ref Strings.fFind.Visible);
+                XMLLoadLocale(xmlElement32["Column"], ref Strings.fFind.Column);
+                XMLLoadLocale(xmlElement32["SelectAll"], ref Strings.fFind.SelectAll);
+                XMLLoadLocale(xmlElement32["SelectInverse"], ref Strings.fFind.SelectInverse);
+                XMLLoadLocale(xmlElement32["UnselectAll"], ref Strings.fFind.UnselectAll);
+                XMLLoadLocale(xmlElement32["Operation"], ref Strings.fFind.Operation);
+                XMLLoadLocale(xmlElement32["ReplaceWithLabel"], ref Strings.fFind.ReplaceWithLabel);
+                XMLLoadLocale(xmlElement32["ReplaceWithValue"], ref Strings.fFind.ReplaceWithValue);
+                XMLLoadLocale(xmlElement32["Select"], ref Strings.fFind.Select_);
+                XMLLoadLocale(xmlElement32["Unselect"], ref Strings.fFind.Unselect_);
+                XMLLoadLocale(xmlElement32["Delete"], ref Strings.fFind.Delete_);
+                XMLLoadLocale(xmlElement32["Close"], ref Strings.fFind.Close_);
+            }
+            XmlElement xmlElement33 = xmlElement["ImportSM"];
+            if (xmlElement33 != null)
+            {
+                XMLLoadLocale(xmlElement33["Title"], ref Strings.fImportSM.Title);
+                XMLLoadLocale(xmlElement33["Difficulty"], ref Strings.fImportSM.Difficulty);
+                XMLLoadLocale(xmlElement33["Note"], ref Strings.fImportSM.Note);
+            }
+            XmlElement xmlElement34 = xmlElement["FileAssociation"];
+            if (xmlElement34 != null)
+            {
+                XMLLoadLocale(xmlElement34["BMS"], ref Strings.FileAssociation.BMS);
+                XMLLoadLocale(xmlElement34["BME"], ref Strings.FileAssociation.BME);
+                XMLLoadLocale(xmlElement34["BML"], ref Strings.FileAssociation.BML);
+                XMLLoadLocale(xmlElement34["PMS"], ref Strings.FileAssociation.PMS);
+                XMLLoadLocale(xmlElement34["IBMSC"], ref Strings.FileAssociation.IBMSC);
+                XMLLoadLocale(xmlElement34["Open"], ref Strings.FileAssociation.Open);
+                XMLLoadLocale(xmlElement34["Preview"], ref Strings.FileAssociation.Preview);
+                XMLLoadLocale(xmlElement34["ViewCode"], ref Strings.FileAssociation.ViewCode);
+            }
+            DispLang = Path.Replace(MyProject.Application.Info.DirectoryPath + "\\", "");
+        }
+        catch (Exception ex7)
+        {
+            ProjectData.SetProjectError(ex7);
+            Interaction.MsgBox(Path + "\r\n\r\n" + ex7.Message, MsgBoxStyle.Exclamation);
+            ProjectData.ClearProjectError();
+        }
+        finally
+        {
+            fileStream?.Close();
+            POHeaderPart2.Visible = visible;
+            POGridPart2.Visible = visible2;
+            POWaveFormPart2.Visible = visible3;
         }
     }
 
     private void LoadThemeComptability(string xPath)
     {
-        checked
+        try
         {
-            try
+            string[] array = Microsoft.VisualBasic.Strings.Split(MyProject.Computer.FileSystem.ReadAllText(xPath), "\r\n");
+            if ((Operators.CompareString(array[0].Trim(), "iBMSC Configuration Settings Format", TextCompare: false) != 0) & (Operators.CompareString(array[0].Trim(), "iBMSC Theme Format", TextCompare: false) != 0))
             {
-                string[] array = Microsoft.VisualBasic.Strings.Split(MyProject.Computer.FileSystem.ReadAllText(xPath), "\r\n");
-                if ((Operators.CompareString(array[0].Trim(), "iBMSC Configuration Settings Format", TextCompare: false) != 0) & (Operators.CompareString(array[0].Trim(), "iBMSC Theme Format", TextCompare: false) != 0))
+                return;
+            }
+            string text = "";
+            string text2 = "";
+            foreach (string text3 in array)
+            {
+                text = Microsoft.VisualBasic.Strings.UCase(Microsoft.VisualBasic.Strings.Mid(text3, 1, Microsoft.VisualBasic.Strings.InStr(text3, "=") - 1));
+                text2 = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.InStr(text3, "=") + 1);
+                switch (text)
                 {
-                    return;
-                }
-                string text = "";
-                string text2 = "";
-                foreach (string text3 in array)
-                {
-                    text = Microsoft.VisualBasic.Strings.UCase(Microsoft.VisualBasic.Strings.Mid(text3, 1, Microsoft.VisualBasic.Strings.InStr(text3, "=") - 1));
-                    text2 = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.InStr(text3, "=") + 1);
-                    switch (text)
-                    {
-                        case "VOTITLE":
-                            vo.ColumnTitle.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                            break;
-                        case "VOTITLEFONT":
-                            vo.ColumnTitleFont = Functions.StringToFont(text2, Font);
-                            break;
-                        case "VOBG":
-                            vo.Bg.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                            break;
-                        case "VOGRID":
-                            vo.pGrid.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                            break;
-                        case "VOSUB":
-                            vo.pSub.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                            break;
-                        case "VOVLINE":
-                            vo.pVLine.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                            break;
-                        case "VOMLINE":
-                            vo.pMLine.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                            break;
-                        case "VOBGMWAV":
-                            vo.pBGMWav.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                            TWTransparency.Value = new decimal(vo.pBGMWav.Color.A);
-                            TWTransparency2.Value = vo.pBGMWav.Color.A;
-                            TWSaturation.Value = new decimal(vo.pBGMWav.Color.GetSaturation() * 1000f);
-                            TWSaturation2.Value = (int)Math.Round(vo.pBGMWav.Color.GetSaturation() * 1000f);
-                            break;
-                        case "VOSELBOX":
-                            vo.SelBox.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                            break;
-                        case "VOPECURSOR":
-                            vo.PECursor.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                            break;
-                        case "VOPEHALF":
-                            vo.PEHalf.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                            break;
-                        case "VOPEDELTAMOUSEOVER":
-                            vo.PEDeltaMouseOver = (int)Math.Round(Conversion.Val(text2));
-                            break;
-                        case "VOPEMOUSEOVER":
-                            vo.PEMouseOver.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                            break;
-                        case "VOPESEL":
-                            vo.PESel.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                            break;
-                        case "VOPEBPM":
-                            vo.PEBPM.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                            break;
-                        case "VOPEBPMFONT":
-                            vo.PEBPMFont = Functions.StringToFont(text2, Font);
-                            break;
-                        case "VKHEIGHT":
-                            vo.kHeight = (int)Math.Round(Conversion.Val(text2));
-                            break;
-                        case "VKFONT":
-                            vo.kFont = Functions.StringToFont(text2, Font);
-                            break;
-                        case "VKMFONT":
-                            vo.kMFont = Functions.StringToFont(text2, Font);
-                            break;
-                        case "VKLABELVSHIFT":
-                            vo.kLabelVShift = (int)Math.Round(Conversion.Val(text2));
-                            break;
-                        case "VKLABELHSHIFT":
-                            vo.kLabelHShift = (int)Math.Round(Conversion.Val(text2));
-                            break;
-                        case "VKLABELHSHIFTL":
-                            vo.kLabelHShiftL = (int)Math.Round(Conversion.Val(text2));
-                            break;
-                        case "VKMOUSEOVER":
-                            vo.kMouseOver.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                            break;
-                        case "VKMOUSEOVERE ":
-                            vo.kMouseOverE.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                            break;
-                        case "VKSELECTED":
-                            vo.kSelected.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                            break;
-                        case "KLENGTH":
+                    case "VOTITLE":
+                        vo.ColumnTitle.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        break;
+                    case "VOTITLEFONT":
+                        vo.ColumnTitleFont = Functions.StringToFont(text2, Font);
+                        break;
+                    case "VOBG":
+                        vo.Bg.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        break;
+                    case "VOGRID":
+                        vo.pGrid.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        break;
+                    case "VOSUB":
+                        vo.pSub.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        break;
+                    case "VOVLINE":
+                        vo.pVLine.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        break;
+                    case "VOMLINE":
+                        vo.pMLine.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        break;
+                    case "VOBGMWAV":
+                        vo.pBGMWav.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        TWTransparency.Value = new decimal(vo.pBGMWav.Color.A);
+                        TWTransparency2.Value = vo.pBGMWav.Color.A;
+                        TWSaturation.Value = new decimal(vo.pBGMWav.Color.GetSaturation() * 1000f);
+                        TWSaturation2.Value = (int)Math.Round(vo.pBGMWav.Color.GetSaturation() * 1000f);
+                        break;
+                    case "VOSELBOX":
+                        vo.SelBox.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        break;
+                    case "VOPECURSOR":
+                        vo.PECursor.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        break;
+                    case "VOPEHALF":
+                        vo.PEHalf.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        break;
+                    case "VOPEDELTAMOUSEOVER":
+                        vo.PEDeltaMouseOver = (int)Math.Round(Conversion.Val(text2));
+                        break;
+                    case "VOPEMOUSEOVER":
+                        vo.PEMouseOver.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        break;
+                    case "VOPESEL":
+                        vo.PESel.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        break;
+                    case "VOPEBPM":
+                        vo.PEBPM.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        break;
+                    case "VOPEBPMFONT":
+                        vo.PEBPMFont = Functions.StringToFont(text2, Font);
+                        break;
+                    case "VKHEIGHT":
+                        vo.kHeight = (int)Math.Round(Conversion.Val(text2));
+                        break;
+                    case "VKFONT":
+                        vo.kFont = Functions.StringToFont(text2, Font);
+                        break;
+                    case "VKMFONT":
+                        vo.kMFont = Functions.StringToFont(text2, Font);
+                        break;
+                    case "VKLABELVSHIFT":
+                        vo.kLabelVShift = (int)Math.Round(Conversion.Val(text2));
+                        break;
+                    case "VKLABELHSHIFT":
+                        vo.kLabelHShift = (int)Math.Round(Conversion.Val(text2));
+                        break;
+                    case "VKLABELHSHIFTL":
+                        vo.kLabelHShiftL = (int)Math.Round(Conversion.Val(text2));
+                        break;
+                    case "VKMOUSEOVER":
+                        vo.kMouseOver.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        break;
+                    case "VKMOUSEOVERE ":
+                        vo.kMouseOverE.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        break;
+                    case "VKSELECTED":
+                        vo.kSelected.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        break;
+                    case "KLENGTH":
+                        {
+                            string[] array9 = LoadThemeComptability_SplitStringInto26Parts(text2);
+                            int num7 = 0;
+                            do
                             {
-                                string[] array9 = LoadThemeComptability_SplitStringInto26Parts(text2);
-                                int num7 = 0;
-                                do
-                                {
-                                    column[num7].Width = (int)Math.Round(Conversion.Val(array9[num7]));
-                                    num7++;
-                                }
-                                while (num7 <= 26);
-                                break;
+                                column[num7].Width = (int)Math.Round(Conversion.Val(array9[num7]));
+                                num7++;
                             }
-                        case "KTITLE":
+                            while (num7 <= 26);
+                            break;
+                        }
+                    case "KTITLE":
+                        {
+                            string[] array8 = LoadThemeComptability_SplitStringInto26Parts(text2);
+                            int num6 = 0;
+                            do
                             {
-                                string[] array8 = LoadThemeComptability_SplitStringInto26Parts(text2);
-                                int num6 = 0;
-                                do
-                                {
-                                    column[num6].Title = array8[num6];
-                                    num6++;
-                                }
-                                while (num6 <= 26);
-                                break;
+                                column[num6].Title = array8[num6];
+                                num6++;
                             }
-                        case "KCOLOR":
+                            while (num6 <= 26);
+                            break;
+                        }
+                    case "KCOLOR":
+                        {
+                            string[] array7 = LoadThemeComptability_SplitStringInto26Parts(text2);
+                            int num5 = 0;
+                            do
                             {
-                                string[] array7 = LoadThemeComptability_SplitStringInto26Parts(text2);
-                                int num5 = 0;
-                                do
-                                {
-                                    column[num5].setNoteColor((int)Math.Round(Conversion.Val(array7[num5])));
-                                    num5++;
-                                }
-                                while (num5 <= 26);
-                                break;
+                                column[num5].setNoteColor((int)Math.Round(Conversion.Val(array7[num5])));
+                                num5++;
                             }
-                        case "KCOLORL":
+                            while (num5 <= 26);
+                            break;
+                        }
+                    case "KCOLORL":
+                        {
+                            string[] array6 = LoadThemeComptability_SplitStringInto26Parts(text2);
+                            int num4 = 0;
+                            do
                             {
-                                string[] array6 = LoadThemeComptability_SplitStringInto26Parts(text2);
-                                int num4 = 0;
-                                do
-                                {
-                                    column[num4].setLNoteColor((int)Math.Round(Conversion.Val(array6[num4])));
-                                    num4++;
-                                }
-                                while (num4 <= 26);
-                                break;
+                                column[num4].setLNoteColor((int)Math.Round(Conversion.Val(array6[num4])));
+                                num4++;
                             }
-                        case "KFORECOLOR":
+                            while (num4 <= 26);
+                            break;
+                        }
+                    case "KFORECOLOR":
+                        {
+                            string[] array5 = LoadThemeComptability_SplitStringInto26Parts(text2);
+                            int num3 = 0;
+                            do
                             {
-                                string[] array5 = LoadThemeComptability_SplitStringInto26Parts(text2);
-                                int num3 = 0;
-                                do
-                                {
-                                    column[num3].cText = Color.FromArgb((int)Math.Round(Conversion.Val(array5[num3])));
-                                    num3++;
-                                }
-                                while (num3 <= 26);
-                                break;
+                                column[num3].cText = Color.FromArgb((int)Math.Round(Conversion.Val(array5[num3])));
+                                num3++;
                             }
-                        case "KFORECOLORL":
+                            while (num3 <= 26);
+                            break;
+                        }
+                    case "KFORECOLORL":
+                        {
+                            string[] array4 = LoadThemeComptability_SplitStringInto26Parts(text2);
+                            int num2 = 0;
+                            do
                             {
-                                string[] array4 = LoadThemeComptability_SplitStringInto26Parts(text2);
-                                int num2 = 0;
-                                do
-                                {
-                                    column[num2].cLText = Color.FromArgb((int)Math.Round(Conversion.Val(array4[num2])));
-                                    num2++;
-                                }
-                                while (num2 <= 26);
-                                break;
+                                column[num2].cLText = Color.FromArgb((int)Math.Round(Conversion.Val(array4[num2])));
+                                num2++;
                             }
-                        case "KBGCOLOR":
+                            while (num2 <= 26);
+                            break;
+                        }
+                    case "KBGCOLOR":
+                        {
+                            string[] array3 = LoadThemeComptability_SplitStringInto26Parts(text2);
+                            int num = 0;
+                            do
                             {
-                                string[] array3 = LoadThemeComptability_SplitStringInto26Parts(text2);
-                                int num = 0;
-                                do
-                                {
-                                    column[num].cBG = Color.FromArgb((int)Math.Round(Conversion.Val(array3[num])));
-                                    num++;
-                                }
-                                while (num <= 26);
-                                break;
+                                column[num].cBG = Color.FromArgb((int)Math.Round(Conversion.Val(array3[num])));
+                                num++;
                             }
-                    }
+                            while (num <= 26);
+                            break;
+                        }
                 }
             }
-            catch (Exception ex)
-            {
-                ProjectData.SetProjectError(ex);
-                Interaction.MsgBox(ex.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err);
-                ProjectData.ClearProjectError();
-            }
-            finally
-            {
-                UpdateColumnsX();
-            }
+        }
+        catch (Exception ex)
+        {
+            ProjectData.SetProjectError(ex);
+            Interaction.MsgBox(ex.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err);
+            ProjectData.ClearProjectError();
+        }
+        finally
+        {
+            UpdateColumnsX();
         }
     }
 
@@ -4345,7 +4315,7 @@ IL_0952:
 
     private void LoadLang(object sender, EventArgs e)
     {
-        string path = Conversions.ToString(NewLateBinding.LateGet(sender, null, "ToolTipText", Array.Empty<object>(),null, null, null));
+        string path = Conversions.ToString(NewLateBinding.LateGet(sender, null, "ToolTipText", Array.Empty<object>(), null, null, null));
         LoadLocale(path);
     }
 
@@ -4362,7 +4332,7 @@ IL_0952:
                 left = xStr.Name;
             }
             cmnLanguage.Items.Add(left, null, LoadLang);
-            cmnLanguage.Items[checked(cmnLanguage.Items.Count - 1)].ToolTipText = xStr.FullName;
+            cmnLanguage.Items[cmnLanguage.Items.Count - 1].ToolTipText = xStr.FullName;
         }
         catch (Exception ex)
         {
@@ -4376,7 +4346,7 @@ IL_0952:
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
     private void LoadTheme(object sender, EventArgs e)
     {
-        LoadSettings(Conversions.ToString(Operators.ConcatenateObject(MyProject.Application.Info.DirectoryPath + "\\Data\\", NewLateBinding.LateGet(sender, null, "Text", Array.Empty<object>(),null, null, null))));
+        LoadSettings(Conversions.ToString(Operators.ConcatenateObject(MyProject.Application.Info.DirectoryPath + "\\Data\\", NewLateBinding.LateGet(sender, null, "Text", Array.Empty<object>(), null, null, null))));
         RefreshPanelAll();
     }
 
@@ -4384,40 +4354,38 @@ IL_0952:
     {
         bool flag = false;
         int num = 0;
-        checked
+        do
         {
-            do
+            if (Operators.CompareString(Recent[num], xFileName, TextCompare: false) == 0)
             {
-                if (Operators.CompareString(Recent[num], xFileName, TextCompare: false) == 0)
-                {
-                    flag = true;
-                    break;
-                }
-                num++;
+                flag = true;
+                break;
             }
-            while (num <= 4);
-            if (flag)
-            {
-                for (int i = num; i >= 1; i += -1)
-                {
-                    Recent[i] = Recent[i - 1];
-                }
-                Recent[0] = xFileName;
-            }
-            else
-            {
-                Recent[4] = Recent[3];
-                Recent[3] = Recent[2];
-                Recent[2] = Recent[1];
-                Recent[1] = Recent[0];
-                Recent[0] = xFileName;
-            }
-            SetRecent(4, Recent[4]);
-            SetRecent(3, Recent[3]);
-            SetRecent(2, Recent[2]);
-            SetRecent(1, Recent[1]);
-            SetRecent(0, Recent[0]);
+            num++;
         }
+        while (num <= 4);
+        if (flag)
+        {
+            for (int i = num; i >= 1; i += -1)
+            {
+                Recent[i] = Recent[i - 1];
+            }
+            Recent[0] = xFileName;
+        }
+        else
+        {
+            Recent[4] = Recent[3];
+            Recent[3] = Recent[2];
+            Recent[2] = Recent[1];
+            Recent[1] = Recent[0];
+            Recent[0] = xFileName;
+        }
+        SetRecent(4, Recent[4]);
+        SetRecent(3, Recent[3]);
+        SetRecent(2, Recent[2]);
+        SetRecent(1, Recent[1]);
+        SetRecent(0, Recent[0]);
+
     }
 
     private void SetRecent(int Index, string Text)
@@ -4521,195 +4489,192 @@ IL_0952:
     private void PerformCommand(UndoRedo.LinkedURCmd sCmd)
     {
         int num = Information.UBound(Notes);
-        checked
+        for (int i = 1; i <= num; i++)
         {
-            for (int i = 1; i <= num; i++)
-            {
-                Notes[i].Selected = false;
-            }
-            LBeat.SelectedIndices.Clear();
-            while (sCmd != null)
-            {
-                switch (sCmd.ofType())
-                {
-                    case 1:
-                        {
-                            UndoRedo.AddNote addNote = (UndoRedo.AddNote)sCmd;
-                            Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + 1 + 1]);
-                            ref Note reference = ref Notes[Information.UBound(Notes)];
-                            reference = addNote.note;
-                            if (TBWavIncrease.Checked)
-                            {
-                                IncreaseCurrentWav();
-                            }
-                            break;
-                        }
-                    case 2:
-                        {
-                            UndoRedo.RemoveNote removeNote = (UndoRedo.RemoveNote)sCmd;
-                            int num7 = FindNoteIndex(removeNote.note);
-                            if (num7 < Notes.Length)
-                            {
-                                int num8 = num7 + 1;
-                                int num9 = Information.UBound(Notes);
-                                for (int k = num8; k <= num9; k++)
-                                {
-                                    ref Note reference2 = ref Notes[k - 1];
-                                    reference2 = Notes[k];
-                                }
-                                Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) - 1 + 1]);
-                            }
-                            if (TBWavIncrease.Checked)
-                            {
-                                DecreaseCurrentWav();
-                            }
-                            break;
-                        }
-                    case 3:
-                        {
-                            UndoRedo.ChangeNote changeNote = (UndoRedo.ChangeNote)sCmd;
-                            int num15 = FindNoteIndex(changeNote.note);
-                            if (num15 < Notes.Length)
-                            {
-                                ref Note reference3 = ref Notes[num15];
-                                reference3 = changeNote.note;
-                            }
-                            break;
-                        }
-                    case 4:
-                        {
-                            UndoRedo.MoveNote moveNote = (UndoRedo.MoveNote)sCmd;
-                            int num13 = FindNoteIndex(moveNote.note);
-                            if (num13 < Notes.Length)
-                            {
-                                Note[] notes2 = Notes;
-                                notes2[num13].ColumnIndex = moveNote.NColumnIndex;
-                                notes2[num13].VPosition = moveNote.NVPosition;
-                                notes2[num13].Selected = moveNote.note.Selected & nEnabled(notes2[num13].ColumnIndex);
-                            }
-                            break;
-                        }
-                    case 5:
-                        {
-                            UndoRedo.LongNoteModify longNoteModify = (UndoRedo.LongNoteModify)sCmd;
-                            int num10 = FindNoteIndex(longNoteModify.note);
-                            if (num10 < Notes.Length)
-                            {
-                                Note[] notes = Notes;
-                                if (NTInput)
-                                {
-                                    notes[num10].VPosition = longNoteModify.NVPosition;
-                                    notes[num10].Length = longNoteModify.NLongNote;
-                                }
-                                else
-                                {
-                                    notes[num10].LongNote = longNoteModify.NLongNote != 0.0;
-                                }
-                                notes[num10].Selected = longNoteModify.note.Selected & nEnabled(notes[num10].ColumnIndex);
-                            }
-                            break;
-                        }
-                    case 6:
-                        {
-                            UndoRedo.HiddenNoteModify hiddenNoteModify = (UndoRedo.HiddenNoteModify)sCmd;
-                            int num3 = FindNoteIndex(hiddenNoteModify.note);
-                            if (num3 < Notes.Length)
-                            {
-                                Notes[num3].Hidden = hiddenNoteModify.NHidden;
-                                Notes[num3].Selected = hiddenNoteModify.note.Selected & nEnabled(Notes[num3].ColumnIndex);
-                            }
-                            break;
-                        }
-                    case 7:
-                        {
-                            UndoRedo.RelabelNote relabelNote = (UndoRedo.RelabelNote)sCmd;
-                            int num2 = FindNoteIndex(relabelNote.note);
-                            if (num2 < Notes.Length)
-                            {
-                                Notes[num2].Value = relabelNote.NValue;
-                                Notes[num2].Selected = relabelNote.note.Selected & nEnabled(Notes[num2].ColumnIndex);
-                            }
-                            break;
-                        }
-                    case 15:
-                        Notes = (Note[])Utils.CopyArray(Notes, new Note[1]);
-                        break;
-                    case 16:
-                        {
-                            UndoRedo.ChangeMeasureLength changeMeasureLength = (UndoRedo.ChangeMeasureLength)sCmd;
-                            long denominator = Functions.GetDenominator(changeMeasureLength.Value / 192.0, 2147483647L);
-                            int[] indices = changeMeasureLength.Indices;
-                            foreach (int num12 in indices)
-                            {
-                                MeasureLength[num12] = changeMeasureLength.Value;
-                                LBeat.Items[num12] = Operators.ConcatenateObject(string.Concat(Functions.Add3Zeros(num12) + ": ", Conversions.ToString(changeMeasureLength.Value / 192.0)), Interaction.IIf(denominator > 10000, "", " ( " + Conversions.ToString((long)Math.Round(changeMeasureLength.Value / 192.0 * (double)denominator)) + " / " + Conversions.ToString(denominator) + " ) "));
-                                LBeat.SelectedIndices.Add(num12);
-                            }
-                            UpdateMeasureBottom();
-                            break;
-                        }
-                    case 17:
-                        {
-                            UndoRedo.ChangeTimeSelection changeTimeSelection = (UndoRedo.ChangeTimeSelection)sCmd;
-                            vSelStart = changeTimeSelection.SelStart;
-                            vSelLength = changeTimeSelection.SelLength;
-                            vSelHalf = changeTimeSelection.SelHalf;
-                            if (changeTimeSelection.Selected)
-                            {
-                                double num4 = Conversions.ToDouble(Operators.AddObject(vSelStart, Interaction.IIf(vSelLength < 0.0, vSelLength, 0)));
-                                double num5 = Conversions.ToDouble(Operators.AddObject(vSelStart, Interaction.IIf(vSelLength > 0.0, vSelLength, 0)));
-                                int num6 = Information.UBound(Notes);
-                                for (int j = 1; j <= num6; j++)
-                                {
-                                    Notes[j].Selected = ((Notes[j].VPosition >= num4 && Notes[j].VPosition < num5 && nEnabled(Notes[j].ColumnIndex)) ? true : false);
-                                }
-                            }
-                            break;
-                        }
-                    case 18:
-                        {
-                            UndoRedo.NT nT = (UndoRedo.NT)sCmd;
-                            NTInput = nT.BecomeNT;
-                            TBNTInput.Checked = NTInput;
-                            mnNTInput.Checked = NTInput;
-                            POBLong.Enabled = !NTInput;
-                            POBLongShort.Enabled = !NTInput;
-                            bAdjustLength = false;
-                            bAdjustUpper = false;
-                            if (nT.AutoConvert)
-                            {
-                                if (NTInput)
-                                {
-                                    ConvertBMSE2NT();
-                                }
-                                else
-                                {
-                                    ConvertNT2BMSE();
-                                }
-                            }
-                            break;
-                        }
-                    case 20:
-                        {
-                            UndoRedo.WavAutoincFlag wavAutoincFlag = (UndoRedo.WavAutoincFlag)sCmd;
-                            TBWavIncrease.Checked = wavAutoincFlag.Checked;
-                            break;
-                        }
-                }
-                sCmd = sCmd.Next;
-            }
-            THBPM.Value = new decimal((double)Notes[0].Value / 10000.0);
-            if (IsSaved)
-            {
-                SetIsSaved(isSaved: false);
-            }
-            SortByVPositionInsertion();
-            UpdatePairing();
-            CalculateTotalPlayableNotes();
-            CalculateGreatestVPosition();
-            RefreshPanelAll();
-            POStatusRefresh();
+            Notes[i].Selected = false;
         }
+        LBeat.SelectedIndices.Clear();
+        while (sCmd != null)
+        {
+            switch (sCmd.ofType())
+            {
+                case 1:
+                    {
+                        UndoRedo.AddNote addNote = (UndoRedo.AddNote)sCmd;
+                        Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + 1 + 1]);
+                        ref Note reference = ref Notes[Information.UBound(Notes)];
+                        reference = addNote.note;
+                        if (TBWavIncrease.Checked)
+                        {
+                            IncreaseCurrentWav();
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        UndoRedo.RemoveNote removeNote = (UndoRedo.RemoveNote)sCmd;
+                        int num7 = FindNoteIndex(removeNote.note);
+                        if (num7 < Notes.Length)
+                        {
+                            int num8 = num7 + 1;
+                            int num9 = Information.UBound(Notes);
+                            for (int k = num8; k <= num9; k++)
+                            {
+                                ref Note reference2 = ref Notes[k - 1];
+                                reference2 = Notes[k];
+                            }
+                            Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) - 1 + 1]);
+                        }
+                        if (TBWavIncrease.Checked)
+                        {
+                            DecreaseCurrentWav();
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        UndoRedo.ChangeNote changeNote = (UndoRedo.ChangeNote)sCmd;
+                        int num15 = FindNoteIndex(changeNote.note);
+                        if (num15 < Notes.Length)
+                        {
+                            ref Note reference3 = ref Notes[num15];
+                            reference3 = changeNote.note;
+                        }
+                        break;
+                    }
+                case 4:
+                    {
+                        UndoRedo.MoveNote moveNote = (UndoRedo.MoveNote)sCmd;
+                        int num13 = FindNoteIndex(moveNote.note);
+                        if (num13 < Notes.Length)
+                        {
+                            Note[] notes2 = Notes;
+                            notes2[num13].ColumnIndex = moveNote.NColumnIndex;
+                            notes2[num13].VPosition = moveNote.NVPosition;
+                            notes2[num13].Selected = moveNote.note.Selected & nEnabled(notes2[num13].ColumnIndex);
+                        }
+                        break;
+                    }
+                case 5:
+                    {
+                        UndoRedo.LongNoteModify longNoteModify = (UndoRedo.LongNoteModify)sCmd;
+                        int num10 = FindNoteIndex(longNoteModify.note);
+                        if (num10 < Notes.Length)
+                        {
+                            Note[] notes = Notes;
+                            if (NTInput)
+                            {
+                                notes[num10].VPosition = longNoteModify.NVPosition;
+                                notes[num10].Length = longNoteModify.NLongNote;
+                            }
+                            else
+                            {
+                                notes[num10].LongNote = longNoteModify.NLongNote != 0.0;
+                            }
+                            notes[num10].Selected = longNoteModify.note.Selected & nEnabled(notes[num10].ColumnIndex);
+                        }
+                        break;
+                    }
+                case 6:
+                    {
+                        UndoRedo.HiddenNoteModify hiddenNoteModify = (UndoRedo.HiddenNoteModify)sCmd;
+                        int num3 = FindNoteIndex(hiddenNoteModify.note);
+                        if (num3 < Notes.Length)
+                        {
+                            Notes[num3].Hidden = hiddenNoteModify.NHidden;
+                            Notes[num3].Selected = hiddenNoteModify.note.Selected & nEnabled(Notes[num3].ColumnIndex);
+                        }
+                        break;
+                    }
+                case 7:
+                    {
+                        UndoRedo.RelabelNote relabelNote = (UndoRedo.RelabelNote)sCmd;
+                        int num2 = FindNoteIndex(relabelNote.note);
+                        if (num2 < Notes.Length)
+                        {
+                            Notes[num2].Value = relabelNote.NValue;
+                            Notes[num2].Selected = relabelNote.note.Selected & nEnabled(Notes[num2].ColumnIndex);
+                        }
+                        break;
+                    }
+                case 15:
+                    Notes = (Note[])Utils.CopyArray(Notes, new Note[1]);
+                    break;
+                case 16:
+                    {
+                        UndoRedo.ChangeMeasureLength changeMeasureLength = (UndoRedo.ChangeMeasureLength)sCmd;
+                        long denominator = Functions.GetDenominator(changeMeasureLength.Value / 192.0, 2147483647L);
+                        int[] indices = changeMeasureLength.Indices;
+                        foreach (int num12 in indices)
+                        {
+                            MeasureLength[num12] = changeMeasureLength.Value;
+                            LBeat.Items[num12] = Operators.ConcatenateObject(string.Concat(Functions.Add3Zeros(num12) + ": ", Conversions.ToString(changeMeasureLength.Value / 192.0)), Interaction.IIf(denominator > 10000, "", " ( " + Conversions.ToString((long)Math.Round(changeMeasureLength.Value / 192.0 * denominator)) + " / " + Conversions.ToString(denominator) + " ) "));
+                            LBeat.SelectedIndices.Add(num12);
+                        }
+                        UpdateMeasureBottom();
+                        break;
+                    }
+                case 17:
+                    {
+                        UndoRedo.ChangeTimeSelection changeTimeSelection = (UndoRedo.ChangeTimeSelection)sCmd;
+                        vSelStart = changeTimeSelection.SelStart;
+                        vSelLength = changeTimeSelection.SelLength;
+                        vSelHalf = changeTimeSelection.SelHalf;
+                        if (changeTimeSelection.Selected)
+                        {
+                            double num4 = Conversions.ToDouble(Operators.AddObject(vSelStart, Interaction.IIf(vSelLength < 0.0, vSelLength, 0)));
+                            double num5 = Conversions.ToDouble(Operators.AddObject(vSelStart, Interaction.IIf(vSelLength > 0.0, vSelLength, 0)));
+                            int num6 = Information.UBound(Notes);
+                            for (int j = 1; j <= num6; j++)
+                            {
+                                Notes[j].Selected = Notes[j].VPosition >= num4 && Notes[j].VPosition < num5 && nEnabled(Notes[j].ColumnIndex) ? true : false;
+                            }
+                        }
+                        break;
+                    }
+                case 18:
+                    {
+                        UndoRedo.NT nT = (UndoRedo.NT)sCmd;
+                        NTInput = nT.BecomeNT;
+                        TBNTInput.Checked = NTInput;
+                        mnNTInput.Checked = NTInput;
+                        POBLong.Enabled = !NTInput;
+                        POBLongShort.Enabled = !NTInput;
+                        bAdjustLength = false;
+                        bAdjustUpper = false;
+                        if (nT.AutoConvert)
+                        {
+                            if (NTInput)
+                            {
+                                ConvertBMSE2NT();
+                            }
+                            else
+                            {
+                                ConvertNT2BMSE();
+                            }
+                        }
+                        break;
+                    }
+                case 20:
+                    {
+                        UndoRedo.WavAutoincFlag wavAutoincFlag = (UndoRedo.WavAutoincFlag)sCmd;
+                        TBWavIncrease.Checked = wavAutoincFlag.Checked;
+                        break;
+                    }
+            }
+            sCmd = sCmd.Next;
+        }
+        THBPM.Value = new decimal(Notes[0].Value / 10000.0);
+        if (IsSaved)
+        {
+            SetIsSaved(isSaved: false);
+        }
+        SortByVPositionInsertion();
+        UpdatePairing();
+        CalculateTotalPlayableNotes();
+        CalculateGreatestVPosition();
+        RefreshPanelAll();
+        POStatusRefresh();
     }
 
     private void AddUndo(UndoRedo.LinkedURCmd sCUndo, UndoRedo.LinkedURCmd sCRedo, bool OverWrite = false)
@@ -4766,7 +4731,7 @@ IL_0952:
     private void RedoAddNote(int[] xIndices, bool xSel, ref UndoRedo.LinkedURCmd BaseUndo, ref UndoRedo.LinkedURCmd BaseRedo)
     {
         int num = Information.UBound(xIndices);
-        for (int i = 0; i <= num; i = checked(i + 1))
+        for (int i = 0; i <= num; i += 1)
         {
             UndoRedo.RemoveNote removeNote = new UndoRedo.RemoveNote(Notes[i]);
             UndoRedo.AddNote addNote = new UndoRedo.AddNote(Notes[i]);
@@ -4783,7 +4748,7 @@ IL_0952:
     private void RedoAddNoteSelected(bool xSel, ref UndoRedo.LinkedURCmd BaseUndo, ref UndoRedo.LinkedURCmd BaseRedo)
     {
         int num = Information.UBound(Notes);
-        for (int i = 1; i <= num; i = checked(i + 1))
+        for (int i = 1; i <= num; i += 1)
         {
             if (Notes[i].Selected)
             {
@@ -4803,7 +4768,7 @@ IL_0952:
     private void RedoAddNoteAll(bool xSel, ref UndoRedo.LinkedURCmd BaseUndo, ref UndoRedo.LinkedURCmd BaseRedo)
     {
         int num = Information.UBound(Notes);
-        for (int i = 1; i <= num; i = checked(i + 1))
+        for (int i = 1; i <= num; i += 1)
         {
             UndoRedo.AddNote addNote = new UndoRedo.AddNote(Notes[i]);
             if (BaseRedo != null)
@@ -4833,7 +4798,7 @@ IL_0952:
     private void RedoRemoveNote(int[] xIndices, ref UndoRedo.LinkedURCmd BaseUndo, ref UndoRedo.LinkedURCmd BaseRedo)
     {
         int num = Information.UBound(xIndices);
-        for (int i = 0; i <= num; i = checked(i + 1))
+        for (int i = 0; i <= num; i += 1)
         {
             UndoRedo.AddNote addNote = new UndoRedo.AddNote(Notes[xIndices[i]]);
             UndoRedo.RemoveNote removeNote = new UndoRedo.RemoveNote(Notes[xIndices[i]]);
@@ -4850,7 +4815,7 @@ IL_0952:
     private void RedoRemoveNoteSelected(bool xSel, ref UndoRedo.LinkedURCmd BaseUndo, ref UndoRedo.LinkedURCmd BaseRedo)
     {
         int num = Information.UBound(Notes);
-        for (int i = 1; i <= num; i = checked(i + 1))
+        for (int i = 1; i <= num; i += 1)
         {
             if (Notes[i].Selected)
             {
@@ -4870,7 +4835,7 @@ IL_0952:
     private void RedoRemoveNoteAll(bool xSel, ref UndoRedo.LinkedURCmd BaseUndo, ref UndoRedo.LinkedURCmd BaseRedo)
     {
         int num = Information.UBound(Notes);
-        for (int i = 1; i <= num; i = checked(i + 1))
+        for (int i = 1; i <= num; i += 1)
         {
             Note[] notes = Notes;
             int num2 = i;
@@ -4963,49 +4928,46 @@ IL_0952:
 
     private void RedoChangeMeasureLengthSelected(double nVal, ref UndoRedo.LinkedURCmd BaseUndo, ref UndoRedo.LinkedURCmd BaseRedo)
     {
-        checked
+        int[] array = new int[LBeat.SelectedIndices.Count - 1 + 1];
+        LBeat.SelectedIndices.CopyTo(array, 0);
+        if (array.Length == 0)
         {
-            int[] array = new int[LBeat.SelectedIndices.Count - 1 + 1];
-            LBeat.SelectedIndices.CopyTo(array, 0);
-            if (array.Length == 0)
-            {
-                return;
-            }
-
-            double[] array2 = Array.Empty<double>();
-            UndoRedo.ChangeMeasureLength[] array3 = Array.Empty<UndoRedo.ChangeMeasureLength>();
-            foreach (int num in array)
-            {
-                int num2 = Array.IndexOf(array2, MeasureLength[num]);
-                if (num2 == -1)
-                {
-                    array2 = (double[])Utils.CopyArray(array2, new double[Information.UBound(array2) + 1 + 1]);
-                    array3 = (UndoRedo.ChangeMeasureLength[])Utils.CopyArray(array3, new UndoRedo.ChangeMeasureLength[Information.UBound(array3) + 1 + 1]);
-                    array2[Information.UBound(array2)] = MeasureLength[num];
-                    array3[Information.UBound(array3)] = new UndoRedo.ChangeMeasureLength(MeasureLength[num], new int[1] { num });
-                }
-                else
-                {
-                    UndoRedo.ChangeMeasureLength changeMeasureLength = array3[num2];
-                    changeMeasureLength.Indices = (int[])Utils.CopyArray(changeMeasureLength.Indices, new int[Information.UBound(changeMeasureLength.Indices) + 1 + 1]);
-                    changeMeasureLength.Indices[Information.UBound(changeMeasureLength.Indices)] = num;
-                    changeMeasureLength = null;
-                }
-            }
-            int num3 = Information.UBound(array3) - 1;
-            for (int j = 0; j <= num3; j++)
-            {
-                array3[j].Next = array3[j + 1];
-            }
-            array3[Information.UBound(array3)].Next = BaseUndo;
-            BaseUndo = array3[0];
-            UndoRedo.ChangeMeasureLength changeMeasureLength2 = new UndoRedo.ChangeMeasureLength(nVal, (int[])array.Clone());
-            if (BaseRedo != null)
-            {
-                BaseRedo.Next = changeMeasureLength2;
-            }
-            BaseRedo = changeMeasureLength2;
+            return;
         }
+
+        double[] array2 = Array.Empty<double>();
+        UndoRedo.ChangeMeasureLength[] array3 = Array.Empty<UndoRedo.ChangeMeasureLength>();
+        foreach (int num in array)
+        {
+            int num2 = Array.IndexOf(array2, MeasureLength[num]);
+            if (num2 == -1)
+            {
+                array2 = (double[])Utils.CopyArray(array2, new double[Information.UBound(array2) + 1 + 1]);
+                array3 = (UndoRedo.ChangeMeasureLength[])Utils.CopyArray(array3, new UndoRedo.ChangeMeasureLength[Information.UBound(array3) + 1 + 1]);
+                array2[Information.UBound(array2)] = MeasureLength[num];
+                array3[Information.UBound(array3)] = new UndoRedo.ChangeMeasureLength(MeasureLength[num], new int[1] { num });
+            }
+            else
+            {
+                UndoRedo.ChangeMeasureLength changeMeasureLength = array3[num2];
+                changeMeasureLength.Indices = (int[])Utils.CopyArray(changeMeasureLength.Indices, new int[Information.UBound(changeMeasureLength.Indices) + 1 + 1]);
+                changeMeasureLength.Indices[Information.UBound(changeMeasureLength.Indices)] = num;
+                changeMeasureLength = null;
+            }
+        }
+        int num3 = Information.UBound(array3) - 1;
+        for (int j = 0; j <= num3; j++)
+        {
+            array3[j].Next = array3[j + 1];
+        }
+        array3[Information.UBound(array3)].Next = BaseUndo;
+        BaseUndo = array3[0];
+        UndoRedo.ChangeMeasureLength changeMeasureLength2 = new UndoRedo.ChangeMeasureLength(nVal, (int[])array.Clone());
+        if (BaseRedo != null)
+        {
+            BaseRedo.Next = changeMeasureLength2;
+        }
+        BaseRedo = changeMeasureLength2;
     }
 
     private void RedoChangeTimeSelection(double pStart, double pLen, double pHalf, double nStart, double nLen, double nHalf, bool xSel, ref UndoRedo.LinkedURCmd BaseUndo, ref UndoRedo.LinkedURCmd BaseRedo)
@@ -5310,29 +5272,26 @@ IL_0952:
 
     private int HorizontalPositiontoDisplay(int xHPosition, long xHSVal)
     {
-        return checked((int)Math.Round((float)xHPosition * gxWidth - (float)xHSVal * gxWidth));
+        return (int)Math.Round(xHPosition * gxWidth - xHSVal * gxWidth);
     }
 
     private int NoteRowToPanelHeight(double xVPosition, long xVSVal, int xTHeight)
     {
-        return checked(xTHeight - (int)Math.Round((xVPosition + (double)xVSVal) * (double)gxHeight) - 1);
+        return xTHeight - (int)Math.Round((xVPosition + xVSVal) * gxHeight) - 1;
     }
 
     public int MeasureAtDisplacement(double xVPos)
     {
         int num = 1;
-        checked
+        while (!(xVPos < MeasureBottom[num]))
         {
-            while (!(xVPos < MeasureBottom[num]))
+            num++;
+            if (num > 999)
             {
-                num++;
-                if (num > 999)
-                {
-                    break;
-                }
+                break;
             }
-            return num - 1;
         }
+        return num - 1;
     }
 
     private double GetMaxVPosition()
@@ -5343,40 +5302,37 @@ IL_0952:
     private double SnapToGrid(double xVPos)
     {
         double num = MeasureBottom[MeasureAtDisplacement(xVPos)];
-        double num2 = 192.0 / (double)gDivide;
+        double num2 = 192.0 / gDivide;
         return Math.Floor((xVPos - num) / num2) * num2 + num;
     }
 
     private void CalculateGreatestVPosition()
     {
         GreatestVPosition = 0.0;
-        checked
+        if (NTInput)
         {
-            if (NTInput)
+            for (int i = Information.UBound(Notes); i >= 0; i += -1)
             {
-                for (int i = Information.UBound(Notes); i >= 0; i += -1)
+                if (Notes[i].VPosition + Notes[i].Length > GreatestVPosition)
                 {
-                    if (Notes[i].VPosition + Notes[i].Length > GreatestVPosition)
-                    {
-                        GreatestVPosition = Notes[i].VPosition + Notes[i].Length;
-                    }
+                    GreatestVPosition = Notes[i].VPosition + Notes[i].Length;
                 }
             }
-            else
-            {
-                for (int i = Information.UBound(Notes); i >= 0; i += -1)
-                {
-                    if (Notes[i].VPosition > GreatestVPosition)
-                    {
-                        GreatestVPosition = Notes[i].VPosition;
-                    }
-                }
-            }
-            int minimum = -Conversions.ToInteger(Interaction.IIf(GreatestVPosition + 2000.0 > GetMaxVPosition(), GetMaxVPosition(), GreatestVPosition + 2000.0));
-            MainPanelScroll.Minimum = minimum;
-            LeftPanelScroll.Minimum = minimum;
-            RightPanelScroll.Minimum = minimum;
         }
+        else
+        {
+            for (int i = Information.UBound(Notes); i >= 0; i += -1)
+            {
+                if (Notes[i].VPosition > GreatestVPosition)
+                {
+                    GreatestVPosition = Notes[i].VPosition;
+                }
+            }
+        }
+        int minimum = -Conversions.ToInteger(Interaction.IIf(GreatestVPosition + 2000.0 > GetMaxVPosition(), GetMaxVPosition(), GreatestVPosition + 2000.0));
+        MainPanelScroll.Minimum = minimum;
+        LeftPanelScroll.Minimum = minimum;
+        RightPanelScroll.Minimum = minimum;
     }
 
     private void SortByVPositionInsertion()
@@ -5386,27 +5342,24 @@ IL_0952:
             return;
         }
         int num = Information.UBound(Notes);
-        checked
+        for (int i = 2; i <= num; i++)
         {
-            for (int i = 2; i <= num; i++)
+            Note note = Notes[i];
+            for (int j = i - 1; j >= 1; j += -1)
             {
-                Note note = Notes[i];
-                for (int j = i - 1; j >= 1; j += -1)
+                if (Notes[j].VPosition > note.VPosition)
                 {
-                    if (Notes[j].VPosition > note.VPosition)
+                    ref Note reference = ref Notes[j + 1];
+                    reference = Notes[j];
+                    if (j == 1)
                     {
-                        ref Note reference = ref Notes[j + 1];
-                        reference = Notes[j];
-                        if (j == 1)
-                        {
-                            Notes[j] = note;
-                            break;
-                        }
-                        continue;
+                        Notes[j] = note;
+                        break;
                     }
-                    Notes[j + 1] = note;
-                    break;
+                    continue;
                 }
+                Notes[j + 1] = note;
+                break;
             }
         }
     }
@@ -5417,112 +5370,107 @@ IL_0952:
         {
             return;
         }
-        checked
+        int num = (int)Math.Round((xMax - xMin) / 2.0) + xMin;
+        Note note = Notes[num];
+        ref Note reference = ref Notes[num];
+        reference = Notes[xMin];
+        int num2 = xMin;
+        int num3 = xMax;
+        while (true)
         {
-            int num = (int)Math.Round((double)(xMax - xMin) / 2.0) + xMin;
-            Note note = Notes[num];
-            ref Note reference = ref Notes[num];
-            reference = Notes[xMin];
-            int num2 = xMin;
-            int num3 = xMax;
-            while (true)
+            if (Notes[num3].VPosition >= note.VPosition)
             {
-                if (Notes[num3].VPosition >= note.VPosition)
+                num3--;
+                if (num3 > num2)
                 {
-                    num3--;
-                    if (num3 > num2)
-                    {
-                        continue;
-                    }
+                    continue;
                 }
-                if (num3 <= num2)
-                {
-                    Notes[num2] = note;
-                    break;
-                }
-                ref Note reference2 = ref Notes[num2];
-                reference2 = Notes[num3];
+            }
+            if (num3 <= num2)
+            {
+                Notes[num2] = note;
+                break;
+            }
+            ref Note reference2 = ref Notes[num2];
+            reference2 = Notes[num3];
+            num2++;
+            while (Notes[num2].VPosition < note.VPosition)
+            {
                 num2++;
-                while (Notes[num2].VPosition < note.VPosition)
-                {
-                    num2++;
-                    if (num2 >= num3)
-                    {
-                        break;
-                    }
-                }
                 if (num2 >= num3)
                 {
-                    num2 = num3;
-                    Notes[num3] = note;
                     break;
                 }
-                ref Note reference3 = ref Notes[num3];
-                reference3 = Notes[num2];
             }
-            SortByVPositionQuick(xMin, num2 - 1);
-            SortByVPositionQuick(num2 + 1, xMax);
+            if (num2 >= num3)
+            {
+                num2 = num3;
+                Notes[num3] = note;
+                break;
+            }
+            ref Note reference3 = ref Notes[num3];
+            reference3 = Notes[num2];
         }
+        SortByVPositionQuick(xMin, num2 - 1);
+        SortByVPositionQuick(num2 + 1, xMax);
+
     }
 
     private void SortByVPositionQuick3(int xMin, int xMax)
     {
         int num = xMin;
         int num2 = xMax;
-        checked
+        int num3 = xMax - xMin + 1;
+        int num4 = (int)Math.Round(Conversion.Int(num3 * VBMath.Rnd())) + xMin;
+        int num5 = (int)Math.Round(Conversion.Int(num3 * VBMath.Rnd())) + xMin;
+        int num6 = (int)Math.Round(Conversion.Int(num3 * VBMath.Rnd())) + xMin;
+        num3 = (Notes[num4].VPosition <= Notes[num5].VPosition) & (Notes[num5].VPosition <= Notes[num6].VPosition) ? num5 : !((Notes[num5].VPosition <= Notes[num4].VPosition) & (Notes[num4].VPosition <= Notes[num6].VPosition)) ? num6 : num4;
+        Note note = Notes[num3];
+        while (true)
         {
-            int num3 = xMax - xMin + 1;
-            int num4 = (int)Math.Round(Conversion.Int((float)num3 * VBMath.Rnd())) + xMin;
-            int num5 = (int)Math.Round(Conversion.Int((float)num3 * VBMath.Rnd())) + xMin;
-            int num6 = (int)Math.Round(Conversion.Int((float)num3 * VBMath.Rnd())) + xMin;
-            num3 = (((Notes[num4].VPosition <= Notes[num5].VPosition) & (Notes[num5].VPosition <= Notes[num6].VPosition)) ? num5 : ((!((Notes[num5].VPosition <= Notes[num4].VPosition) & (Notes[num4].VPosition <= Notes[num6].VPosition))) ? num6 : num4));
-            Note note = Notes[num3];
-            while (true)
+            if (Notes[num].VPosition < note.VPosition && num < xMax)
             {
-                if (unchecked(Notes[num].VPosition < note.VPosition && num < xMax))
-                {
-                    num++;
-                    continue;
-                }
-                while (unchecked(note.VPosition < Notes[num2].VPosition && num2 > xMin))
-                {
-                    num2--;
-                }
-                if (num <= num2)
-                {
-                    Note note2 = Notes[num];
-                    ref Note reference = ref Notes[num];
-                    reference = Notes[num2];
-                    Notes[num2] = note2;
-                    num++;
-                    num2--;
-                }
-                if (num > num2)
-                {
-                    break;
-                }
+                num++;
+                continue;
             }
-            if (num2 - xMin < xMax - num)
+            while (note.VPosition < Notes[num2].VPosition && num2 > xMin)
             {
-                if (xMin < num2)
-                {
-                    SortByVPositionQuick3(xMin, num2);
-                }
-                if (num < xMax)
-                {
-                    SortByVPositionQuick3(num, xMax);
-                }
+                num2--;
             }
-            else
+            if (num <= num2)
             {
-                if (num < xMax)
-                {
-                    SortByVPositionQuick3(num, xMax);
-                }
-                if (xMin < num2)
-                {
-                    SortByVPositionQuick3(xMin, num2);
-                }
+                Note note2 = Notes[num];
+                ref Note reference = ref Notes[num];
+                reference = Notes[num2];
+                Notes[num2] = note2;
+                num++;
+                num2--;
+            }
+            if (num > num2)
+            {
+                break;
+            }
+        }
+        if (num2 - xMin < xMax - num)
+        {
+            if (xMin < num2)
+            {
+                SortByVPositionQuick3(xMin, num2);
+            }
+            if (num < xMax)
+            {
+                SortByVPositionQuick3(num, xMax);
+            }
+        }
+        else
+        {
+            if (num < xMax)
+            {
+                SortByVPositionQuick3(num, xMax);
+            }
+            if (xMin < num2)
+            {
+                SortByVPositionQuick3(xMin, num2);
             }
         }
     }
@@ -5531,15 +5479,12 @@ IL_0952:
     {
         MeasureBottom[0] = 0.0;
         int num = 0;
-        checked
+        do
         {
-            do
-            {
-                MeasureBottom[num + 1] = MeasureBottom[num] + MeasureLength[num];
-                num++;
-            }
-            while (num <= 998);
+            MeasureBottom[num + 1] = MeasureBottom[num] + MeasureLength[num];
+            num++;
         }
+        while (num <= 998);
     }
 
     private bool PathIsValid(string sPath)
@@ -5588,56 +5533,50 @@ IL_0952:
             return;
         }
         int num = 1;
-        checked
+        if (OverWrite)
         {
-            if (OverWrite)
+            while (num <= Information.UBound(Notes))
             {
-                while (num <= Information.UBound(Notes))
+                if ((Notes[num].VPosition == note.VPosition) & (Notes[num].ColumnIndex == note.ColumnIndex))
                 {
-                    if ((Notes[num].VPosition == note.VPosition) & (Notes[num].ColumnIndex == note.ColumnIndex))
-                    {
-                        RemoveNote(num);
-                    }
-                    else
-                    {
-                        num++;
-                    }
+                    RemoveNote(num);
+                }
+                else
+                {
+                    num++;
                 }
             }
-            Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + 1 + 1]);
-            note.Selected &= nEnabled(note.ColumnIndex);
-            Notes[Information.UBound(Notes)] = note;
-            if (SortAndUpdatePairing)
-            {
-                SortByVPositionInsertion();
-                UpdatePairing();
-            }
-            CalculateTotalPlayableNotes();
         }
+        Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + 1 + 1]);
+        note.Selected &= nEnabled(note.ColumnIndex);
+        Notes[Information.UBound(Notes)] = note;
+        if (SortAndUpdatePairing)
+        {
+            SortByVPositionInsertion();
+            UpdatePairing();
+        }
+        CalculateTotalPlayableNotes();
     }
 
     private void RemoveNote(int I, bool SortAndUpdatePairing = true)
     {
         KMouseOver = -1;
-        checked
+        if (TBWavIncrease.Checked && Notes[I].Value == LWAV.SelectedIndex * 10000)
         {
-            if (TBWavIncrease.Checked && Notes[I].Value == LWAV.SelectedIndex * 10000)
-            {
-                DecreaseCurrentWav();
-            }
-            int num = I + 1;
-            int num2 = Information.UBound(Notes);
-            for (int i = num; i <= num2; i++)
-            {
-                ref Note reference = ref Notes[i - 1];
-                reference = Notes[i];
-            }
-            Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) - 1 + 1]);
-            if (SortAndUpdatePairing)
-            {
-                SortByVPositionInsertion();
-                UpdatePairing();
-            }
+            DecreaseCurrentWav();
+        }
+        int num = I + 1;
+        int num2 = Information.UBound(Notes);
+        for (int i = num; i <= num2; i++)
+        {
+            ref Note reference = ref Notes[i - 1];
+            reference = Notes[i];
+        }
+        Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) - 1 + 1]);
+        if (SortAndUpdatePairing)
+        {
+            SortByVPositionInsertion();
+            UpdatePairing();
         }
     }
 
@@ -5645,173 +5584,170 @@ IL_0952:
     {
         string[] array = Microsoft.VisualBasic.Strings.Split(Clipboard.GetText(), "\r\n");
         int num = Information.UBound(Notes);
-        checked
+        for (int i = 0; i <= num; i++)
         {
-            for (int i = 0; i <= num; i++)
+            Notes[i].Selected = false;
+        }
+        long num2 = PanelVScroll[PanelFocus];
+        Note[] notes = Notes;
+        if (Operators.CompareString(array[0], "iBMSC Clipboard Data", TextCompare: false) == 0)
+        {
+            if (NTInput)
             {
-                Notes[i].Selected = false;
+                Notes = (Note[])Utils.CopyArray(Notes, new Note[1]);
             }
-            long num2 = PanelVScroll[PanelFocus];
-            Note[] notes = Notes;
-            if (Operators.CompareString(array[0], "iBMSC Clipboard Data", TextCompare: false) == 0)
+            int num3 = Information.UBound(array);
+            for (int i = 1; i <= num3; i++)
             {
-                if (NTInput)
+                if (Operators.CompareString(array[i].Trim(), "", TextCompare: false) != 0)
                 {
-                    Notes = (Note[])Utils.CopyArray(Notes, new Note[1]);
-                }
-                int num3 = Information.UBound(array);
-                for (int i = 1; i <= num3; i++)
-                {
-                    if (Operators.CompareString(array[i].Trim(), "", TextCompare: false) != 0)
-                    {
-                        string[] array2 = Microsoft.VisualBasic.Strings.Split(array[i]);
-                        double num4 = Conversion.Val(array2[1]) + MeasureBottom[MeasureAtDisplacement(-num2) + 1];
-                        if (unchecked(Information.UBound(array2) == 5 && num4 >= 0.0) & (num4 < GetMaxVPosition()))
-                        {
-                            Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + 1 + 1]);
-                            Note[] notes2 = Notes;
-                            int num5 = Information.UBound(Notes);
-                            notes2[num5].ColumnIndex = (int)Math.Round(Conversion.Val(array2[0]));
-                            notes2[num5].VPosition = num4;
-                            notes2[num5].Value = (long)Math.Round(Conversion.Val(array2[2]));
-                            notes2[num5].LongNote = Conversion.Val(array2[3]) != 0.0;
-                            notes2[num5].Hidden = Conversion.Val(array2[4]) != 0.0;
-                            notes2[num5].Landmine = Conversion.Val(array2[5]) != 0.0;
-                            notes2[num5].Selected = xSelected;
-                        }
-                    }
-                }
-                if (NTInput)
-                {
-                    ConvertBMSE2NT();
-                    int num6 = Information.UBound(Notes);
-                    for (int i = 1; i <= num6; i++)
-                    {
-                        ref Note reference = ref Notes[i - 1];
-                        reference = Notes[i];
-                    }
-                    Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) - 1 + 1]);
-                    Note[] notes3 = Notes;
-                    Notes = notes;
-                    int num7 = Notes.Length;
-                    Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + notes3.Length + 1]);
-                    int num8 = Information.UBound(Notes);
-                    for (int i = num7; i <= num8; i++)
-                    {
-                        ref Note reference2 = ref Notes[i];
-                        reference2 = notes3[i - num7];
-                    }
-                }
-            }
-            else if (Operators.CompareString(array[0], "iBMSC Clipboard Data xNT", TextCompare: false) == 0)
-            {
-                if (!NTInput)
-                {
-                    Notes = (Note[])Utils.CopyArray(Notes, new Note[1]);
-                }
-                int num9 = Information.UBound(array);
-                for (int i = 1; i <= num9; i++)
-                {
-                    if (Operators.CompareString(array[i].Trim(), "", TextCompare: false) != 0)
-                    {
-                        string[] array3 = Microsoft.VisualBasic.Strings.Split(array[i]);
-                        double num4 = Conversion.Val(array3[1]) + MeasureBottom[MeasureAtDisplacement(-num2) + 1];
-                        if (unchecked(Information.UBound(array3) == 5 && num4 >= 0.0) & (num4 < GetMaxVPosition()))
-                        {
-                            Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + 1 + 1]);
-                            Note[] notes4 = Notes;
-                            int num10 = Information.UBound(Notes);
-                            notes4[num10].ColumnIndex = (int)Math.Round(Conversion.Val(array3[0]));
-                            notes4[num10].VPosition = num4;
-                            notes4[num10].Value = (long)Math.Round(Conversion.Val(array3[2]));
-                            notes4[num10].Length = Conversion.Val(array3[3]);
-                            notes4[num10].Hidden = Conversion.Val(array3[4]) != 0.0;
-                            notes4[num10].Landmine = Conversion.Val(array3[5]) != 0.0;
-                            notes4[num10].Selected = xSelected;
-                        }
-                    }
-                }
-                if (!NTInput)
-                {
-                    ConvertNT2BMSE();
-                    int num11 = Information.UBound(Notes);
-                    for (int i = 1; i <= num11; i++)
-                    {
-                        ref Note reference3 = ref Notes[i - 1];
-                        reference3 = Notes[i];
-                    }
-                    Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) - 1 + 1]);
-                    Note[] notes5 = Notes;
-                    Notes = notes;
-                    int num12 = Notes.Length;
-                    Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + notes5.Length + 1]);
-                    int num13 = Information.UBound(Notes);
-                    for (int i = num12; i <= num13; i++)
-                    {
-                        ref Note reference4 = ref Notes[i];
-                        reference4 = notes5[i - num12];
-                    }
-                }
-            }
-            else if (Operators.CompareString(array[0], "BMSE ClipBoard Object Data Format", TextCompare: false) == 0)
-            {
-                if (NTInput)
-                {
-                    Notes = (Note[])Utils.CopyArray(Notes, new Note[1]);
-                }
-                int num14 = Information.UBound(array);
-                for (int i = 1; i <= num14; i++)
-                {
-                    string inputStr = Microsoft.VisualBasic.Strings.Mid(array[i], 5, 7);
-                    double num15 = Conversion.Val(inputStr) + MeasureBottom[MeasureAtDisplacement(-num2) + 1];
-                    string i2 = Microsoft.VisualBasic.Strings.Mid(array[i], 1, 3);
-                    object objectValue = RuntimeHelpers.GetObjectValue(BMSEChannelToColumnIndex(i2));
-                    double a = Conversion.Val(Microsoft.VisualBasic.Strings.Mid(array[i], 12)) * 10000.0;
-                    string left = Microsoft.VisualBasic.Strings.Mid(array[i], 4, 1);
-                    object left2 = Operators.AndObject(Microsoft.VisualBasic.Strings.Len(array[i]) > 11, Operators.CompareObjectGreater(objectValue, 0, TextCompare: false));
-                    bool flag = (num15 >= 0.0) & (num15 < GetMaxVPosition());
-                    if (Conversions.ToBoolean(Operators.AndObject(left2, flag)))
+                    string[] array2 = Microsoft.VisualBasic.Strings.Split(array[i]);
+                    double num4 = Conversion.Val(array2[1]) + MeasureBottom[MeasureAtDisplacement(-num2) + 1];
+                    if ((Information.UBound(array2) == 5 && num4 >= 0.0) & (num4 < GetMaxVPosition()))
                     {
                         Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + 1 + 1]);
-                        Note[] notes6 = Notes;
-                        int num16 = Information.UBound(Notes);
-                        notes6[num16].ColumnIndex = Conversions.ToInteger(objectValue);
-                        notes6[num16].VPosition = num15;
-                        notes6[num16].Value = (long)Math.Round(a);
-                        notes6[num16].LongNote = Operators.CompareString(left, "2", TextCompare: false) == 0;
-                        notes6[num16].Hidden = Operators.CompareString(left, "1", TextCompare: false) == 0;
-                        notes6[num16].Selected = xSelected & nEnabled(notes6[num16].ColumnIndex);
-                    }
-                }
-                if (NTInput)
-                {
-                    ConvertBMSE2NT();
-                    int num17 = Information.UBound(Notes);
-                    for (int i = 1; i <= num17; i++)
-                    {
-                        ref Note reference5 = ref Notes[i - 1];
-                        reference5 = Notes[i];
-                    }
-                    Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) - 1 + 1]);
-                    Note[] notes7 = Notes;
-                    Notes = notes;
-                    int num18 = Notes.Length;
-                    Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + notes7.Length + 1]);
-                    int num19 = Information.UBound(Notes);
-                    for (int i = num18; i <= num19; i++)
-                    {
-                        ref Note reference6 = ref Notes[i];
-                        reference6 = notes7[i - num18];
+                        Note[] notes2 = Notes;
+                        int num5 = Information.UBound(Notes);
+                        notes2[num5].ColumnIndex = (int)Math.Round(Conversion.Val(array2[0]));
+                        notes2[num5].VPosition = num4;
+                        notes2[num5].Value = (long)Math.Round(Conversion.Val(array2[2]));
+                        notes2[num5].LongNote = Conversion.Val(array2[3]) != 0.0;
+                        notes2[num5].Hidden = Conversion.Val(array2[4]) != 0.0;
+                        notes2[num5].Landmine = Conversion.Val(array2[5]) != 0.0;
+                        notes2[num5].Selected = xSelected;
                     }
                 }
             }
-            if (SortAndUpdatePairing)
+            if (NTInput)
             {
-                SortByVPositionInsertion();
-                UpdatePairing();
+                ConvertBMSE2NT();
+                int num6 = Information.UBound(Notes);
+                for (int i = 1; i <= num6; i++)
+                {
+                    ref Note reference = ref Notes[i - 1];
+                    reference = Notes[i];
+                }
+                Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) - 1 + 1]);
+                Note[] notes3 = Notes;
+                Notes = notes;
+                int num7 = Notes.Length;
+                Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + notes3.Length + 1]);
+                int num8 = Information.UBound(Notes);
+                for (int i = num7; i <= num8; i++)
+                {
+                    ref Note reference2 = ref Notes[i];
+                    reference2 = notes3[i - num7];
+                }
             }
-            CalculateTotalPlayableNotes();
         }
+        else if (Operators.CompareString(array[0], "iBMSC Clipboard Data xNT", TextCompare: false) == 0)
+        {
+            if (!NTInput)
+            {
+                Notes = (Note[])Utils.CopyArray(Notes, new Note[1]);
+            }
+            int num9 = Information.UBound(array);
+            for (int i = 1; i <= num9; i++)
+            {
+                if (Operators.CompareString(array[i].Trim(), "", TextCompare: false) != 0)
+                {
+                    string[] array3 = Microsoft.VisualBasic.Strings.Split(array[i]);
+                    double num4 = Conversion.Val(array3[1]) + MeasureBottom[MeasureAtDisplacement(-num2) + 1];
+                    if ((Information.UBound(array3) == 5 && num4 >= 0.0) & (num4 < GetMaxVPosition()))
+                    {
+                        Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + 1 + 1]);
+                        Note[] notes4 = Notes;
+                        int num10 = Information.UBound(Notes);
+                        notes4[num10].ColumnIndex = (int)Math.Round(Conversion.Val(array3[0]));
+                        notes4[num10].VPosition = num4;
+                        notes4[num10].Value = (long)Math.Round(Conversion.Val(array3[2]));
+                        notes4[num10].Length = Conversion.Val(array3[3]);
+                        notes4[num10].Hidden = Conversion.Val(array3[4]) != 0.0;
+                        notes4[num10].Landmine = Conversion.Val(array3[5]) != 0.0;
+                        notes4[num10].Selected = xSelected;
+                    }
+                }
+            }
+            if (!NTInput)
+            {
+                ConvertNT2BMSE();
+                int num11 = Information.UBound(Notes);
+                for (int i = 1; i <= num11; i++)
+                {
+                    ref Note reference3 = ref Notes[i - 1];
+                    reference3 = Notes[i];
+                }
+                Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) - 1 + 1]);
+                Note[] notes5 = Notes;
+                Notes = notes;
+                int num12 = Notes.Length;
+                Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + notes5.Length + 1]);
+                int num13 = Information.UBound(Notes);
+                for (int i = num12; i <= num13; i++)
+                {
+                    ref Note reference4 = ref Notes[i];
+                    reference4 = notes5[i - num12];
+                }
+            }
+        }
+        else if (Operators.CompareString(array[0], "BMSE ClipBoard Object Data Format", TextCompare: false) == 0)
+        {
+            if (NTInput)
+            {
+                Notes = (Note[])Utils.CopyArray(Notes, new Note[1]);
+            }
+            int num14 = Information.UBound(array);
+            for (int i = 1; i <= num14; i++)
+            {
+                string inputStr = Microsoft.VisualBasic.Strings.Mid(array[i], 5, 7);
+                double num15 = Conversion.Val(inputStr) + MeasureBottom[MeasureAtDisplacement(-num2) + 1];
+                string i2 = Microsoft.VisualBasic.Strings.Mid(array[i], 1, 3);
+                object objectValue = RuntimeHelpers.GetObjectValue(BMSEChannelToColumnIndex(i2));
+                double a = Conversion.Val(Microsoft.VisualBasic.Strings.Mid(array[i], 12)) * 10000.0;
+                string left = Microsoft.VisualBasic.Strings.Mid(array[i], 4, 1);
+                object left2 = Operators.AndObject(Microsoft.VisualBasic.Strings.Len(array[i]) > 11, Operators.CompareObjectGreater(objectValue, 0, TextCompare: false));
+                bool flag = (num15 >= 0.0) & (num15 < GetMaxVPosition());
+                if (Conversions.ToBoolean(Operators.AndObject(left2, flag)))
+                {
+                    Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + 1 + 1]);
+                    Note[] notes6 = Notes;
+                    int num16 = Information.UBound(Notes);
+                    notes6[num16].ColumnIndex = Conversions.ToInteger(objectValue);
+                    notes6[num16].VPosition = num15;
+                    notes6[num16].Value = (long)Math.Round(a);
+                    notes6[num16].LongNote = Operators.CompareString(left, "2", TextCompare: false) == 0;
+                    notes6[num16].Hidden = Operators.CompareString(left, "1", TextCompare: false) == 0;
+                    notes6[num16].Selected = xSelected & nEnabled(notes6[num16].ColumnIndex);
+                }
+            }
+            if (NTInput)
+            {
+                ConvertBMSE2NT();
+                int num17 = Information.UBound(Notes);
+                for (int i = 1; i <= num17; i++)
+                {
+                    ref Note reference5 = ref Notes[i - 1];
+                    reference5 = Notes[i];
+                }
+                Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) - 1 + 1]);
+                Note[] notes7 = Notes;
+                Notes = notes;
+                int num18 = Notes.Length;
+                Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + notes7.Length + 1]);
+                int num19 = Information.UBound(Notes);
+                for (int i = num18; i <= num19; i++)
+                {
+                    ref Note reference6 = ref Notes[i];
+                    reference6 = notes7[i - num18];
+                }
+            }
+        }
+        if (SortAndUpdatePairing)
+        {
+            SortByVPositionInsertion();
+            UpdatePairing();
+        }
+        CalculateTotalPlayableNotes();
     }
 
     private void CopyNotes(bool Unselect = true)
@@ -5819,42 +5755,39 @@ IL_0952:
         string text = Conversions.ToString(Operators.ConcatenateObject("iBMSC Clipboard Data", Interaction.IIf(NTInput, " xNT", "")));
         double num = 999.0;
         int num2 = Information.UBound(Notes);
-        checked
+        for (int i = 1; i <= num2; i++)
         {
-            for (int i = 1; i <= num2; i++)
+            if (Notes[i].Selected & (MeasureAtDisplacement(Notes[i].VPosition) < num))
             {
-                if (Notes[i].Selected & ((double)MeasureAtDisplacement(Notes[i].VPosition) < num))
-                {
-                    num = MeasureAtDisplacement(Notes[i].VPosition);
-                }
+                num = MeasureAtDisplacement(Notes[i].VPosition);
             }
-            num = MeasureBottom[(int)Math.Round(num)];
-            if (!NTInput)
-            {
-                int num3 = Information.UBound(Notes);
-                for (int i = 1; i <= num3; i++)
-                {
-                    if (Notes[i].Selected)
-                    {
-                        text = unchecked(text + "\r\n" + Notes[i].ColumnIndex + " " + (Notes[i].VPosition - num) + " " + Notes[i].Value + " " + (0 - (Notes[i].LongNote ? 1 : 0)) + " " + (0 - (Notes[i].Hidden ? 1 : 0)) + " " + (0 - (Notes[i].Landmine ? 1 : 0)));
-                        Notes[i].Selected = !Unselect;
-                    }
-                }
-            }
-            else
-            {
-                int num4 = Information.UBound(Notes);
-                for (int i = 1; i <= num4; i++)
-                {
-                    if (Notes[i].Selected)
-                    {
-                        text = unchecked(text + "\r\n" + Notes[i].ColumnIndex + " " + (Notes[i].VPosition - num) + " " + Notes[i].Value + " " + Notes[i].Length + " " + (0 - (Notes[i].Hidden ? 1 : 0)) + " " + (0 - (Notes[i].Landmine ? 1 : 0)));
-                        Notes[i].Selected = !Unselect;
-                    }
-                }
-            }
-            Clipboard.SetText(text);
         }
+        num = MeasureBottom[(int)Math.Round(num)];
+        if (!NTInput)
+        {
+            int num3 = Information.UBound(Notes);
+            for (int i = 1; i <= num3; i++)
+            {
+                if (Notes[i].Selected)
+                {
+                    text = unchecked(text + "\r\n" + Notes[i].ColumnIndex + " " + (Notes[i].VPosition - num) + " " + Notes[i].Value + " " + (0 - (Notes[i].LongNote ? 1 : 0)) + " " + (0 - (Notes[i].Hidden ? 1 : 0)) + " " + (0 - (Notes[i].Landmine ? 1 : 0)));
+                    Notes[i].Selected = !Unselect;
+                }
+            }
+        }
+        else
+        {
+            int num4 = Information.UBound(Notes);
+            for (int i = 1; i <= num4; i++)
+            {
+                if (Notes[i].Selected)
+                {
+                    text = unchecked(text + "\r\n" + Notes[i].ColumnIndex + " " + (Notes[i].VPosition - num) + " " + Notes[i].Value + " " + Notes[i].Length + " " + (0 - (Notes[i].Hidden ? 1 : 0)) + " " + (0 - (Notes[i].Landmine ? 1 : 0)));
+                    Notes[i].Selected = !Unselect;
+                }
+            }
+        }
+        Clipboard.SetText(text);
     }
 
     private void RemoveNotes(bool SortAndUpdatePairing = true)
@@ -5865,67 +5798,58 @@ IL_0952:
         }
         KMouseOver = -1;
         int num = 1;
-        checked
+        do
         {
-            do
+            if (Notes[num].Selected)
             {
-                if (Notes[num].Selected)
+                int num2 = num + 1;
+                int num3 = Information.UBound(Notes);
+                for (int i = num2; i <= num3; i++)
                 {
-                    int num2 = num + 1;
-                    int num3 = Information.UBound(Notes);
-                    for (int i = num2; i <= num3; i++)
-                    {
-                        ref Note reference = ref Notes[i - 1];
-                        reference = Notes[i];
-                    }
-                    Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) - 1 + 1]);
-                    num = 0;
+                    ref Note reference = ref Notes[i - 1];
+                    reference = Notes[i];
                 }
-                num++;
+                Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) - 1 + 1]);
+                num = 0;
             }
-            while (num < Information.UBound(Notes) + 1);
-            if (SortAndUpdatePairing)
-            {
-                SortByVPositionInsertion();
-                UpdatePairing();
-            }
-            CalculateTotalPlayableNotes();
+            num++;
         }
+        while (num < Information.UBound(Notes) + 1);
+        if (SortAndUpdatePairing)
+        {
+            SortByVPositionInsertion();
+            UpdatePairing();
+        }
+        CalculateTotalPlayableNotes();
     }
 
     private int EnabledColumnIndexToColumnArrayIndex(int cEnabled)
     {
-        checked
+        for (int i = 0; i < gColumns; i++)
         {
-            for (int i = 0; i < gColumns; i++)
+            if (!nEnabled(i))
             {
-                if (!nEnabled(i))
-                {
-                    cEnabled++;
-                }
-                if (i >= cEnabled)
-                {
-                    break;
-                }
+                cEnabled++;
             }
-            return cEnabled;
+            if (i >= cEnabled)
+            {
+                break;
+            }
         }
+        return cEnabled;
     }
 
     private int ColumnArrayIndexToEnabledColumnIndex(int cReal)
     {
-        checked
+        int num = cReal - 1;
+        for (int i = 0; i <= num; i++)
         {
-            int num = cReal - 1;
-            for (int i = 0; i <= num; i++)
+            if (!nEnabled(i))
             {
-                if (!nEnabled(i))
-                {
-                    cReal--;
-                }
+                cReal--;
             }
-            return cReal;
         }
+        return cReal;
     }
 
     private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -5997,31 +5921,28 @@ IL_0952:
     {
         string[] array = Array.Empty<string>();
         int num = Information.UBound(xFile);
-        checked
+        for (int i = 0; i <= num; i++)
         {
-            for (int i = 0; i <= num; i++)
+            if (MyProject.Computer.FileSystem.FileExists(xFile[i]) & (Array.IndexOf(xFilter, Path.GetExtension(xFile[i])) != -1))
             {
-                if (MyProject.Computer.FileSystem.FileExists(xFile[i]) & (Array.IndexOf(xFilter, Path.GetExtension(xFile[i])) != -1))
+                array = (string[])Utils.CopyArray(array, new string[Information.UBound(array) + 1 + 1]);
+                array[Information.UBound(array)] = xFile[i];
+            }
+            if (!MyProject.Computer.FileSystem.DirectoryExists(xFile[i]))
+            {
+                continue;
+            }
+            FileInfo[] files = MyProject.Computer.FileSystem.GetDirectoryInfo(xFile[i]).GetFiles();
+            foreach (FileInfo fileInfo in files)
+            {
+                if (Array.IndexOf(xFilter, fileInfo.Extension) != -1)
                 {
                     array = (string[])Utils.CopyArray(array, new string[Information.UBound(array) + 1 + 1]);
-                    array[Information.UBound(array)] = xFile[i];
-                }
-                if (!MyProject.Computer.FileSystem.DirectoryExists(xFile[i]))
-                {
-                    continue;
-                }
-                FileInfo[] files = MyProject.Computer.FileSystem.GetDirectoryInfo(xFile[i]).GetFiles();
-                foreach (FileInfo fileInfo in files)
-                {
-                    if (Array.IndexOf(xFilter, fileInfo.Extension) != -1)
-                    {
-                        array = (string[])Utils.CopyArray(array, new string[Information.UBound(array) + 1 + 1]);
-                        array[Information.UBound(array)] = fileInfo.FullName;
-                    }
+                    array[Information.UBound(array)] = fileInfo.FullName;
                 }
             }
-            return array;
         }
+        return array;
     }
 
     private void InitializeNewBMS()
@@ -6052,9 +5973,9 @@ IL_0952:
         do
         {
             MeasureLength[num] = 192.0;
-            MeasureBottom[num] = (double)num * 192.0;
+            MeasureBottom[num] = num * 192.0;
             LBeat.Items.Add(Functions.Add3Zeros(num) + ": 1 ( 4 / 4 )");
-            num = checked(num + 1);
+            num += 1;
         }
         while (num <= 999);
     }
@@ -6255,59 +6176,56 @@ IL_0952:
         sI = 0;
         LWAV.Items.Clear();
         var num = 1;
-        checked
+        do
         {
-            do
-            {
-                LWAV.Items.Add(Functions.C10to36(num) + ":");
-                num++;
-            }
-            while (num <= 1295);
-            LWAV.SelectedIndex = 0;
-            CHPlayer.SelectedIndex = 0;
-            CalculateGreatestVPosition();
-            TBLangRefresh_Click(TBLangRefresh, null);
-            TBThemeRefresh_Click(TBThemeRefresh, null);
-            POHeaderPart2.Visible = false;
-            POGridPart2.Visible = false;
-            POWaveFormPart2.Visible = false;
-            if (MyProject.Computer.FileSystem.FileExists(MyProject.Application.Info.DirectoryPath + "\\iBMSC.Settings.xml"))
-            {
-                LoadSettings(MyProject.Application.Info.DirectoryPath + "\\iBMSC.Settings.xml");
-            }
-            SetIsSaved(isSaved: true);
-            var commandLineArgs = Environment.GetCommandLineArgs();
-            if (commandLineArgs.Length == 2)
-            {
-                ReadFile(commandLineArgs[1]);
-                if (Operators.CompareString(Microsoft.VisualBasic.Strings.LCase(Path.GetExtension(commandLineArgs[1])), ".ibmsc", TextCompare: false) == 0 && GetFileName(commandLineArgs[1]).StartsWith("AutoSave_", ignoreCase: true, null))
-                {
-                    goto IL_03ba;
-                }
-            }
-            IsInitializing = false;
-            if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length <= 1)
-            {
-                var files = MyProject.Computer.FileSystem.GetDirectoryInfo(MyProject.Application.Info.DirectoryPath).GetFiles("AutoSave_*.IBMSC");
-                if (files != null && files.Length != 0)
-                {
-                    if (Interaction.MsgBox(Microsoft.VisualBasic.Strings.Replace(Strings.Messages.RestoreAutosavedFile, "{}", Conversions.ToString(files.Length)), MsgBoxStyle.YesNo | MsgBoxStyle.MsgBoxSetForeground) == MsgBoxResult.Yes)
-                    {
-                        foreach (var fileInfo in files)
-                        {
-                            Process.Start(Application.ExecutablePath, "\"" + fileInfo.FullName + "\"");
-                        }
-                    }
-
-                    foreach (var fileInfo2 in files)
-                    {
-                        pTempFileNames = (string[])Utils.CopyArray(pTempFileNames, new string[Information.UBound(pTempFileNames) + 1 + 1]);
-                        pTempFileNames[Information.UBound(pTempFileNames)] = fileInfo2.FullName;
-                    }
-                }
-            }
-            goto IL_03ba;
+            LWAV.Items.Add(Functions.C10to36(num) + ":");
+            num++;
         }
+        while (num <= 1295);
+        LWAV.SelectedIndex = 0;
+        CHPlayer.SelectedIndex = 0;
+        CalculateGreatestVPosition();
+        TBLangRefresh_Click(TBLangRefresh, null);
+        TBThemeRefresh_Click(TBThemeRefresh, null);
+        POHeaderPart2.Visible = false;
+        POGridPart2.Visible = false;
+        POWaveFormPart2.Visible = false;
+        if (MyProject.Computer.FileSystem.FileExists(MyProject.Application.Info.DirectoryPath + "\\iBMSC.Settings.xml"))
+        {
+            LoadSettings(MyProject.Application.Info.DirectoryPath + "\\iBMSC.Settings.xml");
+        }
+        SetIsSaved(isSaved: true);
+        var commandLineArgs = Environment.GetCommandLineArgs();
+        if (commandLineArgs.Length == 2)
+        {
+            ReadFile(commandLineArgs[1]);
+            if (Operators.CompareString(Microsoft.VisualBasic.Strings.LCase(Path.GetExtension(commandLineArgs[1])), ".ibmsc", TextCompare: false) == 0 && GetFileName(commandLineArgs[1]).StartsWith("AutoSave_", ignoreCase: true, null))
+            {
+                goto IL_03ba;
+            }
+        }
+        IsInitializing = false;
+        if (Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName).Length <= 1)
+        {
+            var files = MyProject.Computer.FileSystem.GetDirectoryInfo(MyProject.Application.Info.DirectoryPath).GetFiles("AutoSave_*.IBMSC");
+            if (files != null && files.Length != 0)
+            {
+                if (Interaction.MsgBox(Microsoft.VisualBasic.Strings.Replace(Strings.Messages.RestoreAutosavedFile, "{}", Conversions.ToString(files.Length)), MsgBoxStyle.YesNo | MsgBoxStyle.MsgBoxSetForeground) == MsgBoxResult.Yes)
+                {
+                    foreach (var fileInfo in files)
+                    {
+                        Process.Start(Application.ExecutablePath, "\"" + fileInfo.FullName + "\"");
+                    }
+                }
+
+                foreach (var fileInfo2 in files)
+                {
+                    pTempFileNames = (string[])Utils.CopyArray(pTempFileNames, new string[Information.UBound(pTempFileNames) + 1 + 1]);
+                    pTempFileNames[Information.UBound(pTempFileNames)] = fileInfo2.FullName;
+                }
+            }
+        }
+        goto IL_03ba;
 IL_03ba:
         lErl = 1000;
         IsInitializing = false;
@@ -6321,61 +6239,146 @@ IL_03ba:
 
     private void UpdatePairing()
     {
-        checked
+        if (NTInput)
         {
-            if (NTInput)
+            int num = Information.UBound(Notes);
+            for (int i = 0; i <= num; i++)
             {
-                int num = Information.UBound(Notes);
-                for (int i = 0; i <= num; i++)
+                Notes[i].HasError = false;
+                Notes[i].LNPair = 0;
+                if (Notes[i].Length < 0.0)
                 {
-                    Notes[i].HasError = false;
-                    Notes[i].LNPair = 0;
-                    if (Notes[i].Length < 0.0)
-                    {
-                        Notes[i].Length = 0.0;
-                    }
+                    Notes[i].Length = 0.0;
                 }
-                int num2 = Information.UBound(Notes);
-                for (int i = 1; i <= num2; i++)
+            }
+            int num2 = Information.UBound(Notes);
+            for (int i = 1; i <= num2; i++)
+            {
+                int j;
+                if (Notes[i].Length != 0.0)
                 {
-                    int j;
-                    if (Notes[i].Length != 0.0)
-                    {
-                        int num3 = i + 1;
-                        int num4 = Information.UBound(Notes);
-                        for (j = num3; j <= num4 && !(Notes[j].VPosition > Notes[i].VPosition + Notes[i].Length); j++)
-                        {
-                            if (Notes[j].ColumnIndex == Notes[i].ColumnIndex)
-                            {
-                                Notes[j].HasError = true;
-                            }
-                        }
-                        continue;
-                    }
-                    int num5 = i + 1;
-                    int num6 = Information.UBound(Notes);
-                    for (j = num5; j <= num6 && !(Notes[j].VPosition > Notes[i].VPosition); j++)
+                    int num3 = i + 1;
+                    int num4 = Information.UBound(Notes);
+                    for (j = num3; j <= num4 && !(Notes[j].VPosition > Notes[i].VPosition + Notes[i].Length); j++)
                     {
                         if (Notes[j].ColumnIndex == Notes[i].ColumnIndex)
                         {
                             Notes[j].HasError = true;
                         }
                     }
-                    if (unchecked(Notes[i].Value / 10000) != LnObj || IsColumnNumeric(Notes[i].ColumnIndex))
+                    continue;
+                }
+                int num5 = i + 1;
+                int num6 = Information.UBound(Notes);
+                for (j = num5; j <= num6 && !(Notes[j].VPosition > Notes[i].VPosition); j++)
+                {
+                    if (Notes[j].ColumnIndex == Notes[i].ColumnIndex)
                     {
-                        continue;
+                        Notes[j].HasError = true;
                     }
-                    for (j = i - 1; j >= 1; j += -1)
+                }
+                if (Notes[i].Value / 10000 != LnObj || IsColumnNumeric(Notes[i].ColumnIndex))
+                {
+                    continue;
+                }
+                for (j = i - 1; j >= 1; j += -1)
+                {
+                    if (Notes[j].ColumnIndex == Notes[i].ColumnIndex && !Notes[j].Hidden)
                     {
-                        if (Notes[j].ColumnIndex == Notes[i].ColumnIndex && !Notes[j].Hidden)
+                        if (Notes[j].Length != 0.0 || Notes[j].Value / 10000 == LnObj)
                         {
-                            if (Notes[j].Length != 0.0 || unchecked(Notes[j].Value / 10000) == LnObj)
+                            Notes[i].HasError = true;
+                            break;
+                        }
+                        Notes[i].LNPair = j;
+                        Notes[j].LNPair = i;
+                        break;
+                    }
+                }
+                if (j == 0)
+                {
+                    Notes[i].HasError = true;
+                }
+            }
+        }
+        else
+        {
+            int num7 = Information.UBound(Notes);
+            for (int i = 0; i <= num7; i++)
+            {
+                Notes[i].HasError = false;
+                Notes[i].LNPair = 0;
+            }
+            int num8 = Information.UBound(Notes);
+            for (int i = 1; i <= num8; i++)
+            {
+                if (Notes[i].LongNote)
+                {
+                    int j = i - 1;
+                    while (true)
+                    {
+                        if (j >= 1)
+                        {
+                            if (Notes[j].ColumnIndex != Notes[i].ColumnIndex)
+                            {
+                                j += -1;
+                                continue;
+                            }
+                            if (Notes[j].VPosition == Notes[i].VPosition)
                             {
                                 Notes[i].HasError = true;
                                 break;
                             }
+                            if (Notes[j].LongNote & (Notes[j].LNPair == i))
+                            {
+                                Notes[i].LNPair = j;
+                                break;
+                            }
+                        }
+                        int num9 = i + 1;
+                        int num10 = Information.UBound(Notes);
+                        for (j = num9; j <= num10; j++)
+                        {
+                            if (Notes[j].ColumnIndex == Notes[i].ColumnIndex)
+                            {
+                                Notes[i].LNPair = j;
+                                Notes[j].LNPair = i;
+                                if (!Notes[j].LongNote && Notes[j].Value / 10000 != LnObj)
+                                {
+                                    Notes[j].HasError = true;
+                                }
+                                break;
+                            }
+                        }
+                        if (j == Information.UBound(Notes) + 1)
+                        {
+                            Notes[i].HasError = true;
+                        }
+                        break;
+                    }
+                    continue;
+                }
+                if ((Notes[i].Value / 10000 == LnObj) & !IsColumnNumeric(Notes[i].ColumnIndex))
+                {
+                    int j;
+                    for (j = i - 1; j >= 1; j += -1)
+                    {
+                        if (Notes[i].ColumnIndex == Notes[j].ColumnIndex)
+                        {
+                            if ((Notes[j].LNPair != 0) & (Notes[j].LNPair != i))
+                            {
+                                Notes[j].HasError = true;
+                            }
                             Notes[i].LNPair = j;
                             Notes[j].LNPair = i;
+                            if (Notes[i].VPosition == Notes[j].VPosition)
+                            {
+                                Notes[i].HasError = true;
+                            }
+                            if (Notes[j].Value / 10000 == LnObj)
+                            {
+                                Notes[j].HasError = true;
+                            }
                             break;
                         }
                     }
@@ -6383,117 +6386,29 @@ IL_03ba:
                     {
                         Notes[i].HasError = true;
                     }
+                    continue;
                 }
-            }
-            else
-            {
-                int num7 = Information.UBound(Notes);
-                for (int i = 0; i <= num7; i++)
+                for (int j = i - 1; j >= 1 && !(Notes[j].VPosition < Notes[i].VPosition); j += -1)
                 {
-                    Notes[i].HasError = false;
-                    Notes[i].LNPair = 0;
-                }
-                int num8 = Information.UBound(Notes);
-                for (int i = 1; i <= num8; i++)
-                {
-                    if (Notes[i].LongNote)
+                    if (Notes[j].ColumnIndex == Notes[i].ColumnIndex)
                     {
-                        int j = i - 1;
-                        while (true)
-                        {
-                            if (j >= 1)
-                            {
-                                if (Notes[j].ColumnIndex != Notes[i].ColumnIndex)
-                                {
-                                    j += -1;
-                                    continue;
-                                }
-                                if (Notes[j].VPosition == Notes[i].VPosition)
-                                {
-                                    Notes[i].HasError = true;
-                                    break;
-                                }
-                                if (Notes[j].LongNote & (Notes[j].LNPair == i))
-                                {
-                                    Notes[i].LNPair = j;
-                                    break;
-                                }
-                            }
-                            int num9 = i + 1;
-                            int num10 = Information.UBound(Notes);
-                            for (j = num9; j <= num10; j++)
-                            {
-                                if (Notes[j].ColumnIndex == Notes[i].ColumnIndex)
-                                {
-                                    Notes[i].LNPair = j;
-                                    Notes[j].LNPair = i;
-                                    if (!Notes[j].LongNote && unchecked(Notes[j].Value / 10000) != LnObj)
-                                    {
-                                        Notes[j].HasError = true;
-                                    }
-                                    break;
-                                }
-                            }
-                            if (j == Information.UBound(Notes) + 1)
-                            {
-                                Notes[i].HasError = true;
-                            }
-                            break;
-                        }
-                        continue;
-                    }
-                    if ((unchecked(Notes[i].Value / 10000) == LnObj) & !IsColumnNumeric(Notes[i].ColumnIndex))
-                    {
-                        int j;
-                        for (j = i - 1; j >= 1; j += -1)
-                        {
-                            if (Notes[i].ColumnIndex == Notes[j].ColumnIndex)
-                            {
-                                if ((Notes[j].LNPair != 0) & (Notes[j].LNPair != i))
-                                {
-                                    Notes[j].HasError = true;
-                                }
-                                Notes[i].LNPair = j;
-                                Notes[j].LNPair = i;
-                                if (Notes[i].VPosition == Notes[j].VPosition)
-                                {
-                                    Notes[i].HasError = true;
-                                }
-                                if (unchecked(Notes[j].Value / 10000) == LnObj)
-                                {
-                                    Notes[j].HasError = true;
-                                }
-                                break;
-                            }
-                        }
-                        if (j == 0)
-                        {
-                            Notes[i].HasError = true;
-                        }
-                        continue;
-                    }
-                    for (int j = i - 1; j >= 1 && !(Notes[j].VPosition < Notes[i].VPosition); j += -1)
-                    {
-                        if (Notes[j].ColumnIndex == Notes[i].ColumnIndex)
-                        {
-                            Notes[i].HasError = true;
-                            break;
-                        }
+                        Notes[i].HasError = true;
+                        break;
                     }
                 }
             }
-            double num11 = 0.0;
-            double num12 = (double)Notes[0].Value / 10000.0;
-            double num13 = 0.0;
-            int num14 = Information.UBound(Notes);
-            for (int i = 1; i <= num14; i++)
+        }
+        double num11 = 0.0;
+        double num12 = Notes[0].Value / 10000.0;
+        double num13 = 0.0;
+        int num14 = Information.UBound(Notes);
+        for (int i = 1; i <= num14; i++)
+        {
+            if (Notes[i].ColumnIndex == 2)
             {
-                if (Notes[i].ColumnIndex == 2)
-                {
-                    num11 += (Notes[i].VPosition - num13) / num12 * 1250.0;
-                    num12 = (double)Notes[i].Value / 10000.0;
-                    num13 = Notes[i].VPosition;
-                }
+                num11 += (Notes[i].VPosition - num13) / num12 * 1250.0;
+                num12 = Notes[i].Value / 10000.0;
+                num13 = Notes[i].VPosition;
             }
         }
     }
@@ -6567,7 +6482,7 @@ IL_03ba:
             do
             {
                 LWAV.Items.Add(Functions.C10to36(num2) + ": " + hWAV[num2]);
-                num2 = checked(num2 + 1);
+                num2 += 1;
             }
             while (num2 <= 1295);
             LWAV.SelectedIndex = 0;
@@ -6748,13 +6663,13 @@ IL_03ba:
 
     private void VSGotFocus(object sender, EventArgs e)
     {
-        PanelFocus = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
+        PanelFocus = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(), null, null, null));
         spMain[PanelFocus].Focus();
     }
 
     private void VSValueChanged(object sender, EventArgs e)
     {
-        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
+        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(), null, null, null));
         if (MyProject.Computer.Keyboard.CtrlKeyDown)
         {
             NewLateBinding.LateSet(sender, null, "Value", new object[1] { VSValue }, null, null);
@@ -6765,12 +6680,12 @@ IL_03ba:
         Point point = new Point(-1, -1);
         if (num2 & !(lastMouseDownLocation == point) & (VSValue != -1))
         {
-            LastMouseDownLocation.Y = Conversions.ToSingle(Operators.AddObject(LastMouseDownLocation.Y, Operators.MultiplyObject(Operators.SubtractObject(VSValue, NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(),null, null, null)), gxHeight)));
+            LastMouseDownLocation.Y = Conversions.ToSingle(Operators.AddObject(LastMouseDownLocation.Y, Operators.MultiplyObject(Operators.SubtractObject(VSValue, NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(), null, null, null)), gxHeight)));
         }
-        PanelVScroll[num] = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(),null, null, null));
-        if (spLock[checked(num + 1) % 3])
+        PanelVScroll[num] = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(), null, null, null));
+        if (spLock[(num + 1) % 3])
         {
-            int num3 = checked(PanelVScroll[num] + spDiff[num]);
+            int num3 = PanelVScroll[num] + spDiff[num];
             if (num3 > 0)
             {
                 num3 = 0;
@@ -6792,73 +6707,66 @@ IL_03ba:
                     break;
             }
         }
-        if (spLock[checked(num + 2) % 3])
+        if (spLock[(num + 2) % 3])
         {
-            checked
+            int num4 = PanelVScroll[num] - spDiff[(num + 2) % 3];
+            if (num4 > 0)
             {
-                int num4 = PanelVScroll[num] - spDiff[unchecked(checked(num + 2) % 3)];
-                if (num4 > 0)
-                {
-                    num4 = 0;
-                }
-                if (num4 < MainPanelScroll.Minimum)
-                {
-                    num4 = MainPanelScroll.Minimum;
-                }
-                switch (num)
-                {
-                    case 0:
-                        RightPanelScroll.Value = num4;
-                        break;
-                    case 1:
-                        LeftPanelScroll.Value = num4;
-                        break;
-                    case 2:
-                        MainPanelScroll.Value = num4;
-                        break;
-                }
+                num4 = 0;
+            }
+            if (num4 < MainPanelScroll.Minimum)
+            {
+                num4 = MainPanelScroll.Minimum;
+            }
+            switch (num)
+            {
+                case 0:
+                    RightPanelScroll.Value = num4;
+                    break;
+                case 1:
+                    LeftPanelScroll.Value = num4;
+                    break;
+                case 2:
+                    MainPanelScroll.Value = num4;
+                    break;
             }
         }
-        checked
-        {
-            spDiff[num] = PanelVScroll[unchecked(checked(num + 1) % 3)] - PanelVScroll[num];
-            spDiff[unchecked(checked(num + 2) % 3)] = PanelVScroll[num] - PanelVScroll[unchecked(checked(num + 2) % 3)];
-            VSValue = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(),null, null, null));
-            RefreshPanel(num, spMain[num].DisplayRectangle);
-        }
+        spDiff[num] = PanelVScroll[(num + 1) % 3] - PanelVScroll[num];
+        spDiff[(num + 2) % 3] = PanelVScroll[num] - PanelVScroll[(num + 2) % 3];
+        VSValue = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(), null, null, null));
+        RefreshPanel(num, spMain[num].DisplayRectangle);
+
     }
 
     private void cVSLock_CheckedChanged(object sender, EventArgs e)
     {
-        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
-        spLock[num] = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(),null, null, null));
-        checked
+        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(), null, null, null));
+        spLock[num] = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(), null, null, null));
+        if (spLock[num])
         {
-            if (spLock[num])
-            {
-                spDiff[num] = PanelVScroll[unchecked(checked(num + 1) % 3)] - PanelVScroll[num];
-                spDiff[unchecked(checked(num + 2) % 3)] = PanelVScroll[num] - PanelVScroll[unchecked(checked(num + 2) % 3)];
-            }
+            spDiff[num] = PanelVScroll[(num + 1) % 3] - PanelVScroll[num];
+            spDiff[(num + 2) % 3] = PanelVScroll[num] - PanelVScroll[(num + 2) % 3];
         }
+
     }
 
     private void HSGotFocus(object sender, EventArgs e)
     {
-        PanelFocus = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
+        PanelFocus = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(), null, null, null));
         spMain[PanelFocus].Focus();
     }
 
     private void HSValueChanged(object sender, EventArgs e)
     {
-        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
+        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(), null, null, null));
         PointF lastMouseDownLocation = LastMouseDownLocation;
         Point point = new Point(-1, -1);
         if (!(lastMouseDownLocation == point) & (HSValue != -1))
         {
-            LastMouseDownLocation.X = Conversions.ToSingle(Operators.AddObject(LastMouseDownLocation.X, Operators.MultiplyObject(Operators.SubtractObject(HSValue, NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(),null, null, null)), gxWidth)));
+            LastMouseDownLocation.X = Conversions.ToSingle(Operators.AddObject(LastMouseDownLocation.X, Operators.MultiplyObject(Operators.SubtractObject(HSValue, NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(), null, null, null)), gxWidth)));
         }
-        PanelHScroll[num] = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(),null, null, null));
-        HSValue = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(),null, null, null));
+        PanelHScroll[num] = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(), null, null, null));
+        HSValue = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(), null, null, null));
         RefreshPanel(num, spMain[num].DisplayRectangle);
     }
 
@@ -6876,7 +6784,7 @@ IL_03ba:
         SelectedColumn = -1;
         TempVPosition = -1.0;
         TempLength = 0.0;
-        vSelStart = MeasureBottom[checked(MeasureAtDisplacement(-PanelVScroll[PanelFocus]) + 1)];
+        vSelStart = MeasureBottom[MeasureAtDisplacement(-PanelVScroll[PanelFocus]) + 1];
         vSelLength = 0.0;
         RefreshPanelAll();
         POStatusRefresh();
@@ -6896,7 +6804,7 @@ IL_03ba:
         SelectedColumn = -1;
         TempVPosition = -1.0;
         TempLength = 0.0;
-        vSelStart = MeasureBottom[checked(MeasureAtDisplacement(-PanelVScroll[PanelFocus]) + 1)];
+        vSelStart = MeasureBottom[MeasureAtDisplacement(-PanelVScroll[PanelFocus]) + 1];
         vSelLength = 0.0;
         RefreshPanelAll();
         POStatusRefresh();
@@ -6919,7 +6827,7 @@ IL_03ba:
         TempLength = 0.0;
         ValidateSelection();
         int num = Information.UBound(Notes);
-        for (int i = 0; i <= num; i = checked(i + 1))
+        for (int i = 0; i <= num; i += 1)
         {
             Notes[i].Selected = false;
         }
@@ -6936,37 +6844,34 @@ IL_03ba:
 
     private void CGHeight2_Scroll(object sender, EventArgs e)
     {
-        CGHeight.Value = new decimal((double)CGHeight2.Value / 4.0);
+        CGHeight.Value = new decimal(CGHeight2.Value / 4.0);
     }
 
     private void CGWidth_ValueChanged(object sender, EventArgs e)
     {
         gxWidth = Convert.ToSingle(CGWidth.Value);
         CGWidth2.Value = Conversions.ToInteger(Interaction.IIf(decimal.Compare(decimal.Multiply(CGWidth.Value, new decimal(4L)), new decimal(CGWidth2.Maximum)) < 0, decimal.Multiply(CGWidth.Value, new decimal(4L)), CGWidth2.Maximum));
-        checked
+        HS.LargeChange = (int)Math.Round(PMainIn.Width / gxWidth);
+        if (HS.Value > HS.Maximum - HS.LargeChange + 1)
         {
-            HS.LargeChange = (int)Math.Round((float)PMainIn.Width / gxWidth);
-            if (HS.Value > HS.Maximum - HS.LargeChange + 1)
-            {
-                HS.Value = HS.Maximum - HS.LargeChange + 1;
-            }
-            HSL.LargeChange = (int)Math.Round((float)PMainInL.Width / gxWidth);
-            if (HSL.Value > HSL.Maximum - HSL.LargeChange + 1)
-            {
-                HSL.Value = HSL.Maximum - HSL.LargeChange + 1;
-            }
-            HSR.LargeChange = (int)Math.Round((float)PMainInR.Width / gxWidth);
-            if (HSR.Value > HSR.Maximum - HSR.LargeChange + 1)
-            {
-                HSR.Value = HSR.Maximum - HSR.LargeChange + 1;
-            }
-            RefreshPanelAll();
+            HS.Value = HS.Maximum - HS.LargeChange + 1;
         }
+        HSL.LargeChange = (int)Math.Round(PMainInL.Width / gxWidth);
+        if (HSL.Value > HSL.Maximum - HSL.LargeChange + 1)
+        {
+            HSL.Value = HSL.Maximum - HSL.LargeChange + 1;
+        }
+        HSR.LargeChange = (int)Math.Round(PMainInR.Width / gxWidth);
+        if (HSR.Value > HSR.Maximum - HSR.LargeChange + 1)
+        {
+            HSR.Value = HSR.Maximum - HSR.LargeChange + 1;
+        }
+        RefreshPanelAll();
     }
 
     private void CGWidth2_Scroll(object sender, EventArgs e)
     {
-        CGWidth.Value = new decimal((double)CGWidth2.Value / 4.0);
+        CGWidth.Value = new decimal(CGWidth2.Value / 4.0);
     }
 
     private void CGDivide_ValueChanged(object sender, EventArgs e)
@@ -7006,98 +6911,95 @@ IL_03ba:
 
     private void Timer1_Tick(object sender, EventArgs e)
     {
-        checked
+        switch (PanelFocus)
         {
-            switch (PanelFocus)
-            {
-                case 0:
+            case 0:
+                {
+                    VScrollBar leftPanelScroll = LeftPanelScroll;
+                    int num = (int)Math.Round(leftPanelScroll.Value + tempY / 5.0 / gxHeight);
+                    if (num > 0)
                     {
-                        VScrollBar leftPanelScroll = LeftPanelScroll;
-                        int num = (int)Math.Round((double)leftPanelScroll.Value + (double)tempY / 5.0 / (double)gxHeight);
-                        if (num > 0)
-                        {
-                            num = 0;
-                        }
-                        if (num < leftPanelScroll.Minimum)
-                        {
-                            num = leftPanelScroll.Minimum;
-                        }
-                        leftPanelScroll.Value = num;
-                        leftPanelScroll = null;
-                        HScrollBar hSL = HSL;
-                        num = (int)Math.Round((double)hSL.Value + (double)tempX / 10.0 / (double)gxWidth);
-                        if (num > hSL.Maximum - hSL.LargeChange + 1)
-                        {
-                            num = hSL.Maximum - hSL.LargeChange + 1;
-                        }
-                        if (num < hSL.Minimum)
-                        {
-                            num = hSL.Minimum;
-                        }
-                        hSL.Value = num;
-                        hSL = null;
-                        break;
+                        num = 0;
                     }
-                case 1:
+                    if (num < leftPanelScroll.Minimum)
                     {
-                        VScrollBar mainPanelScroll = MainPanelScroll;
-                        int num = (int)Math.Round((double)mainPanelScroll.Value + (double)tempY / 5.0 / (double)gxHeight);
-                        if (num > 0)
-                        {
-                            num = 0;
-                        }
-                        if (num < mainPanelScroll.Minimum)
-                        {
-                            num = mainPanelScroll.Minimum;
-                        }
-                        mainPanelScroll.Value = num;
-                        mainPanelScroll = null;
-                        HScrollBar hS = HS;
-                        num = (int)Math.Round((double)hS.Value + (double)tempX / 10.0 / (double)gxWidth);
-                        if (num > hS.Maximum - hS.LargeChange + 1)
-                        {
-                            num = hS.Maximum - hS.LargeChange + 1;
-                        }
-                        if (num < hS.Minimum)
-                        {
-                            num = hS.Minimum;
-                        }
-                        hS.Value = num;
-                        hS = null;
-                        break;
+                        num = leftPanelScroll.Minimum;
                     }
-                case 2:
+                    leftPanelScroll.Value = num;
+                    leftPanelScroll = null;
+                    HScrollBar hSL = HSL;
+                    num = (int)Math.Round(hSL.Value + tempX / 10.0 / gxWidth);
+                    if (num > hSL.Maximum - hSL.LargeChange + 1)
                     {
-                        VScrollBar rightPanelScroll = RightPanelScroll;
-                        int num = (int)Math.Round((double)rightPanelScroll.Value + (double)tempY / 5.0 / (double)gxHeight);
-                        if (num > 0)
-                        {
-                            num = 0;
-                        }
-                        if (num < rightPanelScroll.Minimum)
-                        {
-                            num = rightPanelScroll.Minimum;
-                        }
-                        rightPanelScroll.Value = num;
-                        rightPanelScroll = null;
-                        HScrollBar hSR = HSR;
-                        num = (int)Math.Round((double)hSR.Value + (double)tempX / 10.0 / (double)gxWidth);
-                        if (num > hSR.Maximum - hSR.LargeChange + 1)
-                        {
-                            num = hSR.Maximum - hSR.LargeChange + 1;
-                        }
-                        if (num < hSR.Minimum)
-                        {
-                            num = hSR.Minimum;
-                        }
-                        hSR.Value = num;
-                        hSR = null;
-                        break;
+                        num = hSL.Maximum - hSL.LargeChange + 1;
                     }
-            }
-            MouseEventArgs e2 = new MouseEventArgs(MouseButtons.Left, 0, MouseMoveStatus.X, MouseMoveStatus.Y, 0);
-            PMainInMouseMove(spMain[PanelFocus], e2);
+                    if (num < hSL.Minimum)
+                    {
+                        num = hSL.Minimum;
+                    }
+                    hSL.Value = num;
+                    hSL = null;
+                    break;
+                }
+            case 1:
+                {
+                    VScrollBar mainPanelScroll = MainPanelScroll;
+                    int num = (int)Math.Round(mainPanelScroll.Value + tempY / 5.0 / gxHeight);
+                    if (num > 0)
+                    {
+                        num = 0;
+                    }
+                    if (num < mainPanelScroll.Minimum)
+                    {
+                        num = mainPanelScroll.Minimum;
+                    }
+                    mainPanelScroll.Value = num;
+                    mainPanelScroll = null;
+                    HScrollBar hS = HS;
+                    num = (int)Math.Round(hS.Value + tempX / 10.0 / gxWidth);
+                    if (num > hS.Maximum - hS.LargeChange + 1)
+                    {
+                        num = hS.Maximum - hS.LargeChange + 1;
+                    }
+                    if (num < hS.Minimum)
+                    {
+                        num = hS.Minimum;
+                    }
+                    hS.Value = num;
+                    hS = null;
+                    break;
+                }
+            case 2:
+                {
+                    VScrollBar rightPanelScroll = RightPanelScroll;
+                    int num = (int)Math.Round(rightPanelScroll.Value + tempY / 5.0 / gxHeight);
+                    if (num > 0)
+                    {
+                        num = 0;
+                    }
+                    if (num < rightPanelScroll.Minimum)
+                    {
+                        num = rightPanelScroll.Minimum;
+                    }
+                    rightPanelScroll.Value = num;
+                    rightPanelScroll = null;
+                    HScrollBar hSR = HSR;
+                    num = (int)Math.Round(hSR.Value + tempX / 10.0 / gxWidth);
+                    if (num > hSR.Maximum - hSR.LargeChange + 1)
+                    {
+                        num = hSR.Maximum - hSR.LargeChange + 1;
+                    }
+                    if (num < hSR.Minimum)
+                    {
+                        num = hSR.Minimum;
+                    }
+                    hSR.Value = num;
+                    hSR = null;
+                    break;
+                }
         }
+        MouseEventArgs e2 = new MouseEventArgs(MouseButtons.Left, 0, MouseMoveStatus.X, MouseMoveStatus.Y, 0);
+        PMainInMouseMove(spMain[PanelFocus], e2);
     }
 
     private void TimerMiddle_Tick(object sender, EventArgs e)
@@ -7107,98 +7009,95 @@ IL_03ba:
             TimerMiddle.Enabled = false;
             return;
         }
-        checked
+        switch (PanelFocus)
         {
-            switch (PanelFocus)
-            {
-                case 0:
+            case 0:
+                {
+                    VScrollBar leftPanelScroll = LeftPanelScroll;
+                    int num = (int)Math.Round(leftPanelScroll.Value + (Cursor.Position.Y - MiddleButtonLocation.Y) / 5.0 / gxHeight);
+                    if (num > 0)
                     {
-                        VScrollBar leftPanelScroll = LeftPanelScroll;
-                        int num = (int)Math.Round((double)leftPanelScroll.Value + (double)(Cursor.Position.Y - MiddleButtonLocation.Y) / 5.0 / (double)gxHeight);
-                        if (num > 0)
-                        {
-                            num = 0;
-                        }
-                        if (num < leftPanelScroll.Minimum)
-                        {
-                            num = leftPanelScroll.Minimum;
-                        }
-                        leftPanelScroll.Value = num;
-                        leftPanelScroll = null;
-                        HScrollBar hSL = HSL;
-                        num = (int)Math.Round((double)hSL.Value + (double)(Cursor.Position.X - MiddleButtonLocation.X) / 5.0 / (double)gxWidth);
-                        if (num > hSL.Maximum - hSL.LargeChange + 1)
-                        {
-                            num = hSL.Maximum - hSL.LargeChange + 1;
-                        }
-                        if (num < hSL.Minimum)
-                        {
-                            num = hSL.Minimum;
-                        }
-                        hSL.Value = num;
-                        hSL = null;
-                        break;
+                        num = 0;
                     }
-                case 1:
+                    if (num < leftPanelScroll.Minimum)
                     {
-                        VScrollBar mainPanelScroll = MainPanelScroll;
-                        int num = (int)Math.Round((double)mainPanelScroll.Value + (double)(Cursor.Position.Y - MiddleButtonLocation.Y) / 5.0 / (double)gxHeight);
-                        if (num > 0)
-                        {
-                            num = 0;
-                        }
-                        if (num < mainPanelScroll.Minimum)
-                        {
-                            num = mainPanelScroll.Minimum;
-                        }
-                        mainPanelScroll.Value = num;
-                        mainPanelScroll = null;
-                        HScrollBar hS = HS;
-                        num = (int)Math.Round((double)hS.Value + (double)(Cursor.Position.X - MiddleButtonLocation.X) / 5.0 / (double)gxWidth);
-                        if (num > hS.Maximum - hS.LargeChange + 1)
-                        {
-                            num = hS.Maximum - hS.LargeChange + 1;
-                        }
-                        if (num < hS.Minimum)
-                        {
-                            num = hS.Minimum;
-                        }
-                        hS.Value = num;
-                        hS = null;
-                        break;
+                        num = leftPanelScroll.Minimum;
                     }
-                case 2:
+                    leftPanelScroll.Value = num;
+                    leftPanelScroll = null;
+                    HScrollBar hSL = HSL;
+                    num = (int)Math.Round(hSL.Value + (Cursor.Position.X - MiddleButtonLocation.X) / 5.0 / gxWidth);
+                    if (num > hSL.Maximum - hSL.LargeChange + 1)
                     {
-                        VScrollBar rightPanelScroll = RightPanelScroll;
-                        int num = (int)Math.Round((double)rightPanelScroll.Value + (double)(Cursor.Position.Y - MiddleButtonLocation.Y) / 5.0 / (double)gxHeight);
-                        if (num > 0)
-                        {
-                            num = 0;
-                        }
-                        if (num < rightPanelScroll.Minimum)
-                        {
-                            num = rightPanelScroll.Minimum;
-                        }
-                        rightPanelScroll.Value = num;
-                        rightPanelScroll = null;
-                        HScrollBar hSR = HSR;
-                        num = (int)Math.Round((double)hSR.Value + (double)(Cursor.Position.X - MiddleButtonLocation.X) / 5.0 / (double)gxWidth);
-                        if (num > hSR.Maximum - hSR.LargeChange + 1)
-                        {
-                            num = hSR.Maximum - hSR.LargeChange + 1;
-                        }
-                        if (num < hSR.Minimum)
-                        {
-                            num = hSR.Minimum;
-                        }
-                        hSR.Value = num;
-                        hSR = null;
-                        break;
+                        num = hSL.Maximum - hSL.LargeChange + 1;
                     }
-            }
-            MouseEventArgs e2 = new MouseEventArgs(MouseButtons.Left, 0, MouseMoveStatus.X, MouseMoveStatus.Y, 0);
-            PMainInMouseMove(spMain[PanelFocus], e2);
+                    if (num < hSL.Minimum)
+                    {
+                        num = hSL.Minimum;
+                    }
+                    hSL.Value = num;
+                    hSL = null;
+                    break;
+                }
+            case 1:
+                {
+                    VScrollBar mainPanelScroll = MainPanelScroll;
+                    int num = (int)Math.Round(mainPanelScroll.Value + (Cursor.Position.Y - MiddleButtonLocation.Y) / 5.0 / gxHeight);
+                    if (num > 0)
+                    {
+                        num = 0;
+                    }
+                    if (num < mainPanelScroll.Minimum)
+                    {
+                        num = mainPanelScroll.Minimum;
+                    }
+                    mainPanelScroll.Value = num;
+                    mainPanelScroll = null;
+                    HScrollBar hS = HS;
+                    num = (int)Math.Round(hS.Value + (Cursor.Position.X - MiddleButtonLocation.X) / 5.0 / gxWidth);
+                    if (num > hS.Maximum - hS.LargeChange + 1)
+                    {
+                        num = hS.Maximum - hS.LargeChange + 1;
+                    }
+                    if (num < hS.Minimum)
+                    {
+                        num = hS.Minimum;
+                    }
+                    hS.Value = num;
+                    hS = null;
+                    break;
+                }
+            case 2:
+                {
+                    VScrollBar rightPanelScroll = RightPanelScroll;
+                    int num = (int)Math.Round(rightPanelScroll.Value + (Cursor.Position.Y - MiddleButtonLocation.Y) / 5.0 / gxHeight);
+                    if (num > 0)
+                    {
+                        num = 0;
+                    }
+                    if (num < rightPanelScroll.Minimum)
+                    {
+                        num = rightPanelScroll.Minimum;
+                    }
+                    rightPanelScroll.Value = num;
+                    rightPanelScroll = null;
+                    HScrollBar hSR = HSR;
+                    num = (int)Math.Round(hSR.Value + (Cursor.Position.X - MiddleButtonLocation.X) / 5.0 / gxWidth);
+                    if (num > hSR.Maximum - hSR.LargeChange + 1)
+                    {
+                        num = hSR.Maximum - hSR.LargeChange + 1;
+                    }
+                    if (num < hSR.Minimum)
+                    {
+                        num = hSR.Minimum;
+                    }
+                    hSR.Value = num;
+                    hSR = null;
+                    break;
+                }
         }
+        MouseEventArgs e2 = new MouseEventArgs(MouseButtons.Left, 0, MouseMoveStatus.X, MouseMoveStatus.Y, 0);
+        PMainInMouseMove(spMain[PanelFocus], e2);
     }
 
     private void ValidateWavListView()
@@ -7206,7 +7105,7 @@ IL_03ba:
         try
         {
             Rectangle itemRectangle = LWAV.GetItemRectangle(LWAV.SelectedIndex);
-            if (checked(itemRectangle.Top + itemRectangle.Height) > LWAV.DisplayRectangle.Height)
+            if (itemRectangle.Top + itemRectangle.Height > LWAV.DisplayRectangle.Height)
             {
                 SendMessage(LWAV.Handle, 277, 1, 0);
             }
@@ -7221,18 +7120,15 @@ IL_03ba:
 
     private void LWAV_Click(object sender, EventArgs e)
     {
-        checked
+        if (TBWrite.Checked)
         {
-            if (TBWrite.Checked)
-            {
-                FSW.Text = Functions.C10to36(LWAV.SelectedIndex + 1);
-            }
-            PreviewNote("", bStop: true);
-            if (PreviewOnClick && Operators.CompareString(hWAV[LWAV.SelectedIndex + 1], "", TextCompare: false) != 0)
-            {
-                string xFileLocation = Conversions.ToString(Operators.ConcatenateObject(Operators.ConcatenateObject(Interaction.IIf(Operators.CompareString(ExcludeFileName(FileName), "", TextCompare: false) == 0, InitPath, ExcludeFileName(FileName)), "\\"), hWAV[LWAV.SelectedIndex + 1]));
-                PreviewNote(xFileLocation, bStop: false);
-            }
+            FSW.Text = Functions.C10to36(LWAV.SelectedIndex + 1);
+        }
+        PreviewNote("", bStop: true);
+        if (PreviewOnClick && Operators.CompareString(hWAV[LWAV.SelectedIndex + 1], "", TextCompare: false) != 0)
+        {
+            string xFileLocation = Conversions.ToString(Operators.ConcatenateObject(Operators.ConcatenateObject(Interaction.IIf(Operators.CompareString(ExcludeFileName(FileName), "", TextCompare: false) == 0, InitPath, ExcludeFileName(FileName)), "\\"), hWAV[LWAV.SelectedIndex + 1]));
+            PreviewNote(xFileLocation, bStop: false);
         }
     }
 
@@ -7242,17 +7138,14 @@ IL_03ba:
         openFileDialog.DefaultExt = "wav";
         openFileDialog.Filter = Strings.FileType._wave + "|*.wav;*.ogg;*.mp3|" + Strings.FileType.WAV + "|*.wav|" + Strings.FileType.OGG + "|*.ogg|" + Strings.FileType.MP3 + "|*.mp3|" + Strings.FileType._all + "|*.*";
         openFileDialog.InitialDirectory = Conversions.ToString(Interaction.IIf(Operators.CompareString(ExcludeFileName(FileName), "", TextCompare: false) == 0, InitPath, ExcludeFileName(FileName)));
-        checked
+        if (openFileDialog.ShowDialog() != DialogResult.Cancel)
         {
-            if (openFileDialog.ShowDialog() != DialogResult.Cancel)
+            InitPath = ExcludeFileName(openFileDialog.FileName);
+            hWAV[LWAV.SelectedIndex + 1] = GetFileName(openFileDialog.FileName);
+            LWAV.Items[LWAV.SelectedIndex] = Functions.C10to36(LWAV.SelectedIndex + 1) + ": " + GetFileName(openFileDialog.FileName);
+            if (IsSaved)
             {
-                InitPath = ExcludeFileName(openFileDialog.FileName);
-                hWAV[LWAV.SelectedIndex + 1] = GetFileName(openFileDialog.FileName);
-                LWAV.Items[LWAV.SelectedIndex] = Functions.C10to36(LWAV.SelectedIndex + 1) + ": " + GetFileName(openFileDialog.FileName);
-                if (IsSaved)
-                {
-                    SetIsSaved(isSaved: false);
-                }
+                SetIsSaved(isSaved: false);
             }
         }
     }
@@ -7260,23 +7153,20 @@ IL_03ba:
     private void LWAV_KeyDown(object sender, KeyEventArgs e)
     {
         Keys keyCode = e.KeyCode;
-        checked
+        if (keyCode == Keys.Delete)
         {
-            if (keyCode == Keys.Delete)
+            hWAV[LWAV.SelectedIndex + 1] = "";
+            LWAV.Items[LWAV.SelectedIndex] = Functions.C10to36(LWAV.SelectedIndex + 1) + ": ";
+            if (IsSaved)
             {
-                hWAV[LWAV.SelectedIndex + 1] = "";
-                LWAV.Items[LWAV.SelectedIndex] = Functions.C10to36(LWAV.SelectedIndex + 1) + ": ";
-                if (IsSaved)
-                {
-                    SetIsSaved(isSaved: false);
-                }
+                SetIsSaved(isSaved: false);
             }
         }
     }
 
     private void TBErrorCheck_Click(object sender, EventArgs e)
     {
-        ErrorCheck = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(),null, null, null));
+        ErrorCheck = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(), null, null, null));
         TBErrorCheck.Checked = ErrorCheck;
         mnErrorCheck.Checked = ErrorCheck;
         TBErrorCheck.Image = (Image)Interaction.IIf(TBErrorCheck.Checked, Resources.x16CheckError, Resources.x16CheckErrorN);
@@ -7287,7 +7177,7 @@ IL_03ba:
     private void TBPreviewOnClick_Click(object sender, EventArgs e)
     {
         PreviewNote("", bStop: true);
-        PreviewOnClick = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(),null, null, null));
+        PreviewOnClick = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(), null, null, null));
         TBPreviewOnClick.Checked = PreviewOnClick;
         mnPreviewOnClick.Checked = PreviewOnClick;
         TBPreviewOnClick.Image = (Image)Interaction.IIf(PreviewOnClick, Resources.x16PreviewOnClick, Resources.x16PreviewOnClickN);
@@ -7296,7 +7186,7 @@ IL_03ba:
 
     private void TBShowFileName_Click(object sender, EventArgs e)
     {
-        ShowFileName = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(),null, null, null));
+        ShowFileName = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(), null, null, null));
         TBShowFileName.Checked = ShowFileName;
         mnShowFileName.Checked = ShowFileName;
         TBShowFileName.Image = (Image)Interaction.IIf(ShowFileName, Resources.x16ShowFileName, Resources.x16ShowFileNameN);
@@ -7448,7 +7338,7 @@ IL_03ba:
         }
         if (flag)
         {
-            pTempFileNames = (string[])Utils.CopyArray(pTempFileNames, new string[checked(Information.UBound(pTempFileNames) + 1 + 1)]);
+            pTempFileNames = (string[])Utils.CopyArray(pTempFileNames, new string[Information.UBound(pTempFileNames) + 1 + 1]);
             pTempFileNames[Information.UBound(pTempFileNames)] = s;
         }
     }
@@ -7459,184 +7349,178 @@ IL_03ba:
         UpdatePairing();
         int[,] array = new int[7, 6];
         int num = Information.UBound(Notes);
-        checked
+        for (int i = 1; i <= num; i++)
         {
-            for (int i = 1; i <= num; i++)
+            Note[] notes = Notes;
+            int num3 = -1;
+            int columnIndex = notes[i].ColumnIndex;
+            num3 = columnIndex != 1 ? columnIndex == 2 ? 1 : columnIndex == 3 ? 2 : columnIndex != 5 && columnIndex != 6 && columnIndex != 7 && columnIndex != 8 && columnIndex != 9 && columnIndex != 10 && columnIndex != 11 && columnIndex != 12 ? columnIndex == 14 || columnIndex == 15 || columnIndex == 16 || columnIndex == 17 || columnIndex == 18 || columnIndex == 19 || columnIndex == 20 || columnIndex == 21 ? 4 : columnIndex < 27 ? 6 : 5 : 3 : 0;
+            while (true)
             {
-                Note[] notes = Notes;
-                int num3 = -1;
-                int columnIndex = notes[i].ColumnIndex;
-                num3 = ((columnIndex != 1) ? ((columnIndex == 2) ? 1 : ((columnIndex == 3) ? 2 : ((columnIndex != 5 && columnIndex != 6 && columnIndex != 7 && columnIndex != 8 && columnIndex != 9 && columnIndex != 10 && columnIndex != 11 && columnIndex != 12) ? ((columnIndex == 14 || columnIndex == 15 || columnIndex == 16 || columnIndex == 17 || columnIndex == 18 || columnIndex == 19 || columnIndex == 20 || columnIndex == 21) ? 4 : ((columnIndex < 27) ? 6 : 5)) : 3))) : 0);
-                while (true)
+                if (!NTInput)
                 {
-                    if (!NTInput)
+                    int[,] array2;
+                    int num6;
+                    int num4;
+                    if (!notes[i].LongNote)
                     {
-                        int[,] array2;
-                        int num6;
-                        int num4;
-                        if (!notes[i].LongNote)
-                        {
-                            array2 = array;
-                            int[,] array3 = array2;
-                            num4 = num3;
-                            int num5 = num4;
-                            num6 = 0;
-                            array3[num5, num6] = array2[num4, num6] + 1;
-                        }
-                        if (notes[i].LongNote)
-                        {
-                            array2 = array;
-                            int[,] array4 = array2;
-                            num6 = num3;
-                            int num7 = num6;
-                            num4 = 1;
-                            array4[num7, num4] = array2[num6, num4] + 1;
-                        }
-                        if (unchecked(notes[i].Value / 10000) == LnObj)
-                        {
-                            array2 = array;
-                            int[,] array5 = array2;
-                            num6 = num3;
-                            int num8 = num6;
-                            num4 = 2;
-                            array5[num8, num4] = array2[num6, num4] + 1;
-                        }
-                        if (notes[i].Hidden)
-                        {
-                            array2 = array;
-                            int[,] array6 = array2;
-                            num6 = num3;
-                            int num9 = num6;
-                            num4 = 3;
-                            array6[num9, num4] = array2[num6, num4] + 1;
-                        }
-                        if (notes[i].HasError)
-                        {
-                            array2 = array;
-                            int[,] array7 = array2;
-                            num6 = num3;
-                            int num10 = num6;
-                            num4 = 4;
-                            array7[num10, num4] = array2[num6, num4] + 1;
-                        }
                         array2 = array;
-                        int[,] array8 = array2;
-                        num6 = num3;
-                        int num11 = num6;
-                        num4 = 5;
-                        array8[num11, num4] = array2[num6, num4] + 1;
+                        int[,] array3 = array2;
+                        num4 = num3;
+                        int num5 = num4;
+                        num6 = 0;
+                        array3[num5, num6] = array2[num4, num6] + 1;
                     }
-                    else
+                    if (notes[i].LongNote)
                     {
-                        int num12 = 1;
-                        int[,] array2;
-                        int num6;
-                        int num4;
-                        if (notes[i].Length == 0.0)
-                        {
-                            array2 = array;
-                            int[,] array9 = array2;
-                            num6 = num3;
-                            int num13 = num6;
-                            num4 = 0;
-                            array9[num13, num4] = array2[num6, num4] + 1;
-                        }
-                        if (notes[i].Length != 0.0)
-                        {
-                            array2 = array;
-                            int[,] array10 = array2;
-                            num6 = num3;
-                            int num14 = num6;
-                            num4 = 1;
-                            array10[num14, num4] = array2[num6, num4] + 2;
-                            num12 = 2;
-                        }
-                        if (unchecked(notes[i].Value / 10000) == LnObj)
-                        {
-                            array2 = array;
-                            int[,] array11 = array2;
-                            num6 = num3;
-                            int num15 = num6;
-                            num4 = 2;
-                            array11[num15, num4] = array2[num6, num4] + num12;
-                        }
-                        if (notes[i].Hidden)
-                        {
-                            array2 = array;
-                            int[,] array12 = array2;
-                            num6 = num3;
-                            int num16 = num6;
-                            num4 = 3;
-                            array12[num16, num4] = array2[num6, num4] + num12;
-                        }
-                        if (notes[i].HasError)
-                        {
-                            array2 = array;
-                            int[,] array13 = array2;
-                            num6 = num3;
-                            int num17 = num6;
-                            num4 = 4;
-                            array13[num17, num4] = array2[num6, num4] + num12;
-                        }
                         array2 = array;
-                        int[,] array14 = array2;
+                        int[,] array4 = array2;
                         num6 = num3;
-                        int num18 = num6;
-                        num4 = 5;
-                        array14[num18, num4] = array2[num6, num4] + num12;
+                        int num7 = num6;
+                        num4 = 1;
+                        array4[num7, num4] = array2[num6, num4] + 1;
                     }
-                    if (num3 == 6)
+                    if (notes[i].Value / 10000 == LnObj)
                     {
-                        break;
+                        array2 = array;
+                        int[,] array5 = array2;
+                        num6 = num3;
+                        int num8 = num6;
+                        num4 = 2;
+                        array5[num8, num4] = array2[num6, num4] + 1;
                     }
-                    num3 = 6;
+                    if (notes[i].Hidden)
+                    {
+                        array2 = array;
+                        int[,] array6 = array2;
+                        num6 = num3;
+                        int num9 = num6;
+                        num4 = 3;
+                        array6[num9, num4] = array2[num6, num4] + 1;
+                    }
+                    if (notes[i].HasError)
+                    {
+                        array2 = array;
+                        int[,] array7 = array2;
+                        num6 = num3;
+                        int num10 = num6;
+                        num4 = 4;
+                        array7[num10, num4] = array2[num6, num4] + 1;
+                    }
+                    array2 = array;
+                    int[,] array8 = array2;
+                    num6 = num3;
+                    int num11 = num6;
+                    num4 = 5;
+                    array8[num11, num4] = array2[num6, num4] + 1;
                 }
+                else
+                {
+                    int num12 = 1;
+                    int[,] array2;
+                    int num6;
+                    int num4;
+                    if (notes[i].Length == 0.0)
+                    {
+                        array2 = array;
+                        int[,] array9 = array2;
+                        num6 = num3;
+                        int num13 = num6;
+                        num4 = 0;
+                        array9[num13, num4] = array2[num6, num4] + 1;
+                    }
+                    if (notes[i].Length != 0.0)
+                    {
+                        array2 = array;
+                        int[,] array10 = array2;
+                        num6 = num3;
+                        int num14 = num6;
+                        num4 = 1;
+                        array10[num14, num4] = array2[num6, num4] + 2;
+                        num12 = 2;
+                    }
+                    if (notes[i].Value / 10000 == LnObj)
+                    {
+                        array2 = array;
+                        int[,] array11 = array2;
+                        num6 = num3;
+                        int num15 = num6;
+                        num4 = 2;
+                        array11[num15, num4] = array2[num6, num4] + num12;
+                    }
+                    if (notes[i].Hidden)
+                    {
+                        array2 = array;
+                        int[,] array12 = array2;
+                        num6 = num3;
+                        int num16 = num6;
+                        num4 = 3;
+                        array12[num16, num4] = array2[num6, num4] + num12;
+                    }
+                    if (notes[i].HasError)
+                    {
+                        array2 = array;
+                        int[,] array13 = array2;
+                        num6 = num3;
+                        int num17 = num6;
+                        num4 = 4;
+                        array13[num17, num4] = array2[num6, num4] + num12;
+                    }
+                    array2 = array;
+                    int[,] array14 = array2;
+                    num6 = num3;
+                    int num18 = num6;
+                    num4 = 5;
+                    array14[num18, num4] = array2[num6, num4] + num12;
+                }
+                if (num3 == 6)
+                {
+                    break;
+                }
+                num3 = 6;
             }
-            dgStatistics dgStatistics2 = new dgStatistics(array);
-            dgStatistics2.ShowDialog();
         }
+        dgStatistics dgStatistics2 = new dgStatistics(array);
+        dgStatistics2.ShowDialog();
     }
 
     private void CalculateTotalPlayableNotes()
     {
         int num = 0;
-        checked
+        if (!NTInput)
         {
-            if (!NTInput)
+            int num2 = Information.UBound(Notes);
+            for (int i = 1; i <= num2; i++)
             {
-                int num2 = Information.UBound(Notes);
-                for (int i = 1; i <= num2; i++)
+                if ((Notes[i].ColumnIndex >= 5) & (Notes[i].ColumnIndex <= 12))
                 {
-                    if ((Notes[i].ColumnIndex >= 5) & (Notes[i].ColumnIndex <= 12))
-                    {
-                        num++;
-                    }
+                    num++;
                 }
             }
-            else
-            {
-                int num3 = Information.UBound(Notes);
-                for (int i = 1; i <= num3; i++)
-                {
-                    if ((Notes[i].ColumnIndex >= 5) & (Notes[i].ColumnIndex <= 12))
-                    {
-                        num++;
-                        if (Notes[i].Length != 0.0)
-                        {
-                            num++;
-                        }
-                    }
-                }
-            }
-            TBStatistics.Text = Conversions.ToString(num);
         }
+        else
+        {
+            int num3 = Information.UBound(Notes);
+            for (int i = 1; i <= num3; i++)
+            {
+                if ((Notes[i].ColumnIndex >= 5) & (Notes[i].ColumnIndex <= 12))
+                {
+                    num++;
+                    if (Notes[i].Length != 0.0)
+                    {
+                        num++;
+                    }
+                }
+            }
+        }
+        TBStatistics.Text = Conversions.ToString(num);
     }
 
     public object GetMouseVPosition(bool snap = true)
     {
         int num = spMain[PanelFocus].Height;
         int num2 = PanelVScroll[PanelFocus];
-        float num3 = ((float)num - (float)num2 * gxHeight - (float)MouseMoveStatus.Y - 1f) / gxHeight;
+        float num3 = (num - num2 * gxHeight - MouseMoveStatus.Y - 1f) / gxHeight;
         if (snap)
         {
             return SnapToGrid(num3);
@@ -7646,79 +7530,76 @@ IL_03ba:
 
     private void POStatusRefresh()
     {
-        checked
+        if (TBSelect.Checked)
         {
-            if (TBSelect.Checked)
+            var kMouseOver = KMouseOver;
+            if (kMouseOver < 0)
             {
-                var kMouseOver = KMouseOver;
-                if (kMouseOver < 0)
-                {
-                    TempVPosition = Conversions.ToDouble(GetMouseVPosition(gSnap));
-                    SelectedColumn = GetColumnAtX(MouseMoveStatus.X, PanelHScroll[PanelFocus]);
-                    var num = MeasureAtDisplacement(TempVPosition);
-                    var num2 = MeasureLength[num];
-                    var num3 = TempVPosition - MeasureBottom[num];
-                    var num4 = GCD(Conversions.ToDouble(Interaction.IIf(num3 == 0.0, num2, num3)), num2);
-                    FSP1.Text = num3 * (double)gDivide / 192.0 + " / " + num2 * (double)gDivide / 192.0 + "  ";
-                    FSP2.Text = num3 + " / " + Conversions.ToString(num2) + "  ";
-                    FSP3.Text = (int)Math.Round(num3 / num4) + " / " + (int)Math.Round(num2 / num4) + "  ";
-                    FSP4.Text = TempVPosition + "  ";
-                    TimeStatusLabel.Text = GetTimeFromVPosition(TempVPosition).ToString("F4");
-                    FSC.Text = nTitle(SelectedColumn);
-                    FSW.Text = "";
-                    FSM.Text = Functions.Add3Zeros(num);
-                    FST.Text = "";
-                    FSH.Text = "";
-                    FSE.Text = "";
-                }
-                else
-                {
-                    var num5 = MeasureAtDisplacement(Notes[kMouseOver].VPosition);
-                    var num6 = MeasureLength[num5];
-                    var num7 = Notes[kMouseOver].VPosition - MeasureBottom[num5];
-                    var num8 = GCD(Conversions.ToDouble(Interaction.IIf(num7 == 0.0, num6, num7)), num6);
-                    FSP1.Text = num7 * (double)gDivide / 192.0 + " / " + num6 * (double)gDivide / 192.0 + "  ";
-                    FSP2.Text = num7 + " / " + Conversions.ToString(num6) + "  ";
-                    FSP3.Text = (int)Math.Round(num7 / num8) + " / " + (int)Math.Round(num6 / num8) + "  ";
-                    FSP4.Text = Notes[kMouseOver].VPosition + "  ";
-                    TimeStatusLabel.Text = GetTimeFromVPosition(TempVPosition).ToString("F4");
-                    FSC.Text = nTitle(Notes[kMouseOver].ColumnIndex);
-                    FSW.Text = Conversions.ToString(Interaction.IIf(IsColumnNumeric(Notes[kMouseOver].ColumnIndex), (double)Notes[kMouseOver].Value / 10000.0, Functions.C10to36(unchecked(Notes[kMouseOver].Value / 10000))));
-                    FSM.Text = Functions.Add3Zeros(num5);
-                    FST.Text = Conversions.ToString(Interaction.IIf(NTInput, Strings.StatusBar.Length + " = " + Conversions.ToString(Notes[kMouseOver].Length), RuntimeHelpers.GetObjectValue(Interaction.IIf(Notes[kMouseOver].LongNote, Strings.StatusBar.LongNote, ""))));
-                    FSH.Text = Conversions.ToString(Interaction.IIf(Notes[kMouseOver].Hidden, Strings.StatusBar.Hidden, ""));
-                    FSE.Text = Conversions.ToString(Interaction.IIf(Notes[kMouseOver].HasError, Strings.StatusBar.Err, ""));
-                }
-            }
-            else if (TBWrite.Checked)
-            {
-                if (SelectedColumn < 0)
-                {
-                    return;
-                }
-                var num9 = MeasureAtDisplacement(TempVPosition);
-                var num10 = MeasureLength[num9];
-                var num11 = TempVPosition - MeasureBottom[num9];
-                var num12 = GCD(Conversions.ToDouble(Interaction.IIf(num11 == 0.0, num10, num11)), num10);
-                FSP1.Text = num11 * (double)gDivide / 192.0 + " / " + num10 * (double)gDivide / 192.0 + "  ";
-                FSP2.Text = num11 + " / " + Conversions.ToString(num10) + "  ";
-                FSP3.Text = (int)Math.Round(num11 / num12) + " / " + (int)Math.Round(num10 / num12) + "  ";
+                TempVPosition = Conversions.ToDouble(GetMouseVPosition(gSnap));
+                SelectedColumn = GetColumnAtX(MouseMoveStatus.X, PanelHScroll[PanelFocus]);
+                var num = MeasureAtDisplacement(TempVPosition);
+                var num2 = MeasureLength[num];
+                var num3 = TempVPosition - MeasureBottom[num];
+                var num4 = GCD(Conversions.ToDouble(Interaction.IIf(num3 == 0.0, num2, num3)), num2);
+                FSP1.Text = num3 * gDivide / 192.0 + " / " + num2 * gDivide / 192.0 + "  ";
+                FSP2.Text = num3 + " / " + Conversions.ToString(num2) + "  ";
+                FSP3.Text = (int)Math.Round(num3 / num4) + " / " + (int)Math.Round(num2 / num4) + "  ";
                 FSP4.Text = TempVPosition + "  ";
                 TimeStatusLabel.Text = GetTimeFromVPosition(TempVPosition).ToString("F4");
                 FSC.Text = nTitle(SelectedColumn);
-                FSW.Text = Functions.C10to36(LWAV.SelectedIndex + 1);
-                FSM.Text = Functions.Add3Zeros(num9);
-                FST.Text = Conversions.ToString(Interaction.IIf(NTInput, TempLength, RuntimeHelpers.GetObjectValue(Interaction.IIf(MyProject.Computer.Keyboard.ShiftKeyDown, Strings.StatusBar.LongNote, ""))));
-                FSH.Text = Conversions.ToString(Interaction.IIf(MyProject.Computer.Keyboard.CtrlKeyDown, Strings.StatusBar.Hidden, ""));
+                FSW.Text = "";
+                FSM.Text = Functions.Add3Zeros(num);
+                FST.Text = "";
+                FSH.Text = "";
+                FSE.Text = "";
             }
-            else if (TBTimeSelect.Checked)
+            else
             {
-                FSSS.Text = Conversions.ToString(vSelStart);
-                FSSL.Text = Conversions.ToString(vSelLength);
-                FSSH.Text = Conversions.ToString(vSelHalf);
+                var num5 = MeasureAtDisplacement(Notes[kMouseOver].VPosition);
+                var num6 = MeasureLength[num5];
+                var num7 = Notes[kMouseOver].VPosition - MeasureBottom[num5];
+                var num8 = GCD(Conversions.ToDouble(Interaction.IIf(num7 == 0.0, num6, num7)), num6);
+                FSP1.Text = num7 * gDivide / 192.0 + " / " + num6 * gDivide / 192.0 + "  ";
+                FSP2.Text = num7 + " / " + Conversions.ToString(num6) + "  ";
+                FSP3.Text = (int)Math.Round(num7 / num8) + " / " + (int)Math.Round(num6 / num8) + "  ";
+                FSP4.Text = Notes[kMouseOver].VPosition + "  ";
+                TimeStatusLabel.Text = GetTimeFromVPosition(TempVPosition).ToString("F4");
+                FSC.Text = nTitle(Notes[kMouseOver].ColumnIndex);
+                FSW.Text = Conversions.ToString(Interaction.IIf(IsColumnNumeric(Notes[kMouseOver].ColumnIndex), Notes[kMouseOver].Value / 10000.0, Functions.C10to36(Notes[kMouseOver].Value / 10000)));
+                FSM.Text = Functions.Add3Zeros(num5);
+                FST.Text = Conversions.ToString(Interaction.IIf(NTInput, Strings.StatusBar.Length + " = " + Conversions.ToString(Notes[kMouseOver].Length), RuntimeHelpers.GetObjectValue(Interaction.IIf(Notes[kMouseOver].LongNote, Strings.StatusBar.LongNote, ""))));
+                FSH.Text = Conversions.ToString(Interaction.IIf(Notes[kMouseOver].Hidden, Strings.StatusBar.Hidden, ""));
+                FSE.Text = Conversions.ToString(Interaction.IIf(Notes[kMouseOver].HasError, Strings.StatusBar.Err, ""));
             }
-            FStatus.Invalidate();
         }
+        else if (TBWrite.Checked)
+        {
+            if (SelectedColumn < 0)
+            {
+                return;
+            }
+            var num9 = MeasureAtDisplacement(TempVPosition);
+            var num10 = MeasureLength[num9];
+            var num11 = TempVPosition - MeasureBottom[num9];
+            var num12 = GCD(Conversions.ToDouble(Interaction.IIf(num11 == 0.0, num10, num11)), num10);
+            FSP1.Text = num11 * gDivide / 192.0 + " / " + num10 * gDivide / 192.0 + "  ";
+            FSP2.Text = num11 + " / " + Conversions.ToString(num10) + "  ";
+            FSP3.Text = (int)Math.Round(num11 / num12) + " / " + (int)Math.Round(num10 / num12) + "  ";
+            FSP4.Text = TempVPosition + "  ";
+            TimeStatusLabel.Text = GetTimeFromVPosition(TempVPosition).ToString("F4");
+            FSC.Text = nTitle(SelectedColumn);
+            FSW.Text = Functions.C10to36(LWAV.SelectedIndex + 1);
+            FSM.Text = Functions.Add3Zeros(num9);
+            FST.Text = Conversions.ToString(Interaction.IIf(NTInput, TempLength, RuntimeHelpers.GetObjectValue(Interaction.IIf(MyProject.Computer.Keyboard.ShiftKeyDown, Strings.StatusBar.LongNote, ""))));
+            FSH.Text = Conversions.ToString(Interaction.IIf(MyProject.Computer.Keyboard.CtrlKeyDown, Strings.StatusBar.Hidden, ""));
+        }
+        else if (TBTimeSelect.Checked)
+        {
+            FSSS.Text = Conversions.ToString(vSelStart);
+            FSSL.Text = Conversions.ToString(vSelLength);
+            FSSH.Text = Conversions.ToString(vSelHalf);
+        }
+        FStatus.Invalidate();
     }
 
     private double GetTimeFromVPosition(double vpos)
@@ -7744,46 +7625,43 @@ IL_03ba:
         {
             stop_notes = dictionary[3];
         }
-        checked
+        int num = bpm_notes.Count() - 1;
+        //_Closure_0024__1 closure_0024__ = default(_Closure_0024__1);
+        double bpm_contrib = default(double);
+        double stop_contrib = default(double);
+        for (int i = 0; i <= num; i++)
         {
-            int num = bpm_notes.Count() - 1;
-            //_Closure_0024__1 closure_0024__ = default(_Closure_0024__1);
-            double bpm_contrib = default(double);
-            double stop_contrib = default(double);
-            for (int i = 0; i <= num; i++)
+            //closure_0024__ = new _Closure_0024__1(closure_0024__);
+            double duration = 0.0d;
+            //closure_0024__._0024VB_0024Local_duration = 0.0;
+            Note current_note = bpm_notes.ElementAt(i);
+            //closure_0024__._0024VB_0024Local_notevpos = Math.Max(0.0, current_note.VPosition);
+            double notevpos = Math.Max(0d, current_note.VPosition);
+            if (i + 1 != bpm_notes.Count())
             {
-                //closure_0024__ = new _Closure_0024__1(closure_0024__);
-                double duration = 0.0d;
-                //closure_0024__._0024VB_0024Local_duration = 0.0;
-                Note current_note = bpm_notes.ElementAt(i);
-                //closure_0024__._0024VB_0024Local_notevpos = Math.Max(0.0, current_note.VPosition);
-                double notevpos = Math.Max(0d, current_note.VPosition);
-                if (i + 1 != bpm_notes.Count())
-                {
-                    var next_note = bpm_notes.ElementAt(i + 1);
-                    duration = next_note.VPosition - notevpos;
-                    //closure_0024__._0024VB_0024Local_duration = bpm_notes.ElementAt(i + 1).VPosition - closure_0024__._0024VB_0024Local_notevpos;
-                }
-                else
-                {
-                    duration = vpos - notevpos;
-                    //closure_0024__._0024VB_0024Local_duration = vpos - closure_0024__._0024VB_0024Local_notevpos;
-                }
-                double current_bps = 60.0 / ((double)current_note.Value / 10000.0);
-                //bpm_contrib += current_bps * closure_0024__._0024VB_0024Local_duration / 48.0;
-                bpm_contrib += current_bps * duration / 48d;
-                if (stop_notes != null)
-                {
-                    var stops = from stp in stop_notes
-                        where stp.VPosition >= notevpos & stp.VPosition < notevpos + duration
-                        select stp;
-                    //IEnumerable<Note> stops = enumerable.Where(closure_0024__._Lambda_0024__8);
-                    double stop_beats = stops.Sum([SpecialName] (Note x) => (double)x.Value / 10000.0) / 48.0;
-                    stop_contrib += current_bps * stop_beats;
-                }
+                var next_note = bpm_notes.ElementAt(i + 1);
+                duration = next_note.VPosition - notevpos;
+                //closure_0024__._0024VB_0024Local_duration = bpm_notes.ElementAt(i + 1).VPosition - closure_0024__._0024VB_0024Local_notevpos;
             }
-            return stop_contrib + bpm_contrib;
+            else
+            {
+                duration = vpos - notevpos;
+                //closure_0024__._0024VB_0024Local_duration = vpos - closure_0024__._0024VB_0024Local_notevpos;
+            }
+            double current_bps = 60.0 / (current_note.Value / 10000.0);
+            //bpm_contrib += current_bps * closure_0024__._0024VB_0024Local_duration / 48.0;
+            bpm_contrib += current_bps * duration / 48d;
+            if (stop_notes != null)
+            {
+                var stops = from stp in stop_notes
+                            where stp.VPosition >= notevpos & stp.VPosition < notevpos + duration
+                            select stp;
+                //IEnumerable<Note> stops = enumerable.Where(closure_0024__._Lambda_0024__8);
+                double stop_beats = stops.Sum([SpecialName] (Note x) => x.Value / 10000.0) / 48.0;
+                stop_contrib += current_bps * stop_beats;
+            }
         }
+        return stop_contrib + bpm_contrib;
     }
 
     private void POBStorm_Click(object sender, EventArgs e)
@@ -7798,7 +7676,7 @@ IL_03ba:
         UndoRedo.LinkedURCmd linkedURCmd = BaseRedo;
         int num = 0;
         int num2 = Information.UBound(Notes);
-        for (int i = 1; i <= num2; i = checked(i + 1))
+        for (int i = 1; i <= num2; i += 1)
         {
             if (Notes[i].Selected)
             {
@@ -7939,7 +7817,7 @@ IL_03ba:
             if (Conversion.Val(TVCBPM.Text) <= 0.0)
             {
                 Interaction.MsgBox(Strings.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings.Messages.Err);
-                TVCBPM.Text = Conversions.ToString((double)Notes[0].Value / 10000.0);
+                TVCBPM.Text = Conversions.ToString(Notes[0].Value / 10000.0);
                 TVCBPM.Focus();
                 TVCBPM.SelectAll();
             }
@@ -7956,7 +7834,7 @@ IL_03ba:
         if (Conversion.Val(TVCBPM.Text) <= 0.0)
         {
             Interaction.MsgBox(Strings.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings.Messages.Err);
-            TVCBPM.Text = Conversions.ToString((double)Notes[0].Value / 10000.0);
+            TVCBPM.Text = Conversions.ToString(Notes[0].Value / 10000.0);
             TVCBPM.Focus();
             TVCBPM.SelectAll();
         }
@@ -7964,43 +7842,40 @@ IL_03ba:
 
     private int FindNoteIndex(Note note)
     {
-        checked
+        int i;
+        if (NTInput)
         {
-            int i;
-            if (NTInput)
+            int num = Information.UBound(Notes);
+            for (i = 1; i <= num; i++)
             {
-                int num = Information.UBound(Notes);
-                for (i = 1; i <= num; i++)
+                if (Notes[i].equalsNT(note))
                 {
-                    if (Notes[i].equalsNT(note))
-                    {
-                        return i;
-                    }
+                    return i;
                 }
             }
-            else
-            {
-                int num2 = Information.UBound(Notes);
-                for (i = 1; i <= num2; i++)
-                {
-                    if (Notes[i].equalsBMSE(note))
-                    {
-                        return i;
-                    }
-                }
-            }
-            return i;
         }
+        else
+        {
+            int num2 = Information.UBound(Notes);
+            for (i = 1; i <= num2; i++)
+            {
+                if (Notes[i].equalsBMSE(note))
+                {
+                    return i;
+                }
+            }
+        }
+        return i;
     }
 
     private int sIA()
     {
-        return Conversions.ToInteger(Interaction.IIf(sI > 98, 0, checked(sI + 1)));
+        return Conversions.ToInteger(Interaction.IIf(sI > 98, 0, sI + 1));
     }
 
     private int sIM()
     {
-        return Conversions.ToInteger(Interaction.IIf(sI < 1, 99, checked(sI - 1)));
+        return Conversions.ToInteger(Interaction.IIf(sI < 1, 99, sI - 1));
     }
 
     private void TBUndo_Click(object sender, EventArgs e)
@@ -8053,54 +7928,51 @@ IL_03ba:
 
     private void AddToPOWAV(string[] xPath)
     {
-        checked
+        int[] array = new int[LWAV.SelectedIndices.Count - 1 + 1];
+        LWAV.SelectedIndices.CopyTo(array, 0);
+        if (array.Length == 0)
         {
-            int[] array = new int[LWAV.SelectedIndices.Count - 1 + 1];
-            LWAV.SelectedIndices.CopyTo(array, 0);
-            if (array.Length == 0)
+            return;
+        }
+        if (array.Length < xPath.Length)
+        {
+            int i = array.Length;
+            int j = array[Information.UBound(array)] + 1;
+            for (array = (int[])Utils.CopyArray(array, new int[Information.UBound(xPath) + 1]); i < array.Length && j <= 1294; i++)
             {
-                return;
-            }
-            if (array.Length < xPath.Length)
-            {
-                int i = array.Length;
-                int j = array[Information.UBound(array)] + 1;
-                for (array = (int[])Utils.CopyArray(array, new int[Information.UBound(xPath) + 1]); unchecked(i < array.Length && j <= 1294); i++)
+                for (; j <= 1294 && Operators.CompareString(hWAV[j + 1], "", TextCompare: false) != 0; j++)
                 {
-                    for (; j <= 1294 && Operators.CompareString(hWAV[j + 1], "", TextCompare: false) != 0; j++)
-                    {
-                    }
-                    if (j > 1294)
-                    {
-                        break;
-                    }
-                    array[i] = j;
-                    j++;
                 }
                 if (j > 1294)
                 {
-                    xPath = (string[])Utils.CopyArray(xPath, new string[i - 1 + 1]);
-                    array = (int[])Utils.CopyArray(array, new int[i - 1 + 1]);
+                    break;
                 }
+                array[i] = j;
+                j++;
             }
-            int num = Information.UBound(xPath);
-            for (int k = 0; k <= num; k++)
+            if (j > 1294)
             {
-                hWAV[array[k] + 1] = GetFileName(xPath[k]);
-                LWAV.Items[array[k]] = Functions.C10to36(array[k] + 1) + ": " + GetFileName(xPath[k]);
+                xPath = (string[])Utils.CopyArray(xPath, new string[i - 1 + 1]);
+                array = (int[])Utils.CopyArray(array, new int[i - 1 + 1]);
             }
-            LWAV.SelectedIndices.Clear();
-            int num2 = Conversions.ToInteger(Interaction.IIf(Information.UBound(array) < Information.UBound(xPath), Information.UBound(array), Information.UBound(xPath)));
-            for (int l = 0; l <= num2; l++)
-            {
-                LWAV.SelectedIndices.Add(array[l]);
-            }
-            if (IsSaved)
-            {
-                SetIsSaved(isSaved: false);
-            }
-            RefreshPanelAll();
         }
+        int num = Information.UBound(xPath);
+        for (int k = 0; k <= num; k++)
+        {
+            hWAV[array[k] + 1] = GetFileName(xPath[k]);
+            LWAV.Items[array[k]] = Functions.C10to36(array[k] + 1) + ": " + GetFileName(xPath[k]);
+        }
+        LWAV.SelectedIndices.Clear();
+        int num2 = Conversions.ToInteger(Interaction.IIf(Information.UBound(array) < Information.UBound(xPath), Information.UBound(array), Information.UBound(xPath)));
+        for (int l = 0; l <= num2; l++)
+        {
+            LWAV.SelectedIndices.Add(array[l]);
+        }
+        if (IsSaved)
+        {
+            SetIsSaved(isSaved: false);
+        }
+        RefreshPanelAll();
     }
 
     private void POWAV_DragDrop(object sender, DragEventArgs e)
@@ -8144,17 +8016,17 @@ IL_03ba:
 
     private void POWAV_Resize(object sender, EventArgs e)
     {
-        LWAV.Height = Conversions.ToInteger(Operators.SubtractObject(NewLateBinding.LateGet(sender, null, "Height", Array.Empty<object>(),null, null, null), 25));
+        LWAV.Height = Conversions.ToInteger(Operators.SubtractObject(NewLateBinding.LateGet(sender, null, "Height", Array.Empty<object>(), null, null, null), 25));
     }
 
     private void POBeat_Resize(object sender, EventArgs e)
     {
-        LBeat.Height = checked(POBeat.Height - 25);
+        LBeat.Height = POBeat.Height - 25;
     }
 
     private void POExpansion_Resize(object sender, EventArgs e)
     {
-        TExpansion.Height = checked(POExpansion.Height - 2);
+        TExpansion.Height = POExpansion.Height - 2;
     }
 
     private void mn_DropDownClosed(object sender, EventArgs e)
@@ -8169,7 +8041,7 @@ IL_03ba:
 
     private void mn_MouseEnter(object sender, EventArgs e)
     {
-        if (!Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Pressed", Array.Empty<object>(),null, null, null)))
+        if (!Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Pressed", Array.Empty<object>(), null, null, null)))
         {
             NewLateBinding.LateSet(sender, null, "ForeColor", new object[1] { Color.Black }, null, null);
         }
@@ -8177,7 +8049,7 @@ IL_03ba:
 
     private void mn_MouseLeave(object sender, EventArgs e)
     {
-        if (!Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Pressed", Array.Empty<object>(),null, null, null)))
+        if (!Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Pressed", Array.Empty<object>(), null, null, null)))
         {
             NewLateBinding.LateSet(sender, null, "ForeColor", new object[1] { Color.White }, null, null);
         }
@@ -8213,59 +8085,56 @@ IL_03ba:
         SelectedNotes = Array.Empty<Note>();
         SortByVPositionInsertion();
         int num = Information.UBound(Notes);
-        checked
+        for (int i = 0; i <= num; i++)
         {
-            for (int i = 0; i <= num; i++)
+            Notes[i].Length = 0.0;
+        }
+        int num2 = 1;
+        int num3 = 0;
+        int num4 = Information.UBound(Notes);
+        while (num2 <= num4)
+        {
+            if (!Notes[num2].LongNote)
             {
-                Notes[i].Length = 0.0;
+                num2++;
+                continue;
             }
-            int num2 = 1;
-            int num3 = 0;
-            int num4 = Information.UBound(Notes);
-            while (num2 <= num4)
+            int num5 = num2 + 1;
+            int num6 = num4;
+            for (num3 = num5; num3 <= num6; num3++)
             {
-                if (!Notes[num2].LongNote)
+                if (Notes[num3].ColumnIndex != Notes[num2].ColumnIndex)
                 {
-                    num2++;
                     continue;
                 }
-                int num5 = num2 + 1;
-                int num6 = num4;
-                for (num3 = num5; num3 <= num6; num3++)
+                if (Notes[num3].LongNote)
                 {
-                    if (Notes[num3].ColumnIndex != Notes[num2].ColumnIndex)
+                    Notes[num2].Length = Notes[num3].VPosition - Notes[num2].VPosition;
+                    int num8 = num4 - 1;
+                    for (int j = num3; j <= num8; j++)
                     {
-                        continue;
+                        ref Note reference = ref Notes[j];
+                        reference = Notes[j + 1];
                     }
-                    if (Notes[num3].LongNote)
-                    {
-                        Notes[num2].Length = Notes[num3].VPosition - Notes[num2].VPosition;
-                        int num8 = num4 - 1;
-                        for (int j = num3; j <= num8; j++)
-                        {
-                            ref Note reference = ref Notes[j];
-                            reference = Notes[j + 1];
-                        }
-                        num4--;
-                        break;
-                    }
-                    if (unchecked(Notes[num3].Value / 10000) == LnObj)
-                    {
-                        break;
-                    }
+                    num4--;
+                    break;
                 }
-                num2++;
+                if (Notes[num3].Value / 10000 == LnObj)
+                {
+                    break;
+                }
             }
-            Notes = (Note[])Utils.CopyArray(Notes, new Note[num4 + 1]);
-            int num9 = num4;
-            for (num2 = 0; num2 <= num9; num2++)
-            {
-                Notes[num2].LongNote = false;
-            }
-            SortByVPositionInsertion();
-            UpdatePairing();
-            CalculateTotalPlayableNotes();
+            num2++;
         }
+        Notes = (Note[])Utils.CopyArray(Notes, new Note[num4 + 1]);
+        int num9 = num4;
+        for (num2 = 0; num2 <= num9; num2++)
+        {
+            Notes[num2].LongNote = false;
+        }
+        SortByVPositionInsertion();
+        UpdatePairing();
+        CalculateTotalPlayableNotes();
     }
 
     private void ConvertNT2BMSE()
@@ -8273,39 +8142,36 @@ IL_03ba:
         SelectedNotes = Array.Empty<Note>();
         Note[] array = new Note[1] { Notes[0] };
         int num = Information.UBound(Notes);
-        checked
+        for (int i = 1; i <= num; i++)
         {
-            for (int i = 1; i <= num; i++)
+            array = (Note[])Utils.CopyArray(array, new Note[Information.UBound(array) + 1 + 1]);
+            Note[] array2 = array;
+            int num2 = Information.UBound(array);
+            array2[num2].ColumnIndex = Notes[i].ColumnIndex;
+            array2[num2].LongNote = Notes[i].Length > 0.0;
+            array2[num2].Landmine = Notes[i].Landmine;
+            array2[num2].Value = Notes[i].Value;
+            array2[num2].VPosition = Notes[i].VPosition;
+            array2[num2].Selected = Notes[i].Selected;
+            array2[num2].Hidden = Notes[i].Hidden;
+            if (Notes[i].Length > 0.0)
             {
                 array = (Note[])Utils.CopyArray(array, new Note[Information.UBound(array) + 1 + 1]);
-                Note[] array2 = array;
-                int num2 = Information.UBound(array);
-                array2[num2].ColumnIndex = Notes[i].ColumnIndex;
-                array2[num2].LongNote = Notes[i].Length > 0.0;
-                array2[num2].Landmine = Notes[i].Landmine;
-                array2[num2].Value = Notes[i].Value;
-                array2[num2].VPosition = Notes[i].VPosition;
-                array2[num2].Selected = Notes[i].Selected;
-                array2[num2].Hidden = Notes[i].Hidden;
-                if (Notes[i].Length > 0.0)
-                {
-                    array = (Note[])Utils.CopyArray(array, new Note[Information.UBound(array) + 1 + 1]);
-                    Note[] array3 = array;
-                    int num3 = Information.UBound(array);
-                    array3[num3].ColumnIndex = Notes[i].ColumnIndex;
-                    array3[num3].LongNote = true;
-                    array3[num3].Landmine = false;
-                    array3[num3].Value = Notes[i].Value;
-                    array3[num3].VPosition = Notes[i].VPosition + Notes[i].Length;
-                    array3[num3].Selected = Notes[i].Selected;
-                    array3[num3].Hidden = Notes[i].Hidden;
-                }
+                Note[] array3 = array;
+                int num3 = Information.UBound(array);
+                array3[num3].ColumnIndex = Notes[i].ColumnIndex;
+                array3[num3].LongNote = true;
+                array3[num3].Landmine = false;
+                array3[num3].Value = Notes[i].Value;
+                array3[num3].VPosition = Notes[i].VPosition + Notes[i].Length;
+                array3[num3].Selected = Notes[i].Selected;
+                array3[num3].Hidden = Notes[i].Hidden;
             }
-            Notes = array;
-            SortByVPositionInsertion();
-            UpdatePairing();
-            CalculateTotalPlayableNotes();
         }
+        Notes = array;
+        SortByVPositionInsertion();
+        UpdatePairing();
+        CalculateTotalPlayableNotes();
     }
 
     private void TBWavIncrease_Click(object sender, EventArgs e)
@@ -8313,7 +8179,7 @@ IL_03ba:
         UndoRedo.LinkedURCmd BaseUndo = null;
         UndoRedo.LinkedURCmd BaseRedo = new UndoRedo.Void();
         UndoRedo.LinkedURCmd linkedURCmd = BaseRedo;
-        TBWavIncrease.Checked = Conversions.ToBoolean(Operators.NotObject(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(),null, null, null)));
+        TBWavIncrease.Checked = Conversions.ToBoolean(Operators.NotObject(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(), null, null, null)));
         RedoWavIncrease(TBWavIncrease.Checked, ref BaseUndo, ref BaseRedo);
         AddUndo(BaseUndo, linkedURCmd.Next);
     }
@@ -8324,7 +8190,7 @@ IL_03ba:
         UndoRedo.LinkedURCmd BaseRedo = new UndoRedo.Void();
         UndoRedo.LinkedURCmd linkedURCmd = BaseRedo;
         RedoRemoveNoteAll(xSel: false, ref BaseUndo, ref BaseRedo);
-        NTInput = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(),null, null, null));
+        NTInput = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(), null, null, null));
         TBNTInput.Checked = NTInput;
         mnNTInput.Checked = NTInput;
         POBLong.Enabled = !NTInput;
@@ -8361,7 +8227,7 @@ IL_03ba:
     private void TWPosition_ValueChanged(object sender, EventArgs e)
     {
         wPosition = Convert.ToDouble(TWPosition.Value);
-        TWPosition2.Value = Conversions.ToInteger(Interaction.IIf(wPosition > (double)TWPosition2.Maximum, TWPosition2.Maximum, wPosition));
+        TWPosition2.Value = Conversions.ToInteger(Interaction.IIf(wPosition > TWPosition2.Maximum, TWPosition2.Maximum, wPosition));
         RefreshPanelAll();
     }
 
@@ -8397,7 +8263,7 @@ IL_03ba:
     {
         Color color = vo.pBGMWav.Color;
         TWSaturation2.Value = Convert.ToInt32(TWSaturation.Value);
-        vo.pBGMWav.Color = checked(Functions.HSL2RGB((int)Math.Round(color.GetHue()), Convert.ToInt32(TWSaturation.Value), (int)Math.Round(color.GetBrightness() * 1000f), color.A));
+        vo.pBGMWav.Color = Functions.HSL2RGB((int)Math.Round(color.GetHue()), Convert.ToInt32(TWSaturation.Value), (int)Math.Round(color.GetBrightness() * 1000f), color.A);
         RefreshPanelAll();
     }
 
@@ -8440,30 +8306,27 @@ IL_03ba:
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
     private void TBLangRefresh_Click(object sender, EventArgs e)
     {
-        checked
+        for (int i = cmnLanguage.Items.Count - 1; i >= 3; i += -1)
         {
-            for (int i = cmnLanguage.Items.Count - 1; i >= 3; i += -1)
+            try
             {
-                try
-                {
-                    cmnLanguage.Items.RemoveAt(i);
-                }
-                catch (Exception ex)
-                {
-                    ProjectData.SetProjectError(ex);
-                    Exception ex2 = ex;
-                    ProjectData.ClearProjectError();
-                }
+                cmnLanguage.Items.RemoveAt(i);
             }
-            if (!Directory.Exists(MyProject.Application.Info.DirectoryPath + "\\Data"))
+            catch (Exception ex)
             {
-                MyProject.Computer.FileSystem.CreateDirectory(MyProject.Application.Info.DirectoryPath + "\\Data");
+                ProjectData.SetProjectError(ex);
+                Exception ex2 = ex;
+                ProjectData.ClearProjectError();
             }
-            FileInfo[] files = MyProject.Computer.FileSystem.GetDirectoryInfo(MyProject.Application.Info.DirectoryPath + "\\Data").GetFiles("*.Lang.xml");
-            foreach (FileInfo xStr in files)
-            {
-                LoadLocaleXML(xStr);
-            }
+        }
+        if (!Directory.Exists(MyProject.Application.Info.DirectoryPath + "\\Data"))
+        {
+            MyProject.Computer.FileSystem.CreateDirectory(MyProject.Application.Info.DirectoryPath + "\\Data");
+        }
+        FileInfo[] files = MyProject.Computer.FileSystem.GetDirectoryInfo(MyProject.Application.Info.DirectoryPath + "\\Data").GetFiles("*.Lang.xml");
+        foreach (FileInfo xStr in files)
+        {
+            LoadLocaleXML(xStr);
         }
     }
 
@@ -8471,16 +8334,13 @@ IL_03ba:
     {
         column[0].Left = 0;
         int num = Information.UBound(column);
-        checked
+        for (int i = 1; i <= num; i++)
         {
-            for (int i = 1; i <= num; i++)
-            {
-                column[i].Left = Conversions.ToInteger(Operators.AddObject(column[i - 1].Left, Interaction.IIf(column[i - 1].isVisible, column[i - 1].Width, 0)));
-            }
-            HSL.Maximum = nLeft(gColumns) + column[27].Width;
-            HS.Maximum = nLeft(gColumns) + column[27].Width;
-            HSR.Maximum = nLeft(gColumns) + column[27].Width;
+            column[i].Left = Conversions.ToInteger(Operators.AddObject(column[i - 1].Left, Interaction.IIf(column[i - 1].isVisible, column[i - 1].Width, 0)));
         }
+        HSL.Maximum = nLeft(gColumns) + column[27].Width;
+        HS.Maximum = nLeft(gColumns) + column[27].Width;
+        HSR.Maximum = nLeft(gColumns) + column[27].Width;
     }
 
     private void CHPlayer_SelectedIndexChanged(object sender, EventArgs e)
@@ -8501,9 +8361,9 @@ IL_03ba:
         column[21].isVisible = isVisible;
         column[22].isVisible = isVisible;
         int num = Information.UBound(Notes);
-        for (int i = 1; i <= num; i = checked(i + 1))
+        for (int i = 1; i <= num; i += 1)
         {
-            Notes[i].Selected = Notes[i].Selected & nEnabled(Notes[i].ColumnIndex);
+            Notes[i].Selected &= nEnabled(Notes[i].ColumnIndex);
         }
         UpdateColumnsX();
         if (!IsInitializing)
@@ -8533,7 +8393,7 @@ IL_03ba:
             "SJIS" => 7,
             "EUC-KR" => 8,
             _ => 0,
-        }, xMsWheel: gWheel, xPgUpDn: gPgUpDn, xMiddleButton: MiddleButtonMoveMethod, xGridPartition: checked((int)Math.Round(192.0 / BMSGridLimit)), xAutoSave: AutoSaveInterval, xBeep: BeepWhileSaved, xBPMx: BPMx1296, xSTOPx: STOPx1296, xMFEnter: AutoFocusMouseEnter, xMFClick: FirstClickDisabled, xMStopPreview: ClickStopPreview);
+        }, xMsWheel: gWheel, xPgUpDn: gPgUpDn, xMiddleButton: MiddleButtonMoveMethod, xGridPartition: (int)Math.Round(192.0 / BMSGridLimit), xAutoSave: AutoSaveInterval, xBeep: BeepWhileSaved, xBPMx: BPMx1296, xSTOPx: STOPx1296, xMFEnter: AutoFocusMouseEnter, xMFClick: FirstClickDisabled, xMStopPreview: ClickStopPreview);
         if (opGeneral.ShowDialog() == DialogResult.OK)
         {
             OpGeneral opGeneral2 = opGeneral;
@@ -8542,7 +8402,7 @@ IL_03ba:
             TextEncoding = opGeneral2.zEncoding;
             MiddleButtonMoveMethod = opGeneral2.zMiddle;
             AutoSaveInterval = opGeneral2.zAutoSave;
-            BMSGridLimit = 192.0 / (double)opGeneral2.zGridPartition;
+            BMSGridLimit = 192.0 / opGeneral2.zGridPartition;
             BeepWhileSaved = opGeneral2.cBeep.Checked;
             BPMx1296 = opGeneral2.cBpm1296.Checked;
             STOPx1296 = opGeneral2.cStop1296.Checked;
@@ -8568,7 +8428,7 @@ IL_03ba:
         UndoRedo.LinkedURCmd BaseRedo = new UndoRedo.Void();
         UndoRedo.LinkedURCmd linkedURCmd = BaseRedo;
         int num = Information.UBound(Notes);
-        for (int i = 1; i <= num; i = checked(i + 1))
+        for (int i = 1; i <= num; i += 1)
         {
             if (Notes[i].Selected)
             {
@@ -8587,37 +8447,34 @@ IL_03ba:
         UndoRedo.LinkedURCmd BaseUndo = null;
         UndoRedo.LinkedURCmd BaseRedo = new UndoRedo.Void();
         UndoRedo.LinkedURCmd linkedURCmd = BaseRedo;
-        checked
+        if (!NTInput)
         {
-            if (!NTInput)
+            int num = Information.UBound(Notes);
+            for (int i = 1; i <= num; i++)
             {
-                int num = Information.UBound(Notes);
-                for (int i = 1; i <= num; i++)
+                if (Notes[i].Selected)
                 {
-                    if (Notes[i].Selected)
-                    {
-                        RedoLongNoteModify(Notes[i], Notes[i].VPosition, 0.0, ref BaseUndo, ref BaseRedo);
-                        Notes[i].LongNote = false;
-                    }
+                    RedoLongNoteModify(Notes[i], Notes[i].VPosition, 0.0, ref BaseUndo, ref BaseRedo);
+                    Notes[i].LongNote = false;
                 }
             }
-            else
-            {
-                int num2 = Information.UBound(Notes);
-                for (int j = 1; j <= num2; j++)
-                {
-                    if (Notes[j].Selected)
-                    {
-                        RedoLongNoteModify(Notes[j], Notes[j].VPosition, 0.0, ref BaseUndo, ref BaseRedo);
-                        Notes[j].Length = 0.0;
-                    }
-                }
-            }
-            AddUndo(BaseUndo, linkedURCmd.Next);
-            SortByVPositionInsertion();
-            UpdatePairing();
-            RefreshPanelAll();
         }
+        else
+        {
+            int num2 = Information.UBound(Notes);
+            for (int j = 1; j <= num2; j++)
+            {
+                if (Notes[j].Selected)
+                {
+                    RedoLongNoteModify(Notes[j], Notes[j].VPosition, 0.0, ref BaseUndo, ref BaseRedo);
+                    Notes[j].Length = 0.0;
+                }
+            }
+        }
+        AddUndo(BaseUndo, linkedURCmd.Next);
+        SortByVPositionInsertion();
+        UpdatePairing();
+        RefreshPanelAll();
     }
 
     private void POBNormalLong_Click(object sender, EventArgs e)
@@ -8630,11 +8487,11 @@ IL_03ba:
         UndoRedo.LinkedURCmd BaseRedo = new UndoRedo.Void();
         UndoRedo.LinkedURCmd linkedURCmd = BaseRedo;
         int num = Information.UBound(Notes);
-        for (int i = 1; i <= num; i = checked(i + 1))
+        for (int i = 1; i <= num; i += 1)
         {
             if (Notes[i].Selected)
             {
-                RedoLongNoteModify(Notes[i], Notes[i].VPosition, 0 - ((!Notes[i].LongNote) ? 1 : 0), ref BaseUndo, ref BaseRedo);
+                RedoLongNoteModify(Notes[i], Notes[i].VPosition, 0 - (!Notes[i].LongNote ? 1 : 0), ref BaseUndo, ref BaseRedo);
                 Notes[i].LongNote = !Notes[i].LongNote;
             }
         }
@@ -8650,7 +8507,7 @@ IL_03ba:
         UndoRedo.LinkedURCmd BaseRedo = new UndoRedo.Void();
         UndoRedo.LinkedURCmd linkedURCmd = BaseRedo;
         int num = Information.UBound(Notes);
-        for (int i = 1; i <= num; i = checked(i + 1))
+        for (int i = 1; i <= num; i += 1)
         {
             if (Notes[i].Selected)
             {
@@ -8670,7 +8527,7 @@ IL_03ba:
         UndoRedo.LinkedURCmd BaseRedo = new UndoRedo.Void();
         UndoRedo.LinkedURCmd linkedURCmd = BaseRedo;
         int num = Information.UBound(Notes);
-        for (int i = 1; i <= num; i = checked(i + 1))
+        for (int i = 1; i <= num; i += 1)
         {
             if (Notes[i].Selected)
             {
@@ -8690,7 +8547,7 @@ IL_03ba:
         UndoRedo.LinkedURCmd BaseRedo = new UndoRedo.Void();
         UndoRedo.LinkedURCmd linkedURCmd = BaseRedo;
         int num = Information.UBound(Notes);
-        for (int i = 1; i <= num; i = checked(i + 1))
+        for (int i = 1; i <= num; i += 1)
         {
             if (Notes[i].Selected)
             {
@@ -8709,52 +8566,49 @@ IL_03ba:
         bool flag = false;
         bool flag2 = false;
         int num = Information.UBound(Notes);
-        checked
+        for (int i = 1; i <= num; i++)
         {
-            for (int i = 1; i <= num; i++)
+            if (Notes[i].Selected && IsColumnNumeric(Notes[i].ColumnIndex))
             {
-                if (Notes[i].Selected && IsColumnNumeric(Notes[i].ColumnIndex))
+                flag = true;
+                break;
+            }
+        }
+        int num2 = Information.UBound(Notes);
+        for (int i = 1; i <= num2; i++)
+        {
+            if (Notes[i].Selected && !IsColumnNumeric(Notes[i].ColumnIndex))
+            {
+                flag2 = true;
+                break;
+            }
+        }
+        if (!(flag || flag2))
+        {
+            return;
+        }
+        if (flag)
+        {
+            double num3 = Conversion.Val(Interaction.InputBox(Strings.Messages.PromptEnterNumeric, Text)) * 10000.0;
+            if (num3 != 0.0)
+            {
+                if (num3 <= 0.0)
                 {
-                    flag = true;
-                    break;
+                    num3 = 1.0;
                 }
-            }
-            int num2 = Information.UBound(Notes);
-            for (int i = 1; i <= num2; i++)
-            {
-                if (Notes[i].Selected && !IsColumnNumeric(Notes[i].ColumnIndex))
+                UndoRedo.LinkedURCmd BaseUndo = null;
+                UndoRedo.LinkedURCmd BaseRedo = new UndoRedo.Void();
+                UndoRedo.LinkedURCmd linkedURCmd = BaseRedo;
+                int num4 = Information.UBound(Notes);
+                for (int i = 1; i <= num4; i++)
                 {
-                    flag2 = true;
-                    break;
-                }
-            }
-            if (!unchecked(flag || flag2))
-            {
-                return;
-            }
-            if (flag)
-            {
-                double num3 = Conversion.Val(Interaction.InputBox(Strings.Messages.PromptEnterNumeric, Text)) * 10000.0;
-                if (num3 != 0.0)
-                {
-                    if (num3 <= 0.0)
+                    if (IsColumnNumeric(Notes[i].ColumnIndex) && Notes[i].Selected)
                     {
-                        num3 = 1.0;
+                        RedoRelabelNote(Notes[i], (long)Math.Round(num3), ref BaseUndo, ref BaseRedo);
+                        Notes[i].Value = (long)Math.Round(num3);
                     }
-                    UndoRedo.LinkedURCmd BaseUndo = null;
-                    UndoRedo.LinkedURCmd BaseRedo = new UndoRedo.Void();
-                    UndoRedo.LinkedURCmd linkedURCmd = BaseRedo;
-                    int num4 = Information.UBound(Notes);
-                    for (int i = 1; i <= num4; i++)
-                    {
-                        if (IsColumnNumeric(Notes[i].ColumnIndex) && Notes[i].Selected)
-                        {
-                            RedoRelabelNote(Notes[i], (long)Math.Round(num3), ref BaseUndo, ref BaseRedo);
-                            Notes[i].Value = (long)Math.Round(num3);
-                        }
-                    }
-                    AddUndo(BaseUndo, linkedURCmd.Next);
                 }
+                AddUndo(BaseUndo, linkedURCmd.Next);
             }
         }
         if (flag2)
@@ -8775,24 +8629,21 @@ IL_03ba:
                                 goto IL_0347;
                             }
                         }
-                        checked
+                        int num7 = Functions.C36to10(text) * 10000;
+                        UndoRedo.LinkedURCmd BaseUndo2 = null;
+                        UndoRedo.LinkedURCmd BaseRedo2 = new UndoRedo.Void();
+                        UndoRedo.LinkedURCmd linkedURCmd2 = BaseRedo2;
+                        int num8 = Information.UBound(Notes);
+                        for (int i = 1; i <= num8; i++)
                         {
-                            int num7 = Functions.C36to10(text) * 10000;
-                            UndoRedo.LinkedURCmd BaseUndo2 = null;
-                            UndoRedo.LinkedURCmd BaseRedo2 = new UndoRedo.Void();
-                            UndoRedo.LinkedURCmd linkedURCmd2 = BaseRedo2;
-                            int num8 = Information.UBound(Notes);
-                            for (int i = 1; i <= num8; i++)
+                            if (!IsColumnNumeric(Notes[i].ColumnIndex) && Notes[i].Selected)
                             {
-                                if (!IsColumnNumeric(Notes[i].ColumnIndex) && Notes[i].Selected)
-                                {
-                                    RedoRelabelNote(Notes[i], num7, ref BaseUndo2, ref BaseRedo2);
-                                    Notes[i].Value = num7;
-                                }
+                                RedoRelabelNote(Notes[i], num7, ref BaseUndo2, ref BaseRedo2);
+                                Notes[i].Value = num7;
                             }
-                            AddUndo(BaseUndo2, linkedURCmd2.Next);
-                            goto IL_0359;
                         }
+                        AddUndo(BaseUndo2, linkedURCmd2.Next);
+                        goto IL_0359;
                     }
                 }
                 goto IL_0347;
@@ -8821,7 +8672,7 @@ IL_0347:
 
     private bool fdrCheck(Note xNote)
     {
-        return Conversions.ToBoolean((!Conversions.ToBoolean((xNote.VPosition >= MeasureBottom[fdriMesL]) & (xNote.VPosition < MeasureBottom[fdriMesU] + MeasureLength[fdriMesU])) || !Conversions.ToBoolean(Interaction.IIf(IsColumnNumeric(xNote.ColumnIndex), (xNote.Value >= fdriValL) & (xNote.Value <= fdriValU), (xNote.Value >= fdriLblL) & (xNote.Value <= fdriLblU))) || !Conversions.ToBoolean(Array.IndexOf(fdriCol, xNote.ColumnIndex) != -1)) ? ((object)false) : ((object)true));
+        return Conversions.ToBoolean(!Conversions.ToBoolean((xNote.VPosition >= MeasureBottom[fdriMesL]) & (xNote.VPosition < MeasureBottom[fdriMesU] + MeasureLength[fdriMesU])) || !Conversions.ToBoolean(Interaction.IIf(IsColumnNumeric(xNote.ColumnIndex), (xNote.Value >= fdriValL) & (xNote.Value <= fdriValU), (xNote.Value >= fdriLblL) & (xNote.Value <= fdriLblU))) || !Conversions.ToBoolean(Array.IndexOf(fdriCol, xNote.ColumnIndex) != -1) ? false : (object)true);
     }
 
     private bool fdrRangeS(bool xbLim1, bool xbLim2, bool xVal)
@@ -8833,98 +8684,83 @@ IL_0347:
     {
         fdriMesL = xMesL;
         fdriMesU = xMesU;
-        checked
-        {
-            fdriLblL = Functions.C36to10(xLblL) * 10000;
-            fdriLblU = Functions.C36to10(xLblU) * 10000;
-            fdriValL = xValL;
-            fdriValU = xValU;
-            fdriCol = iCol;
-        }
+        fdriLblL = Functions.C36to10(xLblL) * 10000;
+        fdriLblU = Functions.C36to10(xLblU) * 10000;
+        fdriValL = xValL;
+        fdriValU = xValU;
+        fdriCol = iCol;
         bool flag = iRange % 2 == 0;
         bool flag2 = iRange % 3 == 0;
         bool xbLim = iRange % 5 == 0;
         bool xbLim2 = iRange % 7 == 0;
         bool xbLim3 = iRange % 11 == 0;
         bool xbLim4 = iRange % 13 == 0;
-        checked
+        bool[] array = new bool[Information.UBound(Notes) + 1];
+        int num = Information.UBound(Notes);
+        for (int i = 1; i <= num; i++)
         {
-            bool[] array = new bool[Information.UBound(Notes) + 1];
-            int num = Information.UBound(Notes);
-            for (int i = 1; i <= num; i++)
-            {
-                array[i] = Notes[i].Selected;
-            }
-            int num2 = Information.UBound(Notes);
-            for (int j = 1; j <= num2; j++)
-            {
-                bool flag3 = flag & array[j];
-                bool flag4 = flag2 & !array[j];
-                bool flag5 = nEnabled(Notes[j].ColumnIndex);
-                bool flag6 = fdrRangeS(xbLim, xbLim2, Conversions.ToBoolean(Interaction.IIf(NTInput, Notes[j].Length, Notes[j].LongNote)));
-                bool flag7 = fdrRangeS(xbLim4, xbLim3, Notes[j].Hidden);
-                bool flag8 = fdrCheck(Notes[j]);
-                if (((((flag & array[j]) | (flag2 & !array[j])) && nEnabled(Notes[j].ColumnIndex) && fdrRangeS(xbLim, xbLim2, Conversions.ToBoolean(Interaction.IIf(NTInput, Notes[j].Length, Notes[j].LongNote)))) ? true : false) & fdrRangeS(xbLim4, xbLim3, Notes[j].Hidden))
-                {
-                    Notes[j].Selected = fdrCheck(Notes[j]);
-                }
-            }
-            RefreshPanelAll();
-            Interaction.Beep();
+            array[i] = Notes[i].Selected;
         }
+        int num2 = Information.UBound(Notes);
+        for (int j = 1; j <= num2; j++)
+        {
+            bool flag3 = flag & array[j];
+            bool flag4 = flag2 & !array[j];
+            bool flag5 = nEnabled(Notes[j].ColumnIndex);
+            bool flag6 = fdrRangeS(xbLim, xbLim2, Conversions.ToBoolean(Interaction.IIf(NTInput, Notes[j].Length, Notes[j].LongNote)));
+            bool flag7 = fdrRangeS(xbLim4, xbLim3, Notes[j].Hidden);
+            bool flag8 = fdrCheck(Notes[j]);
+            if (((flag & array[j]) | (flag2 & !array[j]) && nEnabled(Notes[j].ColumnIndex) && fdrRangeS(xbLim, xbLim2, Conversions.ToBoolean(Interaction.IIf(NTInput, Notes[j].Length, Notes[j].LongNote))) ? true : false) & fdrRangeS(xbLim4, xbLim3, Notes[j].Hidden))
+            {
+                Notes[j].Selected = fdrCheck(Notes[j]);
+            }
+        }
+        RefreshPanelAll();
+        Interaction.Beep();
     }
 
     public void fdrUnselect(int iRange, int xMesL, int xMesU, string xLblL, string xLblU, int xValL, int xValU, int[] iCol)
     {
         fdriMesL = xMesL;
         fdriMesU = xMesU;
-        checked
-        {
-            fdriLblL = Functions.C36to10(xLblL) * 10000;
-            fdriLblU = Functions.C36to10(xLblU) * 10000;
-            fdriValL = xValL;
-            fdriValU = xValU;
-            fdriCol = iCol;
-        }
+        fdriLblL = Functions.C36to10(xLblL) * 10000;
+        fdriLblU = Functions.C36to10(xLblU) * 10000;
+        fdriValL = xValL;
+        fdriValU = xValU;
+        fdriCol = iCol;
         bool flag = iRange % 2 == 0;
         bool flag2 = iRange % 3 == 0;
         bool xbLim = iRange % 5 == 0;
         bool xbLim2 = iRange % 7 == 0;
         bool xbLim3 = iRange % 11 == 0;
         bool xbLim4 = iRange % 13 == 0;
-        checked
+        bool[] array = new bool[Information.UBound(Notes) + 1];
+        int num = Information.UBound(Notes);
+        for (int i = 1; i <= num; i++)
         {
-            bool[] array = new bool[Information.UBound(Notes) + 1];
-            int num = Information.UBound(Notes);
-            for (int i = 1; i <= num; i++)
-            {
-                array[i] = Notes[i].Selected;
-            }
-            int num2 = Information.UBound(Notes);
-            for (int j = 1; j <= num2; j++)
-            {
-                if (((((flag & array[j]) | (flag2 & !array[j])) && nEnabled(Notes[j].ColumnIndex) && fdrRangeS(xbLim, xbLim2, Conversions.ToBoolean(Interaction.IIf(NTInput, Notes[j].Length, Notes[j].LongNote)))) ? true : false) & fdrRangeS(xbLim4, xbLim3, Notes[j].Hidden))
-                {
-                    Notes[j].Selected = !fdrCheck(Notes[j]);
-                }
-            }
-            RefreshPanelAll();
-            Interaction.Beep();
+            array[i] = Notes[i].Selected;
         }
+        int num2 = Information.UBound(Notes);
+        for (int j = 1; j <= num2; j++)
+        {
+            if (((flag & array[j]) | (flag2 & !array[j]) && nEnabled(Notes[j].ColumnIndex) && fdrRangeS(xbLim, xbLim2, Conversions.ToBoolean(Interaction.IIf(NTInput, Notes[j].Length, Notes[j].LongNote))) ? true : false) & fdrRangeS(xbLim4, xbLim3, Notes[j].Hidden))
+            {
+                Notes[j].Selected = !fdrCheck(Notes[j]);
+            }
+        }
+        RefreshPanelAll();
+        Interaction.Beep();
     }
 
     public void fdrDelete(int iRange, int xMesL, int xMesU, string xLblL, string xLblU, int xValL, int xValU, int[] iCol)
     {
         fdriMesL = xMesL;
         fdriMesU = xMesU;
-        checked
-        {
-            fdriLblL = Functions.C36to10(xLblL) * 10000;
-            fdriLblU = Functions.C36to10(xLblU) * 10000;
-            fdriValL = xValL;
-            fdriValU = xValU;
-            fdriCol = iCol;
-        }
+        fdriLblL = Functions.C36to10(xLblL) * 10000;
+        fdriLblU = Functions.C36to10(xLblU) * 10000;
+        fdriValL = xValL;
+        fdriValU = xValU;
+        fdriCol = iCol;
         bool flag = iRange % 2 == 0;
         bool flag2 = iRange % 3 == 0;
         bool xbLim = iRange % 5 == 0;
@@ -8937,14 +8773,14 @@ IL_0347:
         int num = 1;
         while (num <= Information.UBound(Notes))
         {
-            if (((((flag & Notes[num].Selected) | (flag2 & !Notes[num].Selected)) && fdrCheck(Notes[num]) && nEnabled(Notes[num].ColumnIndex) && fdrRangeS(xbLim, xbLim2, Conversions.ToBoolean(Interaction.IIf(NTInput, Notes[num].Length, Notes[num].LongNote)))) ? true : false) & fdrRangeS(xbLim4, xbLim3, Notes[num].Hidden))
+            if (((flag & Notes[num].Selected) | (flag2 & !Notes[num].Selected) && fdrCheck(Notes[num]) && nEnabled(Notes[num].ColumnIndex) && fdrRangeS(xbLim, xbLim2, Conversions.ToBoolean(Interaction.IIf(NTInput, Notes[num].Length, Notes[num].LongNote))) ? true : false) & fdrRangeS(xbLim4, xbLim3, Notes[num].Hidden))
             {
                 RedoRemoveNote(Notes[num], ref BaseUndo, ref BaseRedo);
                 RemoveNote(num, SortAndUpdatePairing: false);
             }
             else
             {
-                num = checked(num + 1);
+                num += 1;
             }
         }
         AddUndo(BaseUndo, linkedURCmd.Next);
@@ -8982,7 +8818,7 @@ IL_0347:
             int num2 = Information.UBound(Notes);
             for (int i = 1; i <= num2; i++)
             {
-                if ((((((((flag & Notes[i].Selected) | (flag2 & !Notes[i].Selected)) && fdrCheck(Notes[i]) && nEnabled(Notes[i].ColumnIndex)) ? true : false) & !IsColumnNumeric(Notes[i].ColumnIndex)) && fdrRangeS(xbLim, xbLim2, Conversions.ToBoolean(Interaction.IIf(NTInput, Notes[i].Length, Notes[i].LongNote)))) ? true : false) & fdrRangeS(xbLim4, xbLim3, Notes[i].Hidden))
+                if ((((flag & Notes[i].Selected) | (flag2 & !Notes[i].Selected) && fdrCheck(Notes[i]) && nEnabled(Notes[i].ColumnIndex) ? true : false) & !IsColumnNumeric(Notes[i].ColumnIndex) && fdrRangeS(xbLim, xbLim2, Conversions.ToBoolean(Interaction.IIf(NTInput, Notes[i].Length, Notes[i].LongNote))) ? true : false) & fdrRangeS(xbLim4, xbLim3, Notes[i].Hidden))
                 {
                     RedoRelabelNote(Notes[i], num, ref BaseUndo, ref BaseRedo);
                     Notes[i].Value = num;
@@ -9018,7 +8854,7 @@ IL_0347:
         int num = Information.UBound(Notes);
         for (int i = 1; i <= num; i = checked(i + 1))
         {
-            if ((((((((flag & Notes[i].Selected) | (flag2 & !Notes[i].Selected)) && fdrCheck(Notes[i]) && nEnabled(Notes[i].ColumnIndex)) ? true : false) & IsColumnNumeric(Notes[i].ColumnIndex)) && fdrRangeS(xbLim, xbLim2, Conversions.ToBoolean(Interaction.IIf(NTInput, Notes[i].Length, Notes[i].LongNote)))) ? true : false) & fdrRangeS(xbLim4, xbLim3, Notes[i].Hidden))
+            if ((((flag & Notes[i].Selected) | (flag2 & !Notes[i].Selected) && fdrCheck(Notes[i]) && nEnabled(Notes[i].ColumnIndex) ? true : false) & IsColumnNumeric(Notes[i].ColumnIndex) && fdrRangeS(xbLim, xbLim2, Conversions.ToBoolean(Interaction.IIf(NTInput, Notes[i].Length, Notes[i].LongNote))) ? true : false) & fdrRangeS(xbLim4, xbLim3, Notes[i].Hidden))
             {
                 RedoRelabelNote(Notes[i], xReplaceVal, ref BaseUndo, ref BaseRedo);
                 Notes[i].Value = xReplaceVal;
@@ -9061,7 +8897,7 @@ IL_0347:
                     {
                         RedoMoveNote(Notes[num4], Notes[num4].ColumnIndex, Notes[num4].VPosition + num2, ref BaseUndo, ref BaseRedo);
                         Note[] notes = Notes;
-                        notes[num4].VPosition = notes[num4].VPosition + num2;
+                        notes[num4].VPosition += num2;
                     }
                     else if (Notes[num4].VPosition >= num3)
                     {
@@ -9081,7 +8917,7 @@ IL_0347:
                         double num7 = Conversions.ToDouble(Interaction.IIf(Notes[num4].VPosition + Notes[num4].Length > MeasureBottom[999] - 1.0, GetMaxVPosition() - 1.0 - Notes[num4].VPosition - Notes[num4].Length, num2));
                         RedoLongNoteModify(Notes[num4], Notes[num4].VPosition, Notes[num4].Length + num7, ref BaseUndo, ref BaseRedo);
                         Note[] notes = Notes;
-                        notes[num4].Length = notes[num4].Length + num7;
+                        notes[num4].Length += num7;
                     }
                 }
             }
@@ -9107,7 +8943,7 @@ IL_0347:
                     {
                         RedoMoveNote(Notes[num8], Notes[num8].ColumnIndex, Notes[num8].VPosition + num2, ref BaseUndo, ref BaseRedo);
                         Note[] notes = Notes;
-                        notes[num8].VPosition = notes[num8].VPosition + num2;
+                        notes[num8].VPosition += num2;
                     }
                 }
             }
@@ -9158,7 +8994,7 @@ IL_0347:
                     {
                         RedoMoveNote(Notes[num4], Notes[num4].ColumnIndex, Notes[num4].VPosition - num2, ref BaseUndo, ref BaseRedo);
                         Note[] notes = Notes;
-                        notes[num4].VPosition = notes[num4].VPosition - num2;
+                        notes[num4].VPosition -= num2;
                     }
                     else if (Notes[num4].VPosition >= num3)
                     {
@@ -9178,7 +9014,7 @@ IL_0347:
                         double num7 = Conversions.ToDouble(Interaction.IIf(Notes[num4].VPosition + Notes[num4].Length >= num3 + num2, num2, Notes[num4].VPosition + Notes[num4].Length - num3 + 1.0));
                         RedoLongNoteModify(Notes[num4], Notes[num4].VPosition, Notes[num4].Length - num7, ref BaseUndo, ref BaseRedo);
                         Note[] notes = Notes;
-                        notes[num4].Length = notes[num4].Length - num7;
+                        notes[num4].Length -= num7;
                     }
                 }
             }
@@ -9205,7 +9041,7 @@ IL_0347:
                     {
                         RedoMoveNote(Notes[num8], Notes[num8].ColumnIndex, Notes[num8].VPosition - num2, ref BaseUndo, ref BaseRedo);
                         Note[] notes = Notes;
-                        notes[num8].VPosition = notes[num8].VPosition - num2;
+                        notes[num8].VPosition -= num2;
                     }
                 }
             }
@@ -9473,7 +9309,7 @@ end_IL_0000:;
             }
             catch (Exception obj) when (num3 != 0 && num2 == 0)
             {
-                ProjectData.SetProjectError((Exception)obj);
+                ProjectData.SetProjectError(obj);
                 try0000_dispatch = 367;
                 continue;
             }
@@ -9544,12 +9380,12 @@ end_IL_0000_3:
                     {
                         if (!IsColumnNumeric(Notes[j].ColumnIndex))
                         {
-                            if (Operators.CompareString(Functions.C10to36(unchecked(Notes[j].Value / 10000)), right, TextCompare: false) == 0)
+                            if (Operators.CompareString(Functions.C10to36(Notes[j].Value / 10000), right, TextCompare: false) == 0)
                             {
                                 RedoRelabelNote(Notes[j], i * 10000 + 10000, ref BaseUndo, ref BaseRedo);
                                 Notes[j].Value = i * 10000 + 10000;
                             }
-                            else if (Operators.CompareString(Functions.C10to36(unchecked(Notes[j].Value / 10000)), right2, TextCompare: false) == 0)
+                            else if (Operators.CompareString(Functions.C10to36(Notes[j].Value / 10000), right2, TextCompare: false) == 0)
                             {
                                 RedoRelabelNote(Notes[j], i * 10000, ref BaseUndo, ref BaseRedo);
                                 Notes[j].Value = i * 10000;
@@ -9618,12 +9454,12 @@ end_IL_0000_3:
                     {
                         if (!IsColumnNumeric(Notes[j].ColumnIndex))
                         {
-                            if (Operators.CompareString(Functions.C10to36(unchecked(Notes[j].Value / 10000)), right, TextCompare: false) == 0)
+                            if (Operators.CompareString(Functions.C10to36(Notes[j].Value / 10000), right, TextCompare: false) == 0)
                             {
                                 RedoRelabelNote(Notes[j], i * 10000 + 10000, ref BaseUndo, ref BaseRedo);
                                 Notes[j].Value = i * 10000 + 10000;
                             }
-                            else if (Operators.CompareString(Functions.C10to36(unchecked(Notes[j].Value / 10000)), right2, TextCompare: false) == 0)
+                            else if (Operators.CompareString(Functions.C10to36(Notes[j].Value / 10000), right2, TextCompare: false) == 0)
                             {
                                 RedoRelabelNote(Notes[j], i * 10000 + 20000, ref BaseUndo, ref BaseRedo);
                                 Notes[j].Value = i * 10000 + 20000;
@@ -9713,7 +9549,7 @@ end_IL_0000_3:
 
     private void mnSelectAll_Click(object sender, EventArgs e)
     {
-        if (((PMainIn.Focused || PMainInL.Focused) ? true : false) | PMainInR.Focused)
+        if ((PMainIn.Focused || PMainInL.Focused ? true : false) | PMainInR.Focused)
         {
             int num = Information.UBound(Notes);
             for (int i = 1; i <= num; i = checked(i + 1))
@@ -9733,7 +9569,7 @@ end_IL_0000_3:
 
     private void mnDelete_Click(object sender, EventArgs e)
     {
-        if (((PMainIn.Focused || PMainInL.Focused) ? true : false) | PMainInR.Focused)
+        if ((PMainIn.Focused || PMainInL.Focused ? true : false) | PMainInR.Focused)
         {
             UndoRedo.LinkedURCmd BaseUndo = null;
             UndoRedo.LinkedURCmd BaseRedo = new UndoRedo.Void();
@@ -9911,7 +9747,7 @@ end_IL_0000_3:
             int num = Information.UBound(Notes);
             for (int i = 1; i <= num; i = checked(i + 1))
             {
-                Notes[i].Selected = Notes[i].Selected & nEnabled(Notes[i].ColumnIndex);
+                Notes[i].Selected &= nEnabled(Notes[i].ColumnIndex);
             }
             UpdateColumnsX();
             RefreshPanelAll();
@@ -9927,7 +9763,7 @@ end_IL_0000_3:
             int num = Information.UBound(Notes);
             for (int i = 1; i <= num; i = checked(i + 1))
             {
-                Notes[i].Selected = Notes[i].Selected & nEnabled(Notes[i].ColumnIndex);
+                Notes[i].Selected &= nEnabled(Notes[i].ColumnIndex);
             }
             UpdateColumnsX();
             RefreshPanelAll();
@@ -9943,7 +9779,7 @@ end_IL_0000_3:
             int num = Information.UBound(Notes);
             for (int i = 1; i <= num; i = checked(i + 1))
             {
-                Notes[i].Selected = Notes[i].Selected & nEnabled(Notes[i].ColumnIndex);
+                Notes[i].Selected &= nEnabled(Notes[i].ColumnIndex);
             }
             UpdateColumnsX();
             RefreshPanelAll();
@@ -9959,7 +9795,7 @@ end_IL_0000_3:
             int num = Information.UBound(Notes);
             for (int i = 1; i <= num; i = checked(i + 1))
             {
-                Notes[i].Selected = Notes[i].Selected & nEnabled(Notes[i].ColumnIndex);
+                Notes[i].Selected &= nEnabled(Notes[i].ColumnIndex);
             }
             UpdateColumnsX();
             RefreshPanelAll();
@@ -10031,7 +9867,7 @@ end_IL_0000_3:
                                     {
                                         RedoLongNoteModify(Notes[num25], Notes[num25].VPosition, Notes[num25].Length + num2, ref BaseUndo, ref BaseRedo);
                                         Note[] notes = Notes;
-                                        notes[num25].Length = notes[num25].Length + num2;
+                                        notes[num25].Length += num2;
                                     }
                                 }
                             }
@@ -10048,7 +9884,7 @@ end_IL_0000_3:
                             {
                                 RedoLongNoteModify(Notes[num29], Notes[num29].VPosition + num2, Notes[num29].Length, ref BaseUndo, ref BaseRedo);
                                 Note[] notes = Notes;
-                                notes[num29].VPosition = notes[num29].VPosition + num2;
+                                notes[num29].VPosition += num2;
                             }
                             break;
                         }
@@ -10130,7 +9966,7 @@ end_IL_0000_3:
                                     {
                                         RedoLongNoteModify(Notes[k], Notes[k].VPosition, Notes[k].Length + num2, ref BaseUndo, ref BaseRedo);
                                         Note[] notes = Notes;
-                                        notes[k].Length = notes[k].Length + num2;
+                                        notes[k].Length += num2;
                                     }
                                     else if (Notes[k].VPosition + Notes[k].Length > num4)
                                     {
@@ -10162,7 +9998,7 @@ end_IL_0000_3:
                                 {
                                     RedoLongNoteModify(Notes[k], Notes[k].VPosition + num2, Notes[k].Length, ref BaseUndo, ref BaseRedo);
                                     Note[] notes = Notes;
-                                    notes[k].VPosition = notes[k].VPosition + num2;
+                                    notes[k].VPosition += num2;
                                 }
                             }
                         }
@@ -10193,7 +10029,7 @@ end_IL_0000_3:
                             {
                                 RedoLongNoteModify(Notes[num23], Notes[num23].VPosition + num2, Notes[num23].Length, ref BaseUndo, ref BaseRedo);
                                 Note[] notes = Notes;
-                                notes[num23].VPosition = notes[num23].VPosition + num2;
+                                notes[num23].VPosition += num2;
                             }
                         }
                         break;
@@ -10222,7 +10058,7 @@ end_IL_0000_3:
     {
         int num = Convert.ToInt32(nBeatD.Value);
         int num2 = Convert.ToInt32(nBeatN.Value);
-        double num3 = (double)num2 / (double)num;
+        double num3 = num2 / (double)num;
         ApplyBeat(num3, Conversions.ToString(num3) + " ( " + Conversions.ToString(num2) + " / " + Conversions.ToString(num) + " ) ");
     }
 
@@ -10236,7 +10072,7 @@ end_IL_0000_3:
                 return;
             }
             long denominator = Functions.GetDenominator(result, 2147483647L);
-            ApplyBeat(result, Conversions.ToString(Operators.ConcatenateObject(result, Interaction.IIf(denominator > 10000, "", " ( " + Conversions.ToString(checked((long)Math.Round(result * (double)denominator))) + " / " + Conversions.ToString(denominator) + " ) "))));
+            ApplyBeat(result, Conversions.ToString(Operators.ConcatenateObject(result, Interaction.IIf(denominator > 10000, "", " ( " + Conversions.ToString(checked((long)Math.Round(result * denominator))) + " / " + Conversions.ToString(denominator) + " ) "))));
         }
     }
 
@@ -10500,13 +10336,13 @@ end_IL_0000_3:
                 {
                     if (Notes[i].ColumnIndex == 2)
                     {
-                        num += (Notes[i].VPosition - num2) / (double)num3;
+                        num += (Notes[i].VPosition - num2) / num3;
                         num2 = Notes[i].VPosition;
                         num3 = (int)Notes[i].Value;
                     }
                     else
                     {
-                        Notes[i].VPosition = (double)vBPM * (num + (Notes[i].VPosition - num2) / (double)num3);
+                        Notes[i].VPosition = vBPM * (num + (Notes[i].VPosition - num2) / num3);
                     }
                 }
             }
@@ -10517,17 +10353,17 @@ end_IL_0000_3:
                 {
                     if (Notes[i].ColumnIndex == 2)
                     {
-                        num += (Notes[i].VPosition - num2) / (double)num3;
+                        num += (Notes[i].VPosition - num2) / num3;
                         num2 = Notes[i].VPosition;
                         num3 = (int)Notes[i].Value;
                         continue;
                     }
                     if (Notes[i].Length == 0.0)
                     {
-                        Notes[i].VPosition = (double)vBPM * (num + (Notes[i].VPosition - num2) / (double)num3);
+                        Notes[i].VPosition = vBPM * (num + (Notes[i].VPosition - num2) / num3);
                         continue;
                     }
-                    double num6 = num + (Notes[i].VPosition - num2) / (double)num3;
+                    double num6 = num + (Notes[i].VPosition - num2) / num3;
                     double num7 = num;
                     double num8 = num2;
                     int num9 = num3;
@@ -10537,14 +10373,14 @@ end_IL_0000_3:
                     {
                         if (Notes[j].ColumnIndex == 2)
                         {
-                            num7 += (Notes[j].VPosition - num8) / (double)num9;
+                            num7 += (Notes[j].VPosition - num8) / num9;
                             num8 = Notes[j].VPosition;
                             num9 = (int)Notes[j].Value;
                         }
                     }
-                    double num12 = num7 + (Notes[i].VPosition + Notes[i].Length - num8) / (double)num9;
-                    Notes[i].VPosition = (double)vBPM * num6;
-                    Notes[i].Length = (double)vBPM * num12 - Notes[i].VPosition;
+                    double num12 = num7 + (Notes[i].VPosition + Notes[i].Length - num8) / num9;
+                    Notes[i].VPosition = vBPM * num6;
+                    Notes[i].Length = vBPM * num12 - Notes[i].VPosition;
                 }
             }
             i = 1;
@@ -10572,7 +10408,7 @@ end_IL_0000_3:
             SortByVPositionInsertion();
             UpdatePairing();
             Notes[0].Value = vBPM;
-            THBPM.Value = new decimal((double)vBPM / 10000.0);
+            THBPM.Value = new decimal(vBPM / 10000.0);
             CalculateTotalPlayableNotes();
             CalculateGreatestVPosition();
             RefreshPanelAll();
@@ -10619,10 +10455,10 @@ end_IL_0000_3:
                         int num7 = num2 - 1;
                         for (int l = num; l <= num7; l++)
                         {
-                            if ((Operators.CompareString(GetBMSChannelBy(Notes[l]), text, TextCompare: false) == 0) & (Math.Abs(Notes[l].VPosition - (double)(MeasureAtDisplacement(Notes[l].VPosition) * 192)) > 0.0))
+                            if ((Operators.CompareString(GetBMSChannelBy(Notes[l]), text, TextCompare: false) == 0) & (Math.Abs(Notes[l].VPosition - MeasureAtDisplacement(Notes[l].VPosition) * 192) > 0.0))
                             {
                                 array5 = (double[])Utils.CopyArray(array5, new double[Information.UBound(array5) + 1 + 1]);
-                                array5[Information.UBound(array5)] = Notes[l].VPosition - (double)(i * 192);
+                                array5[Information.UBound(array5)] = Notes[l].VPosition - i * 192;
                                 if (array5[Information.UBound(array5)] < 0.0)
                                 {
                                     array5[Information.UBound(array5)] = 0.0;
@@ -10642,8 +10478,8 @@ end_IL_0000_3:
                             int num12 = Information.UBound(array5);
                             for (int n = 0; n <= num12; n++)
                             {
-                                num10 = (int)Math.Round((double)num10 + Math.Abs(array5[n] - (double)((int)Math.Round(array5[n] / 4.0) * 4)));
-                                num11 = (int)Math.Round((double)num11 + Math.Abs(array5[n] - (double)((int)Math.Round(array5[n] / 3.0) * 3)));
+                                num10 = (int)Math.Round(num10 + Math.Abs(array5[n] - (int)Math.Round(array5[n] / 4.0) * 4));
+                                num11 = (int)Math.Round(num11 + Math.Abs(array5[n] - (int)Math.Round(array5[n] / 3.0) * 3));
                             }
                             bool flag = num10 > num11;
                             array = (string[])Utils.CopyArray(array, new string[Information.UBound(array) + 1 + 1]);
@@ -10667,23 +10503,23 @@ end_IL_0000_3:
                         int num16 = Information.UBound(Notes);
                         for (int num17 = 1; num17 <= num16 && MeasureAtDisplacement(Notes[num17].VPosition) <= num14; num17++)
                         {
-                            if (Operators.CompareString(GetBMSChannelBy(Notes[num17]), text2, TextCompare: false) != 0 || (BMS.IsChannelLongNote(text2) ^ (Notes[num17].Length != 0.0)))
+                            if (Operators.CompareString(GetBMSChannelBy(Notes[num17]), text2, TextCompare: false) != 0 || BMS.IsChannelLongNote(text2) ^ (Notes[num17].Length != 0.0))
                             {
                                 continue;
                             }
-                            if (MeasureAtDisplacement(Notes[num17].VPosition) == num14 && Math.Abs(Notes[num17].VPosition - (double)(MeasureAtDisplacement(Notes[num17].VPosition) * 192)) > 0.0)
+                            if (MeasureAtDisplacement(Notes[num17].VPosition) == num14 && Math.Abs(Notes[num17].VPosition - MeasureAtDisplacement(Notes[num17].VPosition) * 192) > 0.0)
                             {
                                 array7 = (double[])Utils.CopyArray(array7, new double[Information.UBound(array7) + 1 + 1]);
-                                array7[Information.UBound(array7)] = Notes[num17].VPosition - (double)(num14 * 192);
+                                array7[Information.UBound(array7)] = Notes[num17].VPosition - num14 * 192;
                                 if (array7[Information.UBound(array7)] < 0.0)
                                 {
                                     array7[Information.UBound(array7)] = 0.0;
                                 }
                             }
-                            if (Notes[num17].Length != 0.0 && MeasureAtDisplacement(Notes[num17].VPosition + Notes[num17].Length) == num14 && Notes[num17].VPosition + Notes[num17].Length - (double)(num14 * 192) != 0.0)
+                            if (Notes[num17].Length != 0.0 && MeasureAtDisplacement(Notes[num17].VPosition + Notes[num17].Length) == num14 && Notes[num17].VPosition + Notes[num17].Length - num14 * 192 != 0.0)
                             {
                                 array7 = (double[])Utils.CopyArray(array7, new double[Information.UBound(array7) + 1 + 1]);
-                                array7[Information.UBound(array7)] = Notes[num17].VPosition + Notes[num17].Length - (double)(num14 * 192);
+                                array7[Information.UBound(array7)] = Notes[num17].VPosition + Notes[num17].Length - num14 * 192;
                                 if (array7[Information.UBound(array7)] < 0.0)
                                 {
                                     array7[Information.UBound(array7)] = 0.0;
@@ -10703,8 +10539,8 @@ end_IL_0000_3:
                             int num23 = Information.UBound(array7);
                             for (int num24 = 0; num24 <= num23; num24++)
                             {
-                                num21 = (int)Math.Round((double)num21 + Math.Abs(array7[num24] - (double)((int)Math.Round(array7[num24] / 4.0) * 4)));
-                                num22 = (int)Math.Round((double)num22 + Math.Abs(array7[num24] - (double)((int)Math.Round(array7[num24] / 3.0) * 3)));
+                                num21 = (int)Math.Round(num21 + Math.Abs(array7[num24] - (int)Math.Round(array7[num24] / 4.0) * 4));
+                                num22 = (int)Math.Round(num22 + Math.Abs(array7[num24] - (int)Math.Round(array7[num24] / 3.0) * 3));
                             }
                             bool flag2 = num21 > num22;
                             array = (string[])Utils.CopyArray(array, new string[Information.UBound(array) + 1 + 1]);
@@ -10759,7 +10595,7 @@ end_IL_0000_3:
                             {
                                 vPosition = Conversions.ToDouble(Operators.MultiplyObject(Conversions.ToLong(Operators.DivideObject(Notes[l].VPosition, Interaction.IIf(adj2.AdjTo64, 3, 4))), Interaction.IIf(adj2.AdjTo64, 3, 4)));
                             }
-                            if (((Notes[l].Length > 0.0 && MeasureAtDisplacement(Notes[l].VPosition + Notes[l].Length) == adj2.Measure) ? true : false) & (Notes[l].ColumnIndex == adj2.ColumnIndex) & (Notes[l].Hidden == adj2.Hidden))
+                            if ((Notes[l].Length > 0.0 && MeasureAtDisplacement(Notes[l].VPosition + Notes[l].Length) == adj2.Measure ? true : false) & (Notes[l].ColumnIndex == adj2.ColumnIndex) & (Notes[l].Hidden == adj2.Hidden))
                             {
                                 num3 = Conversions.ToDouble(Operators.MultiplyObject(Conversions.ToLong(Operators.DivideObject(Notes[l].VPosition + Notes[l].Length, Interaction.IIf(adj2.AdjTo64, 3, 4))), Interaction.IIf(adj2.AdjTo64, 3, 4)));
                             }
@@ -10823,7 +10659,7 @@ end_IL_0000_3:
             int xHS = PanelHScroll[xIndex];
             int xVS = PanelVScroll[xIndex];
             int num2 = checked(-PanelVScroll[xIndex]);
-            int xVSu = Conversions.ToInteger(Interaction.IIf((double)((float)num2 + (float)num / gxHeight) > GetMaxVPosition(), GetMaxVPosition(), (float)num2 + (float)num / gxHeight));
+            int xVSu = Conversions.ToInteger(Interaction.IIf(num2 + num / gxHeight > GetMaxVPosition(), GetMaxVPosition(), num2 + num / gxHeight));
             int xI = default(int);
             DrawBackgroundColor(bufferedGraphics, num, xTWidth, xHS, xI);
             xI = DrawPanelLines(bufferedGraphics, num, xTWidth, xHS, xVS, xVSu);
@@ -10835,7 +10671,7 @@ end_IL_0000_3:
             {
                 DrawMouseOver(bufferedGraphics, num, xHS, xVS);
             }
-            if (ShouldDrawTempNote && ((SelectedColumn > -1) & (TempVPosition > -1.0)))
+            if (ShouldDrawTempNote && (SelectedColumn > -1) & (TempVPosition > -1.0))
             {
                 DrawTempNote(bufferedGraphics, num, xHS, xVS);
             }
@@ -10893,8 +10729,8 @@ end_IL_0000_3:
                 color2 = Color.Red;
             }
             var brush2 = new LinearGradientBrush(point, point2, color, color2);
-            e1.Graphics.FillRectangle(brush2, HorizontalPositiontoDisplay(nLeft(SelectedColumn), xHS) + 2, NoteRowToPanelHeight(TempVPosition, xVS, xTHeight) - vo.kHeight + 1, (float)GetColumnWidth(SelectedColumn) * gxWidth - 3f, vo.kHeight - 1);
-            e1.Graphics.DrawRectangle(pen, HorizontalPositiontoDisplay(nLeft(SelectedColumn), xHS) + 1, NoteRowToPanelHeight(TempVPosition, xVS, xTHeight) - vo.kHeight, (float)GetColumnWidth(SelectedColumn) * gxWidth - 2f, vo.kHeight);
+            e1.Graphics.FillRectangle(brush2, HorizontalPositiontoDisplay(nLeft(SelectedColumn), xHS) + 2, NoteRowToPanelHeight(TempVPosition, xVS, xTHeight) - vo.kHeight + 1, GetColumnWidth(SelectedColumn) * gxWidth - 3f, vo.kHeight - 1);
+            e1.Graphics.DrawRectangle(pen, HorizontalPositiontoDisplay(nLeft(SelectedColumn), xHS) + 1, NoteRowToPanelHeight(TempVPosition, xVS, xTHeight) - vo.kHeight, GetColumnWidth(SelectedColumn) * gxWidth - 2f, vo.kHeight);
             e1.Graphics.DrawString(s, vo.kFont, brush, HorizontalPositiontoDisplay(nLeft(SelectedColumn), xHS) + vo.kLabelHShiftL - 2, NoteRowToPanelHeight(TempVPosition, xVS, xTHeight) - vo.kHeight + vo.kLabelVShift);
         }
     }
@@ -10904,8 +10740,8 @@ end_IL_0000_3:
         if (Information.UBound(DDFileName) > -1)
         {
             SolidBrush brush = new SolidBrush(Color.FromArgb(-1056964609));
-            float num = (float)((double)spMain[xIndex].DisplayRectangle.Width / 2.0);
-            float num2 = (float)((double)spMain[xIndex].DisplayRectangle.Height / 2.0);
+            float num = (float)(spMain[xIndex].DisplayRectangle.Width / 2.0);
+            float num2 = (float)(spMain[xIndex].DisplayRectangle.Height / 2.0);
             StringFormat stringFormat = new StringFormat();
             stringFormat.Alignment = StringAlignment.Center;
             stringFormat.LineAlignment = StringAlignment.Center;
@@ -10933,10 +10769,10 @@ end_IL_0000_3:
     {
         var clamp = delegate (object x) { return Interaction.IIf(Operators.ConditionalCompareObjectGreater(x, 255, TextCompare: false), 255, RuntimeHelpers.GetObjectValue(x)); };
         return Color.FromArgb(
-            Conversions.ToInteger(clamp((double)(int)col.A * factor)), 
-            Conversions.ToInteger(clamp((double)(int)col.R * factor)), 
-            Conversions.ToInteger(clamp((double)(int)col.G * factor)), 
-            Conversions.ToInteger(clamp((double)(int)col.B * factor))
+            Conversions.ToInteger(clamp(col.A * factor)),
+            Conversions.ToInteger(clamp(col.R * factor)),
+            Conversions.ToInteger(clamp(col.G * factor)),
+            Conversions.ToInteger(clamp(col.B * factor))
           );
     }
 
@@ -10952,9 +10788,9 @@ end_IL_0000_3:
             var color2 = default(Color);
             for (xI1 = 0; xI1 <= num; xI1++)
             {
-                if (!((float)nLeft(xI1 + 1) * gxWidth - (float)xHS * gxWidth + 1f < 0f))
+                if (!(nLeft(xI1 + 1) * gxWidth - xHS * gxWidth + 1f < 0f))
                 {
-                    if ((float)nLeft(xI1) * gxWidth - (float)xHS * gxWidth + 1f > (float)xTWidth)
+                    if (nLeft(xI1) * gxWidth - xHS * gxWidth + 1f > xTWidth)
                     {
                         break;
                     }
@@ -10965,10 +10801,10 @@ end_IL_0000_3:
                         {
                             var num2 = 1.2;
                             var columnHighlightColor = GetColumnHighlightColor(color);
-                            color = ((columnHighlightColor != null) ? ((Color)columnHighlightColor) : color2);
+                            color = columnHighlightColor != null ? (Color)columnHighlightColor : color2;
                         }
                         var brush = new SolidBrush(color);
-                        e1.Graphics.FillRectangle(brush, (float)nLeft(xI1) * gxWidth - (float)xHS * gxWidth + 1f, 0f, (float)GetColumnWidth(xI1) * gxWidth, xTHeight);
+                        e1.Graphics.FillRectangle(brush, nLeft(xI1) * gxWidth - xHS * gxWidth + 1f, 0f, GetColumnWidth(xI1) * gxWidth, xTHeight);
                     }
                 }
             }
@@ -10984,15 +10820,15 @@ end_IL_0000_3:
                 var num = gColumns;
                 for (xI1 = 0; xI1 <= num; xI1++)
                 {
-                    if (!((float)nLeft(xI1 + 1) * gxWidth - (float)xHS * gxWidth + 1f < 0f))
+                    if (!(nLeft(xI1 + 1) * gxWidth - xHS * gxWidth + 1f < 0f))
                     {
-                        if ((float)nLeft(xI1) * gxWidth - (float)xHS * gxWidth + 1f > (float)xTWidth)
+                        if (nLeft(xI1) * gxWidth - xHS * gxWidth + 1f > xTWidth)
                         {
                             break;
                         }
                         if (GetColumnWidth(xI1) > 0)
                         {
-                            e1.Graphics.DrawString(nTitle(xI1), vo.ColumnTitleFont, vo.ColumnTitle, (float)nLeft(xI1) * gxWidth - (float)xHS * gxWidth, 0f);
+                            e1.Graphics.DrawString(nTitle(xI1), vo.ColumnTitleFont, vo.ColumnTitle, nLeft(xI1) * gxWidth - xHS * gxWidth, 0f);
                         }
                     }
                 }
@@ -11010,10 +10846,10 @@ end_IL_0000_3:
                 var num = gColumns;
                 for (var i = 0; i <= num; i++)
                 {
-                    var num2 = (float)nLeft(i) * gxWidth - (float)xHS * gxWidth;
+                    var num2 = nLeft(i) * gxWidth - xHS * gxWidth;
                     if (!(num2 + 1f < 0f))
                     {
-                        if (num2 + 1f > (float)xTWidth)
+                        if (num2 + 1f > xTWidth)
                         {
                             break;
                         }
@@ -11046,7 +10882,7 @@ end_IL_0000_3:
                     }
                     if (gShowMeasureNumber)
                     {
-                        e1.Graphics.DrawString("[" + Functions.Add3Zeros(Conversions.ToInteger(CounterResult)).ToString() + "]", vo.kMFont, new SolidBrush(GetColumn(0).cText), (float)(-xHS) * gxWidth, num3 - vo.kMFont.Height);
+                        e1.Graphics.DrawString("[" + Functions.Add3Zeros(Conversions.ToInteger(CounterResult)).ToString() + "]", vo.kMFont, new SolidBrush(GetColumn(0).cText), -xHS * gxWidth, num3 - vo.kMFont.Height);
                     }
                 }
                 while (ObjectFlowControl.ForLoopControl.ForNextCheckObj(CounterResult, LoopForResult, ref CounterResult));
@@ -11064,26 +10900,26 @@ end_IL_0000_3:
         int num = 0;
         double num2 = MeasureUpper(measureIndex);
         double num3 = MeasureBottom[measureIndex];
-        double num4 = 192.0 / (double)divisions;
+        double num4 = 192.0 / divisions;
         while (num3 < num2)
         {
             int num5 = NoteRowToPanelHeight(num3, xVS, xTHeight);
             e1.Graphics.DrawLine(pen, 0, num5, xTWidth, num5);
             num = checked(num + 1);
-            num3 = MeasureBottom[measureIndex] + (double)num * num4;
+            num3 = MeasureBottom[measureIndex] + num * num4;
         }
     }
 
     private bool IsNoteVisible(Note note, int xTHeight, int xVS)
     {
-        float num = (float)Math.Abs(xVS) + (float)xTHeight / gxHeight;
-        float num2 = (float)Math.Abs(xVS) - (float)vo.kHeight / gxHeight;
-        bool flag = note.VPosition >= (double)num2;
-        bool flag2 = note.VPosition <= (double)num2;
-        bool flag3 = note.VPosition + note.Length >= (double)num2;
+        float num = Math.Abs(xVS) + xTHeight / gxHeight;
+        float num2 = Math.Abs(xVS) - vo.kHeight / gxHeight;
+        bool flag = note.VPosition >= num2;
+        bool flag2 = note.VPosition <= num2;
+        bool flag3 = note.VPosition + note.Length >= num2;
         bool flag4 = flag2 && flag3;
-        bool flag5 = (note.VPosition <= (double)num2) & (Notes[note.LNPair].VPosition >= (double)num2);
-        bool flag6 = note.VPosition > (double)num;
+        bool flag5 = (note.VPosition <= num2) & (Notes[note.LNPair].VPosition >= num2);
+        bool flag6 = note.VPosition > num;
         if (!(!flag6 && flag) && !flag4 && !flag4)
         {
             return false;
@@ -11098,10 +10934,10 @@ end_IL_0000_3:
 
     private void DrawNotes(BufferedGraphics e1, int xTHeight, int xHS, int xVS)
     {
-        float num = (float)Math.Abs(xVS) + (float)xTHeight / gxHeight;
-        float num2 = (float)Math.Abs(xVS) - (float)vo.kHeight / gxHeight;
+        float num = Math.Abs(xVS) + xTHeight / gxHeight;
+        float num2 = Math.Abs(xVS) - vo.kHeight / gxHeight;
         int num3 = Information.UBound(Notes);
-        for (int i = 0; i <= num3 && !(Notes[i].VPosition > (double)num); i = checked(i + 1))
+        for (int i = 0; i <= num3 && !(Notes[i].VPosition > num); i = checked(i + 1))
         {
             if (IsNoteVisible(i, xTHeight, xVS))
             {
@@ -11123,8 +10959,8 @@ end_IL_0000_3:
         checked
         {
             var num2 = Conversions.ToInteger(Interaction.IIf(!NTInput | (bAdjustLength & !bAdjustUpper), NoteRowToPanelHeight(note.VPosition, xVS, xTHeight) - vo.kHeight - 1, NoteRowToPanelHeight(note.VPosition + note.Length, xVS, xTHeight) - vo.kHeight - 1));
-            var num3 = (int)Math.Round((float)GetColumnWidth(note.ColumnIndex) * gxWidth + 1f);
-            var num4 = Conversions.ToInteger(Interaction.IIf(!NTInput | bAdjustLength, vo.kHeight + 3, note.Length * (double)gxHeight + (double)vo.kHeight + 3.0));
+            var num3 = (int)Math.Round(GetColumnWidth(note.ColumnIndex) * gxWidth + 1f);
+            var num4 = Conversions.ToInteger(Interaction.IIf(!NTInput | bAdjustLength, vo.kHeight + 3, note.Length * gxHeight + vo.kHeight + 3.0));
             return new Rectangle(num, num2, num3, num4);
         }
     }
@@ -11242,12 +11078,12 @@ end_IL_0000_3:
                     break;
                 }
             }
-            e1.Graphics.FillRectangle(vo.PESel, 0, NoteRowToPanelHeight(Conversions.ToDouble(Operators.AddObject(vSelStart, Interaction.IIf(vSelLength > 0.0, vSelLength, 0))), xVS, xTHeight) + Math.Abs(unchecked(0 - ((vSelLength != 0.0) ? 1 : 0))), xTWidth, (int)Math.Round(Math.Abs(vSelLength) * (double)gxHeight));
+            e1.Graphics.FillRectangle(vo.PESel, 0, NoteRowToPanelHeight(Conversions.ToDouble(Operators.AddObject(vSelStart, Interaction.IIf(vSelLength > 0.0, vSelLength, 0))), xVS, xTHeight) + Math.Abs(unchecked(0 - (vSelLength != 0.0 ? 1 : 0))), xTWidth, (int)Math.Round(Math.Abs(vSelLength) * gxHeight));
             e1.Graphics.DrawLine(vo.PECursor, 0, NoteRowToPanelHeight(vSelStart + vSelLength, xVS, xTHeight), xTWidth, NoteRowToPanelHeight(vSelStart + vSelLength, xVS, xTHeight));
             e1.Graphics.DrawLine(vo.PEHalf, 0, NoteRowToPanelHeight(vSelStart + vSelHalf, xVS, xTHeight), xTWidth, NoteRowToPanelHeight(vSelStart + vSelHalf, xVS, xTHeight));
-            e1.Graphics.DrawString(Conversions.ToString((double)value / 10000.0), vo.PEBPMFont, vo.PEBPM, (float)(-xHS + nLeft(2)) * gxWidth, NoteRowToPanelHeight(vSelStart, xVS, xTHeight) - vo.PEBPMFont.Height + 3);
-            e1.Graphics.DrawString(Conversions.ToString((double)value2 / 10000.0), vo.PEBPMFont, vo.PEBPM, (float)(-xHS + nLeft(2)) * gxWidth, NoteRowToPanelHeight(vSelStart + vSelHalf, xVS, xTHeight) - vo.PEBPMFont.Height + 3);
-            e1.Graphics.DrawString(Conversions.ToString((double)value3 / 10000.0), vo.PEBPMFont, vo.PEBPM, (float)(-xHS + nLeft(2)) * gxWidth, NoteRowToPanelHeight(vSelStart + vSelLength, xVS, xTHeight) - vo.PEBPMFont.Height + 3);
+            e1.Graphics.DrawString(Conversions.ToString(value / 10000.0), vo.PEBPMFont, vo.PEBPM, (-xHS + nLeft(2)) * gxWidth, NoteRowToPanelHeight(vSelStart, xVS, xTHeight) - vo.PEBPMFont.Height + 3);
+            e1.Graphics.DrawString(Conversions.ToString(value2 / 10000.0), vo.PEBPMFont, vo.PEBPM, (-xHS + nLeft(2)) * gxWidth, NoteRowToPanelHeight(vSelStart + vSelHalf, xVS, xTHeight) - vo.PEBPMFont.Height + 3);
+            e1.Graphics.DrawString(Conversions.ToString(value3 / 10000.0), vo.PEBPMFont, vo.PEBPM, (-xHS + nLeft(2)) * gxWidth, NoteRowToPanelHeight(vSelStart + vSelLength, xVS, xTHeight) - vo.PEBPMFont.Height + 3);
             if (vSelMouseOverLine == 1)
             {
                 e1.Graphics.DrawRectangle(vo.PEMouseOver, 0, NoteRowToPanelHeight(vSelStart, xVS, xTHeight) - 1, xTWidth - 1, 2);
@@ -11276,17 +11112,17 @@ end_IL_0000_3:
             float num4 = Cursor.Position.Y - point.Y;
             double num5 = Math.Atan2(num4 - num2, num3 - num);
             e1.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-            if (!unchecked(num == num3 && num2 == num4))
+            if (!(num == num3 && num2 == num4))
             {
                 PointF[] array = new PointF[3];
                 ref PointF reference = ref array[0];
                 PointF pointF = new PointF(num3, num4);
                 reference = pointF;
                 ref PointF reference2 = ref array[1];
-                PointF pointF2 = new PointF((float)(Math.Cos(num5 + Math.PI / 2.0) * 10.0 + (double)num), (float)(Math.Sin(num5 + Math.PI / 2.0) * 10.0 + (double)num2));
+                PointF pointF2 = new PointF((float)(Math.Cos(num5 + Math.PI / 2.0) * 10.0 + num), (float)(Math.Sin(num5 + Math.PI / 2.0) * 10.0 + num2));
                 reference2 = pointF2;
                 ref PointF reference3 = ref array[2];
-                PointF pointF3 = new PointF((float)(Math.Cos(num5 - Math.PI / 2.0) * 10.0 + (double)num), (float)(Math.Sin(num5 - Math.PI / 2.0) * 10.0 + (double)num2));
+                PointF pointF3 = new PointF((float)(Math.Cos(num5 - Math.PI / 2.0) * 10.0 + num), (float)(Math.Sin(num5 - Math.PI / 2.0) * 10.0 + num2));
                 reference3 = pointF3;
                 Graphics graphics = e1.Graphics;
                 p = new Point((int)Math.Round(num), (int)Math.Round(num2));
@@ -11326,7 +11162,7 @@ end_IL_0000_3:
             double[] array3 = new double[1] { wPosition };
             decimal[] array4 = new decimal[1]
             {
-                new decimal((double)Notes[0].Value / 10000.0)
+                new decimal(Notes[0].Value / 10000.0)
             };
             decimal[] array5 = new decimal[1] { 0m };
             int num2 = Information.UBound(Notes);
@@ -11341,40 +11177,40 @@ end_IL_0000_3:
                         array5 = (decimal[])Utils.CopyArray(array5, new decimal[Information.UBound(array5) + 1 + 1]);
                         array3[Information.UBound(array3)] = Notes[xI1].VPosition;
                         ref decimal reference = ref array4[Information.UBound(array4)];
-                        reference = new decimal((double)Notes[xI1].Value / 10000.0);
+                        reference = new decimal(Notes[xI1].Value / 10000.0);
                         ref decimal reference2 = ref array5[Information.UBound(array5)];
-                        reference2 = new decimal((Notes[xI1].VPosition - array3[Information.UBound(array3) - 1]) * 1.25 * (double)wSampleRate / Convert.ToDouble(array4[Information.UBound(array4) - 1]) + Convert.ToDouble(array5[Information.UBound(array5) - 1]));
+                        reference2 = new decimal((Notes[xI1].VPosition - array3[Information.UBound(array3) - 1]) * 1.25 * wSampleRate / Convert.ToDouble(array4[Information.UBound(array4) - 1]) + Convert.ToDouble(array5[Information.UBound(array5) - 1]));
                     }
                     else
                     {
                         ref decimal reference3 = ref array4[0];
-                        reference3 = new decimal((double)Notes[xI1].Value / 10000.0);
+                        reference3 = new decimal(Notes[xI1].Value / 10000.0);
                     }
                 }
             }
             int num3 = 0;
             for (xI1 = xTHeight * wPrecision; xI1 >= 0; xI1 += -1)
             {
-                double num4 = ((double)(-xI1) / (double)wPrecision + (double)xTHeight + (double)((float)xVSR * gxHeight) - 1.0) / (double)gxHeight;
+                double num4 = (-xI1 / (double)wPrecision + xTHeight + xVSR * gxHeight - 1.0) / gxHeight;
                 int num5 = Information.UBound(array3);
                 for (num3 = 1; num3 <= num5 && !(array3[num3] >= num4); num3++)
                 {
                 }
                 num3--;
-                double num6 = Convert.ToDouble(array5[num3]) + (num4 - array3[num3]) * 1.25 * (double)wSampleRate / Convert.ToDouble(array4[num3]);
-                if (unchecked(num6 <= (double)Information.UBound(wWavL) && num6 >= 0.0))
+                double num6 = Convert.ToDouble(array5[num3]) + (num4 - array3[num3]) * 1.25 * wSampleRate / Convert.ToDouble(array4[num3]);
+                if (num6 <= Information.UBound(wWavL) && num6 >= 0.0)
                 {
                     ref PointF reference4 = ref array[xI1];
-                    reference4 = new PointF(wWavL[(int)Math.Round(Conversion.Int(num6))] * (float)wWidth + (float)wLeft, (float)((double)xI1 / (double)wPrecision));
+                    reference4 = new PointF(wWavL[(int)Math.Round(Conversion.Int(num6))] * wWidth + wLeft, (float)(xI1 / (double)wPrecision));
                     ref PointF reference5 = ref array2[xI1];
-                    reference5 = new PointF(wWavR[(int)Math.Round(Conversion.Int(num6))] * (float)wWidth + (float)wLeft, (float)((double)xI1 / (double)wPrecision));
+                    reference5 = new PointF(wWavR[(int)Math.Round(Conversion.Int(num6))] * wWidth + wLeft, (float)(xI1 / (double)wPrecision));
                 }
                 else
                 {
                     ref PointF reference6 = ref array[xI1];
-                    reference6 = new PointF(wLeft, (float)((double)xI1 / (double)wPrecision));
+                    reference6 = new PointF(wLeft, (float)(xI1 / (double)wPrecision));
                     ref PointF reference7 = ref array2[xI1];
-                    reference7 = new PointF(wLeft, (float)((double)xI1 / (double)wPrecision));
+                    reference7 = new PointF(wLeft, (float)(xI1 / (double)wPrecision));
                 }
             }
             e1.Graphics.DrawLines(vo.pBGMWav, array);
@@ -11426,20 +11262,20 @@ end_IL_0000_3:
             }
             pen = new Pen(color);
             var brush2 = new LinearGradientBrush(point, point2, color, color2);
-            e.Graphics.FillRectangle(brush2, HorizontalPositiontoDisplay(nLeft(sNote.ColumnIndex), xHS) + 2, NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - vo.kHeight + 1, (float)GetColumnWidth(sNote.ColumnIndex) * gxWidth - 3f, vo.kHeight - 1);
-            e.Graphics.DrawRectangle(pen, HorizontalPositiontoDisplay(nLeft(sNote.ColumnIndex), xHS) + 1, NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - vo.kHeight, (float)GetColumnWidth(sNote.ColumnIndex) * gxWidth - 2f, vo.kHeight);
-            e.Graphics.DrawString(Conversions.ToString(Interaction.IIf(IsColumnNumeric(sNote.ColumnIndex), (double)sNote.Value / 10000.0, text)), vo.kFont, brush, HorizontalPositiontoDisplay(nLeft(sNote.ColumnIndex), xHS) + vo.kLabelHShift, NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - vo.kHeight + vo.kLabelVShift);
+            e.Graphics.FillRectangle(brush2, HorizontalPositiontoDisplay(nLeft(sNote.ColumnIndex), xHS) + 2, NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - vo.kHeight + 1, GetColumnWidth(sNote.ColumnIndex) * gxWidth - 3f, vo.kHeight - 1);
+            e.Graphics.DrawRectangle(pen, HorizontalPositiontoDisplay(nLeft(sNote.ColumnIndex), xHS) + 1, NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - vo.kHeight, GetColumnWidth(sNote.ColumnIndex) * gxWidth - 2f, vo.kHeight);
+            e.Graphics.DrawString(Conversions.ToString(Interaction.IIf(IsColumnNumeric(sNote.ColumnIndex), sNote.Value / 10000.0, text)), vo.kFont, brush, HorizontalPositiontoDisplay(nLeft(sNote.ColumnIndex), xHS) + vo.kLabelHShift, NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - vo.kHeight + vo.kLabelVShift);
             if (sNote.ColumnIndex < 27 && sNote.LNPair != 0)
             {
                 DrawPairedLNBody(sNote, e, xHS, xVS, xHeight, num);
             }
             if (ErrorCheck && sNote.HasError)
             {
-                e.Graphics.DrawImage(Resources.ImageError, HorizontalPositiontoDisplay((int)Math.Round((double)nLeft(sNote.ColumnIndex) + (double)GetColumnWidth(sNote.ColumnIndex) / 2.0), xHS) - 12, (int)Math.Round((double)NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - (double)vo.kHeight / 2.0 - 12.0), 24, 24);
+                e.Graphics.DrawImage(Resources.ImageError, HorizontalPositiontoDisplay((int)Math.Round(nLeft(sNote.ColumnIndex) + GetColumnWidth(sNote.ColumnIndex) / 2.0), xHS) - 12, (int)Math.Round(NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - vo.kHeight / 2.0 - 12.0), 24, 24);
             }
             if (sNote.Selected)
             {
-                e.Graphics.DrawRectangle(vo.kSelected, HorizontalPositiontoDisplay(nLeft(sNote.ColumnIndex), xHS), NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - vo.kHeight - 1, (float)GetColumnWidth(sNote.ColumnIndex) * gxWidth, vo.kHeight + 2);
+                e.Graphics.DrawRectangle(vo.kSelected, HorizontalPositiontoDisplay(nLeft(sNote.ColumnIndex), xHS), NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - vo.kHeight - 1, GetColumnWidth(sNote.ColumnIndex) * gxWidth, vo.kHeight + 2);
             }
         }
     }
@@ -11449,11 +11285,11 @@ end_IL_0000_3:
         Pen pen = new Pen(GetColumn(sNote.ColumnIndex).getLongBright(xAlpha));
         checked
         {
-            Point point = new Point(HorizontalPositiontoDisplay((int)Math.Round((double)nLeft(sNote.ColumnIndex) - 0.5 * (double)GetColumnWidth(sNote.ColumnIndex)), xHS), NoteRowToPanelHeight(Notes[sNote.LNPair].VPosition, xVS, xHeight));
-            Point point2 = new Point(HorizontalPositiontoDisplay((int)Math.Round((double)nLeft(sNote.ColumnIndex) + 1.5 * (double)GetColumnWidth(sNote.ColumnIndex)), xHS), NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) + vo.kHeight);
+            Point point = new Point(HorizontalPositiontoDisplay((int)Math.Round(nLeft(sNote.ColumnIndex) - 0.5 * GetColumnWidth(sNote.ColumnIndex)), xHS), NoteRowToPanelHeight(Notes[sNote.LNPair].VPosition, xVS, xHeight));
+            Point point2 = new Point(HorizontalPositiontoDisplay((int)Math.Round(nLeft(sNote.ColumnIndex) + 1.5 * GetColumnWidth(sNote.ColumnIndex)), xHS), NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) + vo.kHeight);
             LinearGradientBrush brush = new LinearGradientBrush(point, point2, GetColumn(sNote.ColumnIndex).getLongBright(xAlpha), GetColumn(sNote.ColumnIndex).getLongDark(xAlpha));
-            e.Graphics.FillRectangle(brush, HorizontalPositiontoDisplay(nLeft(Notes[sNote.LNPair].ColumnIndex), xHS) + 3, NoteRowToPanelHeight(Notes[sNote.LNPair].VPosition, xVS, xHeight) + 1, (float)GetColumnWidth(Notes[sNote.LNPair].ColumnIndex) * gxWidth - 5f, NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - NoteRowToPanelHeight(Notes[sNote.LNPair].VPosition, xVS, xHeight) - vo.kHeight - 1);
-            e.Graphics.DrawRectangle(pen, HorizontalPositiontoDisplay(nLeft(Notes[sNote.LNPair].ColumnIndex), xHS) + 2, NoteRowToPanelHeight(Notes[sNote.LNPair].VPosition, xVS, xHeight), (float)GetColumnWidth(Notes[sNote.LNPair].ColumnIndex) * gxWidth - 4f, NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - NoteRowToPanelHeight(Notes[sNote.LNPair].VPosition, xVS, xHeight) - vo.kHeight);
+            e.Graphics.FillRectangle(brush, HorizontalPositiontoDisplay(nLeft(Notes[sNote.LNPair].ColumnIndex), xHS) + 3, NoteRowToPanelHeight(Notes[sNote.LNPair].VPosition, xVS, xHeight) + 1, GetColumnWidth(Notes[sNote.LNPair].ColumnIndex) * gxWidth - 5f, NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - NoteRowToPanelHeight(Notes[sNote.LNPair].VPosition, xVS, xHeight) - vo.kHeight - 1);
+            e.Graphics.DrawRectangle(pen, HorizontalPositiontoDisplay(nLeft(Notes[sNote.LNPair].ColumnIndex), xHS) + 2, NoteRowToPanelHeight(Notes[sNote.LNPair].VPosition, xVS, xHeight), GetColumnWidth(Notes[sNote.LNPair].ColumnIndex) * gxWidth - 4f, NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - NoteRowToPanelHeight(Notes[sNote.LNPair].VPosition, xVS, xHeight) - vo.kHeight);
         }
     }
 
@@ -11495,28 +11331,28 @@ end_IL_0000_3:
             }
             else
             {
-                point = new Point(HorizontalPositiontoDisplay((int)Math.Round((double)nLeft(sNote.ColumnIndex) - 0.5 * (double)GetColumnWidth(sNote.ColumnIndex)), xHS), NoteRowToPanelHeight(sNote.VPosition + sNote.Length, xVS, xHeight) - vo.kHeight);
-                point2 = new Point(HorizontalPositiontoDisplay((int)Math.Round((double)nLeft(sNote.ColumnIndex) + 1.5 * (double)GetColumnWidth(sNote.ColumnIndex)), xHS), NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight));
+                point = new Point(HorizontalPositiontoDisplay((int)Math.Round(nLeft(sNote.ColumnIndex) - 0.5 * GetColumnWidth(sNote.ColumnIndex)), xHS), NoteRowToPanelHeight(sNote.VPosition + sNote.Length, xVS, xHeight) - vo.kHeight);
+                point2 = new Point(HorizontalPositiontoDisplay((int)Math.Round(nLeft(sNote.ColumnIndex) + 1.5 * GetColumnWidth(sNote.ColumnIndex)), xHS), NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight));
                 color = GetColumn(sNote.ColumnIndex).getLongBright(num);
                 color2 = GetColumn(sNote.ColumnIndex).getLongDark(num);
                 brush = new SolidBrush(GetColumn(sNote.ColumnIndex).cLText);
             }
             Pen pen = new Pen(color);
             LinearGradientBrush brush2 = new LinearGradientBrush(point, point2, color, color2);
-            e.Graphics.FillRectangle(brush2, HorizontalPositiontoDisplay(nLeft(sNote.ColumnIndex), xHS) + 1, NoteRowToPanelHeight(sNote.VPosition + sNote.Length, xVS, xHeight) - vo.kHeight + 1, (float)GetColumnWidth(sNote.ColumnIndex) * gxWidth - 1f, (int)Math.Round(sNote.Length * (double)gxHeight) + vo.kHeight - 1);
-            e.Graphics.DrawRectangle(pen, HorizontalPositiontoDisplay(nLeft(sNote.ColumnIndex), xHS) + 1, NoteRowToPanelHeight(sNote.VPosition + sNote.Length, xVS, xHeight) - vo.kHeight, (float)GetColumnWidth(sNote.ColumnIndex) * gxWidth - 3f, (int)Math.Round(sNote.Length * (double)gxHeight) + vo.kHeight);
-            e.Graphics.DrawString(Conversions.ToString(Interaction.IIf(IsColumnNumeric(sNote.ColumnIndex), (double)sNote.Value / 10000.0, text)), vo.kFont, brush, HorizontalPositiontoDisplay(nLeft(sNote.ColumnIndex), xHS) + vo.kLabelHShiftL - 2, NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - vo.kHeight + vo.kLabelVShift);
-            if (sNote.ColumnIndex < 27 && ((sNote.Length == 0.0) & (sNote.LNPair != 0)))
+            e.Graphics.FillRectangle(brush2, HorizontalPositiontoDisplay(nLeft(sNote.ColumnIndex), xHS) + 1, NoteRowToPanelHeight(sNote.VPosition + sNote.Length, xVS, xHeight) - vo.kHeight + 1, GetColumnWidth(sNote.ColumnIndex) * gxWidth - 1f, (int)Math.Round(sNote.Length * gxHeight) + vo.kHeight - 1);
+            e.Graphics.DrawRectangle(pen, HorizontalPositiontoDisplay(nLeft(sNote.ColumnIndex), xHS) + 1, NoteRowToPanelHeight(sNote.VPosition + sNote.Length, xVS, xHeight) - vo.kHeight, GetColumnWidth(sNote.ColumnIndex) * gxWidth - 3f, (int)Math.Round(sNote.Length * gxHeight) + vo.kHeight);
+            e.Graphics.DrawString(Conversions.ToString(Interaction.IIf(IsColumnNumeric(sNote.ColumnIndex), sNote.Value / 10000.0, text)), vo.kFont, brush, HorizontalPositiontoDisplay(nLeft(sNote.ColumnIndex), xHS) + vo.kLabelHShiftL - 2, NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - vo.kHeight + vo.kLabelVShift);
+            if (sNote.ColumnIndex < 27 && (sNote.Length == 0.0) & (sNote.LNPair != 0))
             {
                 DrawPairedLNBody(sNote, e, xHS, xVS, xHeight, num);
             }
             if (sNote.Selected)
             {
-                e.Graphics.DrawRectangle(vo.kSelected, HorizontalPositiontoDisplay(nLeft(sNote.ColumnIndex), xHS), NoteRowToPanelHeight(sNote.VPosition + sNote.Length, xVS, xHeight) - vo.kHeight - 1, (float)GetColumnWidth(sNote.ColumnIndex) * gxWidth, (int)Math.Round(sNote.Length * (double)gxHeight) + vo.kHeight + 2);
+                e.Graphics.DrawRectangle(vo.kSelected, HorizontalPositiontoDisplay(nLeft(sNote.ColumnIndex), xHS), NoteRowToPanelHeight(sNote.VPosition + sNote.Length, xVS, xHeight) - vo.kHeight - 1, GetColumnWidth(sNote.ColumnIndex) * gxWidth, (int)Math.Round(sNote.Length * gxHeight) + vo.kHeight + 2);
             }
             if (ErrorCheck && sNote.HasError)
             {
-                e.Graphics.DrawImage(Resources.ImageError, HorizontalPositiontoDisplay((int)Math.Round((double)nLeft(sNote.ColumnIndex) + (double)GetColumnWidth(sNote.ColumnIndex) / 2.0), xHS) - 12, (int)Math.Round((double)NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - (double)vo.kHeight / 2.0 - 12.0), 24, 24);
+                e.Graphics.DrawImage(Resources.ImageError, HorizontalPositiontoDisplay((int)Math.Round(nLeft(sNote.ColumnIndex) + GetColumnWidth(sNote.ColumnIndex) / 2.0), xHS) - 12, (int)Math.Round(NoteRowToPanelHeight(sNote.VPosition, xVS, xHeight) - vo.kHeight / 2.0 - 12.0), 24, 24);
             }
         }
     }
@@ -11536,7 +11372,7 @@ end_IL_0000_3:
                 {
                     return;
                 }
-                int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
+                int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(), null, null, null));
                 int num2 = -1;
                 UndoRedo.LinkedURCmd BaseUndo = null;
                 UndoRedo.LinkedURCmd BaseRedo = new UndoRedo.Void();
@@ -11546,7 +11382,7 @@ end_IL_0000_3:
                 {
                     case Keys.Up:
                         {
-                            double num3 = 192.0 / (double)gDivide;
+                            double num3 = 192.0 / gDivide;
                             if (MyProject.Computer.Keyboard.CtrlKeyDown)
                             {
                                 num3 = 1.0;
@@ -11584,7 +11420,7 @@ end_IL_0000_3:
                         }
                     case Keys.Down:
                         {
-                            double num10 = -192.0 / (double)gDivide;
+                            double num10 = -192.0 / gDivide;
                             if (MyProject.Computer.Keyboard.CtrlKeyDown)
                             {
                                 num10 = -1.0;
@@ -11861,7 +11697,7 @@ end_IL_0000_3:
                             break;
                     }
                 }
-                if (PanelKeyStates.ModifierMultiselectActive() && ((e.KeyCode == Keys.A) & (KMouseOver != -1)))
+                if (PanelKeyStates.ModifierMultiselectActive() && (e.KeyCode == Keys.A) & (KMouseOver != -1))
                 {
                     SelectAllWithHoveredNoteLabel();
                 }
@@ -11886,9 +11722,9 @@ end_IL_0000_3:
         {
             if (TBShowFileName.Checked)
             {
-                double a = (double)Notes[index].Value / 10000.0;
+                double a = Notes[index].Value / 10000.0;
                 string right = hWAV[(int)Math.Round(a)];
-                if (Operators.CompareString(hWAV[(int)Math.Round((double)note.Value / 10000.0)], right, TextCompare: false) == 0)
+                if (Operators.CompareString(hWAV[(int)Math.Round(note.Value / 10000.0)], right, TextCompare: false) == 0)
                 {
                     return true;
                 }
@@ -11958,7 +11794,7 @@ end_IL_0000_3:
                     {
                         bool flag = Notes[j].VPosition <= Notes[i].VPosition + Notes[i].Length;
                         bool flag2 = Notes[j].VPosition + Notes[j].Length >= Notes[i].VPosition;
-                        if (unchecked(((Notes[j].ColumnIndex == num3 && flag) ? true : false) && flag2))
+                        if ((Notes[j].ColumnIndex == num3 && flag ? true : false) && flag2)
                         {
                             num3++;
                             j = 1;
@@ -12035,7 +11871,7 @@ end_IL_0000_3:
         {
             return;
         }
-        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
+        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(), null, null, null));
         PanelWidth[0] = PMainL.Width;
         PanelWidth[1] = PMain.Width;
         PanelWidth[2] = PMainR.Width;
@@ -12044,36 +11880,36 @@ end_IL_0000_3:
             switch (num)
             {
                 case 0:
-                    LeftPanelScroll.LargeChange = Conversions.ToInteger(Operators.MultiplyObject(NewLateBinding.LateGet(sender, null, "Height", Array.Empty<object>(),null, null, null), 0.9));
+                    LeftPanelScroll.LargeChange = Conversions.ToInteger(Operators.MultiplyObject(NewLateBinding.LateGet(sender, null, "Height", Array.Empty<object>(), null, null, null), 0.9));
                     LeftPanelScroll.Maximum = LeftPanelScroll.LargeChange - 1;
-                    HSL.LargeChange = Conversions.ToInteger(Operators.DivideObject(NewLateBinding.LateGet(sender, null, "Width", Array.Empty<object>(),null, null, null), gxWidth));
+                    HSL.LargeChange = Conversions.ToInteger(Operators.DivideObject(NewLateBinding.LateGet(sender, null, "Width", Array.Empty<object>(), null, null, null), gxWidth));
                     if (HSL.Value > HSL.Maximum - HSL.LargeChange + 1)
                     {
                         HSL.Value = HSL.Maximum - HSL.LargeChange + 1;
                     }
                     break;
                 case 1:
-                    MainPanelScroll.LargeChange = Conversions.ToInteger(Operators.MultiplyObject(NewLateBinding.LateGet(sender, null, "Height", Array.Empty<object>(),null, null, null), 0.9));
+                    MainPanelScroll.LargeChange = Conversions.ToInteger(Operators.MultiplyObject(NewLateBinding.LateGet(sender, null, "Height", Array.Empty<object>(), null, null, null), 0.9));
                     MainPanelScroll.Maximum = MainPanelScroll.LargeChange - 1;
-                    HS.LargeChange = Conversions.ToInteger(Operators.DivideObject(NewLateBinding.LateGet(sender, null, "Width", Array.Empty<object>(),null, null, null), gxWidth));
+                    HS.LargeChange = Conversions.ToInteger(Operators.DivideObject(NewLateBinding.LateGet(sender, null, "Width", Array.Empty<object>(), null, null, null), gxWidth));
                     if (HS.Value > HS.Maximum - HS.LargeChange + 1)
                     {
                         HS.Value = HS.Maximum - HS.LargeChange + 1;
                     }
                     break;
                 case 2:
-                    RightPanelScroll.LargeChange = Conversions.ToInteger(Operators.MultiplyObject(NewLateBinding.LateGet(sender, null, "Height", Array.Empty<object>(),null, null, null), 0.9));
+                    RightPanelScroll.LargeChange = Conversions.ToInteger(Operators.MultiplyObject(NewLateBinding.LateGet(sender, null, "Height", Array.Empty<object>(), null, null, null), 0.9));
                     RightPanelScroll.Maximum = RightPanelScroll.LargeChange - 1;
-                    HSR.LargeChange = Conversions.ToInteger(Operators.DivideObject(NewLateBinding.LateGet(sender, null, "Width", Array.Empty<object>(),null, null, null), gxWidth));
+                    HSR.LargeChange = Conversions.ToInteger(Operators.DivideObject(NewLateBinding.LateGet(sender, null, "Width", Array.Empty<object>(), null, null, null), gxWidth));
                     if (HSR.Value > HSR.Maximum - HSR.LargeChange + 1)
                     {
                         HSR.Value = HSR.Maximum - HSR.LargeChange + 1;
                     }
                     break;
             }
-            object obj = NewLateBinding.LateGet(sender, null, "DisplayRectangle", Array.Empty<object>(),null, null, null);
+            object obj = NewLateBinding.LateGet(sender, null, "DisplayRectangle", Array.Empty<object>(), null, null, null);
             Rectangle rectangle = default(Rectangle);
-            RefreshPanel(num, (obj != null) ? ((Rectangle)obj) : rectangle);
+            RefreshPanel(num, obj != null ? (Rectangle)obj : rectangle);
         }
     }
 
@@ -12084,9 +11920,9 @@ end_IL_0000_3:
 
     private void PMainInMouseDown(object sender, MouseEventArgs e)
     {
-        tempFirstMouseDown = Conversions.ToBoolean(Operators.AndObject(FirstClickDisabled, Operators.NotObject(NewLateBinding.LateGet(sender, null, "Focused", Array.Empty<object>(),null, null, null))));
-        PanelFocus = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
-        NewLateBinding.LateCall(sender, null, "Focus", Array.Empty<object>(),null, null, null, IgnoreReturn: true);
+        tempFirstMouseDown = Conversions.ToBoolean(Operators.AndObject(FirstClickDisabled, Operators.NotObject(NewLateBinding.LateGet(sender, null, "Focused", Array.Empty<object>(), null, null, null))));
+        PanelFocus = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(), null, null, null));
+        NewLateBinding.LateCall(sender, null, "Focus", Array.Empty<object>(), null, null, null, IgnoreReturn: true);
         Point point = new Point(-1, -1);
         LastMouseDownLocation = point;
         VSValue = PanelVScroll[PanelFocus];
@@ -12168,7 +12004,7 @@ end_IL_0000_3:
                     if (MyProject.Computer.Keyboard.ShiftKeyDown)
                     {
                         LWAV.SelectedIndices.Clear();
-                        LWAV.SelectedIndex = Functions.C36to10(Functions.C10to36(unchecked(Notes[i].Value / 10000))) - 1;
+                        LWAV.SelectedIndex = Functions.C36to10(Functions.C10to36(Notes[i].Value / 10000)) - 1;
                         ValidateWavListView();
                         break;
                     }
@@ -12220,7 +12056,7 @@ end_IL_0000_3:
         }
         checked
         {
-            int num = (int)unchecked(Notes[NoteIndex].Value / 10000);
+            int num = (int)(Notes[NoteIndex].Value / 10000);
             if (num <= 0)
             {
                 num = 1;
@@ -12361,7 +12197,7 @@ end_IL_0000_3:
                 {
                     return;
                 }
-                double num5 = ((NoteIndex < 0) ? ((double)(((float)xHeight - (float)xVS * gxHeight - (float)e.Y - 1f) / gxHeight)) : Notes[NoteIndex].VPosition);
+                double num5 = NoteIndex < 0 ? (xHeight - xVS * gxHeight - e.Y - 1f) / gxHeight : Notes[NoteIndex].VPosition;
                 vSelAdjust = PanelKeyStates.ModifierLongNoteActive();
                 vSelMouseOverLine = 0;
                 if (Math.Abs(e.Y - NoteRowToPanelHeight(vSelStart + vSelLength, xVS, xHeight)) <= vo.PEDeltaMouseOver)
@@ -12624,7 +12460,7 @@ end_IL_0000_3:
                 }
                 string text = Interaction.InputBox(prompt, Text);
                 double num = Conversion.Val(text) * 10000.0;
-                if (unchecked(((columnIndex == 1) & (Operators.CompareString(text, "0", TextCompare: false) == 0)) || num != 0.0))
+                if ((columnIndex == 1) & (Operators.CompareString(text, "0", TextCompare: false) == 0) || num != 0.0)
                 {
                     UndoRedo.LinkedURCmd BaseUndo = null;
                     UndoRedo.LinkedURCmd BaseRedo = null;
@@ -12667,7 +12503,7 @@ end_IL_0000_3:
 
     private void PMainInMouseEnter(object sender, EventArgs e)
     {
-        spMouseOver = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
+        spMouseOver = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(), null, null, null));
         Panel panel = (Panel)sender;
         if (AutoFocusMouseEnter && Focused)
         {
@@ -12700,7 +12536,7 @@ end_IL_0000_3:
     private void PMainInMouseMove(object sender, MouseEventArgs e)
     {
         MouseMoveStatus = e.Location;
-        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
+        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(), null, null, null));
         long num2 = PanelHScroll[num];
         long num3 = PanelVScroll[num];
         int num4 = spMain[num].Height;
@@ -12750,7 +12586,7 @@ end_IL_0000_3:
                             }
                         }
                         bool @checked = TBTimeSelect.Checked;
-                        if (unchecked(TBSelect.Checked || @checked))
+                        if (TBSelect.Checked || @checked)
                         {
                             if (flag)
                             {
@@ -12785,7 +12621,7 @@ end_IL_0000_3:
                         }
                         else if (TBWrite.Checked)
                         {
-                            TempVPosition = ((float)num4 - (float)num3 * gxHeight - (float)e.Y - 1f) / gxHeight;
+                            TempVPosition = (num4 - num3 * gxHeight - e.Y - 1f) / gxHeight;
                             if (gSnap)
                             {
                                 TempVPosition = SnapToGrid(TempVPosition);
@@ -12856,7 +12692,7 @@ end_IL_0000_3:
                             OnWriteModeMouseMove(num4, num3, e);
                             break;
                         }
-                        TempVPosition = ((float)num4 - (float)num3 * gxHeight - (float)e.Y - 1f) / gxHeight;
+                        TempVPosition = (num4 - num3 * gxHeight - e.Y - 1f) / gxHeight;
                         if (gSnap)
                         {
                             TempVPosition = SnapToGrid(TempVPosition);
@@ -12954,8 +12790,8 @@ end_IL_0000_3:
         }
         checked
         {
-            int num = (int)Math.Round((float)tempV + (float)(tempY - e.Y) / gxHeight);
-            int num2 = (int)Math.Round((float)tempH + (float)(tempX - e.X) / gxWidth);
+            int num = (int)Math.Round(tempV + (tempY - e.Y) / gxHeight);
+            int num2 = (int)Math.Round(tempH + (tempX - e.X) / gxWidth);
             if (num > 0)
             {
                 num = 0;
@@ -13028,7 +12864,7 @@ end_IL_0000_3:
                 {
                     if (vSelMouseOverLine == 1)
                     {
-                        double num2 = (xHeight - xvs * (double)gxHeight - (double)e.Y - 1.0) / (double)gxHeight;
+                        double num2 = (xHeight - xvs * gxHeight - e.Y - 1.0) / gxHeight;
                         if (num >= 0)
                         {
                             num2 = Notes[num].VPosition;
@@ -13043,7 +12879,7 @@ end_IL_0000_3:
                     }
                     else if (vSelMouseOverLine == 2)
                     {
-                        vSelHalf = (xHeight - xvs * (double)gxHeight - (double)e.Y - 1.0) / (double)gxHeight;
+                        vSelHalf = (xHeight - xvs * gxHeight - e.Y - 1.0) / gxHeight;
                         if (num >= 0)
                         {
                             vSelHalf = Notes[num].VPosition;
@@ -13056,7 +12892,7 @@ end_IL_0000_3:
                     }
                     else if (vSelMouseOverLine == 3)
                     {
-                        vSelLength = (xHeight - xvs * (double)gxHeight - (double)e.Y - 1.0) / (double)gxHeight;
+                        vSelLength = (xHeight - xvs * gxHeight - e.Y - 1.0) / gxHeight;
                         if (num >= 0)
                         {
                             vSelLength = Notes[num].VPosition;
@@ -13075,7 +12911,7 @@ end_IL_0000_3:
                         }
                         else
                         {
-                            vSelLength = (xHeight - xvs * (double)gxHeight - (double)e.Y - 1.0) / (double)gxHeight;
+                            vSelLength = (xHeight - xvs * gxHeight - e.Y - 1.0) / gxHeight;
                             if (gSnap & !MyProject.Computer.Keyboard.CtrlKeyDown)
                             {
                                 vSelLength = SnapToGrid(vSelLength);
@@ -13089,7 +12925,7 @@ end_IL_0000_3:
             }
             else
             {
-                double num3 = (xHeight - xvs * (double)gxHeight - (double)e.Y - 1.0) / (double)gxHeight;
+                double num3 = (xHeight - xvs * gxHeight - e.Y - 1.0) / gxHeight;
                 if (vSelMouseOverLine == 2)
                 {
                     vSelStart = vSelPStart;
@@ -13306,7 +13142,7 @@ end_IL_0000_3:
             }
             num8 -= 191999.0;
         }
-        if ((!DuplicatedSelectedNotes & (checked(num5 - num6) == 0)) && num2 - num7 - num8 == 0.0)
+        if (!DuplicatedSelectedNotes & (checked(num5 - num6) == 0) && num2 - num7 - num8 == 0.0)
         {
             return;
         }
@@ -13362,14 +13198,14 @@ end_IL_0000_3:
         if (bAdjustUpper && Operators.ConditionalCompareObjectLess(objectValue, notes[num3].VPosition, TextCompare: false))
         {
             bAdjustUpper = false;
-            notes[num3].VPosition = notes[num3].VPosition + notes[num3].Length;
-            notes[num3].Length = notes[num3].Length * -1.0;
+            notes[num3].VPosition += notes[num3].Length;
+            notes[num3].Length *= -1.0;
         }
         else if (!bAdjustUpper && Operators.ConditionalCompareObjectGreater(objectValue, notes[num3].VPosition + notes[num3].Length, TextCompare: false))
         {
             bAdjustUpper = true;
-            notes[num3].VPosition = notes[num3].VPosition + notes[num3].Length;
-            notes[num3].Length = notes[num3].Length * -1.0;
+            notes[num3].VPosition += notes[num3].Length;
+            notes[num3].Length *= -1.0;
         }
         if (bAdjustUpper)
         {
@@ -13382,7 +13218,7 @@ end_IL_0000_3:
         }
         if (notes[num3].VPosition < 0.0)
         {
-            notes[num3].Length = notes[num3].Length + notes[num3].VPosition;
+            notes[num3].Length += notes[num3].VPosition;
             notes[num3].VPosition = 0.0;
         }
         if (notes[num3].VPosition + notes[num3].Length >= GetMaxVPosition())
@@ -13422,7 +13258,7 @@ end_IL_0000_3:
         int i = 0;
         checked
         {
-            int num = (int)Math.Round((float)e.X / gxWidth + (float)xHS);
+            int num = (int)Math.Round(e.X / gxWidth + xHS);
             int num2 = default(int);
             if (num >= 0)
             {
@@ -13477,7 +13313,7 @@ end_IL_0000_3:
             int num = Information.UBound(Notes);
             for (int i = 1; i <= num; i++)
             {
-                if (new Rectangle(HorizontalPositiontoDisplay(nLeft(Notes[i].ColumnIndex), xHS) + 1, NoteRowToPanelHeight(Conversions.ToDouble(Operators.AddObject(Notes[i].VPosition, Interaction.IIf(NTInput, Notes[i].Length, 0))), xVS, xHeight) - vo.kHeight, (int)Math.Round((float)GetColumnWidth(Notes[i].ColumnIndex) * gxWidth - 2f), Conversions.ToInteger(Operators.AddObject(vo.kHeight, Interaction.IIf(NTInput, Notes[i].Length * (double)gxHeight, 0)))).IntersectsWith(rect))
+                if (new Rectangle(HorizontalPositiontoDisplay(nLeft(Notes[i].ColumnIndex), xHS) + 1, NoteRowToPanelHeight(Conversions.ToDouble(Operators.AddObject(Notes[i].VPosition, Interaction.IIf(NTInput, Notes[i].Length, 0))), xVS, xHeight) - vo.kHeight, (int)Math.Round(GetColumnWidth(Notes[i].ColumnIndex) * gxWidth - 2f), Conversions.ToInteger(Operators.AddObject(vo.kHeight, Interaction.IIf(NTInput, Notes[i].Length * gxHeight, 0)))).IntersectsWith(rect))
                 {
                     Notes[i].Selected = !Notes[i].TempSelected & nEnabled(Notes[i].ColumnIndex);
                 }
@@ -13544,8 +13380,8 @@ end_IL_0000_3:
         checked
         {
             int num2 = Conversions.ToInteger(Interaction.IIf(!NTInput | (bAdjustLength & !bAdjustUpper), NoteRowToPanelHeight(Notes[foundNoteIndex].VPosition, xVS, xHeight) - vo.kHeight - 1, NoteRowToPanelHeight(Notes[foundNoteIndex].VPosition + Notes[foundNoteIndex].Length, xVS, xHeight) - vo.kHeight - 1));
-            int num3 = (int)Math.Round((float)GetColumnWidth(Notes[foundNoteIndex].ColumnIndex) * gxWidth + 1f);
-            int num4 = Conversions.ToInteger(Interaction.IIf(!NTInput | bAdjustLength, vo.kHeight + 3, Notes[foundNoteIndex].Length * (double)gxHeight + (double)vo.kHeight + 3.0));
+            int num3 = (int)Math.Round(GetColumnWidth(Notes[foundNoteIndex].ColumnIndex) * gxWidth + 1f);
+            int num4 = Conversions.ToInteger(Interaction.IIf(!NTInput | bAdjustLength, vo.kHeight + 3, Notes[foundNoteIndex].Length * gxHeight + vo.kHeight + 3.0));
             BufferedGraphicsContext current = BufferedGraphicsManager.Current;
             Graphics targetGraphics = spMain[iI].CreateGraphics();
             Rectangle targetRectangle = new Rectangle(num, num2, num3, num4);
@@ -13591,7 +13427,7 @@ end_IL_0000_3:
         int i = 0;
         checked
         {
-            int num = (int)Math.Round((float)x / gxWidth + (float)xHS);
+            int num = (int)Math.Round(x / gxWidth + xHS);
             int cReal = 0;
             if (num >= 0)
             {
@@ -13613,9 +13449,9 @@ end_IL_0000_3:
     {
         if (MyProject.Computer.Keyboard.CtrlKeyDown)
         {
-            double val = Math.Round((double)CGHeight2.Value + (double)e.Delta / 120.0);
+            double val = Math.Round(CGHeight2.Value + e.Delta / 120.0);
             CGHeight2.Value = checked((int)Math.Round(Math.Min(CGHeight2.Maximum, Math.Max(CGHeight2.Minimum, val))));
-            CGHeight.Value = new decimal((double)CGHeight2.Value / 4.0);
+            CGHeight.Value = new decimal(CGHeight2.Value / 4.0);
         }
     }
 
@@ -13629,10 +13465,10 @@ end_IL_0000_3:
         HSValue = -1;
         Timer1.Enabled = false;
         SelectedNotes = Array.Empty<Note>();
-        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
+        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(), null, null, null));
         checked
         {
-            if (MiddleButtonClicked && e.Button == MouseButtons.Middle && Math.Pow(MiddleButtonLocation.X - Cursor.Position.X, 2.0) + Math.Pow(MiddleButtonLocation.Y - Cursor.Position.Y, 2.0) >= (double)vo.MiddleDeltaRelease)
+            if (MiddleButtonClicked && e.Button == MouseButtons.Middle && Math.Pow(MiddleButtonLocation.X - Cursor.Position.X, 2.0) + Math.Pow(MiddleButtonLocation.Y - Cursor.Position.Y, 2.0) >= vo.MiddleDeltaRelease)
             {
                 MiddleButtonClicked = false;
             }
@@ -13661,7 +13497,7 @@ end_IL_0000_3:
             {
                 if (!NTInput & !tempFirstMouseDown)
                 {
-                    double num3 = Conversions.ToDouble(Operators.DivideObject(Operators.SubtractObject(Operators.SubtractObject(Operators.SubtractObject(NewLateBinding.LateGet(sender, null, "Height", Array.Empty<object>(),null, null, null), (float)PanelVScroll[num] * gxHeight), e.Y), 1), gxHeight));
+                    double num3 = Conversions.ToDouble(Operators.DivideObject(Operators.SubtractObject(Operators.SubtractObject(Operators.SubtractObject(NewLateBinding.LateGet(sender, null, "Height", Array.Empty<object>(), null, null, null), PanelVScroll[num] * gxHeight), e.Y), 1), gxHeight));
                     if (gSnap)
                     {
                         num3 = SnapToGrid(num3);
@@ -13796,7 +13632,7 @@ end_IL_0000_3:
 
     private void PMainInPaint(object sender, PaintEventArgs e)
     {
-        RefreshPanel(Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null)), e.ClipRectangle);
+        RefreshPanel(Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(), null, null, null)), e.ClipRectangle);
     }
 
     private void BVCCalculate_Click(object sender, EventArgs e)
@@ -13873,7 +13709,7 @@ end_IL_0000_3:
                         if (Notes[i].ColumnIndex == 2)
                         {
                             num3 = (int)Notes[i].Value;
-                            Notes[i].Value = (long)Math.Round((double)Notes[i].Value * xRatio);
+                            Notes[i].Value = (long)Math.Round(Notes[i].Value * xRatio);
                         }
                         Notes[i].VPosition = (Notes[i].VPosition - num) * xRatio + num;
                     }
@@ -13884,9 +13720,9 @@ end_IL_0000_3:
                     for (i = num10; i <= num11; i++)
                     {
                         Note[] notes = Notes;
-                        notes[i].VPosition = notes[i].VPosition + (xRatio - 1.0) * (num2 - num);
+                        notes[i].VPosition += (xRatio - 1.0) * (num2 - num);
                     }
-                    Note note = new Note(2, num, (long)Math.Round((double)num4 * xRatio));
+                    Note note = new Note(2, num, (long)Math.Round(num4 * xRatio));
                     AddNote(note, xSelected: false, OverWrite: true, SortAndUpdatePairing: false);
                     note = new Note(2, num2 + (xRatio - 1.0) * (num2 - num), num5);
                     AddNote(note, xSelected: false, OverWrite: true, SortAndUpdatePairing: false);
@@ -13907,7 +13743,7 @@ end_IL_0000_3:
                                 if (Notes[i].VPosition == num)
                                 {
                                     flag = false;
-                                    Notes[i].Value = Conversions.ToLong(Interaction.IIf((double)Notes[i].Value * xRatio <= 655359999.0, (double)Notes[i].Value * xRatio, 655359999));
+                                    Notes[i].Value = Conversions.ToLong(Interaction.IIf(Notes[i].Value * xRatio <= 655359999.0, Notes[i].Value * xRatio, 655359999));
                                 }
                             }
                             if (Notes[i].VPosition + Notes[i].Length > num)
@@ -13927,7 +13763,7 @@ end_IL_0000_3:
                                 }
                                 else
                                 {
-                                    Notes[i].Value = Conversions.ToLong(Interaction.IIf((double)Notes[i].Value * xRatio <= 655359999.0, (double)Notes[i].Value * xRatio, 655359999));
+                                    Notes[i].Value = Conversions.ToLong(Interaction.IIf(Notes[i].Value * xRatio <= 655359999.0, Notes[i].Value * xRatio, 655359999));
                                 }
                             }
                             Note[] notes = Notes;
@@ -13937,12 +13773,12 @@ end_IL_0000_3:
                         else
                         {
                             Note[] notes = Notes;
-                            notes[i].VPosition = notes[i].VPosition + (num2 - num) * (xRatio - 1.0);
+                            notes[i].VPosition += (num2 - num) * (xRatio - 1.0);
                         }
                     }
                     if (flag)
                     {
-                        Note note = new Note(2, num, (long)Math.Round((double)num4 * xRatio));
+                        Note note = new Note(2, num, (long)Math.Round(num4 * xRatio));
                         AddNote(note, xSelected: false, OverWrite: true, SortAndUpdatePairing: false);
                     }
                     if (flag2)
@@ -14054,7 +13890,7 @@ end_IL_0000_3:
                             if (Notes[i].ColumnIndex == 2)
                             {
                                 num4 = (int)Notes[i].Value;
-                                Notes[i].Value = (long)Math.Round((double)Notes[i].Value * num8);
+                                Notes[i].Value = (long)Math.Round(Notes[i].Value * num8);
                             }
                             Notes[i].VPosition = (Notes[i].VPosition - num) * num8 + num;
                         }
@@ -14067,15 +13903,15 @@ end_IL_0000_3:
                             if (Notes[i].ColumnIndex == 2)
                             {
                                 num4 = (int)Notes[i].Value;
-                                Notes[i].Value = Conversions.ToLong(Interaction.IIf((double)Notes[i].Value * num9 <= 655359999.0, (double)Notes[i].Value * num9, 655359999));
+                                Notes[i].Value = Conversions.ToLong(Interaction.IIf(Notes[i].Value * num9 <= 655359999.0, Notes[i].Value * num9, 655359999));
                             }
                             Notes[i].VPosition = (Notes[i].VPosition - num2) * num9 + num2 + dVPosition;
                         }
                         num7 = num4;
                         num11 = i;
-                        Note note = new Note(2, num, (long)Math.Round((double)num5 * num8));
+                        Note note = new Note(2, num, (long)Math.Round(num5 * num8));
                         AddNote(note, xSelected: false, OverWrite: true, SortAndUpdatePairing: false);
-                        note = new Note(2, num2 + dVPosition, (long)Math.Round((double)num6 * num9));
+                        note = new Note(2, num2 + dVPosition, (long)Math.Round(num6 * num9));
                         AddNote(note, xSelected: false, OverWrite: true, SortAndUpdatePairing: false);
                         note = new Note(2, num3, num7);
                         AddNote(note, xSelected: false, OverWrite: true, SortAndUpdatePairing: false);
@@ -14098,7 +13934,7 @@ end_IL_0000_3:
                                     if (Notes[i].VPosition == num)
                                     {
                                         flag = false;
-                                        Notes[i].Value = (long)Math.Round((double)Notes[i].Value * num8);
+                                        Notes[i].Value = (long)Math.Round(Notes[i].Value * num8);
                                     }
                                 }
                                 double num17 = Notes[i].VPosition + Notes[i].Length;
@@ -14123,11 +13959,11 @@ end_IL_0000_3:
                                     if (Notes[i].VPosition == num2)
                                     {
                                         flag2 = false;
-                                        Notes[i].Value = (long)Math.Round((double)Notes[i].Value * num9);
+                                        Notes[i].Value = (long)Math.Round(Notes[i].Value * num9);
                                     }
                                     else
                                     {
-                                        Notes[i].Value = (long)Math.Round((double)Notes[i].Value * num8);
+                                        Notes[i].Value = (long)Math.Round(Notes[i].Value * num8);
                                     }
                                 }
                                 double num18 = Notes[i].VPosition + Notes[i].Length;
@@ -14142,7 +13978,7 @@ end_IL_0000_3:
                                 else
                                 {
                                     Note[] notes = Notes;
-                                    notes[i].Length = notes[i].Length * num8;
+                                    notes[i].Length *= num8;
                                 }
                                 Notes[i].VPosition = (Notes[i].VPosition - num) * num8 + num;
                             }
@@ -14161,7 +13997,7 @@ end_IL_0000_3:
                                     }
                                     else
                                     {
-                                        Notes[i].Value = Conversions.ToLong(Interaction.IIf((double)Notes[i].Value * num9 <= 655359999.0, (double)Notes[i].Value * num9, 655359999));
+                                        Notes[i].Value = Conversions.ToLong(Interaction.IIf(Notes[i].Value * num9 <= 655359999.0, Notes[i].Value * num9, 655359999));
                                     }
                                 }
                                 double num20 = Notes[i].VPosition + Notes[i].Length;
@@ -14172,19 +14008,19 @@ end_IL_0000_3:
                                 else
                                 {
                                     Note[] notes = Notes;
-                                    notes[i].Length = notes[i].Length * num9;
+                                    notes[i].Length *= num9;
                                 }
                                 Notes[i].VPosition = (Notes[i].VPosition - num2) * num9 + num2 + dVPosition;
                             }
                         }
                         if (flag)
                         {
-                            Note note = new Note(2, num, (long)Math.Round((double)num5 * num8));
+                            Note note = new Note(2, num, (long)Math.Round(num5 * num8));
                             AddNote(note, xSelected: false, OverWrite: true, SortAndUpdatePairing: false);
                         }
                         if (flag2)
                         {
-                            Note note = new Note(2, num2 + dVPosition, (long)Math.Round((double)num6 * num9));
+                            Note note = new Note(2, num2 + dVPosition, (long)Math.Round(num6 * num9));
                             AddNote(note, xSelected: false, OverWrite: true, SortAndUpdatePairing: false);
                         }
                         if (flag3)
@@ -14292,21 +14128,21 @@ end_IL_0000_3:
             int num10 = num7;
             for (i = 0; i <= num10; i++)
             {
-                num4 += (array[i + 1] - array[i]) / (double)array2[i];
+                num4 += (array[i + 1] - array[i]) / array2[i];
             }
             num4 = (num3 - num) / num4;
-            if ((num3 - num) / num4 <= (num2 - num) / (double)xValue)
+            if ((num3 - num) / num4 <= (num2 - num) / xValue)
             {
                 double num11 = (num2 - num) * num4 / (num3 - num) / 10000.0;
                 Interaction.MsgBox("Please enter a value that is greater than " + Conversions.ToString(num11) + ".", MsgBoxStyle.Critical, Strings.Messages.Err);
                 return;
             }
-            double num12 = num4 * (num2 - num) - (double)xValue * (num3 - num);
+            double num12 = num4 * (num2 - num) - xValue * (num3 - num);
             if (num12 == 0.0)
             {
                 return;
             }
-            double num13 = (num2 - num3) * (double)xValue / num12 * num4;
+            double num13 = (num2 - num3) * xValue / num12 * num4;
             RedoRemoveNoteAll(xSel: false, ref BaseUndo, ref BaseRedo);
             if (!NTInput)
             {
@@ -14325,16 +14161,16 @@ end_IL_0000_3:
                         int j;
                         for (j = 0; j <= num7 && !(vPosition < array[j + 1]); j++)
                         {
-                            num17 += (array[j + 1] - array[j]) / (double)array2[j];
+                            num17 += (array[j + 1] - array[j]) / array2[j];
                         }
-                        num17 += (vPosition - array[j]) / (double)array2[j];
-                        if (num17 - (num2 - num) / (double)xValue > 0.0)
+                        num17 += (vPosition - array[j]) / array2[j];
+                        if (num17 - (num2 - num) / xValue > 0.0)
                         {
-                            Notes[i].VPosition = (num17 - (num2 - num) / (double)xValue) * num13 + num2;
+                            Notes[i].VPosition = (num17 - (num2 - num) / xValue) * num13 + num2;
                         }
                         else
                         {
-                            Notes[i].VPosition = num17 * (double)xValue + num;
+                            Notes[i].VPosition = num17 * xValue + num;
                         }
                     }
                 }
@@ -14356,38 +14192,38 @@ end_IL_0000_3:
                         int j;
                         for (j = 0; j <= num7 && !(vPosition2 < array[j + 1]); j++)
                         {
-                            num21 += (array[j + 1] - array[j]) / (double)array2[j];
+                            num21 += (array[j + 1] - array[j]) / array2[j];
                         }
-                        num21 += (vPosition2 - array[j]) / (double)array2[j];
-                        if (num21 - (num2 - num) / (double)xValue > 0.0)
+                        num21 += (vPosition2 - array[j]) / array2[j];
+                        if (num21 - (num2 - num) / xValue > 0.0)
                         {
-                            Notes[i].VPosition = (num21 - (num2 - num) / (double)xValue) * num13 + num2;
+                            Notes[i].VPosition = (num21 - (num2 - num) / xValue) * num13 + num2;
                         }
                         else
                         {
-                            Notes[i].VPosition = num21 * (double)xValue + num;
+                            Notes[i].VPosition = num21 * xValue + num;
                         }
                     }
                     if (Notes[i].Length == 0.0)
                     {
                         continue;
                     }
-                    if (unchecked(num20 > num && num20 < num3))
+                    if (num20 > num && num20 < num3)
                     {
                         double num21 = 0.0;
                         int j;
                         for (j = 0; j <= num7 && !(num20 < array[j + 1]); j++)
                         {
-                            num21 += (array[j + 1] - array[j]) / (double)array2[j];
+                            num21 += (array[j + 1] - array[j]) / array2[j];
                         }
-                        num21 += (num20 - array[j]) / (double)array2[j];
-                        if (num21 - (num2 - num) / (double)xValue > 0.0)
+                        num21 += (num20 - array[j]) / array2[j];
+                        if (num21 - (num2 - num) / xValue > 0.0)
                         {
-                            Notes[i].Length = (num21 - (num2 - num) / (double)xValue) * num13 + num2 - Notes[i].VPosition;
+                            Notes[i].Length = (num21 - (num2 - num) / xValue) * num13 + num2 - Notes[i].VPosition;
                         }
                         else
                         {
-                            Notes[i].Length = num21 * (double)xValue + num - Notes[i].VPosition;
+                            Notes[i].Length = num21 * xValue + num - Notes[i].VPosition;
                         }
                     }
                     else
@@ -14471,7 +14307,7 @@ end_IL_0000_3:
         double num2 = Conversions.ToDouble(Interaction.IIf(vSelLength < 0.0, vSelStart, vSelStart + vSelLength));
         IEnumerable<Note> source = from note in Notes
                                    where (note.VPosition > num) & (note.VPosition <= num2)
-                                   select (note);
+                                   select note;
         if (source.Count() > 0)
         {
             MessageBox.Show("The selected area can't have notes anywhere but at the start.");
@@ -14486,7 +14322,7 @@ end_IL_0000_3:
                 if (Notes[i].VPosition > num2)
                 {
                     Note[] notes = Notes;
-                    notes[i].VPosition = notes[i].VPosition - vSelLength;
+                    notes[i].VPosition -= vSelLength;
                 }
             }
             Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + 1 + 1]);
@@ -14529,7 +14365,7 @@ end_IL_0000_3:
         {
             float[] array = new float[(int)codec.Length + 1];
             codec.ToSampleSource().Read(array, 0, (int)codec.Length);
-            double num = (double)(codec.Length - 1) / (double)codec.WaveFormat.Channels;
+            double num = (codec.Length - 1) / (double)codec.WaveFormat.Channels;
             wWavL = new float[(int)Math.Round(num + 1.0) + 1];
             wWavR = new float[(int)Math.Round(num + 1.0) + 1];
             int num2 = (int)Math.Round(num);

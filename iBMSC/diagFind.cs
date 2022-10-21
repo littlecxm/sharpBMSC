@@ -140,7 +140,7 @@ public partial class diagFind : Form
             checkBox2.Checked = true;
             checkBox2.FlatStyle = FlatStyle.System;
             var checkBox3 = checkBox2;
-            var location = new Point(checked(i - 26) % 8 * 35 + 3, checked(i - 26) / 8 * 25 + 103);
+            var location = new Point((i - 26) % 8 * 35 + 3, (i - 26) / 8 * 25 + 103);
             checkBox3.Location = location;
             var checkBox4 = checkBox2;
             var size = new Size(35, 25);

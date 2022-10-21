@@ -1,8 +1,5 @@
 using System;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using iBMSC.My;
 using Microsoft.VisualBasic.CompilerServices;
@@ -10,7 +7,7 @@ using Microsoft.VisualBasic.CompilerServices;
 namespace iBMSC;
 
 [DesignerGenerated]
-public partial  class dgStatistics : Form
+public partial class dgStatistics : Form
 {
     private void OK_Button_Click(object sender, EventArgs e)
     {
@@ -48,36 +45,35 @@ public partial  class dgStatistics : Form
         base.Load += dgStatistics_Load;
         InitializeComponent();
         var num = 0;
-        checked
+
+        do
         {
+            var num2 = 0;
             do
             {
-                var num2 = 0;
-                do
+                var label = new Label
                 {
-                    var label = new Label
-                    {
-                        Dock = DockStyle.Fill,
-                        TextAlign = ContentAlignment.MiddleCenter
-                    };
-                    var margin = new Padding(0);
-                    label.Margin = margin;
-                    label.Font = new Font(Font, FontStyle.Bold);
-                    if (data[num, num2] != 0)
-                    {
-                        label.Text = Conversions.ToString(data[num, num2]);
-                    }
-                    if (num % 2 == 0)
-                    {
-                        label.BackColor = Color.FromArgb(268435456);
-                    }
-                    TableLayoutPanel1.Controls.Add(label, num2 + 1, num + 1);
-                    num2++;
+                    Dock = DockStyle.Fill,
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
+                var margin = new Padding(0);
+                label.Margin = margin;
+                label.Font = new Font(Font, FontStyle.Bold);
+                if (data[num, num2] != 0)
+                {
+                    label.Text = Conversions.ToString(data[num, num2]);
                 }
-                while (num2 <= 5);
-                num++;
-            }
-            while (num <= 5);
-        }
+
+                if (num % 2 == 0)
+                {
+                    label.BackColor = Color.FromArgb(268435456);
+                }
+
+                TableLayoutPanel1.Controls.Add(label, num2 + 1, num + 1);
+                num2++;
+            } while (num2 <= 5);
+
+            num++;
+        } while (num <= 5);
     }
 }
