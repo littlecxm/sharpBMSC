@@ -1,7 +1,4 @@
 using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using iBMSC.My;
@@ -11,7 +8,7 @@ using Microsoft.VisualBasic.CompilerServices;
 namespace iBMSC;
 
 [DesignerGenerated]
-public partial  class dgMyO2 : Form
+public partial class dgMyO2 : Form
 {
     public struct Adj
     {
@@ -45,7 +42,7 @@ public partial  class dgMyO2 : Form
     private void AddAdjItem(Adj xAj, int Index)
     {
         lResult.Rows.Add();
-        var rowIndex = checked(lResult.Rows.Count - 1);
+        var rowIndex = lResult.Rows.Count - 1;
         lResult[0, rowIndex].Value = Index;
         lResult[1, rowIndex].Value = xAj.Measure;
         lResult[2, rowIndex].Value = xAj.ColumnName;
@@ -65,26 +62,24 @@ public partial  class dgMyO2 : Form
     private void bApply2_Click(object sender, EventArgs e)
     {
         var array = MyProject.Forms.MainWindow.MyO2GridCheck();
-        checked
+
+        Aj = new Adj[Information.UBound(array) + 1];
+        lResult.Rows.Clear();
+        var num = Information.UBound(Aj);
+        for (var i = 0; i <= num; i++)
         {
-            Aj = new Adj[Information.UBound(array) + 1];
-            lResult.Rows.Clear();
-            var num = Information.UBound(Aj);
-            for (var i = 0; i <= num; i++)
-            {
-                var array2 = Microsoft.VisualBasic.Strings.Split(array[i], "_");
-                var aj = Aj;
-                aj[i].Measure = (int)Math.Round(Conversion.Val(array2[0]));
-                aj[i].ColumnIndex = (int)Math.Round(Conversion.Val(array2[1]));
-                aj[i].ColumnName = array2[2];
-                aj[i].Grid = array2[3];
-                aj[i].LongNote = Conversion.Val(array2[4]) != 0.0;
-                aj[i].Hidden = Conversion.Val(array2[5]) != 0.0;
-                aj[i].AdjTo64 = Conversion.Val(array2[6]) != 0.0;
-                aj[i].D64 = (int)Math.Round(Conversion.Val(array2[7]));
-                aj[i].D48 = (int)Math.Round(Conversion.Val(array2[8]));
-                AddAdjItem(Aj[i], i);
-            }
+            var array2 = Microsoft.VisualBasic.Strings.Split(array[i], "_");
+            var aj = Aj;
+            aj[i].Measure = (int)Math.Round(Conversion.Val(array2[0]));
+            aj[i].ColumnIndex = (int)Math.Round(Conversion.Val(array2[1]));
+            aj[i].ColumnName = array2[2];
+            aj[i].Grid = array2[3];
+            aj[i].LongNote = Conversion.Val(array2[4]) != 0.0;
+            aj[i].Hidden = Conversion.Val(array2[5]) != 0.0;
+            aj[i].AdjTo64 = Conversion.Val(array2[6]) != 0.0;
+            aj[i].D64 = (int)Math.Round(Conversion.Val(array2[7]));
+            aj[i].D48 = (int)Math.Round(Conversion.Val(array2[8]));
+            AddAdjItem(Aj[i], i);
         }
     }
 
@@ -104,7 +99,7 @@ public partial  class dgMyO2 : Form
     {
         if (e.ColumnIndex == 6 && e.RowIndex >= 0)
         {
-            Aj[checked((int)Math.Round(Conversion.Val(RuntimeHelpers.GetObjectValue(lResult[0, e.RowIndex].Value))))].AdjTo64 = Conversions.ToBoolean(lResult[6, e.RowIndex].Value);
+            Aj[(int)Math.Round(Conversion.Val(RuntimeHelpers.GetObjectValue(lResult[0, e.RowIndex].Value)))].AdjTo64 = Conversions.ToBoolean(lResult[6, e.RowIndex].Value);
         }
     }
 }

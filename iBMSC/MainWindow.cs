@@ -914,8 +914,8 @@ IL_0952:
             object LoopForResult = default(object);
             foreach (string text2 in BMSChannelList)
             {
-                object[] array = neArray.Empty<object>()
-                object[] array2 = neArray.Empty<object>()
+                object[] array = Array.Empty<object>();
+                object[] array2 = Array.Empty<object>();
                 if (Operators.CompareString(text2, "01", TextCompare: false) == 0)
                 {
                     continue;
@@ -1054,8 +1054,8 @@ IL_0952:
         {
             for (int i = 27; i <= GreatestColumn; i++)
             {
-                double[] array = neArray.Empty<double>()
-                string[] array2 = neArray.Empty<string>()
+                double[] array = Array.Empty<double>();
+                string[] array2 = Array.Empty<string>();
                 int num = Information.UBound(NotesInMeasure);
                 for (int j = 0; j <= num; j++)
                 {
@@ -1132,7 +1132,7 @@ IL_0952:
             int num2 = 0;
             int num3 = 0;
             string[] array2 = Microsoft.VisualBasic.Strings.Split(xStrAll, "#NOTES:");
-            string[] array3 = neArray.Empty<string>()
+            string[] array3 = Array.Empty<string>();
             if (array2.Length > 2)
             {
                 array3 = (string[])Utils.CopyArray(array3, new string[Information.UBound(array2) - 1 + 1]);
@@ -4345,7 +4345,7 @@ IL_0952:
 
     private void LoadLang(object sender, EventArgs e)
     {
-        string path = Conversions.ToString(NewLateBinding.LateGet(sender, null, "ToolTipText", neArray.Empty<object>()null, null, null));
+        string path = Conversions.ToString(NewLateBinding.LateGet(sender, null, "ToolTipText", Array.Empty<object>(),null, null, null));
         LoadLocale(path);
     }
 
@@ -4376,7 +4376,7 @@ IL_0952:
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
     private void LoadTheme(object sender, EventArgs e)
     {
-        LoadSettings(Conversions.ToString(Operators.ConcatenateObject(MyProject.Application.Info.DirectoryPath + "\\Data\\", NewLateBinding.LateGet(sender, null, "Text", neArray.Empty<object>()null, null, null))));
+        LoadSettings(Conversions.ToString(Operators.ConcatenateObject(MyProject.Application.Info.DirectoryPath + "\\Data\\", NewLateBinding.LateGet(sender, null, "Text", Array.Empty<object>(),null, null, null))));
         RefreshPanelAll();
     }
 
@@ -4461,7 +4461,7 @@ IL_0952:
 
     private void OpenRecent(string xFileName)
     {
-        SelectedNotes = neArray.Empty<Note>()
+        SelectedNotes = Array.Empty<Note>();
         KMouseOver = -1;
         if (!MyProject.Computer.FileSystem.FileExists(xFileName))
         {
@@ -4971,8 +4971,9 @@ IL_0952:
             {
                 return;
             }
-            double[] array2 = neArray.Empty<double>()
-            UndoRedo.ChangeMeasureLength[] array3 = neArray.Empty<UndoRedo.ChangeMeasureLength>()
+
+            double[] array2 = Array.Empty<double>();
+            UndoRedo.ChangeMeasureLength[] array3 = Array.Empty<UndoRedo.ChangeMeasureLength>();
             foreach (int num in array)
             {
                 int num2 = Array.IndexOf(array2, MeasureLength[num]);
@@ -5202,7 +5203,7 @@ IL_0952:
         FileName = "Untitled.bms";
         InitPath = "";
         IsSaved = true;
-        DDFileName = neArray.Empty<string>()
+        DDFileName = Array.Empty<string>();
         SupportedFileExtension = new string[7] { ".bms", ".bme", ".bml", ".pms", ".txt", ".sm", ".ibmsc" };
         SupportedAudioExtension = new string[3] { ".wav", ".mp3", ".ogg" };
         sUndo = new UndoRedo.LinkedURCmd[100];
@@ -5218,7 +5219,7 @@ IL_0952:
         MiddleButtonLocation = new Point(0, 0);
         MiddleButtonClicked = false;
         MouseMoveStatus = new Point(0, 0);
-        SelectedNotes = neArray.Empty<Note>()
+        SelectedNotes = Array.Empty<Note>();
         ctrlPressed = false;
         DuplicatedSelectedNotes = false;
         ShouldDrawTempNote = false;
@@ -5230,7 +5231,7 @@ IL_0952:
         vSelHalf = 0.0;
         vSelMouseOverLine = 0;
         vSelAdjust = false;
-        vSelK = neArray.Empty<Note>()
+        vSelK = Array.Empty<Note>();
         vSelPStart = 192.0;
         vSelPLength = 0.0;
         vSelPHalf = 0.0;
@@ -5280,7 +5281,7 @@ IL_0952:
         PreviewOnClick = true;
         PreviewErrorCheck = false;
         ClickStopPreview = true;
-        pTempFileNames = neArray.Empty<string>()
+        pTempFileNames = Array.Empty<string>();
         PanelWidth = new float[3] { 0f, 100f, 0f };
         PanelHScroll = new int[3] { 0, 0, 0 };
         PanelVScroll = new int[3] { 0, 0, 0 };
@@ -5291,7 +5292,7 @@ IL_0952:
         AutoFocusMouseEnter = false;
         FirstClickDisabled = true;
         tempFirstMouseDown = false;
-        spMain = neArray.Empty<Panel>()
+        spMain = Array.Empty<Panel>();
         bufferlist = new Dictionary<int, BufferedGraphics>();
         rectList = new Dictionary<int, Rectangle>();
         lastVPos = -1;
@@ -5994,7 +5995,7 @@ IL_0952:
 
     private string[] FilterFileBySupported(string[] xFile, string[] xFilter)
     {
-        string[] array = neArray.Empty<string>()
+        string[] array = Array.Empty<string>();
         int num = Information.UBound(xFile);
         checked
         {
@@ -6079,13 +6080,13 @@ IL_0952:
 
     private void Form1_DragLeave(object sender, EventArgs e)
     {
-        DDFileName = neArray.Empty<string>()
+        DDFileName = Array.Empty<string>();
         RefreshPanelAll();
     }
 
     private void Form1_DragDrop(object sender, DragEventArgs e)
     {
-        DDFileName = neArray.Empty<string>()
+        DDFileName = Array.Empty<string>();
         if (e.Data.GetDataPresent(DataFormats.FileDrop))
         {
             string[] xFile = (string[])e.Data.GetData(DataFormats.FileDrop);
@@ -6539,7 +6540,7 @@ IL_03ba:
 
     private void TBNew_Click(object sender, EventArgs e)
     {
-        SelectedNotes = neArray.Empty<Note>()
+        SelectedNotes = Array.Empty<Note>();
         KMouseOver = -1;
         if (!ClosingPopSave())
         {
@@ -6581,7 +6582,7 @@ IL_03ba:
 
     private void TBNewC_Click(object sender, EventArgs e)
     {
-        SelectedNotes = neArray.Empty<Note>()
+        SelectedNotes = Array.Empty<Note>();
         KMouseOver = -1;
         if (!ClosingPopSave())
         {
@@ -6613,7 +6614,7 @@ IL_03ba:
 
     private void TBOpen_ButtonClick(object sender, EventArgs e)
     {
-        SelectedNotes = neArray.Empty<Note>()
+        SelectedNotes = Array.Empty<Note>();
         KMouseOver = -1;
         if (!ClosingPopSave())
         {
@@ -6635,7 +6636,7 @@ IL_03ba:
 
     private void TBImportIBMSC_Click(object sender, EventArgs e)
     {
-        SelectedNotes = neArray.Empty<Note>()
+        SelectedNotes = Array.Empty<Note>();
         KMouseOver = -1;
         if (!ClosingPopSave())
         {
@@ -6656,7 +6657,7 @@ IL_03ba:
 
     private void TBImportSM_Click(object sender, EventArgs e)
     {
-        SelectedNotes = neArray.Empty<Note>()
+        SelectedNotes = Array.Empty<Note>();
         KMouseOver = -1;
         if (!ClosingPopSave())
         {
@@ -6676,7 +6677,7 @@ IL_03ba:
 
     private void TBSave_ButtonClick(object sender, EventArgs e)
     {
-        SelectedNotes = neArray.Empty<Note>()
+        SelectedNotes = Array.Empty<Note>();
         KMouseOver = -1;
         if (Operators.CompareString(ExcludeFileName(FileName), "", TextCompare: false) == 0)
         {
@@ -6704,7 +6705,7 @@ IL_03ba:
 
     private void TBSaveAs_Click(object sender, EventArgs e)
     {
-        SelectedNotes = neArray.Empty<Note>()
+        SelectedNotes = Array.Empty<Note>();
         KMouseOver = -1;
         SaveFileDialog saveFileDialog = new SaveFileDialog();
         saveFileDialog.Filter = Strings.FileType._bms + "|*.bms;*.bme;*.bml;*.pms;*.txt|" + Strings.FileType.BMS + "|*.bms|" + Strings.FileType.BME + "|*.bme|" + Strings.FileType.BML + "|*.bml|" + Strings.FileType.PMS + "|*.pms|" + Strings.FileType.TXT + "|*.txt|" + Strings.FileType._all + "|*.*";
@@ -6728,7 +6729,7 @@ IL_03ba:
 
     private void TBExport_Click(object sender, EventArgs e)
     {
-        SelectedNotes = neArray.Empty<Note>()
+        SelectedNotes = Array.Empty<Note>();
         KMouseOver = -1;
         SaveFileDialog saveFileDialog = new SaveFileDialog();
         saveFileDialog.Filter = Strings.FileType.IBMSC + "|*.ibmsc";
@@ -6747,13 +6748,13 @@ IL_03ba:
 
     private void VSGotFocus(object sender, EventArgs e)
     {
-        PanelFocus = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", neArray.Empty<object>()null, null, null));
+        PanelFocus = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
         spMain[PanelFocus].Focus();
     }
 
     private void VSValueChanged(object sender, EventArgs e)
     {
-        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", neArray.Empty<object>()null, null, null));
+        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
         if (MyProject.Computer.Keyboard.CtrlKeyDown)
         {
             NewLateBinding.LateSet(sender, null, "Value", new object[1] { VSValue }, null, null);
@@ -6764,9 +6765,9 @@ IL_03ba:
         Point point = new Point(-1, -1);
         if (num2 & !(lastMouseDownLocation == point) & (VSValue != -1))
         {
-            LastMouseDownLocation.Y = Conversions.ToSingle(Operators.AddObject(LastMouseDownLocation.Y, Operators.MultiplyObject(Operators.SubtractObject(VSValue, NewLateBinding.LateGet(sender, null, "Value", neArray.Empty<object>()null, null, null)), gxHeight)));
+            LastMouseDownLocation.Y = Conversions.ToSingle(Operators.AddObject(LastMouseDownLocation.Y, Operators.MultiplyObject(Operators.SubtractObject(VSValue, NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(),null, null, null)), gxHeight)));
         }
-        PanelVScroll[num] = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Value", neArray.Empty<object>()null, null, null));
+        PanelVScroll[num] = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(),null, null, null));
         if (spLock[checked(num + 1) % 3])
         {
             int num3 = checked(PanelVScroll[num] + spDiff[num]);
@@ -6822,15 +6823,15 @@ IL_03ba:
         {
             spDiff[num] = PanelVScroll[unchecked(checked(num + 1) % 3)] - PanelVScroll[num];
             spDiff[unchecked(checked(num + 2) % 3)] = PanelVScroll[num] - PanelVScroll[unchecked(checked(num + 2) % 3)];
-            VSValue = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Value", neArray.Empty<object>()null, null, null));
+            VSValue = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(),null, null, null));
             RefreshPanel(num, spMain[num].DisplayRectangle);
         }
     }
 
     private void cVSLock_CheckedChanged(object sender, EventArgs e)
     {
-        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", neArray.Empty<object>()null, null, null));
-        spLock[num] = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", neArray.Empty<object>()null, null, null));
+        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
+        spLock[num] = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(),null, null, null));
         checked
         {
             if (spLock[num])
@@ -6843,21 +6844,21 @@ IL_03ba:
 
     private void HSGotFocus(object sender, EventArgs e)
     {
-        PanelFocus = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", neArray.Empty<object>()null, null, null));
+        PanelFocus = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
         spMain[PanelFocus].Focus();
     }
 
     private void HSValueChanged(object sender, EventArgs e)
     {
-        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", neArray.Empty<object>()null, null, null));
+        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
         PointF lastMouseDownLocation = LastMouseDownLocation;
         Point point = new Point(-1, -1);
         if (!(lastMouseDownLocation == point) & (HSValue != -1))
         {
-            LastMouseDownLocation.X = Conversions.ToSingle(Operators.AddObject(LastMouseDownLocation.X, Operators.MultiplyObject(Operators.SubtractObject(HSValue, NewLateBinding.LateGet(sender, null, "Value", neArray.Empty<object>()null, null, null)), gxWidth)));
+            LastMouseDownLocation.X = Conversions.ToSingle(Operators.AddObject(LastMouseDownLocation.X, Operators.MultiplyObject(Operators.SubtractObject(HSValue, NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(),null, null, null)), gxWidth)));
         }
-        PanelHScroll[num] = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Value", neArray.Empty<object>()null, null, null));
-        HSValue = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Value", neArray.Empty<object>()null, null, null));
+        PanelHScroll[num] = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(),null, null, null));
+        HSValue = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Value", Array.Empty<object>(),null, null, null));
         RefreshPanel(num, spMain[num].DisplayRectangle);
     }
 
@@ -6929,7 +6930,7 @@ IL_03ba:
     private void CGHeight_ValueChanged(object sender, EventArgs e)
     {
         gxHeight = Convert.ToSingle(CGHeight.Value);
-        CGHeight2.Value = Conversions.ToInteger(Interaction.IIf(decimal.Compare(decimal.Multiply(CGHeight.Value, 4m), CGHeight2.Maximum)) < 0, decimal.Multiply(CGHeight.Value, new decimal(4m), CGHeight2.Maximum));
+        CGHeight2.Value = Conversions.ToInteger(Interaction.IIf(decimal.Compare(decimal.Multiply(CGHeight.Value, new decimal(4L)), new decimal(CGHeight2.Maximum)) < 0, decimal.Multiply(CGHeight.Value, new decimal(4L)), CGHeight2.Maximum));
         RefreshPanelAll();
     }
 
@@ -6941,7 +6942,7 @@ IL_03ba:
     private void CGWidth_ValueChanged(object sender, EventArgs e)
     {
         gxWidth = Convert.ToSingle(CGWidth.Value);
-        CGWidth2.Value = Conversions.ToInteger(Interaction.IIf(decimal.Compare(decimal.Multiply(CGWidth.Value, 4m), CGWidth2.Maximum)) < 0, decimal.Multiply(CGWidth.Value, new decimal(4m), CGWidth2.Maximum));
+        CGWidth2.Value = Conversions.ToInteger(Interaction.IIf(decimal.Compare(decimal.Multiply(CGWidth.Value, new decimal(4L)), new decimal(CGWidth2.Maximum)) < 0, decimal.Multiply(CGWidth.Value, new decimal(4L)), CGWidth2.Maximum));
         checked
         {
             HS.LargeChange = (int)Math.Round((float)PMainIn.Width / gxWidth);
@@ -7275,7 +7276,7 @@ IL_03ba:
 
     private void TBErrorCheck_Click(object sender, EventArgs e)
     {
-        ErrorCheck = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", neArray.Empty<object>()null, null, null));
+        ErrorCheck = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(),null, null, null));
         TBErrorCheck.Checked = ErrorCheck;
         mnErrorCheck.Checked = ErrorCheck;
         TBErrorCheck.Image = (Image)Interaction.IIf(TBErrorCheck.Checked, Resources.x16CheckError, Resources.x16CheckErrorN);
@@ -7286,7 +7287,7 @@ IL_03ba:
     private void TBPreviewOnClick_Click(object sender, EventArgs e)
     {
         PreviewNote("", bStop: true);
-        PreviewOnClick = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", neArray.Empty<object>()null, null, null));
+        PreviewOnClick = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(),null, null, null));
         TBPreviewOnClick.Checked = PreviewOnClick;
         mnPreviewOnClick.Checked = PreviewOnClick;
         TBPreviewOnClick.Image = (Image)Interaction.IIf(PreviewOnClick, Resources.x16PreviewOnClick, Resources.x16PreviewOnClickN);
@@ -7295,7 +7296,7 @@ IL_03ba:
 
     private void TBShowFileName_Click(object sender, EventArgs e)
     {
-        ShowFileName = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", neArray.Empty<object>()null, null, null));
+        ShowFileName = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(),null, null, null));
         TBShowFileName.Checked = ShowFileName;
         mnShowFileName.Checked = ShowFileName;
         TBShowFileName.Image = (Image)Interaction.IIf(ShowFileName, Resources.x16ShowFileName, Resources.x16ShowFileNameN);
@@ -8005,7 +8006,7 @@ IL_03ba:
     private void TBUndo_Click(object sender, EventArgs e)
     {
         KMouseOver = -1;
-        SelectedNotes = neArray.Empty<Note>()
+        SelectedNotes = Array.Empty<Note>();
         if (sUndo[sI].ofType() != byte.MaxValue)
         {
             PerformCommand(sUndo[sI]);
@@ -8020,7 +8021,7 @@ IL_03ba:
     private void TBRedo_Click(object sender, EventArgs e)
     {
         KMouseOver = -1;
-        SelectedNotes = neArray.Empty<Note>()
+        SelectedNotes = Array.Empty<Note>();
         if (sRedo[sIA()].ofType() != byte.MaxValue)
         {
             PerformCommand(sRedo[sIA()]);
@@ -8104,7 +8105,7 @@ IL_03ba:
 
     private void POWAV_DragDrop(object sender, DragEventArgs e)
     {
-        DDFileName = neArray.Empty<string>()
+        DDFileName = Array.Empty<string>();
         if (e.Data.GetDataPresent(DataFormats.FileDrop))
         {
             string[] xFile = (string[])e.Data.GetData(DataFormats.FileDrop);
@@ -8137,13 +8138,13 @@ IL_03ba:
 
     private void POWAV_DragLeave(object sender, EventArgs e)
     {
-        DDFileName = neArray.Empty<string>()
+        DDFileName = Array.Empty<string>();
         RefreshPanelAll();
     }
 
     private void POWAV_Resize(object sender, EventArgs e)
     {
-        LWAV.Height = Conversions.ToInteger(Operators.SubtractObject(NewLateBinding.LateGet(sender, null, "Height", neArray.Empty<object>()null, null, null), 25));
+        LWAV.Height = Conversions.ToInteger(Operators.SubtractObject(NewLateBinding.LateGet(sender, null, "Height", Array.Empty<object>(),null, null, null), 25));
     }
 
     private void POBeat_Resize(object sender, EventArgs e)
@@ -8168,7 +8169,7 @@ IL_03ba:
 
     private void mn_MouseEnter(object sender, EventArgs e)
     {
-        if (!Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Pressed", neArray.Empty<object>()null, null, null)))
+        if (!Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Pressed", Array.Empty<object>(),null, null, null)))
         {
             NewLateBinding.LateSet(sender, null, "ForeColor", new object[1] { Color.Black }, null, null);
         }
@@ -8176,7 +8177,7 @@ IL_03ba:
 
     private void mn_MouseLeave(object sender, EventArgs e)
     {
-        if (!Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Pressed", neArray.Empty<object>()null, null, null)))
+        if (!Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Pressed", Array.Empty<object>(),null, null, null)))
         {
             NewLateBinding.LateSet(sender, null, "ForeColor", new object[1] { Color.White }, null, null);
         }
@@ -8209,7 +8210,7 @@ IL_03ba:
 
     private void ConvertBMSE2NT()
     {
-        SelectedNotes = neArray.Empty<Note>()
+        SelectedNotes = Array.Empty<Note>();
         SortByVPositionInsertion();
         int num = Information.UBound(Notes);
         checked
@@ -8269,7 +8270,7 @@ IL_03ba:
 
     private void ConvertNT2BMSE()
     {
-        SelectedNotes = neArray.Empty<Note>()
+        SelectedNotes = Array.Empty<Note>();
         Note[] array = new Note[1] { Notes[0] };
         int num = Information.UBound(Notes);
         checked
@@ -8312,7 +8313,7 @@ IL_03ba:
         UndoRedo.LinkedURCmd BaseUndo = null;
         UndoRedo.LinkedURCmd BaseRedo = new UndoRedo.Void();
         UndoRedo.LinkedURCmd linkedURCmd = BaseRedo;
-        TBWavIncrease.Checked = Conversions.ToBoolean(Operators.NotObject(NewLateBinding.LateGet(sender, null, "Checked", neArray.Empty<object>()null, null, null)));
+        TBWavIncrease.Checked = Conversions.ToBoolean(Operators.NotObject(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(),null, null, null)));
         RedoWavIncrease(TBWavIncrease.Checked, ref BaseUndo, ref BaseRedo);
         AddUndo(BaseUndo, linkedURCmd.Next);
     }
@@ -8323,7 +8324,7 @@ IL_03ba:
         UndoRedo.LinkedURCmd BaseRedo = new UndoRedo.Void();
         UndoRedo.LinkedURCmd linkedURCmd = BaseRedo;
         RedoRemoveNoteAll(xSel: false, ref BaseUndo, ref BaseRedo);
-        NTInput = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", neArray.Empty<object>()null, null, null));
+        NTInput = Conversions.ToBoolean(NewLateBinding.LateGet(sender, null, "Checked", Array.Empty<object>(),null, null, null));
         TBNTInput.Checked = NTInput;
         mnNTInput.Checked = NTInput;
         POBLong.Enabled = !NTInput;
@@ -10583,8 +10584,8 @@ end_IL_0000_3:
     {
         CalculateGreatestVPosition();
         SortByVPositionInsertion();
-        string[] array = neArray.Empty<string>()
-        string[] array2 = neArray.Empty<string>()
+        string[] array = Array.Empty<string>();
+        string[] array2 = Array.Empty<string>();
         string[] array3 = new string[71]
         {
             "01", "03", "04", "06", "07", "08", "09", "16", "11", "12",
@@ -10614,7 +10615,7 @@ end_IL_0000_3:
                     num2 = j;
                     foreach (string text in array3)
                     {
-                        double[] array5 = neArray.Empty<double>()
+                        double[] array5 = Array.Empty<double>();
                         int num7 = num2 - 1;
                         for (int l = num; l <= num7; l++)
                         {
@@ -10662,7 +10663,7 @@ end_IL_0000_3:
                 {
                     foreach (string text2 in array3)
                     {
-                        double[] array7 = neArray.Empty<double>()
+                        double[] array7 = Array.Empty<double>();
                         int num16 = Information.UBound(Notes);
                         for (int num17 = 1; num17 <= num16 && MeasureAtDisplacement(Notes[num17].VPosition) <= num14; num17++)
                         {
@@ -11535,12 +11536,12 @@ end_IL_0000_3:
                 {
                     return;
                 }
-                int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", neArray.Empty<object>()null, null, null));
+                int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
                 int num2 = -1;
                 UndoRedo.LinkedURCmd BaseUndo = null;
                 UndoRedo.LinkedURCmd BaseRedo = new UndoRedo.Void();
                 UndoRedo.LinkedURCmd linkedURCmd = BaseRedo;
-                SelectedNotes = neArray.Empty<Note>()
+                SelectedNotes = Array.Empty<Note>();
                 switch (e.KeyCode)
                 {
                     case Keys.Up:
@@ -12034,7 +12035,7 @@ end_IL_0000_3:
         {
             return;
         }
-        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", neArray.Empty<object>()null, null, null));
+        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
         PanelWidth[0] = PMainL.Width;
         PanelWidth[1] = PMain.Width;
         PanelWidth[2] = PMainR.Width;
@@ -12043,34 +12044,34 @@ end_IL_0000_3:
             switch (num)
             {
                 case 0:
-                    LeftPanelScroll.LargeChange = Conversions.ToInteger(Operators.MultiplyObject(NewLateBinding.LateGet(sender, null, "Height", neArray.Empty<object>()null, null, null), 0.9));
+                    LeftPanelScroll.LargeChange = Conversions.ToInteger(Operators.MultiplyObject(NewLateBinding.LateGet(sender, null, "Height", Array.Empty<object>(),null, null, null), 0.9));
                     LeftPanelScroll.Maximum = LeftPanelScroll.LargeChange - 1;
-                    HSL.LargeChange = Conversions.ToInteger(Operators.DivideObject(NewLateBinding.LateGet(sender, null, "Width", neArray.Empty<object>()null, null, null), gxWidth));
+                    HSL.LargeChange = Conversions.ToInteger(Operators.DivideObject(NewLateBinding.LateGet(sender, null, "Width", Array.Empty<object>(),null, null, null), gxWidth));
                     if (HSL.Value > HSL.Maximum - HSL.LargeChange + 1)
                     {
                         HSL.Value = HSL.Maximum - HSL.LargeChange + 1;
                     }
                     break;
                 case 1:
-                    MainPanelScroll.LargeChange = Conversions.ToInteger(Operators.MultiplyObject(NewLateBinding.LateGet(sender, null, "Height", neArray.Empty<object>()null, null, null), 0.9));
+                    MainPanelScroll.LargeChange = Conversions.ToInteger(Operators.MultiplyObject(NewLateBinding.LateGet(sender, null, "Height", Array.Empty<object>(),null, null, null), 0.9));
                     MainPanelScroll.Maximum = MainPanelScroll.LargeChange - 1;
-                    HS.LargeChange = Conversions.ToInteger(Operators.DivideObject(NewLateBinding.LateGet(sender, null, "Width", neArray.Empty<object>()null, null, null), gxWidth));
+                    HS.LargeChange = Conversions.ToInteger(Operators.DivideObject(NewLateBinding.LateGet(sender, null, "Width", Array.Empty<object>(),null, null, null), gxWidth));
                     if (HS.Value > HS.Maximum - HS.LargeChange + 1)
                     {
                         HS.Value = HS.Maximum - HS.LargeChange + 1;
                     }
                     break;
                 case 2:
-                    RightPanelScroll.LargeChange = Conversions.ToInteger(Operators.MultiplyObject(NewLateBinding.LateGet(sender, null, "Height", neArray.Empty<object>()null, null, null), 0.9));
+                    RightPanelScroll.LargeChange = Conversions.ToInteger(Operators.MultiplyObject(NewLateBinding.LateGet(sender, null, "Height", Array.Empty<object>(),null, null, null), 0.9));
                     RightPanelScroll.Maximum = RightPanelScroll.LargeChange - 1;
-                    HSR.LargeChange = Conversions.ToInteger(Operators.DivideObject(NewLateBinding.LateGet(sender, null, "Width", neArray.Empty<object>()null, null, null), gxWidth));
+                    HSR.LargeChange = Conversions.ToInteger(Operators.DivideObject(NewLateBinding.LateGet(sender, null, "Width", Array.Empty<object>(),null, null, null), gxWidth));
                     if (HSR.Value > HSR.Maximum - HSR.LargeChange + 1)
                     {
                         HSR.Value = HSR.Maximum - HSR.LargeChange + 1;
                     }
                     break;
             }
-            object obj = NewLateBinding.LateGet(sender, null, "DisplayRectangle", neArray.Empty<object>()null, null, null);
+            object obj = NewLateBinding.LateGet(sender, null, "DisplayRectangle", Array.Empty<object>(),null, null, null);
             Rectangle rectangle = default(Rectangle);
             RefreshPanel(num, (obj != null) ? ((Rectangle)obj) : rectangle);
         }
@@ -12083,9 +12084,9 @@ end_IL_0000_3:
 
     private void PMainInMouseDown(object sender, MouseEventArgs e)
     {
-        tempFirstMouseDown = Conversions.ToBoolean(Operators.AndObject(FirstClickDisabled, Operators.NotObject(NewLateBinding.LateGet(sender, null, "Focused", neArray.Empty<object>()null, null, null))));
-        PanelFocus = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", neArray.Empty<object>()null, null, null));
-        NewLateBinding.LateCall(sender, null, "Focus", neArray.Empty<object>()null, null, null, IgnoreReturn: true);
+        tempFirstMouseDown = Conversions.ToBoolean(Operators.AndObject(FirstClickDisabled, Operators.NotObject(NewLateBinding.LateGet(sender, null, "Focused", Array.Empty<object>(),null, null, null))));
+        PanelFocus = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
+        NewLateBinding.LateCall(sender, null, "Focus", Array.Empty<object>(),null, null, null, IgnoreReturn: true);
         Point point = new Point(-1, -1);
         LastMouseDownLocation = point;
         VSValue = PanelVScroll[PanelFocus];
@@ -12153,7 +12154,7 @@ end_IL_0000_3:
     private void DeselectOrRemove(MouseEventArgs e, long xHS, long xVS, int xHeight)
     {
         KMouseOver = -1;
-        SelectedNotes = neArray.Empty<Note>()
+        SelectedNotes = Array.Empty<Note>();
         if (tempFirstMouseDown)
         {
             return;
@@ -12505,7 +12506,7 @@ end_IL_0000_3:
         {
             if (NoteIndex > 0)
             {
-                SelectedNotes = neArray.Empty<Note>()
+                SelectedNotes = Array.Empty<Note>();
                 Notes[NoteIndex].TempMouseDown = true;
                 if (MyProject.Computer.Keyboard.CtrlKeyDown & !PanelKeyStates.ModifierMultiselectActive())
                 {
@@ -12577,7 +12578,8 @@ end_IL_0000_3:
                 uAdded = false;
                 return;
             }
-            SelectedNotes = neArray.Empty<Note>()
+
+            SelectedNotes = Array.Empty<Note>();
             LastMouseDownLocation = e.Location;
             if (!MyProject.Computer.Keyboard.CtrlKeyDown)
             {
@@ -12665,7 +12667,7 @@ end_IL_0000_3:
 
     private void PMainInMouseEnter(object sender, EventArgs e)
     {
-        spMouseOver = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", neArray.Empty<object>()null, null, null));
+        spMouseOver = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
         Panel panel = (Panel)sender;
         if (AutoFocusMouseEnter && Focused)
         {
@@ -12683,7 +12685,7 @@ end_IL_0000_3:
     private void PMainInMouseLeave(object sender, EventArgs e)
     {
         KMouseOver = -1;
-        SelectedNotes = neArray.Empty<Note>()
+        SelectedNotes = Array.Empty<Note>();
         TempVPosition = -1.0;
         SelectedColumn = -1;
         RefreshPanelAll();
@@ -12698,7 +12700,7 @@ end_IL_0000_3:
     private void PMainInMouseMove(object sender, MouseEventArgs e)
     {
         MouseMoveStatus = e.Location;
-        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", neArray.Empty<object>()null, null, null));
+        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
         long num2 = PanelHScroll[num];
         long num3 = PanelVScroll[num];
         int num4 = spMain[num].Height;
@@ -13626,8 +13628,8 @@ end_IL_0000_3:
         VSValue = -1;
         HSValue = -1;
         Timer1.Enabled = false;
-        SelectedNotes = neArray.Empty<Note>()
-        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", neArray.Empty<object>()null, null, null));
+        SelectedNotes = Array.Empty<Note>();
+        int num = Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null));
         checked
         {
             if (MiddleButtonClicked && e.Button == MouseButtons.Middle && Math.Pow(MiddleButtonLocation.X - Cursor.Position.X, 2.0) + Math.Pow(MiddleButtonLocation.Y - Cursor.Position.Y, 2.0) >= (double)vo.MiddleDeltaRelease)
@@ -13659,7 +13661,7 @@ end_IL_0000_3:
             {
                 if (!NTInput & !tempFirstMouseDown)
                 {
-                    double num3 = Conversions.ToDouble(Operators.DivideObject(Operators.SubtractObject(Operators.SubtractObject(Operators.SubtractObject(NewLateBinding.LateGet(sender, null, "Height", neArray.Empty<object>()null, null, null), (float)PanelVScroll[num] * gxHeight), e.Y), 1), gxHeight));
+                    double num3 = Conversions.ToDouble(Operators.DivideObject(Operators.SubtractObject(Operators.SubtractObject(Operators.SubtractObject(NewLateBinding.LateGet(sender, null, "Height", Array.Empty<object>(),null, null, null), (float)PanelVScroll[num] * gxHeight), e.Y), 1), gxHeight));
                     if (gSnap)
                     {
                         num3 = SnapToGrid(num3);
@@ -13794,7 +13796,7 @@ end_IL_0000_3:
 
     private void PMainInPaint(object sender, PaintEventArgs e)
     {
-        RefreshPanel(Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", neArray.Empty<object>()null, null, null)), e.ClipRectangle);
+        RefreshPanel(Conversions.ToInteger(NewLateBinding.LateGet(sender, null, "Tag", Array.Empty<object>(),null, null, null)), e.ClipRectangle);
     }
 
     private void BVCCalculate_Click(object sender, EventArgs e)

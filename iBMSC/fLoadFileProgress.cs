@@ -11,7 +11,7 @@ using Microsoft.VisualBasic.CompilerServices;
 namespace iBMSC;
 
 [DesignerGenerated]
-public partial  class fLoadFileProgress : Form
+public partial class fLoadFileProgress : Form
 {
     private string[] xPath;
 
@@ -27,7 +27,7 @@ public partial  class fLoadFileProgress : Form
         CancelPressed = false;
         IsSaved = false;
         InitializeComponent();
-        prog.Maximum = checked(Information.UBound(xxPath) + 1);
+        prog.Maximum = Information.UBound(xxPath) + 1;
         xPath = xxPath;
         IsSaved = xIsSaved;
         this.TopMost = TopMost;
@@ -49,49 +49,49 @@ public partial  class fLoadFileProgress : Form
         {
             try
             {
-                /*Note: ILSpy has introduced the following switch to emulate a goto from catch-block to try-block*/;
-                checked
+                /*Note: ILSpy has introduced the following switch to emulate a goto from catch-block to try-block*/
+                ;
+                
+                switch (try0000_dispatch)
                 {
-                    switch (try0000_dispatch)
-                    {
                     default:
-                    {
-                        ProjectData.ClearProjectError();
-                        num2 = 0;
-                        var num3 = Information.UBound(xPath);
-                        for (var i = 0; i <= num3; i++)
                         {
-                            Label1.Text = "Currently loading ( " + Conversions.ToString(i + 1) + " / " + Conversions.ToString(Information.UBound(xPath) + 1) + " ): " + xPath[i];
-                            var maximum = prog.Maximum;
-                            var value = prog.Value;
-                            prog.Value = i;
-                            Application.DoEvents();
-                            if (CancelPressed)
+                            ProjectData.ClearProjectError();
+                            num2 = 0;
+                            var num3 = Information.UBound(xPath);
+                            for (var i = 0; i <= num3; i++)
                             {
-                                break;
+                                Label1.Text = "Currently loading ( " + Conversions.ToString(i + 1) + " / " + Conversions.ToString(Information.UBound(xPath) + 1) + " ): " + xPath[i];
+                                var maximum = prog.Maximum;
+                                var value = prog.Value;
+                                prog.Value = i;
+                                Application.DoEvents();
+                                if (CancelPressed)
+                                {
+                                    break;
+                                }
+                                if (i == 0 && IsSaved)
+                                {
+                                    MyProject.Forms.MainWindow.ReadFile(xPath[i]);
+                                }
+                                else
+                                {
+                                    Process.Start(Application.ExecutablePath, "\"" + xPath[i] + "\"");
+                                }
                             }
-                            if (i == 0 && IsSaved)
-                            {
-                                MyProject.Forms.MainWindow.ReadFile(xPath[i]);
-                            }
-                            else
-                            {
-                                Process.Start(Application.ExecutablePath, "\"" + xPath[i] + "\"");
-                            }
+                            Close();
+                            goto end_IL_0000;
                         }
-                        Close();
-                        goto end_IL_0000;
-                    }
                     case 269:
                         num = -1;
                         switch (num2)
                         {
                         }
                         break;
-                    }
-                    goto IL_0143;
                 }
-                end_IL_0000:;
+                goto IL_0143;
+
+end_IL_0000:;
             }
             catch (Exception obj) when (num2 != 0 && num == 0)
             {
@@ -100,7 +100,7 @@ public partial  class fLoadFileProgress : Form
                 continue;
             }
             break;
-            IL_0143:
+IL_0143:
             throw ProjectData.CreateProjectError(-2146828237);
         }
         if (num != 0)

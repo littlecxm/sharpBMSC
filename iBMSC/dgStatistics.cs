@@ -67,7 +67,7 @@ public partial  class dgStatistics : Form
                     {
                         label.Text = Conversions.ToString(data[num, num2]);
                     }
-                    if (unchecked(num % 2) == 0)
+                    if (num % 2 == 0)
                     {
                         label.BackColor = Color.FromArgb(268435456);
                     }

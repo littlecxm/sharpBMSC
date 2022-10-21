@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
@@ -12,7 +10,7 @@ using Microsoft.VisualBasic.CompilerServices;
 namespace iBMSC;
 
 [DesignerGenerated]
-public partial  class diagFind : Form
+public partial class diagFind : Form
 {
     private int bCol;
 
@@ -133,32 +131,31 @@ public partial  class diagFind : Form
         TBDelete.Text = Strings.fFind.Delete_;
         TBClose.Text = Strings.fFind.Close_;
         var num = bCol;
-        checked
+
+        for (var i = 27; i <= num; i++)
         {
-            for (var i = 27; i <= num; i++)
-            {
-                var checkBox = new CheckBox();
-                var checkBox2 = checkBox;
-                checkBox2.Appearance = Appearance.Button;
-                checkBox2.Checked = true;
-                checkBox2.FlatStyle = FlatStyle.System;
-                var checkBox3 = checkBox2;
-                var location = new Point(unchecked(checked(i - 26) % 8) * 35 + 3, unchecked(checked(i - 26) / 8) * 25 + 103);
-                checkBox3.Location = location;
-                var checkBox4 = checkBox2;
-                var size = new Size(35, 25);
-                checkBox4.Size = size;
-                checkBox2.Tag = i;
-                checkBox2.Text = "B" + (i - 25);
-                checkBox2.TextAlign = ContentAlignment.MiddleCenter;
-                checkBox2.UseVisualStyleBackColor = true;
-                checkBox2 = null;
-                Panel1.Controls.Add(checkBox);
-            }
-            lr1.KeyDown += lblKeyDown;
-            lr2.KeyDown += lblKeyDown;
-            Ttl.KeyDown += lblKeyDown;
+            var checkBox = new CheckBox();
+            var checkBox2 = checkBox;
+            checkBox2.Appearance = Appearance.Button;
+            checkBox2.Checked = true;
+            checkBox2.FlatStyle = FlatStyle.System;
+            var checkBox3 = checkBox2;
+            var location = new Point(checked(i - 26) % 8 * 35 + 3, checked(i - 26) / 8 * 25 + 103);
+            checkBox3.Location = location;
+            var checkBox4 = checkBox2;
+            var size = new Size(35, 25);
+            checkBox4.Size = size;
+            checkBox2.Tag = i;
+            checkBox2.Text = "B" + (i - 25);
+            checkBox2.TextAlign = ContentAlignment.MiddleCenter;
+            checkBox2.UseVisualStyleBackColor = true;
+            checkBox2 = null;
+            Panel1.Controls.Add(checkBox);
         }
+
+        lr1.KeyDown += lblKeyDown;
+        lr2.KeyDown += lblKeyDown;
+        Ttl.KeyDown += lblKeyDown;
     }
 
     private bool ValidLabel(string xStr)
@@ -219,56 +216,54 @@ public partial  class diagFind : Form
             return;
         }
         var array = Array.Empty<int>();
-        checked
+
+        var enumerator = default(IEnumerator);
+        try
         {
-            var enumerator = default(IEnumerator);
-            try
+            enumerator = Panel1.Controls.GetEnumerator();
+            while (enumerator.MoveNext())
             {
-                enumerator = Panel1.Controls.GetEnumerator();
-                while (enumerator.MoveNext())
+                var checkBox = (CheckBox)enumerator.Current;
+                if (checkBox.Checked)
                 {
-                    var checkBox = (CheckBox)enumerator.Current;
-                    if (checkBox.Checked)
-                    {
-                        array = (int[])Utils.CopyArray(array, new int[Information.UBound(array) + 1 + 1]);
-                        array[Information.UBound(array)] = Conversions.ToInteger(checkBox.Tag);
-                    }
+                    array = (int[])Utils.CopyArray(array, new int[Information.UBound(array) + 1 + 1]);
+                    array[Information.UBound(array)] = Conversions.ToInteger(checkBox.Tag);
                 }
             }
-            finally
-            {
-                if (enumerator is IDisposable)
-                {
-                    (enumerator as IDisposable).Dispose();
-                }
-            }
-            var num = 1;
-            if (cbx1.Checked)
-            {
-                num *= 2;
-            }
-            if (cbx2.Checked)
-            {
-                num *= 3;
-            }
-            if (cbx3.Checked)
-            {
-                num *= 5;
-            }
-            if (cbx4.Checked)
-            {
-                num *= 7;
-            }
-            if (cbx5.Checked)
-            {
-                num *= 11;
-            }
-            if (cbx6.Checked)
-            {
-                num *= 13;
-            }
-            MyProject.Forms.MainWindow.fdrSelect(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, 10000m)), Convert.ToInt32(decimal.Multiply(vr2.Value, 10000m)), array);
         }
+        finally
+        {
+            if (enumerator is IDisposable)
+            {
+                (enumerator as IDisposable).Dispose();
+            }
+        }
+        var num = 1;
+        if (cbx1.Checked)
+        {
+            num *= 2;
+        }
+        if (cbx2.Checked)
+        {
+            num *= 3;
+        }
+        if (cbx3.Checked)
+        {
+            num *= 5;
+        }
+        if (cbx4.Checked)
+        {
+            num *= 7;
+        }
+        if (cbx5.Checked)
+        {
+            num *= 11;
+        }
+        if (cbx6.Checked)
+        {
+            num *= 13;
+        }
+        MyProject.Forms.MainWindow.fdrSelect(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, 10000m)), Convert.ToInt32(decimal.Multiply(vr2.Value, 10000m)), array);
     }
 
     private void TBUnselect_Click(object sender, EventArgs e)
@@ -278,56 +273,54 @@ public partial  class diagFind : Form
             return;
         }
         var array = Array.Empty<int>();
-        checked
+
+        var enumerator = default(IEnumerator);
+        try
         {
-            var enumerator = default(IEnumerator);
-            try
+            enumerator = Panel1.Controls.GetEnumerator();
+            while (enumerator.MoveNext())
             {
-                enumerator = Panel1.Controls.GetEnumerator();
-                while (enumerator.MoveNext())
+                var checkBox = (CheckBox)enumerator.Current;
+                if (checkBox.Checked)
                 {
-                    var checkBox = (CheckBox)enumerator.Current;
-                    if (checkBox.Checked)
-                    {
-                        array = (int[])Utils.CopyArray(array, new int[Information.UBound(array) + 1 + 1]);
-                        array[Information.UBound(array)] = Conversions.ToInteger(checkBox.Tag);
-                    }
+                    array = (int[])Utils.CopyArray(array, new int[Information.UBound(array) + 1 + 1]);
+                    array[Information.UBound(array)] = Conversions.ToInteger(checkBox.Tag);
                 }
             }
-            finally
-            {
-                if (enumerator is IDisposable)
-                {
-                    (enumerator as IDisposable).Dispose();
-                }
-            }
-            var num = 1;
-            if (cbx1.Checked)
-            {
-                num *= 2;
-            }
-            if (cbx2.Checked)
-            {
-                num *= 3;
-            }
-            if (cbx3.Checked)
-            {
-                num *= 5;
-            }
-            if (cbx4.Checked)
-            {
-                num *= 7;
-            }
-            if (cbx5.Checked)
-            {
-                num *= 11;
-            }
-            if (cbx6.Checked)
-            {
-                num *= 13;
-            }
-            MyProject.Forms.MainWindow.fdrUnselect(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, 10000m)), Convert.ToInt32(decimal.Multiply(vr2.Value, 10000m)), array);
         }
+        finally
+        {
+            if (enumerator is IDisposable)
+            {
+                (enumerator as IDisposable).Dispose();
+            }
+        }
+        var num = 1;
+        if (cbx1.Checked)
+        {
+            num *= 2;
+        }
+        if (cbx2.Checked)
+        {
+            num *= 3;
+        }
+        if (cbx3.Checked)
+        {
+            num *= 5;
+        }
+        if (cbx4.Checked)
+        {
+            num *= 7;
+        }
+        if (cbx5.Checked)
+        {
+            num *= 11;
+        }
+        if (cbx6.Checked)
+        {
+            num *= 13;
+        }
+        MyProject.Forms.MainWindow.fdrUnselect(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, 10000m)), Convert.ToInt32(decimal.Multiply(vr2.Value, 10000m)), array);
     }
 
     private void TBDelete_Click(object sender, EventArgs e)
@@ -337,56 +330,54 @@ public partial  class diagFind : Form
             return;
         }
         var array = Array.Empty<int>();
-        checked
+
+        var enumerator = default(IEnumerator);
+        try
         {
-            var enumerator = default(IEnumerator);
-            try
+            enumerator = Panel1.Controls.GetEnumerator();
+            while (enumerator.MoveNext())
             {
-                enumerator = Panel1.Controls.GetEnumerator();
-                while (enumerator.MoveNext())
+                var checkBox = (CheckBox)enumerator.Current;
+                if (checkBox.Checked)
                 {
-                    var checkBox = (CheckBox)enumerator.Current;
-                    if (checkBox.Checked)
-                    {
-                        array = (int[])Utils.CopyArray(array, new int[Information.UBound(array) + 1 + 1]);
-                        array[Information.UBound(array)] = Conversions.ToInteger(checkBox.Tag);
-                    }
+                    array = (int[])Utils.CopyArray(array, new int[Information.UBound(array) + 1 + 1]);
+                    array[Information.UBound(array)] = Conversions.ToInteger(checkBox.Tag);
                 }
             }
-            finally
-            {
-                if (enumerator is IDisposable)
-                {
-                    (enumerator as IDisposable).Dispose();
-                }
-            }
-            var num = 1;
-            if (cbx1.Checked)
-            {
-                num *= 2;
-            }
-            if (cbx2.Checked)
-            {
-                num *= 3;
-            }
-            if (cbx3.Checked)
-            {
-                num *= 5;
-            }
-            if (cbx4.Checked)
-            {
-                num *= 7;
-            }
-            if (cbx5.Checked)
-            {
-                num *= 11;
-            }
-            if (cbx6.Checked)
-            {
-                num *= 13;
-            }
-            MyProject.Forms.MainWindow.fdrDelete(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, 10000m)), Convert.ToInt32(decimal.Multiply(vr2.Value, 10000m)), array);
         }
+        finally
+        {
+            if (enumerator is IDisposable)
+            {
+                (enumerator as IDisposable).Dispose();
+            }
+        }
+        var num = 1;
+        if (cbx1.Checked)
+        {
+            num *= 2;
+        }
+        if (cbx2.Checked)
+        {
+            num *= 3;
+        }
+        if (cbx3.Checked)
+        {
+            num *= 5;
+        }
+        if (cbx4.Checked)
+        {
+            num *= 7;
+        }
+        if (cbx5.Checked)
+        {
+            num *= 11;
+        }
+        if (cbx6.Checked)
+        {
+            num *= 13;
+        }
+        MyProject.Forms.MainWindow.fdrDelete(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, 10000m)), Convert.ToInt32(decimal.Multiply(vr2.Value, 10000m)), array);
     }
 
     private void TBrl_Click(object sender, EventArgs e)
@@ -396,56 +387,54 @@ public partial  class diagFind : Form
             return;
         }
         var array = Array.Empty<int>();
-        checked
+
+        var enumerator = default(IEnumerator);
+        try
         {
-            var enumerator = default(IEnumerator);
-            try
+            enumerator = Panel1.Controls.GetEnumerator();
+            while (enumerator.MoveNext())
             {
-                enumerator = Panel1.Controls.GetEnumerator();
-                while (enumerator.MoveNext())
+                var checkBox = (CheckBox)enumerator.Current;
+                if (checkBox.Checked)
                 {
-                    var checkBox = (CheckBox)enumerator.Current;
-                    if (checkBox.Checked)
-                    {
-                        array = (int[])Utils.CopyArray(array, new int[Information.UBound(array) + 1 + 1]);
-                        array[Information.UBound(array)] = Conversions.ToInteger(checkBox.Tag);
-                    }
+                    array = (int[])Utils.CopyArray(array, new int[Information.UBound(array) + 1 + 1]);
+                    array[Information.UBound(array)] = Conversions.ToInteger(checkBox.Tag);
                 }
             }
-            finally
-            {
-                if (enumerator is IDisposable)
-                {
-                    (enumerator as IDisposable).Dispose();
-                }
-            }
-            var num = 1;
-            if (cbx1.Checked)
-            {
-                num *= 2;
-            }
-            if (cbx2.Checked)
-            {
-                num *= 3;
-            }
-            if (cbx3.Checked)
-            {
-                num *= 5;
-            }
-            if (cbx4.Checked)
-            {
-                num *= 7;
-            }
-            if (cbx5.Checked)
-            {
-                num *= 11;
-            }
-            if (cbx6.Checked)
-            {
-                num *= 13;
-            }
-            MyProject.Forms.MainWindow.fdrReplaceL(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, 10000m)), Convert.ToInt32(decimal.Multiply(vr2.Value, 10000m)), array, Ttl.Text);
         }
+        finally
+        {
+            if (enumerator is IDisposable)
+            {
+                (enumerator as IDisposable).Dispose();
+            }
+        }
+        var num = 1;
+        if (cbx1.Checked)
+        {
+            num *= 2;
+        }
+        if (cbx2.Checked)
+        {
+            num *= 3;
+        }
+        if (cbx3.Checked)
+        {
+            num *= 5;
+        }
+        if (cbx4.Checked)
+        {
+            num *= 7;
+        }
+        if (cbx5.Checked)
+        {
+            num *= 11;
+        }
+        if (cbx6.Checked)
+        {
+            num *= 13;
+        }
+        MyProject.Forms.MainWindow.fdrReplaceL(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, 10000m)), Convert.ToInt32(decimal.Multiply(vr2.Value, 10000m)), array, Ttl.Text);
     }
 
     private void TBrv_Click(object sender, EventArgs e)
@@ -455,55 +444,53 @@ public partial  class diagFind : Form
             return;
         }
         var array = Array.Empty<int>();
-        checked
+
+        var enumerator = default(IEnumerator);
+        try
         {
-            var enumerator = default(IEnumerator);
-            try
+            enumerator = Panel1.Controls.GetEnumerator();
+            while (enumerator.MoveNext())
             {
-                enumerator = Panel1.Controls.GetEnumerator();
-                while (enumerator.MoveNext())
+                var checkBox = (CheckBox)enumerator.Current;
+                if (checkBox.Checked)
                 {
-                    var checkBox = (CheckBox)enumerator.Current;
-                    if (checkBox.Checked)
-                    {
-                        array = (int[])Utils.CopyArray(array, new int[Information.UBound(array) + 1 + 1]);
-                        array[Information.UBound(array)] = Conversions.ToInteger(checkBox.Tag);
-                    }
+                    array = (int[])Utils.CopyArray(array, new int[Information.UBound(array) + 1 + 1]);
+                    array[Information.UBound(array)] = Conversions.ToInteger(checkBox.Tag);
                 }
             }
-            finally
-            {
-                if (enumerator is IDisposable)
-                {
-                    (enumerator as IDisposable).Dispose();
-                }
-            }
-            var num = 1;
-            if (cbx1.Checked)
-            {
-                num *= 2;
-            }
-            if (cbx2.Checked)
-            {
-                num *= 3;
-            }
-            if (cbx3.Checked)
-            {
-                num *= 5;
-            }
-            if (cbx4.Checked)
-            {
-                num *= 7;
-            }
-            if (cbx5.Checked)
-            {
-                num *= 11;
-            }
-            if (cbx6.Checked)
-            {
-                num *= 13;
-            }
-            MyProject.Forms.MainWindow.fdrReplaceV(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, 10000m)), Convert.ToInt32(decimal.Multiply(vr2.Value, 10000m)), array, Convert.ToInt32(decimal.Multiply(Ttv.Value, 10000m)));
         }
+        finally
+        {
+            if (enumerator is IDisposable)
+            {
+                (enumerator as IDisposable).Dispose();
+            }
+        }
+        var num = 1;
+        if (cbx1.Checked)
+        {
+            num *= 2;
+        }
+        if (cbx2.Checked)
+        {
+            num *= 3;
+        }
+        if (cbx3.Checked)
+        {
+            num *= 5;
+        }
+        if (cbx4.Checked)
+        {
+            num *= 7;
+        }
+        if (cbx5.Checked)
+        {
+            num *= 11;
+        }
+        if (cbx6.Checked)
+        {
+            num *= 13;
+        }
+        MyProject.Forms.MainWindow.fdrReplaceV(num, Convert.ToInt32(mr1.Value), Convert.ToInt32(mr2.Value), lr1.Text, lr2.Text, Convert.ToInt32(decimal.Multiply(vr1.Value, 10000m)), Convert.ToInt32(decimal.Multiply(vr2.Value, 10000m)), array, Convert.ToInt32(decimal.Multiply(Ttv.Value, 10000m)));
     }
 }

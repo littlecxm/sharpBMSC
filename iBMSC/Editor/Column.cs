@@ -82,22 +82,22 @@ public struct Column
 
     public Color getBright(float opacity)
     {
-        return Color.FromArgb((checked((int)Math.Round(((cCacheB >> 24) & 0xFF) * opacity)) << 24) | (cCacheB & 0xFFFFFF));
+        return Color.FromArgb(((int)Math.Round(((cCacheB >> 24) & 0xFF) * opacity) << 24) | (cCacheB & 0xFFFFFF));
     }
 
     public Color getDark(float opacity)
     {
-        return Color.FromArgb((checked((int)Math.Round(((cCacheD >> 24) & 0xFF) * opacity)) << 24) | (cCacheD & 0xFFFFFF));
+        return Color.FromArgb(((int)Math.Round(((cCacheD >> 24) & 0xFF) * opacity) << 24) | (cCacheD & 0xFFFFFF));
     }
 
     public Color getLongBright(float opacity)
     {
-        return Color.FromArgb((checked((int)Math.Round(((cCacheLB >> 24) & 0xFF) * opacity)) << 24) | (cCacheLB & 0xFFFFFF));
+        return Color.FromArgb(((int)Math.Round(((cCacheLB >> 24) & 0xFF) * opacity) << 24) | (cCacheLB & 0xFFFFFF));
     }
 
     public Color getLongDark(float opacity)
     {
-        return Color.FromArgb((checked((int)Math.Round(((cCacheLD >> 24) & 0xFF) * opacity)) << 24) | (cCacheLD & 0xFFFFFF));
+        return Color.FromArgb(((int)Math.Round(((cCacheLD >> 24) & 0xFF) * opacity) << 24) | (cCacheLD & 0xFFFFFF));
     }
 
     public void setNoteColor(int c)

@@ -58,13 +58,13 @@ public sealed class Functions
     public static string Add3Zeros(int xNum)
     {
         var text = "000" + Conversions.ToString(xNum);
-        return Microsoft.VisualBasic.Strings.Mid(text, checked(Microsoft.VisualBasic.Strings.Len(text) - 2));
+        return Microsoft.VisualBasic.Strings.Mid(text, Microsoft.VisualBasic.Strings.Len(text) - 2);
     }
 
     public static string Add2Zeros(int xNum)
     {
         var text = "00" + Conversions.ToString(xNum);
-        return Microsoft.VisualBasic.Strings.Mid(text, checked(Microsoft.VisualBasic.Strings.Len(text) - 1));
+        return Microsoft.VisualBasic.Strings.Mid(text, Microsoft.VisualBasic.Strings.Len(text) - 1);
     }
 
     public static char C10to36S(int xStart)
@@ -73,7 +73,7 @@ public sealed class Functions
         {
             return Conversions.ToChar(Conversions.ToString(xStart));
         }
-        return Microsoft.VisualBasic.Strings.Chr(checked(xStart + 55));
+        return Microsoft.VisualBasic.Strings.Chr(xStart + 55);
     }
 
     public static int C36to10S(char xChar)
@@ -81,11 +81,11 @@ public sealed class Functions
         var num = Microsoft.VisualBasic.Strings.Asc(Microsoft.VisualBasic.Strings.UCase(xChar));
         if (num >= 48 && num <= 57)
         {
-            return checked(num - 48);
+            return num - 48;
         }
         if (num >= 65 && num <= 90)
         {
-            return checked(num - 55);
+            return num - 55;
         }
         return 0;
     }
@@ -100,19 +100,14 @@ public sealed class Functions
         {
             xStart = 1295L;
         }
-        checked
-        {
-            return Conversions.ToString(C10to36S((int)unchecked(xStart / 36))) + Conversions.ToString(C10to36S((int)unchecked(xStart % 36)));
-        }
+
+        return Conversions.ToString(C10to36S((int)(xStart / 36))) + Conversions.ToString(C10to36S((int)(xStart % 36)));
     }
 
     public static int C36to10(string xStart)
     {
-        checked
-        {
-            xStart = Microsoft.VisualBasic.Strings.Mid("00" + xStart, Microsoft.VisualBasic.Strings.Len(xStart) + 1);
-            return C36to10S(xStart[0]) * 36 + C36to10S(xStart[1]);
-        }
+        xStart = Microsoft.VisualBasic.Strings.Mid("00" + xStart, Microsoft.VisualBasic.Strings.Len(xStart) + 1);
+        return C36to10S(xStart[0]) * 36 + C36to10S(xStart[1]);
     }
 
     public static string EncodingToString(Encoding TextEncoding)
@@ -162,21 +157,19 @@ public sealed class Functions
         {
             return Color.FromArgb(0);
         }
-        checked
-        {
-            return Color.FromArgb((int)Math.Round(unchecked(cStart.A) * iTransparency), (int)Math.Round(unchecked(cStart.R * (100f - Math.Abs(iPercent)) * 0.01 + Math.Abs((0 - ((iPercent >= 0f) ? 1 : 0)) * iPercent) * 2.55)), (int)Math.Round(unchecked(cStart.G * (100f - Math.Abs(iPercent)) * 0.01 + Math.Abs((0 - ((iPercent >= 0f) ? 1 : 0)) * iPercent) * 2.55)), (int)Math.Round(unchecked(cStart.B * (100f - Math.Abs(iPercent)) * 0.01 + Math.Abs((0 - ((iPercent >= 0f) ? 1 : 0)) * iPercent) * 2.55)));
-        }
+
+        return Color.FromArgb((int)Math.Round(cStart.A * iTransparency), (int)Math.Round(unchecked(cStart.R * (100f - Math.Abs(iPercent)) * 0.01 + Math.Abs((0 - (iPercent >= 0f ? 1 : 0)) * iPercent) * 2.55)), (int)Math.Round(unchecked(cStart.G * (100f - Math.Abs(iPercent)) * 0.01 + Math.Abs((0 - (iPercent >= 0f ? 1 : 0)) * iPercent) * 2.55)), (int)Math.Round(unchecked(cStart.B * (100f - Math.Abs(iPercent)) * 0.01 + Math.Abs((0 - (iPercent >= 0f ? 1 : 0)) * iPercent) * 2.55)));
     }
 
     public static bool IdentifiertoLongNote(string I)
     {
-        var num = checked((int)Math.Round(Conversion.Val(I)));
+        var num = (int)Math.Round(Conversion.Val(I));
         return num >= 50 && num < 90;
     }
 
     public static bool IdentifiertoHidden(string I)
     {
-        var num = checked((int)Math.Round(Conversion.Val(I)));
+        var num = (int)Math.Round(Conversion.Val(I));
         return (num >= 30 && num < 50) || (num >= 70 && num < 90);
     }
 
@@ -199,53 +192,51 @@ public sealed class Functions
             return Color.Black;
         }
         var num = xS / 1000.0;
-        checked
+
+        var num2 = (xL - 500) / 500.0;
+        double num4;
+        double num5;
+        double num3;
+        if (xH < 60)
         {
-            var num2 = (xL - 500) / 500.0;
-            double num4;
-            double num5;
-            double num3;
-            if (xH < 60)
-            {
-                num3 = -1.0;
-                num4 = 1.0;
-                num5 = (xH - 30) / 30.0;
-            }
-            else if (xH < 120)
-            {
-                num3 = -1.0;
-                num5 = 1.0;
-                num4 = (90 - xH) / 30.0;
-            }
-            else if (xH < 180)
-            {
-                num4 = -1.0;
-                num5 = 1.0;
-                num3 = (xH - 150) / 30.0;
-            }
-            else if (xH < 240)
-            {
-                num4 = -1.0;
-                num3 = 1.0;
-                num5 = (210 - xH) / 30.0;
-            }
-            else if (xH < 300)
-            {
-                num5 = -1.0;
-                num3 = 1.0;
-                num4 = (xH - 270) / 30.0;
-            }
-            else
-            {
-                num5 = -1.0;
-                num4 = 1.0;
-                num3 = (330 - xH) / 30.0;
-            }
-            num4 = (num4 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
-            num5 = (num5 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
-            num3 = (num3 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
-            return Color.FromArgb(xA, (int)Math.Round(num4), (int)Math.Round(num5), (int)Math.Round(num3));
+            num3 = -1.0;
+            num4 = 1.0;
+            num5 = (xH - 30) / 30.0;
         }
+        else if (xH < 120)
+        {
+            num3 = -1.0;
+            num5 = 1.0;
+            num4 = (90 - xH) / 30.0;
+        }
+        else if (xH < 180)
+        {
+            num4 = -1.0;
+            num5 = 1.0;
+            num3 = (xH - 150) / 30.0;
+        }
+        else if (xH < 240)
+        {
+            num4 = -1.0;
+            num3 = 1.0;
+            num5 = (210 - xH) / 30.0;
+        }
+        else if (xH < 300)
+        {
+            num5 = -1.0;
+            num3 = 1.0;
+            num4 = (xH - 270) / 30.0;
+        }
+        else
+        {
+            num5 = -1.0;
+            num4 = 1.0;
+            num3 = (330 - xH) / 30.0;
+        }
+        num4 = (num4 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
+        num5 = (num5 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
+        num3 = (num3 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
+        return Color.FromArgb(xA, (int)Math.Round(num4), (int)Math.Round(num5), (int)Math.Round(num3));
     }
 
     public static string FontToString(Font xFont)
@@ -272,7 +263,7 @@ public sealed class Functions
         var array = Microsoft.VisualBasic.Strings.Split(xStr, ",");
         if (Information.UBound(array) == 2)
         {
-            var style = (FontStyle)checked((int)Math.Round(Conversion.Val(array[2])));
+            var style = (FontStyle)(int)Math.Round(Conversion.Val(array[2]));
             return new Font(array[0], (float)Conversion.Val(array[1]), style, GraphicsUnit.Pixel);
         }
         return xDefault;
@@ -282,7 +273,7 @@ public sealed class Functions
     {
         var text = "";
         var num = Information.UBound(xInt);
-        for (var i = 0; i <= num; i = checked(i + 1))
+        for (var i = 0; i <= num; i += 1)
         {
             text = Conversions.ToString(Operators.ConcatenateObject(text, Operators.ConcatenateObject(xInt[i].ToString(), Interaction.IIf(i == Information.UBound(xInt), "", ","))));
         }
@@ -293,7 +284,7 @@ public sealed class Functions
     {
         var text = "";
         var num = Information.UBound(xBool);
-        for (var i = 0; i <= num; i = checked(i + 1))
+        for (var i = 0; i <= num; i += 1)
         {
             text = Conversions.ToString(Operators.ConcatenateObject(text, Operators.ConcatenateObject((0 - (xBool[i] ? 1 : 0)).ToString(), Interaction.IIf(i == Information.UBound(xBool), "", ","))));
         }
@@ -304,7 +295,7 @@ public sealed class Functions
     {
         var text = "";
         var num = Information.UBound(xColor);
-        for (var i = 0; i <= num; i = checked(i + 1))
+        for (var i = 0; i <= num; i += 1)
         {
             text = Conversions.ToString(Operators.ConcatenateObject(text, Operators.ConcatenateObject(xColor[i].ToArgb().ToString(), Interaction.IIf(i == Information.UBound(xColor), "", ","))));
         }
@@ -314,31 +305,29 @@ public sealed class Functions
     public static int[] StringToArrayInt(string xStr)
     {
         var array = Microsoft.VisualBasic.Strings.Split(xStr, ",");
-        checked
+
+        var array2 = new int[Information.UBound(array) + 1];
+        var num = Information.UBound(array2);
+        for (var i = 0; i <= num; i++)
         {
-            var array2 = new int[Information.UBound(array) + 1];
-            var num = Information.UBound(array2);
-            for (var i = 0; i <= num; i++)
-            {
-                array2[i] = (int)Math.Round(Conversion.Val(array[i]));
-            }
-            return array2;
+            array2[i] = (int)Math.Round(Conversion.Val(array[i]));
         }
+
+        return array2;
     }
 
     public static bool[] StringToArrayBool(string xStr)
     {
         var array = Microsoft.VisualBasic.Strings.Split(xStr, ",");
-        checked
+
+        var array2 = new bool[Information.UBound(array) + 1];
+        var num = Information.UBound(array2);
+        for (var i = 0; i <= num; i++)
         {
-            var array2 = new bool[Information.UBound(array) + 1];
-            var num = Information.UBound(array2);
-            for (var i = 0; i <= num; i++)
-            {
-                array2[i] = Conversion.Val(array[i]) != 0.0;
-            }
-            return array2;
+            array2[i] = Conversion.Val(array[i]) != 0.0;
         }
+
+        return array2;
     }
 
     public static long GetDenominator(double a, long maxDenom = 2147483647L)
@@ -348,30 +337,31 @@ public sealed class Functions
         var num3 = 0L;
         var num4 = 1L;
         var num5 = a;
-        checked
+
+        var num6 = (long)Math.Round(Conversion.Int(num5));
+        while (num3 * num6 + num4 <= maxDenom)
         {
-            var num6 = (long)Math.Round(Conversion.Int(num5));
-            while (num3 * num6 + num4 <= maxDenom)
+            var num7 = num * num6 + num2;
+            num2 = num;
+            num = num7;
+            num7 = num3 * num6 + num4;
+            num4 = num3;
+            num3 = num7;
+            if (num5 == num6)
             {
-                var num7 = num * num6 + num2;
-                num2 = num;
-                num = num7;
-                num7 = num3 * num6 + num4;
-                num4 = num3;
-                num3 = num7;
-                if (num5 == num6)
-                {
-                    break;
-                }
-                num5 = 1.0 / (num5 - num6);
-                if (num5 > 9.223372036854776E+18)
-                {
-                    break;
-                }
-                num6 = (long)Math.Round(Conversion.Int(num5));
+                break;
             }
-            return num3;
+
+            num5 = 1.0 / (num5 - num6);
+            if (num5 > 9.223372036854776E+18)
+            {
+                break;
+            }
+
+            num6 = (long)Math.Round(Conversion.Int(num5));
         }
+
+        return num3;
     }
 
     public static bool IsBase36(string str)
