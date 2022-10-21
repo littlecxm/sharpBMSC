@@ -33,75 +33,38 @@ public partial  class OpGeneral : Form
 
     private void OK_Button_Click(object sender, EventArgs e)
     {
-        switch (CWheel.SelectedIndex)
+        zWheel = CWheel.SelectedIndex switch
         {
-            case 0:
-                zWheel = 192;
-                break;
-            case 1:
-                zWheel = 96;
-                break;
-            case 2:
-                zWheel = 64;
-                break;
-            case 3:
-                zWheel = 48;
-                break;
-        }
-        switch (CPgUpDn.SelectedIndex)
+            0 => 192,
+            1 => 96,
+            2 => 64,
+            3 => 48,
+            _ => zWheel
+        };
+        zPgUpDn = CPgUpDn.SelectedIndex switch
         {
-            case 0:
-                zPgUpDn = 1536;
-                break;
-            case 1:
-                zPgUpDn = 1152;
-                break;
-            case 2:
-                zPgUpDn = 768;
-                break;
-            case 3:
-                zPgUpDn = 576;
-                break;
-            case 4:
-                zPgUpDn = 384;
-                break;
-            case 5:
-                zPgUpDn = 192;
-                break;
-            case 6:
-                zPgUpDn = 96;
-                break;
-        }
-        switch (CTextEncoding.SelectedIndex)
+            0 => 1536,
+            1 => 1152,
+            2 => 768,
+            3 => 576,
+            4 => 384,
+            5 => 192,
+            6 => 96,
+            _ => zPgUpDn
+        };
+        zEncoding = CTextEncoding.SelectedIndex switch
         {
-            case 0:
-                zEncoding = Encoding.Default;
-                break;
-            case 1:
-                zEncoding = Encoding.Unicode;
-                break;
-            case 2:
-                zEncoding = Encoding.ASCII;
-                break;
-            case 3:
-                zEncoding = Encoding.BigEndianUnicode;
-                break;
-            case 4:
-                zEncoding = Encoding.UTF32;
-                break;
-            case 5:
-                zEncoding = Encoding.UTF7;
-                break;
-            case 6:
-                zEncoding = Encoding.UTF8;
-                break;
-            case 7:
-                zEncoding = Encoding.GetEncoding(932);
-                break;
-            case 8:
-                zEncoding = Encoding.GetEncoding(51949);
-                break;
-        }
+            0 => Encoding.Default,
+            1 => Encoding.Unicode,
+            2 => Encoding.ASCII,
+            3 => Encoding.BigEndianUnicode,
+            4 => Encoding.UTF32,
+            5 => Encoding.UTF7,
+            6 => Encoding.UTF8,
+            7 => Encoding.GetEncoding(932),
+            8 => Encoding.GetEncoding(51949),
+            _ => zEncoding
+        };
         zMiddle = Conversions.ToInteger(Interaction.IIf(rMiddleDrag.Checked, 1, 0));
         zAutoSave = Conversions.ToInteger(Operators.MultiplyObject(Operators.MultiplyObject(Interaction.IIf(cAutoSave.Checked, 1, 0), NAutoSave.Value), 60000));
         zGridPartition = Convert.ToInt32(nGridPartition.Value);

@@ -41,10 +41,7 @@ public struct Column
 
     public int Width
     {
-        get
-        {
-            return _Width;
-        }
+        get => _Width;
         set
         {
             _Width = value;
@@ -54,10 +51,7 @@ public struct Column
 
     public bool isVisible
     {
-        get
-        {
-            return _isVisible;
-        }
+        get => _isVisible;
         set
         {
             _isVisible = value;
@@ -67,10 +61,7 @@ public struct Column
 
     public bool isNoteCol
     {
-        get
-        {
-            return _isNoteCol;
-        }
+        get => _isNoteCol;
         set
         {
             _isNoteCol = value;
@@ -114,9 +105,11 @@ public struct Column
         cCacheLD = Functions.AdjustBrightness(Color.FromArgb(c), -25f, (float)(((c >> 24) & 0xFF) / 255.0)).ToArgb();
     }
 
-    public Column(int xLeft, int xWidth, string xTitle, bool xNoteCol, bool xisNumeric, bool xVisible, int xIdentifier, int xcNote, int xcText, int xcLNote, int xcLText, int xcBG)
+    public Column(int xLeft, int xWidth, string xTitle,
+        bool xNoteCol, bool xisNumeric, bool xVisible, int xIdentifier, 
+        uint xcNote, uint xcText, uint xcLNote, uint xcLText, uint xcBG)
     {
-        this = default(Column);
+        this = default;
         Left = xLeft;
         Title = xTitle;
         isNumeric = xisNumeric;
@@ -125,10 +118,10 @@ public struct Column
         _isVisible = xVisible;
         _isNoteCol = xNoteCol;
         _isEnabledAfterAll = xVisible && xNoteCol && xWidth != 0;
-        setNoteColor(xcNote);
-        cText = Color.FromArgb(xcText);
-        setLNoteColor(xcLNote);
-        cLText = Color.FromArgb(xcLText);
-        cBG = Color.FromArgb(xcBG);
+        setNoteColor((int)xcNote);
+        cText = Color.FromArgb((int)xcText);
+        setLNoteColor((int)xcLNote);
+        cLText = Color.FromArgb((int)xcLText);
+        cBG = Color.FromArgb((int)xcBG);
     }
 }

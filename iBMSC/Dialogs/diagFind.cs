@@ -174,14 +174,14 @@ public partial class diagFind : Form
             return false;
         }
         var num = Microsoft.VisualBasic.Strings.Asc(Microsoft.VisualBasic.Strings.Mid(xStr, 1, 1));
-        if (!((num >= 48 && num <= 57) || (num >= 65 && num <= 90)))
+        if (!(num is >= 48 and <= 57 || num is >= 65 and <= 90))
         {
             return false;
         }
         if (Microsoft.VisualBasic.Strings.Len(xStr) == 2)
         {
             var num2 = Microsoft.VisualBasic.Strings.Asc(Microsoft.VisualBasic.Strings.Mid(xStr, 2, 1));
-            if (!((num2 >= 48 && num2 <= 57) || (num2 >= 65 && num2 <= 90)))
+            if (!(num2 is >= 48 and <= 57 || num2 is >= 65 and <= 90))
             {
                 return false;
             }

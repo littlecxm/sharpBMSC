@@ -79,11 +79,11 @@ public sealed class Functions
     public static int C36to10S(char xChar)
     {
         var num = Microsoft.VisualBasic.Strings.Asc(Microsoft.VisualBasic.Strings.UCase(xChar));
-        if (num >= 48 && num <= 57)
+        if (num is >= 48 and <= 57)
         {
             return num - 48;
         }
-        if (num >= 65 && num <= 90)
+        if (num is >= 65 and <= 90)
         {
             return num - 55;
         }
@@ -164,13 +164,13 @@ public sealed class Functions
     public static bool IdentifiertoLongNote(string I)
     {
         var num = (int)Math.Round(Conversion.Val(I));
-        return num >= 50 && num < 90;
+        return num is >= 50 and < 90;
     }
 
     public static bool IdentifiertoHidden(string I)
     {
         var num = (int)Math.Round(Conversion.Val(I));
-        return (num >= 30 && num < 50) || (num >= 70 && num < 90);
+        return num is >= 30 and < 50 || num is >= 70 and < 90;
     }
 
     public static string RandomFileName(string extWithDot)

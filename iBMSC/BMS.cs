@@ -9,13 +9,13 @@ internal static class BMS
     public static bool IsChannelLongNote(string I)
     {
         var num = (int)Math.Round(Conversion.Val(I));
-        return num >= 50 && num < 90;
+        return num is >= 50 and < 90;
     }
 
     public static bool IsChannelHidden(string I)
     {
         var num = (int)Math.Round(Conversion.Val(I));
-        return (num >= 30 && num < 50) || (num >= 70 && num < 90);
+        return num is >= 30 and < 50 || num is >= 70 and < 90;
     }
 
     public static bool IsChannelLandmine(string I)

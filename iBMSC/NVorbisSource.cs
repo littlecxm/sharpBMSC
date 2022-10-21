@@ -25,10 +25,7 @@ internal class NVorbisSource : ISampleSource
 
     public long Position
     {
-        get
-        {
-            return Conversions.ToLong(Interaction.IIf(CanSeek, _vorbisReader.DecodedTime.TotalSeconds * _vorbisReader.SampleRate * _vorbisReader.Channels, 0));
-        }
+        get => Conversions.ToLong(Interaction.IIf(CanSeek, _vorbisReader.DecodedTime.TotalSeconds * _vorbisReader.SampleRate * _vorbisReader.Channels, 0));
         set
         {
             if (!CanSeek)

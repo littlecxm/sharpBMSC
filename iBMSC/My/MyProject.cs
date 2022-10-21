@@ -311,49 +311,34 @@ internal sealed class MyProject
     internal static MyComputer Computer
     {
         [DebuggerHidden]
-        get
-        {
-            return m_ComputerObjectProvider.GetInstance;
-        }
+        get => m_ComputerObjectProvider.GetInstance;
     }
 
     [HelpKeyword("My.Application")]
     internal static MyApplication Application
     {
         [DebuggerHidden]
-        get
-        {
-            return m_AppObjectProvider.GetInstance;
-        }
+        get => m_AppObjectProvider.GetInstance;
     }
 
     [HelpKeyword("My.User")]
     internal static User User
     {
         [DebuggerHidden]
-        get
-        {
-            return m_UserObjectProvider.GetInstance;
-        }
+        get => m_UserObjectProvider.GetInstance;
     }
 
     [HelpKeyword("My.Forms")]
     internal static MyForms Forms
     {
         [DebuggerHidden]
-        get
-        {
-            return m_MyFormsObjectProvider.GetInstance;
-        }
+        get => m_MyFormsObjectProvider.GetInstance;
     }
 
     [HelpKeyword("My.WebServices")]
     internal static MyWebServices WebServices
     {
         [DebuggerHidden]
-        get
-        {
-            return m_MyWebServicesObjectProvider.GetInstance;
-        }
+        get => m_MyWebServicesObjectProvider.GetInstance;
     }
 }

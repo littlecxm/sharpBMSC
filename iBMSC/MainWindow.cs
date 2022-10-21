@@ -62,66 +62,7 @@ public partial class MainWindow : Form
     }
 
     private readonly string[] BMSChannelList;
-
-    public const int niMeasure = 0;
-
-    public const int niSCROLL = 1;
-
-    public const int niBPM = 2;
-
-    public const int niSTOP = 3;
-
-    public const int niS1 = 4;
-
-    public const int niA1 = 5;
-
-    public const int niA2 = 6;
-
-    public const int niA3 = 7;
-
-    public const int niA4 = 8;
-
-    public const int niA5 = 9;
-
-    public const int niA6 = 10;
-
-    public const int niA7 = 11;
-
-    public const int niA8 = 12;
-
-    public const int niS2 = 13;
-
-    public const int niD1 = 14;
-
-    public const int niD2 = 15;
-
-    public const int niD3 = 16;
-
-    public const int niD4 = 17;
-
-    public const int niD5 = 18;
-
-    public const int niD6 = 19;
-
-    public const int niD7 = 20;
-
-    public const int niD8 = 21;
-
-    public const int niS3 = 22;
-
-    public const int niBGA = 23;
-
-    public const int niLAYER = 24;
-
-    public const int niPOOR = 25;
-
-    public const int niS4 = 26;
-
-    public const int niB = 27;
-
-    public Column[] column;
-
-    public const int idflBPM = 5;
+    
 
     private double[] MeasureLength;
 
@@ -1767,251 +1708,6 @@ IL_0952:
             ProjectData.SetProjectError(ex);
             Interaction.MsgBox(ex.Message);
             ProjectData.ClearProjectError();
-        }
-    }
-
-    private string GetBMSChannelBy(Note note)
-    {
-        var columnIndex = note.ColumnIndex;
-        var value = note.Value;
-        var longNote = note.LongNote;
-        var hidden = note.Hidden;
-        var num = GetColumn(columnIndex).Identifier;
-        var landmine = note.Landmine;
-        if (columnIndex == 2 && (value / 10000.0 != value / 10000 || value >= 2560000 || value < 0))
-        {
-            num += 5;
-        }
-        if (columnIndex == 1)
-        {
-            return "SC";
-        }
-        if (columnIndex >= 5 && columnIndex <= 12)
-        {
-            if (longNote)
-            {
-                return Conversion.Hex(num + Convert.ToInt32("50", 16) - 10);
-            }
-
-            if (hidden)
-            {
-                return Conversion.Hex(num + Convert.ToInt32("30", 16) - 10);
-            }
-
-            if (landmine)
-            {
-                return Conversion.Hex(num + Convert.ToInt32("D0", 16) - 10);
-            }
-        }
-        if (columnIndex >= 14 && columnIndex <= 21)
-        {
-            if (longNote)
-            {
-                return Conversion.Hex(num + Convert.ToInt32("60", 16) - 20);
-            }
-
-            if (hidden)
-            {
-                return Conversion.Hex(num + Convert.ToInt32("40", 16) - 20);
-            }
-
-            if (landmine)
-            {
-                return Conversion.Hex(num + Convert.ToInt32("E0", 16) - 20);
-            }
-        }
-        return Functions.Add2Zeros(num);
-    }
-
-    private int nLeft(int iCol)
-    {
-        if (iCol < 27)
-        {
-            return column[iCol].Left;
-        }
-        return column[27].Left + (iCol - 27) * column[27].Width;
-    }
-
-    private int GetColumnWidth(int iCol)
-    {
-        if (!GetColumn(iCol).isVisible)
-        {
-            return 0;
-        }
-        if (iCol < 27)
-        {
-            return column[iCol].Width;
-        }
-        return column[27].Width;
-    }
-
-    private string nTitle(int iCol)
-    {
-        if (iCol < 27)
-        {
-            return column[iCol].Title;
-        }
-        return column[27].Title + (iCol - 27 + 1);
-    }
-
-    private bool nEnabled(int iCol)
-    {
-        if (iCol < 27)
-        {
-            return column[iCol].isEnabledAfterAll;
-        }
-        return column[27].isEnabledAfterAll;
-    }
-
-    private bool IsColumnNumeric(int iCol)
-    {
-        if (iCol < 27)
-        {
-            return column[iCol].isNumeric;
-        }
-        return column[27].isNumeric;
-    }
-
-    private Column GetColumn(int iCol)
-    {
-        if (iCol < 27)
-        {
-            return column[iCol];
-        }
-        return column[27];
-    }
-
-    private object BMSEChannelToColumnIndex(string I)
-    {
-        double num = Conversion.Val(I);
-        if (num > 100.0)
-        {
-            return 27.0 + num - 101.0;
-        }
-        if (num < 100.0 && num > 0.0)
-        {
-            return BMSChannelToColumn(Microsoft.VisualBasic.Strings.Mid(I, 2, 2));
-        }
-        return 27;
-    }
-
-    private int BMSChannelToColumn(string I)
-    {
-        switch (I)
-        {
-            case "01":
-                return 27;
-            case "03":
-            case "08":
-                return 2;
-            case "09":
-                return 3;
-            case "SC":
-                return 1;
-            case "04":
-                return 23;
-            case "07":
-                return 24;
-            case "06":
-                return 25;
-            case "16":
-            case "36":
-            case "56":
-            case "76":
-            case "D6":
-                return 5;
-            case "11":
-            case "31":
-            case "51":
-            case "71":
-            case "D1":
-                return 6;
-            case "12":
-            case "32":
-            case "52":
-            case "72":
-            case "D2":
-                return 7;
-            case "13":
-            case "33":
-            case "53":
-            case "73":
-            case "D3":
-                return 8;
-            case "14":
-            case "34":
-            case "54":
-            case "74":
-            case "D4":
-                return 9;
-            case "15":
-            case "35":
-            case "55":
-            case "75":
-            case "D5":
-                return 10;
-            case "18":
-            case "38":
-            case "58":
-            case "78":
-            case "D8":
-                return 11;
-            case "19":
-            case "39":
-            case "59":
-            case "79":
-            case "D9":
-                return 12;
-            case "21":
-            case "41":
-            case "61":
-            case "81":
-            case "E1":
-                return 14;
-            case "22":
-            case "42":
-            case "62":
-            case "82":
-            case "E2":
-                return 15;
-            case "23":
-            case "43":
-            case "63":
-            case "83":
-            case "E3":
-                return 16;
-            case "24":
-            case "44":
-            case "64":
-            case "84":
-            case "E4":
-                return 17;
-            case "25":
-            case "45":
-            case "65":
-            case "85":
-            case "E5":
-                return 18;
-            case "28":
-            case "48":
-            case "68":
-            case "88":
-            case "E8":
-                return 19;
-            case "29":
-            case "49":
-            case "69":
-            case "89":
-            case "E9":
-                return 20;
-            case "26":
-            case "46":
-            case "66":
-            case "86":
-            case "E6":
-                return 21;
-            default:
-                return 0;
         }
     }
 
@@ -5039,7 +4735,7 @@ IL_0952:
             Unload();
         };
         Load += Form1_Load;
-        BMSChannelList = new string[72]
+        BMSChannelList = new string[]
         {
             "01", "03", "04", "06", "07", "08", "09", "11", "12", "13",
             "14", "15", "16", "18", "19", "21", "22", "23", "24", "25",
@@ -5050,97 +4746,12 @@ IL_0952:
             "D6", "D8", "D9", "E1", "E2", "E3", "E4", "E5", "E6", "E8",
             "E9", "SC"
         };
-        Column[] array = new Column[28];
-        ref Column reference = ref array[0];
-        Column column = new Column(0, 50, "Measure", xNoteCol: false, xisNumeric: true, xVisible: true, 0, 0, -16711681, 0, -16711681, 0);
-        reference = column;
-        ref Column reference2 = ref array[1];
-        Column column2 = new Column(50, 60, "SCROLL", xNoteCol: true, xisNumeric: true, xVisible: true, 99, 0, -65536, 0, -65536, 0);
-        reference2 = column2;
-        ref Column reference3 = ref array[2];
-        Column column3 = new Column(110, 60, "BPM", xNoteCol: true, xisNumeric: true, xVisible: true, 3, 0, -65536, 0, -65536, 0);
-        reference3 = column3;
-        ref Column reference4 = ref array[3];
-        Column column4 = new Column(170, 50, "STOP", xNoteCol: true, xisNumeric: true, xVisible: true, 9, 0, -65536, 0, -65536, 0);
-        reference4 = column4;
-        ref Column reference5 = ref array[4];
-        Column column5 = new Column(220, 5, "", xNoteCol: false, xisNumeric: false, xVisible: true, 0, 0, 0, 0, 0, 0);
-        reference5 = column5;
-        ref Column reference6 = ref array[5];
-        Column column6 = new Column(225, 42, "A1", xNoteCol: true, xisNumeric: false, xVisible: true, 16, -5197648, -16777216, -4144960, -16777216, 352321535);
-        reference6 = column6;
-        ref Column reference7 = ref array[6];
-        Column column7 = new Column(267, 30, "A2", xNoteCol: true, xisNumeric: false, xVisible: true, 11, -10309377, -16777216, -9785097, -16777216, 335557631);
-        reference7 = column7;
-        ref Column reference8 = ref array[7];
-        Column column8 = new Column(297, 42, "A3", xNoteCol: true, xisNumeric: false, xVisible: true, 12, -5197648, -16777216, -4144960, -16777216, 352321535);
-        reference8 = column8;
-        ref Column reference9 = ref array[8];
-        Column column9 = new Column(339, 45, "A4", xNoteCol: true, xisNumeric: false, xVisible: true, 13, -14238, -16777216, -539030, -16777216, 385059596);
-        reference9 = column9;
-        ref Column reference10 = ref array[9];
-        Column column10 = new Column(384, 42, "A5", xNoteCol: true, xisNumeric: false, xVisible: true, 14, -5197648, -16777216, -4144960, -16777216, 352321535);
-        reference10 = column10;
-        ref Column reference11 = ref array[10];
-        Column column11 = new Column(426, 30, "A6", xNoteCol: true, xisNumeric: false, xVisible: true, 15, -10309377, -16777216, -9785097, -16777216, 335557631);
-        reference11 = column11;
-        ref Column reference12 = ref array[11];
-        Column column12 = new Column(456, 42, "A7", xNoteCol: true, xisNumeric: false, xVisible: true, 18, -5197648, -16777216, -4144960, -16777216, 352321535);
-        reference12 = column12;
-        ref Column reference13 = ref array[12];
-        Column column13 = new Column(498, 40, "A8", xNoteCol: true, xisNumeric: false, xVisible: true, 19, -8355712, -16777216, -7303024, -16777216, 0);
-        reference13 = column13;
-        ref Column reference14 = ref array[13];
-        Column column14 = new Column(498, 5, "", xNoteCol: false, xisNumeric: false, xVisible: true, 0, 0, 0, 0, 0, 0);
-        reference14 = column14;
-        ref Column reference15 = ref array[14];
-        Column column15 = new Column(503, 42, "D1", xNoteCol: true, xisNumeric: false, xVisible: false, 21, -5197648, -16777216, -4144960, -16777216, 352321535);
-        reference15 = column15;
-        ref Column reference16 = ref array[15];
-        Column column16 = new Column(503, 30, "D2", xNoteCol: true, xisNumeric: false, xVisible: false, 22, -10309377, -16777216, -9785097, -16777216, 335557631);
-        reference16 = column16;
-        ref Column reference17 = ref array[16];
-        Column column17 = new Column(503, 42, "D3", xNoteCol: true, xisNumeric: false, xVisible: false, 23, -5197648, -16777216, -4144960, -16777216, 352321535);
-        reference17 = column17;
-        ref Column reference18 = ref array[17];
-        Column column18 = new Column(503, 45, "D4", xNoteCol: true, xisNumeric: false, xVisible: false, 24, -14238, -16777216, -539030, -16777216, 385059596);
-        reference18 = column18;
-        ref Column reference19 = ref array[18];
-        Column column19 = new Column(503, 42, "D5", xNoteCol: true, xisNumeric: false, xVisible: false, 25, -5197648, -16777216, -4144960, -16777216, 352321535);
-        reference19 = column19;
-        ref Column reference20 = ref array[19];
-        Column column20 = new Column(503, 30, "D6", xNoteCol: true, xisNumeric: false, xVisible: false, 28, -10309377, -16777216, -9785097, -16777216, 335557631);
-        reference20 = column20;
-        ref Column reference21 = ref array[20];
-        Column column21 = new Column(503, 42, "D7", xNoteCol: true, xisNumeric: false, xVisible: false, 29, -5197648, -16777216, -4144960, -16777216, 352321535);
-        reference21 = column21;
-        ref Column reference22 = ref array[21];
-        Column column22 = new Column(503, 40, "D8", xNoteCol: true, xisNumeric: false, xVisible: false, 26, -8355712, -16777216, -7303024, -16777216, 0);
-        reference22 = column22;
-        ref Column reference23 = ref array[22];
-        Column column23 = new Column(503, 5, "", xNoteCol: false, xisNumeric: false, xVisible: false, 0, 0, 0, 0, 0, 0);
-        reference23 = column23;
-        ref Column reference24 = ref array[23];
-        Column column24 = new Column(503, 40, "BGA", xNoteCol: true, xisNumeric: false, xVisible: false, 4, -7546998, -16777216, -7285874, -16777216, 0);
-        reference24 = column24;
-        ref Column reference25 = ref array[24];
-        Column column25 = new Column(503, 40, "LAYER", xNoteCol: true, xisNumeric: false, xVisible: false, 7, -7546998, -16777216, -7285874, -16777216, 0);
-        reference25 = column25;
-        ref Column reference26 = ref array[25];
-        Column column26 = new Column(503, 40, "POOR", xNoteCol: true, xisNumeric: false, xVisible: false, 6, -7546998, -16777216, -7285874, -16777216, 0);
-        reference26 = column26;
-        ref Column reference27 = ref array[26];
-        Column column27 = new Column(503, 5, "", xNoteCol: false, xisNumeric: false, xVisible: false, 0, 0, 0, 0, 0, 0);
-        reference27 = column27;
-        ref Column reference28 = ref array[27];
-        Column column28 = new Column(503, 40, "B", xNoteCol: true, xisNumeric: false, xVisible: true, 1, -1998720, -16777216, -2325115, -16777216, 0);
-        reference28 = column28;
-        this.column = array;
+
         MeasureLength = new double[1000];
         MeasureBottom = new double[1000];
-        Note[] array2 = new Note[1];
-        ref Note reference29 = ref array2[0];
-        Note note = new Note(2, -1.0, 1200000L);
+        var array2 = new Note[1];
+        ref var reference29 = ref array2[0];
+        var note = new Note(2, -1.0, 1200000L);
         reference29 = note;
         Notes = array2;
         mColumn = new int[1000];
@@ -5173,7 +4784,7 @@ IL_0952:
         sI = 0;
         DisableVerticalMove = false;
         KMouseOver = -1;
-        Point point = new Point(-1, -1);
+        var point = new Point(-1, -1);
         LastMouseDownLocation = point;
         point = new Point(-1, -1);
         pMouseMove = point;
@@ -5231,12 +4842,12 @@ IL_0952:
         iPlayer = 0;
         gColumns = 46;
         vo = new visualSettings();
-        PlayerArguments[] array3 = new PlayerArguments[2];
-        ref PlayerArguments reference31 = ref array3[0];
-        PlayerArguments playerArguments = new PlayerArguments("<apppath>\\uBMplay.exe", "-P -N0 \"<filename>\"", "-P -N<measure> \"<filename>\"", "-S");
+        var array3 = new PlayerArguments[2];
+        ref var reference31 = ref array3[0];
+        var playerArguments = new PlayerArguments("<apppath>\\uBMplay.exe", "-P -N0 \"<filename>\"", "-P -N<measure> \"<filename>\"", "-S");
         reference31 = playerArguments;
-        ref PlayerArguments reference32 = ref array3[1];
-        PlayerArguments playerArguments2 = new PlayerArguments("<apppath>\\o2play.exe", "-P -N0 \"<filename>\"", "-P -N<measure> \"<filename>\"", "-S");
+        ref var reference32 = ref array3[1];
+        var playerArguments2 = new PlayerArguments("<apppath>\\o2play.exe", "-P -N0 \"<filename>\"", "-P -N<measure> \"<filename>\"", "-S");
         reference32 = playerArguments2;
         pArgs = array3;
         CurrentPlayer = 0;
