@@ -412,10 +412,9 @@ public partial  class MainWindow : Form
         notes[num].VPosition = -1.0;
         notes[num].Value = 1200000L;
         int num2 = 0;
-        string[] array2 = array;
         checked
         {
-            foreach (string text2 in array2)
+            foreach (string text2 in array)
             {
                 string text3 = text2.Trim();
                 if (num2 <= 0)
@@ -611,9 +610,8 @@ IL_0952:
             }
             UpdateMeasureBottom();
             num2 = 0;
-            string[] array3 = array;
             int k;
-            foreach (string text2 in array3)
+            foreach (string text2 in array)
             {
                 string text6 = text2.Trim();
                 if (num2 > 0 || !(text6.StartsWith("#") & (Operators.CompareString(Microsoft.VisualBasic.Strings.Mid(text6, 7, 1), ":", TextCompare: false) == 0)))
@@ -629,8 +627,7 @@ IL_0952:
                 if (Operators.CompareString(text7, "01", TextCompare: false) == 0)
                 {
                     int[] array4 = mColumn;
-                    int num8 = num7;
-                    array4[num8]++;
+                    array4[num7]++;
                 }
                 int num9 = Microsoft.VisualBasic.Strings.Len(text6) - 1;
                 for (k = 8; k <= num9; k += 2)
@@ -718,9 +715,7 @@ IL_0952:
                 string text = Functions.WriteDecimalWithDot(MeasureLength[i] / 192.0);
                 if (MeasureLength[i] != 192.0)
                 {
-                    string[] array2 = array;
-                    int num2 = i;
-                    array2[num2] = array2[num2] + "#" + Functions.Add3Zeros(i) + "02:" + text + "\r\n";
+                    array[i] = array[i] + "#" + Functions.Add3Zeros(i) + "02:" + text + "\r\n";
                 }
                 int LowerLimit = 0;
                 int UpperLimit = 0;
@@ -729,24 +724,22 @@ IL_0952:
                 {
                     int num3 = Information.UBound(xprevNotes);
                     Note[] array3 = new Note[UpperLimit - LowerLimit + num3 + 1];
-                    int num4 = num3;
-                    for (int j = 0; j <= num4; j++)
+                    for (int j = 0; j <= num3; j++)
                     {
                         ref Note reference = ref array3[j];
                         reference = xprevNotes[j];
                     }
-                    int num5 = LowerLimit;
+
                     int num6 = UpperLimit - 1;
-                    for (int k = num5; k <= num6; k++)
+                    for (int k = LowerLimit; k <= num6; k++)
                     {
                         ref Note reference2 = ref array3[k - LowerLimit + xprevNotes.Length];
                         reference2 = Notes[k];
                     }
                     int num7 = 0;
-                    Note[] array4 = array3;
-                    for (int l = 0; l < array4.Length; l++)
+                    for (int l = 0; l < array3.Length; l++)
                     {
-                        Note note = array4[l];
+                        Note note = array3[l];
                         num7 = Math.Max(note.ColumnIndex, num7);
                     }
                     xprevNotes = new Note[0];
@@ -881,10 +874,9 @@ IL_0952:
     {
         int num = Information.UBound(Notes);
         LowerLimit = 0;
-        int num2 = num;
         checked
         {
-            for (int i = 1; i <= num2; i++)
+            for (int i = 1; i <= num; i++)
             {
                 if (MeasureAtDisplacement(Notes[i].VPosition) >= MeasureIndex)
                 {
@@ -894,8 +886,7 @@ IL_0952:
             }
             UpperLimit = 0;
             int num3 = LowerLimit;
-            int num4 = num;
-            for (int j = num3; j <= num4; j++)
+            for (int j = num3; j <= num; j++)
             {
                 if (MeasureAtDisplacement(Notes[j].VPosition) > MeasureIndex)
                 {
@@ -913,7 +904,6 @@ IL_0952:
     private string GenerateKeyTracks(int MeasureIndex, ref bool hasOverlapping, Note[] NotesInMeasure, ref Note[] xprevNotes)
     {
         string text = "";
-        string[] bMSChannelList = BMSChannelList;
         checked
         {
             object CounterResult3 = default(object);
@@ -922,7 +912,7 @@ IL_0952:
             object LoopForResult2 = default(object);
             object CounterResult = default(object);
             object LoopForResult = default(object);
-            foreach (string text2 in bMSChannelList)
+            foreach (string text2 in BMSChannelList)
             {
                 object[] array = new object[0];
                 object[] array2 = new object[0];
@@ -1153,9 +1143,8 @@ IL_0952:
                     array2[j] = Microsoft.VisualBasic.Strings.Mid(array2[j], Microsoft.VisualBasic.Strings.InStr(array2[j], ":") + 1).Trim();
                     array3[j - 1] = Microsoft.VisualBasic.Strings.Mid(array2[j], 1, Microsoft.VisualBasic.Strings.InStr(array2[j], ":") - 1);
                     array2[j] = Microsoft.VisualBasic.Strings.Mid(array2[j], Microsoft.VisualBasic.Strings.InStr(array2[j], ":") + 1).Trim();
-                    string[] array4 = array3;
                     int num5 = j - 1;
-                    array4[num5] = array4[num5] + " : " + Microsoft.VisualBasic.Strings.Mid(array2[j], 1, Microsoft.VisualBasic.Strings.InStr(array2[j], ":") - 1);
+                    array3[num5] = array3[num5] + " : " + Microsoft.VisualBasic.Strings.Mid(array2[j], 1, Microsoft.VisualBasic.Strings.InStr(array2[j], ":") - 1);
                 }
                 dgImportSM dgImportSM2 = new dgImportSM(array3);
                 if (dgImportSM2.ShowDialog() == DialogResult.Cancel)
@@ -1434,8 +1423,7 @@ IL_0952:
                                 CWAVChangeLabel.Checked = WAVChangeLabel;
                                 CWAVChangeLabel_CheckedChanged(CWAVChangeLabel, new EventArgs());
                                 int num12 = br.ReadInt32();
-                                int num13 = num12;
-                                for (int k = 1; k <= num13; k++)
+                                for (int k = 1; k <= num12; k++)
                                 {
                                     int num14 = br.ReadInt16();
                                     hWAV[num14] = br.ReadString();
@@ -1451,8 +1439,7 @@ IL_0952:
                                 array[num18].Checked = true;
                                 CBeatPreserve_Click(array[num18], new EventArgs());
                                 int num19 = br.ReadInt32();
-                                int num20 = num19;
-                                for (int m = 1; m <= num20; m++)
+                                for (int m = 1; m <= num19; m++)
                                 {
                                     int num21 = br.ReadInt16();
                                     MeasureLength[num21] = br.ReadDouble();
@@ -1486,8 +1473,7 @@ IL_0952:
                                     int num7 = br.ReadInt32();
                                     UndoRedo.Void @void = new UndoRedo.Void();
                                     UndoRedo.LinkedURCmd linkedURCmd = @void;
-                                    int num8 = num7;
-                                    for (int i = 1; i <= num8; i++)
+                                    for (int i = 1; i <= num7; i++)
                                     {
                                         int count = br.ReadInt32();
                                         byte[] b = br.ReadBytes(count);
@@ -1498,8 +1484,7 @@ IL_0952:
                                     int num9 = br.ReadInt32();
                                     UndoRedo.Void void2 = new UndoRedo.Void();
                                     UndoRedo.LinkedURCmd linkedURCmd2 = void2;
-                                    int num10 = num9;
-                                    for (int j = 1; j <= num10; j++)
+                                    for (int j = 1; j <= num9; j++)
                                     {
                                         int count2 = br.ReadInt32();
                                         byte[] b2 = br.ReadBytes(count2);
@@ -1798,8 +1783,7 @@ IL_0952:
             catch (Exception ex)
             {
                 ProjectData.SetProjectError(ex);
-                Exception ex2 = ex;
-                Interaction.MsgBox(ex2.Message);
+                Interaction.MsgBox(ex.Message);
                 ProjectData.ClearProjectError();
             }
         }
@@ -2290,23 +2274,22 @@ IL_0952:
         if (!((v < 0) | (v > Information.UBound(column))))
         {
             Column[] array = column;
-            int num = v;
             string attribute = n.GetAttribute("Width");
-            int v2 = array[num].Width;
+            int v2 = array[v].Width;
             XMLUtil.XMLLoadAttribute(attribute, ref v2);
-            array[num].Width = v2;
-            XMLUtil.XMLLoadAttribute(n.GetAttribute("Title"), ref array[num].Title);
+            array[v].Width = v2;
+            XMLUtil.XMLLoadAttribute(n.GetAttribute("Title"), ref array[v].Title);
             string attribute2 = n.GetAttribute("Display");
             bool v3 = default(bool);
             XMLUtil.XMLLoadAttribute(attribute2, ref v3);
-            array[num].isVisible = Conversions.ToBoolean(Interaction.IIf(string.IsNullOrEmpty(attribute2), array[num].isVisible, v3));
-            XMLUtil.XMLLoadAttribute(n.GetAttribute("NoteColor"), ref array[num].cNote);
-            array[num].setNoteColor(array[num].cNote);
-            XMLUtil.XMLLoadAttribute(n.GetAttribute("TextColor"), ref array[num].cText);
-            XMLUtil.XMLLoadAttribute(n.GetAttribute("LongNoteColor"), ref array[num].cLNote);
-            array[num].setLNoteColor(array[num].cLNote);
-            XMLUtil.XMLLoadAttribute(n.GetAttribute("LongTextColor"), ref array[num].cLText);
-            XMLUtil.XMLLoadAttribute(n.GetAttribute("BG"), ref array[num].cBG);
+            array[v].isVisible = Conversions.ToBoolean(Interaction.IIf(string.IsNullOrEmpty(attribute2), array[v].isVisible, v3));
+            XMLUtil.XMLLoadAttribute(n.GetAttribute("NoteColor"), ref array[v].cNote);
+            array[v].setNoteColor(array[v].cNote);
+            XMLUtil.XMLLoadAttribute(n.GetAttribute("TextColor"), ref array[v].cText);
+            XMLUtil.XMLLoadAttribute(n.GetAttribute("LongNoteColor"), ref array[v].cLNote);
+            array[v].setLNoteColor(array[v].cLNote);
+            XMLUtil.XMLLoadAttribute(n.GetAttribute("LongTextColor"), ref array[v].cLText);
+            XMLUtil.XMLLoadAttribute(n.GetAttribute("BG"), ref array[v].cBG);
         }
     }
 
@@ -2889,10 +2872,9 @@ IL_0952:
                         }
                     }
                     object[] array = new object[10] { this, mnSys, Menu1, mnMain, cmnLanguage, cmnTheme, cmnConversion, TBMain, FStatus, FStatus2 };
-                    object[] array2 = array;
-                    for (int i = 0; i < array2.Length; i++)
+                    for (int i = 0; i < array.Length; i++)
                     {
-                        object objectValue = RuntimeHelpers.GetObjectValue(array2[i]);
+                        object objectValue = RuntimeHelpers.GetObjectValue(array[i]);
                         try
                         {
                             NewLateBinding.LateSet(objectValue, null, "Font", new object[1] { font }, null, null);
@@ -2910,10 +2892,9 @@ IL_0952:
                         TBStatistics, FSSS, FSSL, FSSH, TVCM, TVCD, TVCBPM, FSP1, FSP3, FSP2,
                         PMain, PMainIn, PMainR, PMainInR, PMainL, PMainInL
                     };
-                    object[] array4 = array3;
-                    for (int j = 0; j < array4.Length; j++)
+                    for (int j = 0; j < array3.Length; j++)
                     {
-                        object objectValue2 = RuntimeHelpers.GetObjectValue(array4[j]);
+                        object objectValue2 = RuntimeHelpers.GetObjectValue(array3[j]);
                         try
                         {
                             NewLateBinding.LateSet(objectValue2, null, "Font", new object[1] { font2 }, null, null);
@@ -2948,10 +2929,9 @@ IL_0952:
                         }
                     }
                     object[] array5 = new object[3] { LWAV, LBeat, TExpansion };
-                    object[] array6 = array5;
-                    for (int k = 0; k < array6.Length; k++)
+                    for (int k = 0; k < array5.Length; k++)
                     {
-                        object objectValue3 = RuntimeHelpers.GetObjectValue(array6[k]);
+                        object objectValue3 = RuntimeHelpers.GetObjectValue(array5[k]);
                         try
                         {
                             NewLateBinding.LateSet(objectValue3, null, "font", new object[1] { font3 }, null, null);
@@ -4146,8 +4126,7 @@ IL_0952:
             catch (Exception ex7)
             {
                 ProjectData.SetProjectError(ex7);
-                Exception ex8 = ex7;
-                Interaction.MsgBox(Path + "\r\n\r\n" + ex8.Message, MsgBoxStyle.Exclamation);
+                Interaction.MsgBox(Path + "\r\n\r\n" + ex7.Message, MsgBoxStyle.Exclamation);
                 ProjectData.ClearProjectError();
             }
             finally
@@ -4173,8 +4152,7 @@ IL_0952:
                 }
                 string text = "";
                 string text2 = "";
-                string[] array2 = array;
-                foreach (string text3 in array2)
+                foreach (string text3 in array)
                 {
                     text = Microsoft.VisualBasic.Strings.UCase(Microsoft.VisualBasic.Strings.Mid(text3, 1, Microsoft.VisualBasic.Strings.InStr(text3, "=") - 1));
                     text2 = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.InStr(text3, "=") + 1);
@@ -4349,8 +4327,7 @@ IL_0952:
             catch (Exception ex)
             {
                 ProjectData.SetProjectError(ex);
-                Exception ex2 = ex;
-                Interaction.MsgBox(ex2.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err);
+                Interaction.MsgBox(ex.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err);
                 ProjectData.ClearProjectError();
             }
             finally
@@ -4390,8 +4367,7 @@ IL_0952:
         catch (Exception ex)
         {
             ProjectData.SetProjectError(ex);
-            Exception ex2 = ex;
-            Interaction.MsgBox(xStr.FullName + "\r\n\r\n" + ex2.Message, MsgBoxStyle.Exclamation);
+            Interaction.MsgBox(xStr.FullName + "\r\n\r\n" + ex.Message, MsgBoxStyle.Exclamation);
             ProjectData.ClearProjectError();
         }
         fileStream.Close();
@@ -4607,10 +4583,9 @@ IL_0952:
                             if (num13 < Notes.Length)
                             {
                                 Note[] notes2 = Notes;
-                                int num14 = num13;
-                                notes2[num14].ColumnIndex = moveNote.NColumnIndex;
-                                notes2[num14].VPosition = moveNote.NVPosition;
-                                notes2[num14].Selected = moveNote.note.Selected & nEnabled(notes2[num14].ColumnIndex);
+                                notes2[num13].ColumnIndex = moveNote.NColumnIndex;
+                                notes2[num13].VPosition = moveNote.NVPosition;
+                                notes2[num13].Selected = moveNote.note.Selected & nEnabled(notes2[num13].ColumnIndex);
                             }
                             break;
                         }
@@ -4621,17 +4596,16 @@ IL_0952:
                             if (num10 < Notes.Length)
                             {
                                 Note[] notes = Notes;
-                                int num11 = num10;
                                 if (NTInput)
                                 {
-                                    notes[num11].VPosition = longNoteModify.NVPosition;
-                                    notes[num11].Length = longNoteModify.NLongNote;
+                                    notes[num10].VPosition = longNoteModify.NVPosition;
+                                    notes[num10].Length = longNoteModify.NLongNote;
                                 }
                                 else
                                 {
-                                    notes[num11].LongNote = longNoteModify.NLongNote != 0.0;
+                                    notes[num10].LongNote = longNoteModify.NLongNote != 0.0;
                                 }
-                                notes[num11].Selected = longNoteModify.note.Selected & nEnabled(notes[num11].ColumnIndex);
+                                notes[num10].Selected = longNoteModify.note.Selected & nEnabled(notes[num10].ColumnIndex);
                             }
                             break;
                         }
@@ -4999,8 +4973,7 @@ IL_0952:
             }
             double[] array2 = new double[0];
             UndoRedo.ChangeMeasureLength[] array3 = new UndoRedo.ChangeMeasureLength[0];
-            int[] array4 = array;
-            foreach (int num in array4)
+            foreach (int num in array)
             {
                 int num2 = Array.IndexOf(array2, MeasureLength[num]);
                 if (num2 == -1)
@@ -5242,11 +5215,9 @@ IL_0952:
         point = new Point(-1, -1);
         pMouseMove = point;
         deltaVPosition = 0.0;
-        ref Point middleButtonLocation = ref MiddleButtonLocation;
-        middleButtonLocation = new Point(0, 0);
+        MiddleButtonLocation = new Point(0, 0);
         MiddleButtonClicked = false;
-        ref Point mouseMoveStatus = ref MouseMoveStatus;
-        mouseMoveStatus = new Point(0, 0);
+        MouseMoveStatus = new Point(0, 0);
         SelectedNotes = new Note[0];
         ctrlPressed = false;
         DuplicatedSelectedNotes = false;
@@ -5265,8 +5236,7 @@ IL_0952:
         vSelPHalf = 0.0;
         isFullScreen = false;
         previousWindowState = FormWindowState.Normal;
-        ref Rectangle reference30 = ref previousWindowPosition;
-        reference30 = new Rectangle(0, 0, 0, 0);
+        previousWindowPosition = new Rectangle(0, 0, 0, 0);
         menuVPosition = 0.0;
         tempResize = 0;
         PreviousAutoSavedFileName = "";
@@ -6040,8 +6010,7 @@ IL_0952:
                     continue;
                 }
                 FileInfo[] files = MyProject.Computer.FileSystem.GetDirectoryInfo(xFile[i]).GetFiles();
-                FileInfo[] array2 = files;
-                foreach (FileInfo fileInfo in array2)
+                foreach (FileInfo fileInfo in files)
                 {
                     if (Array.IndexOf(xFilter, fileInfo.Extension) != -1)
                     {
@@ -6323,14 +6292,13 @@ IL_0952:
                 {
                     if (Interaction.MsgBox(Microsoft.VisualBasic.Strings.Replace(Strings.Messages.RestoreAutosavedFile, "{}", Conversions.ToString(files.Length)), MsgBoxStyle.YesNo | MsgBoxStyle.MsgBoxSetForeground) == MsgBoxResult.Yes)
                     {
-                        FileInfo[] array = files;
-                        foreach (FileInfo fileInfo in array)
+                        foreach (FileInfo fileInfo in files)
                         {
                             Process.Start(Application.ExecutablePath, "\"" + fileInfo.FullName + "\"");
                         }
                     }
-                    FileInfo[] array2 = files;
-                    foreach (FileInfo fileInfo2 in array2)
+
+                    foreach (FileInfo fileInfo2 in files)
                     {
                         pTempFileNames = (string[])Utils.CopyArray(pTempFileNames, new string[Information.UBound(pTempFileNames) + 1 + 1]);
                         pTempFileNames[Information.UBound(pTempFileNames)] = fileInfo2.FullName;
@@ -7495,9 +7463,8 @@ IL_03ba:
             for (int i = 1; i <= num; i++)
             {
                 Note[] notes = Notes;
-                int num2 = i;
                 int num3 = -1;
-                int columnIndex = notes[num2].ColumnIndex;
+                int columnIndex = notes[i].ColumnIndex;
                 num3 = ((columnIndex != 1) ? ((columnIndex == 2) ? 1 : ((columnIndex == 3) ? 2 : ((columnIndex != 5 && columnIndex != 6 && columnIndex != 7 && columnIndex != 8 && columnIndex != 9 && columnIndex != 10 && columnIndex != 11 && columnIndex != 12) ? ((columnIndex == 14 || columnIndex == 15 || columnIndex == 16 || columnIndex == 17 || columnIndex == 18 || columnIndex == 19 || columnIndex == 20 || columnIndex == 21) ? 4 : ((columnIndex < 27) ? 6 : 5)) : 3))) : 0);
                 while (true)
                 {
@@ -7506,7 +7473,7 @@ IL_03ba:
                         int[,] array2;
                         int num6;
                         int num4;
-                        if (!notes[num2].LongNote)
+                        if (!notes[i].LongNote)
                         {
                             array2 = array;
                             int[,] array3 = array2;
@@ -7515,7 +7482,7 @@ IL_03ba:
                             num6 = 0;
                             array3[num5, num6] = array2[num4, num6] + 1;
                         }
-                        if (notes[num2].LongNote)
+                        if (notes[i].LongNote)
                         {
                             array2 = array;
                             int[,] array4 = array2;
@@ -7524,7 +7491,7 @@ IL_03ba:
                             num4 = 1;
                             array4[num7, num4] = array2[num6, num4] + 1;
                         }
-                        if (unchecked(notes[num2].Value / 10000) == LnObj)
+                        if (unchecked(notes[i].Value / 10000) == LnObj)
                         {
                             array2 = array;
                             int[,] array5 = array2;
@@ -7533,7 +7500,7 @@ IL_03ba:
                             num4 = 2;
                             array5[num8, num4] = array2[num6, num4] + 1;
                         }
-                        if (notes[num2].Hidden)
+                        if (notes[i].Hidden)
                         {
                             array2 = array;
                             int[,] array6 = array2;
@@ -7542,7 +7509,7 @@ IL_03ba:
                             num4 = 3;
                             array6[num9, num4] = array2[num6, num4] + 1;
                         }
-                        if (notes[num2].HasError)
+                        if (notes[i].HasError)
                         {
                             array2 = array;
                             int[,] array7 = array2;
@@ -7564,7 +7531,7 @@ IL_03ba:
                         int[,] array2;
                         int num6;
                         int num4;
-                        if (notes[num2].Length == 0.0)
+                        if (notes[i].Length == 0.0)
                         {
                             array2 = array;
                             int[,] array9 = array2;
@@ -7573,7 +7540,7 @@ IL_03ba:
                             num4 = 0;
                             array9[num13, num4] = array2[num6, num4] + 1;
                         }
-                        if (notes[num2].Length != 0.0)
+                        if (notes[i].Length != 0.0)
                         {
                             array2 = array;
                             int[,] array10 = array2;
@@ -7583,7 +7550,7 @@ IL_03ba:
                             array10[num14, num4] = array2[num6, num4] + 2;
                             num12 = 2;
                         }
-                        if (unchecked(notes[num2].Value / 10000) == LnObj)
+                        if (unchecked(notes[i].Value / 10000) == LnObj)
                         {
                             array2 = array;
                             int[,] array11 = array2;
@@ -7592,7 +7559,7 @@ IL_03ba:
                             num4 = 2;
                             array11[num15, num4] = array2[num6, num4] + num12;
                         }
-                        if (notes[num2].Hidden)
+                        if (notes[i].Hidden)
                         {
                             array2 = array;
                             int[,] array12 = array2;
@@ -7601,7 +7568,7 @@ IL_03ba:
                             num4 = 3;
                             array12[num16, num4] = array2[num6, num4] + num12;
                         }
-                        if (notes[num2].HasError)
+                        if (notes[i].HasError)
                         {
                             array2 = array;
                             int[,] array13 = array2;
@@ -8272,9 +8239,8 @@ IL_03ba:
                     if (Notes[num3].LongNote)
                     {
                         Notes[num2].Length = Notes[num3].VPosition - Notes[num2].VPosition;
-                        int num7 = num3;
                         int num8 = num4 - 1;
-                        for (int j = num7; j <= num8; j++)
+                        for (int j = num3; j <= num8; j++)
                         {
                             ref Note reference = ref Notes[j];
                             reference = Notes[j + 1];
@@ -8493,8 +8459,7 @@ IL_03ba:
                 MyProject.Computer.FileSystem.CreateDirectory(MyProject.Application.Info.DirectoryPath + "\\Data");
             }
             FileInfo[] files = MyProject.Computer.FileSystem.GetDirectoryInfo(MyProject.Application.Info.DirectoryPath + "\\Data").GetFiles("*.Lang.xml");
-            FileInfo[] array = files;
-            foreach (FileInfo xStr in array)
+            foreach (FileInfo xStr in files)
             {
                 LoadLocaleXML(xStr);
             }
@@ -9095,9 +9060,7 @@ IL_0347:
                     {
                         RedoMoveNote(Notes[num4], Notes[num4].ColumnIndex, Notes[num4].VPosition + num2, ref BaseUndo, ref BaseRedo);
                         Note[] notes = Notes;
-                        Note[] array = notes;
-                        int num6 = num4;
-                        array[num6].VPosition = notes[num6].VPosition + num2;
+                        notes[num4].VPosition = notes[num4].VPosition + num2;
                     }
                     else if (Notes[num4].VPosition >= num3)
                     {
@@ -9117,9 +9080,7 @@ IL_0347:
                         double num7 = Conversions.ToDouble(Interaction.IIf(Notes[num4].VPosition + Notes[num4].Length > MeasureBottom[999] - 1.0, GetMaxVPosition() - 1.0 - Notes[num4].VPosition - Notes[num4].Length, num2));
                         RedoLongNoteModify(Notes[num4], Notes[num4].VPosition, Notes[num4].Length + num7, ref BaseUndo, ref BaseRedo);
                         Note[] notes = Notes;
-                        Note[] array4 = notes;
-                        int num6 = num4;
-                        array4[num6].Length = notes[num6].Length + num7;
+                        notes[num4].Length = notes[num4].Length + num7;
                     }
                 }
             }
@@ -9145,9 +9106,7 @@ IL_0347:
                     {
                         RedoMoveNote(Notes[num8], Notes[num8].ColumnIndex, Notes[num8].VPosition + num2, ref BaseUndo, ref BaseRedo);
                         Note[] notes = Notes;
-                        Note[] array5 = notes;
-                        int num6 = num8;
-                        array5[num6].VPosition = notes[num6].VPosition + num2;
+                        notes[num8].VPosition = notes[num8].VPosition + num2;
                     }
                 }
             }
@@ -9198,9 +9157,7 @@ IL_0347:
                     {
                         RedoMoveNote(Notes[num4], Notes[num4].ColumnIndex, Notes[num4].VPosition - num2, ref BaseUndo, ref BaseRedo);
                         Note[] notes = Notes;
-                        Note[] array = notes;
-                        int num6 = num4;
-                        array[num6].VPosition = notes[num6].VPosition - num2;
+                        notes[num4].VPosition = notes[num4].VPosition - num2;
                     }
                     else if (Notes[num4].VPosition >= num3)
                     {
@@ -9220,9 +9177,7 @@ IL_0347:
                         double num7 = Conversions.ToDouble(Interaction.IIf(Notes[num4].VPosition + Notes[num4].Length >= num3 + num2, num2, Notes[num4].VPosition + Notes[num4].Length - num3 + 1.0));
                         RedoLongNoteModify(Notes[num4], Notes[num4].VPosition, Notes[num4].Length - num7, ref BaseUndo, ref BaseRedo);
                         Note[] notes = Notes;
-                        Note[] array4 = notes;
-                        int num6 = num4;
-                        array4[num6].Length = notes[num6].Length - num7;
+                        notes[num4].Length = notes[num4].Length - num7;
                     }
                 }
             }
@@ -9249,9 +9204,7 @@ IL_0347:
                     {
                         RedoMoveNote(Notes[num8], Notes[num8].ColumnIndex, Notes[num8].VPosition - num2, ref BaseUndo, ref BaseRedo);
                         Note[] notes = Notes;
-                        Note[] array5 = notes;
-                        int num6 = num8;
-                        array5[num6].VPosition = notes[num6].VPosition - num2;
+                        notes[num8].VPosition = notes[num8].VPosition - num2;
                     }
                 }
             }
@@ -9321,8 +9274,7 @@ IL_0347:
                 MyProject.Computer.FileSystem.CreateDirectory(MyProject.Application.Info.DirectoryPath + "\\Data");
             }
             FileInfo[] files = MyProject.Computer.FileSystem.GetDirectoryInfo(MyProject.Application.Info.DirectoryPath + "\\Data").GetFiles("*.Theme.xml");
-            FileInfo[] array = files;
-            foreach (FileInfo fileInfo in array)
+            foreach (FileInfo fileInfo in files)
             {
                 cmnTheme.Items.Add(fileInfo.Name, null, LoadTheme);
             }
@@ -9604,9 +9556,9 @@ end_IL_0000_3:
                         }
                     }
                 }
-                int[] array2 = array;
+
                 int num4 = num2;
-                array2[num4] += -1;
+                array[num4] += -1;
             }
             LWAV.SelectedIndices.Clear();
             int num5 = Information.UBound(array);
@@ -9678,9 +9630,9 @@ end_IL_0000_3:
                         }
                     }
                 }
-                int[] array2 = array;
+
                 int num4 = num2;
-                array2[num4]++;
+                array[num4]++;
             }
             LWAV.SelectedIndices.Clear();
             int num5 = Information.UBound(array);
@@ -10052,8 +10004,7 @@ end_IL_0000_3:
         {
             int[] array = new int[LBeat.SelectedIndices.Count - 1 + 1];
             LBeat.SelectedIndices.CopyTo(array, 0);
-            int[] array2 = array;
-            foreach (int num in array2)
+            foreach (int num in array)
             {
                 double num2 = xRatio * 192.0 - MeasureLength[num];
                 double num3 = xRatio * 192.0 / MeasureLength[num];
@@ -10079,9 +10030,7 @@ end_IL_0000_3:
                                     {
                                         RedoLongNoteModify(Notes[num25], Notes[num25].VPosition, Notes[num25].Length + num2, ref BaseUndo, ref BaseRedo);
                                         Note[] notes = Notes;
-                                        Note[] array6 = notes;
-                                        int num9 = num25;
-                                        array6[num9].Length = notes[num9].Length + num2;
+                                        notes[num25].Length = notes[num25].Length + num2;
                                     }
                                 }
                             }
@@ -10098,9 +10047,7 @@ end_IL_0000_3:
                             {
                                 RedoLongNoteModify(Notes[num29], Notes[num29].VPosition + num2, Notes[num29].Length, ref BaseUndo, ref BaseRedo);
                                 Note[] notes = Notes;
-                                Note[] array7 = notes;
-                                int num9 = num29;
-                                array7[num9].VPosition = notes[num9].VPosition + num2;
+                                notes[num29].VPosition = notes[num29].VPosition + num2;
                             }
                             break;
                         }
@@ -10182,9 +10129,7 @@ end_IL_0000_3:
                                     {
                                         RedoLongNoteModify(Notes[k], Notes[k].VPosition, Notes[k].Length + num2, ref BaseUndo, ref BaseRedo);
                                         Note[] notes = Notes;
-                                        Note[] array3 = notes;
-                                        int num9 = k;
-                                        array3[num9].Length = notes[num9].Length + num2;
+                                        notes[k].Length = notes[k].Length + num2;
                                     }
                                     else if (Notes[k].VPosition + Notes[k].Length > num4)
                                     {
@@ -10216,9 +10161,7 @@ end_IL_0000_3:
                                 {
                                     RedoLongNoteModify(Notes[k], Notes[k].VPosition + num2, Notes[k].Length, ref BaseUndo, ref BaseRedo);
                                     Note[] notes = Notes;
-                                    Note[] array4 = notes;
-                                    int num9 = k;
-                                    array4[num9].VPosition = notes[num9].VPosition + num2;
+                                    notes[k].VPosition = notes[k].VPosition + num2;
                                 }
                             }
                         }
@@ -10249,9 +10192,7 @@ end_IL_0000_3:
                             {
                                 RedoLongNoteModify(Notes[num23], Notes[num23].VPosition + num2, Notes[num23].Length, ref BaseUndo, ref BaseRedo);
                                 Note[] notes = Notes;
-                                Note[] array5 = notes;
-                                int num9 = num23;
-                                array5[num9].VPosition = notes[num9].VPosition + num2;
+                                notes[num23].VPosition = notes[num23].VPosition + num2;
                             }
                         }
                         break;
@@ -10671,13 +10612,11 @@ end_IL_0000_3:
                     {
                     }
                     num2 = j;
-                    string[] array4 = array3;
-                    foreach (string text in array4)
+                    foreach (string text in array3)
                     {
                         double[] array5 = new double[0];
-                        int num6 = num;
                         int num7 = num2 - 1;
-                        for (int l = num6; l <= num7; l++)
+                        for (int l = num; l <= num7; l++)
                         {
                             if ((Operators.CompareString(GetBMSChannelBy(Notes[l]), text, TextCompare: false) == 0) & (Math.Abs(Notes[l].VPosition - (double)(MeasureAtDisplacement(Notes[l].VPosition) * 192)) > 0.0))
                             {
@@ -10721,8 +10660,7 @@ end_IL_0000_3:
                 int num13 = MeasureAtDisplacement(GreatestVPosition);
                 for (int num14 = 0; num14 <= num13; num14++)
                 {
-                    string[] array6 = array3;
-                    foreach (string text2 in array6)
+                    foreach (string text2 in array3)
                     {
                         double[] array7 = new double[0];
                         int num16 = Information.UBound(Notes);
@@ -11221,9 +11159,8 @@ end_IL_0000_3:
                 noteRectangle.Width - 1,
                 noteRectangle.Height - 1
             };
-            object[] arguments = array;
             bool[] array2 = new bool[5] { true, true, true, false, false };
-            NewLateBinding.LateCall(graphics, null, "DrawRectangle", arguments, null, null, array2, IgnoreReturn: true);
+            NewLateBinding.LateCall(graphics, null, "DrawRectangle", array, null, null, array2, IgnoreReturn: true);
             if (array2[0])
             {
                 objectValue = RuntimeHelpers.GetObjectValue(array[0]);
@@ -11255,9 +11192,8 @@ end_IL_0000_3:
                         noteRectangle2.Width - 1,
                         noteRectangle2.Height - 1
                     };
-                    object[] arguments2 = array3;
                     array2 = new bool[5] { true, true, true, false, false };
-                    NewLateBinding.LateCall(graphics2, null, "DrawRectangle", arguments2, null, null, array2, IgnoreReturn: true);
+                    NewLateBinding.LateCall(graphics2, null, "DrawRectangle", array3, null, null, array2, IgnoreReturn: true);
                     if (array2[0])
                     {
                         objectValue = RuntimeHelpers.GetObjectValue(array3[0]);
@@ -11351,12 +11287,11 @@ end_IL_0000_3:
                 ref PointF reference3 = ref array[2];
                 PointF pointF3 = new PointF((float)(Math.Cos(num5 - Math.PI / 2.0) * 10.0 + (double)num), (float)(Math.Sin(num5 - Math.PI / 2.0) * 10.0 + (double)num2));
                 reference3 = pointF3;
-                PointF[] points = array;
                 Graphics graphics = e1.Graphics;
                 p = new Point((int)Math.Round(num), (int)Math.Round(num2));
                 Point point2 = p;
                 Point point3 = new Point((int)Math.Round(num3), (int)Math.Round(num4));
-                graphics.FillPolygon(new LinearGradientBrush(point2, point3, Color.FromArgb(0), Color.FromArgb(-1)), points);
+                graphics.FillPolygon(new LinearGradientBrush(point2, point3, Color.FromArgb(0), Color.FromArgb(-1)), array);
             }
             e1.Graphics.FillEllipse(Brushes.LightGray, num - 10f, num2 - 10f, 20f, 20f);
             e1.Graphics.DrawEllipse(Pens.Black, num - 8f, num2 - 8f, 16f, 16f);
@@ -12014,7 +11949,6 @@ end_IL_0000_3:
                     continue;
                 }
                 Note[] notes = Notes;
-                int num2 = i;
                 int num3 = 27;
                 if (NTInput)
                 {
@@ -12042,8 +11976,8 @@ end_IL_0000_3:
                         }
                     }
                 }
-                RedoMoveNote(Notes[i], num3, notes[num2].VPosition, ref xUndo, ref xRedo);
-                notes[num2].ColumnIndex = num3;
+                RedoMoveNote(Notes[i], num3, notes[i].VPosition, ref xUndo, ref xRedo);
+                notes[i].ColumnIndex = num3;
             }
             AddUndo(xUndo, linkedURCmd.Next);
             UpdatePairing();
@@ -13948,9 +13882,7 @@ end_IL_0000_3:
                     for (i = num10; i <= num11; i++)
                     {
                         Note[] notes = Notes;
-                        Note[] array = notes;
-                        int num12 = i;
-                        array[num12].VPosition = notes[num12].VPosition + (xRatio - 1.0) * (num2 - num);
+                        notes[i].VPosition = notes[i].VPosition + (xRatio - 1.0) * (num2 - num);
                     }
                     Note note = new Note(2, num, (long)Math.Round((double)num4 * xRatio));
                     AddNote(note, xSelected: false, OverWrite: true, SortAndUpdatePairing: false);
@@ -13979,9 +13911,7 @@ end_IL_0000_3:
                             if (Notes[i].VPosition + Notes[i].Length > num)
                             {
                                 Note[] notes = Notes;
-                                Note[] array2 = notes;
-                                int num12 = i;
-                                array2[num12].Length = Conversions.ToDouble(Operators.AddObject(notes[num12].Length, Operators.MultiplyObject(Operators.SubtractObject(Interaction.IIf(num2 < Notes[i].VPosition + Notes[i].Length, num2, Notes[i].VPosition + Notes[i].Length), num), xRatio - 1.0)));
+                                notes[i].Length = Conversions.ToDouble(Operators.AddObject(notes[i].Length, Operators.MultiplyObject(Operators.SubtractObject(Interaction.IIf(num2 < Notes[i].VPosition + Notes[i].Length, num2, Notes[i].VPosition + Notes[i].Length), num), xRatio - 1.0)));
                             }
                         }
                         else if (Notes[i].VPosition <= num2)
@@ -13999,17 +13929,13 @@ end_IL_0000_3:
                                 }
                             }
                             Note[] notes = Notes;
-                            Note[] array3 = notes;
-                            int num12 = i;
-                            array3[num12].Length = Conversions.ToDouble(Operators.AddObject(notes[num12].Length, Operators.MultiplyObject(Operators.SubtractObject(Interaction.IIf(num2 < Notes[i].Length + Notes[i].VPosition, num2, Notes[i].Length + Notes[i].VPosition), Notes[i].VPosition), xRatio - 1.0)));
+                            notes[i].Length = Conversions.ToDouble(Operators.AddObject(notes[i].Length, Operators.MultiplyObject(Operators.SubtractObject(Interaction.IIf(num2 < Notes[i].Length + Notes[i].VPosition, num2, Notes[i].Length + Notes[i].VPosition), Notes[i].VPosition), xRatio - 1.0)));
                             Notes[i].VPosition = (Notes[i].VPosition - num) * xRatio + num;
                         }
                         else
                         {
                             Note[] notes = Notes;
-                            Note[] array4 = notes;
-                            int num12 = i;
-                            array4[num12].VPosition = notes[num12].VPosition + (num2 - num) * (xRatio - 1.0);
+                            notes[i].VPosition = notes[i].VPosition + (num2 - num) * (xRatio - 1.0);
                         }
                     }
                     if (flag)
@@ -14214,9 +14140,7 @@ end_IL_0000_3:
                                 else
                                 {
                                     Note[] notes = Notes;
-                                    Note[] array = notes;
-                                    int num19 = i;
-                                    array[num19].Length = notes[num19].Length * num8;
+                                    notes[i].Length = notes[i].Length * num8;
                                 }
                                 Notes[i].VPosition = (Notes[i].VPosition - num) * num8 + num;
                             }
@@ -14246,9 +14170,7 @@ end_IL_0000_3:
                                 else
                                 {
                                     Note[] notes = Notes;
-                                    Note[] array2 = notes;
-                                    int num19 = i;
-                                    array2[num19].Length = notes[num19].Length * num9;
+                                    notes[i].Length = notes[i].Length * num9;
                                 }
                                 Notes[i].VPosition = (Notes[i].VPosition - num2) * num9 + num2 + dVPosition;
                             }
@@ -14393,15 +14315,13 @@ end_IL_0000_3:
                 num6 = i;
                 if (num6 <= Information.UBound(Notes))
                 {
-                    int num15 = num6;
                     int num16 = Information.UBound(Notes);
-                    for (i = num15; i <= num16 && !(Notes[i].VPosition >= num3); i++)
+                    for (i = num6; i <= num16 && !(Notes[i].VPosition >= num3); i++)
                     {
                         double num17 = 0.0;
                         double vPosition = Notes[i].VPosition;
-                        int num18 = num7;
                         int j;
-                        for (j = 0; j <= num18 && !(vPosition < array[j + 1]); j++)
+                        for (j = 0; j <= num7 && !(vPosition < array[j + 1]); j++)
                         {
                             num17 += (array[j + 1] - array[j]) / (double)array2[j];
                         }
@@ -14431,9 +14351,8 @@ end_IL_0000_3:
                     {
                         double num21 = 0.0;
                         double vPosition2 = Notes[i].VPosition;
-                        int num22 = num7;
                         int j;
-                        for (j = 0; j <= num22 && !(vPosition2 < array[j + 1]); j++)
+                        for (j = 0; j <= num7 && !(vPosition2 < array[j + 1]); j++)
                         {
                             num21 += (array[j + 1] - array[j]) / (double)array2[j];
                         }
@@ -14454,9 +14373,8 @@ end_IL_0000_3:
                     if (unchecked(num20 > num && num20 < num3))
                     {
                         double num21 = 0.0;
-                        int num23 = num7;
                         int j;
-                        for (j = 0; j <= num23 && !(num20 < array[j + 1]); j++)
+                        for (j = 0; j <= num7 && !(num20 < array[j + 1]); j++)
                         {
                             num21 += (array[j + 1] - array[j]) / (double)array2[j];
                         }
@@ -14566,8 +14484,7 @@ end_IL_0000_3:
                 if (Notes[i].VPosition > num2)
                 {
                     Note[] notes = Notes;
-                    int num4 = i;
-                    notes[num4].VPosition = notes[num4].VPosition - vSelLength;
+                    notes[i].VPosition = notes[i].VPosition - vSelLength;
                 }
             }
             Notes = (Note[])Utils.CopyArray(Notes, new Note[Information.UBound(Notes) + 1 + 1]);

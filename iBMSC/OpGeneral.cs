@@ -599,8 +599,7 @@ end_IL_0006_3:
         catch (Exception ex)
         {
             ProjectData.SetProjectError(ex);
-            Exception ex2 = ex;
-            Interaction.MsgBox(Strings.Messages.FileAssociationError + "\r\n\r\n" + ex2.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err);
+            Interaction.MsgBox(Strings.Messages.FileAssociationError + "\r\n\r\n" + ex.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err);
             ProjectData.ClearProjectError();
         }
         SHChangeNotify(134217728, 0, 0, 0);

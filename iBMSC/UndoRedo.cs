@@ -377,8 +377,7 @@ public class UndoRedo
             Value = BitConverter.ToDouble(b, 1);
             int num = BitConverter.ToInt32(b, 9);
             Indices = (int[])Utils.CopyArray(Indices, new int[checked(num + 1)]);
-            int num2 = num;
-            for (int i = 13; i <= num2; i = checked(i + 4))
+            for (int i = 13; i <= num; i = checked(i + 4))
             {
                 Indices[checked(i - 13) / 4] = BitConverter.ToInt32(b, i);
             }

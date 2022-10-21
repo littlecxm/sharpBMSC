@@ -35,8 +35,7 @@ public partial  class ColorPicker : Form
         NewColor = Color.Black;
         DrawingIndex = 1;
         PassiveValueChange = false;
-        ref Point reference = ref mMain;
-        reference = new Point(0, 255);
+        mMain = new Point(0, 255);
         mAlpha = 255;
         m1 = 255;
         InitializeComponent();
@@ -76,43 +75,37 @@ public partial  class ColorPicker : Form
         {
         case 0:
         {
-            ref Point reference6 = ref mMain;
-            reference6 = new Point(Convert.ToInt32(decimal.Multiply(decimal.Divide(inS.Value, 1000m), 255m)), Convert.ToInt32(decimal.Multiply(decimal.Divide(decimal.Subtract(1000m, inL.Value), 1000m), 255m)));
+            mMain = new Point(Convert.ToInt32(decimal.Multiply(decimal.Divide(inS.Value, 1000m), 255m)), Convert.ToInt32(decimal.Multiply(decimal.Divide(decimal.Subtract(1000m, inL.Value), 1000m), 255m)));
             m1 = Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(360m, inH.Value), 255m), 360m));
             break;
         }
         case 1:
         {
-            ref Point reference5 = ref mMain;
-            reference5 = new Point(Convert.ToInt32(decimal.Divide(decimal.Multiply(inH.Value, 255m), 360m)), Convert.ToInt32(decimal.Multiply(decimal.Divide(decimal.Subtract(1000m, inL.Value), 1000m), 255m)));
+            mMain = new Point(Convert.ToInt32(decimal.Divide(decimal.Multiply(inH.Value, 255m), 360m)), Convert.ToInt32(decimal.Multiply(decimal.Divide(decimal.Subtract(1000m, inL.Value), 1000m), 255m)));
             m1 = Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(1000m, inS.Value), 255m), 1000m));
             break;
         }
         case 2:
         {
-            ref Point reference4 = ref mMain;
-            reference4 = new Point(Convert.ToInt32(decimal.Divide(decimal.Multiply(inH.Value, 255m), 360m)), Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(1000m, inS.Value), 255m), 1000m)));
+            mMain = new Point(Convert.ToInt32(decimal.Divide(decimal.Multiply(inH.Value, 255m), 360m)), Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(1000m, inS.Value), 255m), 1000m)));
             m1 = Convert.ToInt32(decimal.Divide(decimal.Multiply(decimal.Subtract(1000m, inL.Value), 255m), 1000m));
             break;
         }
         case 3:
         {
-            ref Point reference3 = ref mMain;
-            reference3 = new Point(Convert.ToInt32(inB.Value), Convert.ToInt32(decimal.Subtract(255m, inG.Value)));
+            mMain = new Point(Convert.ToInt32(inB.Value), Convert.ToInt32(decimal.Subtract(255m, inG.Value)));
             m1 = Convert.ToInt32(decimal.Subtract(255m, inR.Value));
             break;
         }
         case 4:
         {
-            ref Point reference2 = ref mMain;
-            reference2 = new Point(Convert.ToInt32(inB.Value), Convert.ToInt32(decimal.Subtract(255m, inR.Value)));
+            mMain = new Point(Convert.ToInt32(inB.Value), Convert.ToInt32(decimal.Subtract(255m, inR.Value)));
             m1 = Convert.ToInt32(decimal.Subtract(255m, inG.Value));
             break;
         }
         case 5:
         {
-            ref Point reference = ref mMain;
-            reference = new Point(Convert.ToInt32(inG.Value), Convert.ToInt32(decimal.Subtract(255m, inR.Value)));
+            mMain = new Point(Convert.ToInt32(inG.Value), Convert.ToInt32(decimal.Subtract(255m, inR.Value)));
             m1 = Convert.ToInt32(decimal.Subtract(255m, inB.Value));
             break;
         }
@@ -251,8 +244,7 @@ public partial  class ColorPicker : Form
             case 0:
             {
                 int xH = Convert.ToInt32(inH.Value);
-                int num4 = value;
-                for (int i = 0; ((num4 >> 31) ^ i) <= ((num4 >> 31) ^ 0xFF); i += num4)
+                for (int i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
                 {
                     Graphics graphics4 = bufferedGraphics.Graphics;
                     Point point3 = new Point(0, 0);
@@ -270,8 +262,7 @@ public partial  class ColorPicker : Form
             case 1:
             {
                 int xS = Convert.ToInt32(inS.Value);
-                int num6 = value;
-                for (int i = 0; ((num6 >> 31) ^ i) <= ((num6 >> 31) ^ 0xFF); i += num6)
+                for (int i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
                 {
                     Graphics graphics7 = bufferedGraphics.Graphics;
                     Point point = new Point(0, 0);
@@ -289,56 +280,48 @@ public partial  class ColorPicker : Form
             case 2:
             {
                 int xL = Convert.ToInt32(inL.Value);
-                int num2 = value;
-                for (int i = 0; ((num2 >> 31) ^ i) <= ((num2 >> 31) ^ 0xFF); i += num2)
+                for (int i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
                 {
                     Graphics graphics2 = bufferedGraphics.Graphics;
                     Point point = new Point(0, 0);
-                    Point point4 = point;
                     Point point3 = new Point(0, 256);
-                    graphics2.FillRectangle(new LinearGradientBrush(point4, point3, HSL2RGB((int)Math.Round((double)i / 255.0 * 360.0), 1000, xL), HSL2RGB((int)Math.Round((double)i / 255.0 * 360.0), 0, xL)), i, 0, value, 256);
+                    graphics2.FillRectangle(new LinearGradientBrush(point, point3, HSL2RGB((int)Math.Round((double)i / 255.0 * 360.0), 1000, xL), HSL2RGB((int)Math.Round((double)i / 255.0 * 360.0), 0, xL)), i, 0, value, 256);
                 }
                 break;
             }
             case 3:
             {
                 int red = Convert.ToInt32(inR.Value);
-                int num5 = value;
-                for (int i = 0; ((num5 >> 31) ^ i) <= ((num5 >> 31) ^ 0xFF); i += num5)
+                for (int i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
                 {
                     Graphics graphics6 = bufferedGraphics.Graphics;
                     Point point = new Point(0, 0);
-                    Point point8 = point;
                     Point point3 = new Point(0, 256);
-                    graphics6.FillRectangle(new LinearGradientBrush(point8, point3, Color.FromArgb(red, 255, i), Color.FromArgb(red, 0, i)), i, 0, value, 256);
+                    graphics6.FillRectangle(new LinearGradientBrush(point, point3, Color.FromArgb(red, 255, i), Color.FromArgb(red, 0, i)), i, 0, value, 256);
                 }
                 break;
             }
             case 4:
             {
                 int green = Convert.ToInt32(inG.Value);
-                int num3 = value;
-                for (int i = 0; ((num3 >> 31) ^ i) <= ((num3 >> 31) ^ 0xFF); i += num3)
+                for (int i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
                 {
                     Graphics graphics3 = bufferedGraphics.Graphics;
                     Point point = new Point(0, 0);
-                    Point point5 = point;
                     Point point3 = new Point(0, 256);
-                    graphics3.FillRectangle(new LinearGradientBrush(point5, point3, Color.FromArgb(255, green, i), Color.FromArgb(0, green, i)), i, 0, value, 256);
+                    graphics3.FillRectangle(new LinearGradientBrush(point, point3, Color.FromArgb(255, green, i), Color.FromArgb(0, green, i)), i, 0, value, 256);
                 }
                 break;
             }
             case 5:
             {
                 int blue = Convert.ToInt32(inB.Value);
-                int num = value;
-                for (int i = 0; ((num >> 31) ^ i) <= ((num >> 31) ^ 0xFF); i += num)
+                for (int i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
                 {
                     Graphics graphics = bufferedGraphics.Graphics;
                     Point point = new Point(0, 0);
-                    Point point2 = point;
                     Point point3 = new Point(0, 256);
-                    graphics.FillRectangle(new LinearGradientBrush(point2, point3, Color.FromArgb(255, i, blue), Color.FromArgb(0, i, blue)), i, 0, value, 256);
+                    graphics.FillRectangle(new LinearGradientBrush(point, point3, Color.FromArgb(255, i, blue), Color.FromArgb(0, i, blue)), i, 0, value, 256);
                 }
                 break;
             }
@@ -605,8 +588,7 @@ public partial  class ColorPicker : Form
             {
                 int xS2 = Convert.ToInt32(inS.Value);
                 int xL2 = Convert.ToInt32(inL.Value);
-                int num2 = value;
-                for (int i = 0; ((num2 >> 31) ^ i) <= ((num2 >> 31) ^ 0xFF); i += num2)
+                for (int i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
                 {
                     bufferedGraphics.Graphics.FillRectangle(new SolidBrush(HSL2RGB((int)Math.Round((double)(255 - i) / 255.0 * 360.0), xS2, xL2)), 0, i, num, value);
                 }
@@ -737,11 +719,10 @@ public partial  class ColorPicker : Form
         int value = tbPrecision.Value;
         Color baseColor = Color.FromArgb(Convert.ToInt32(inR.Value), Convert.ToInt32(inG.Value), Convert.ToInt32(inB.Value));
         bufferedGraphics.Graphics.DrawImageUnscaledAndClipped(Resources.TransparentBG, xRegion);
-        int num2 = value;
         checked
         {
             int i;
-            for (i = 0; ((num2 >> 31) ^ i) <= ((num2 >> 31) ^ 0xFF); i += num2)
+            for (i = 0; ((value >> 31) ^ i) <= ((value >> 31) ^ 0xFF); i += value)
             {
                 bufferedGraphics.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(i, baseColor)), i, 0, value, num);
             }
@@ -836,8 +817,7 @@ public partial  class ColorPicker : Form
         catch (Exception ex)
         {
             ProjectData.SetProjectError(ex);
-            Exception ex2 = ex;
-            Interaction.MsgBox(ex2.Message, MsgBoxStyle.Critical, "Error");
+            Interaction.MsgBox(ex.Message, MsgBoxStyle.Critical, "Error");
             ProjectData.ClearProjectError();
         }
         finally

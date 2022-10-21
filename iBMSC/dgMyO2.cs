@@ -74,16 +74,15 @@ public partial  class dgMyO2 : Form
             {
                 string[] array2 = Microsoft.VisualBasic.Strings.Split(array[i], "_");
                 Adj[] aj = Aj;
-                int num2 = i;
-                aj[num2].Measure = (int)Math.Round(Conversion.Val(array2[0]));
-                aj[num2].ColumnIndex = (int)Math.Round(Conversion.Val(array2[1]));
-                aj[num2].ColumnName = array2[2];
-                aj[num2].Grid = array2[3];
-                aj[num2].LongNote = Conversion.Val(array2[4]) != 0.0;
-                aj[num2].Hidden = Conversion.Val(array2[5]) != 0.0;
-                aj[num2].AdjTo64 = Conversion.Val(array2[6]) != 0.0;
-                aj[num2].D64 = (int)Math.Round(Conversion.Val(array2[7]));
-                aj[num2].D48 = (int)Math.Round(Conversion.Val(array2[8]));
+                aj[i].Measure = (int)Math.Round(Conversion.Val(array2[0]));
+                aj[i].ColumnIndex = (int)Math.Round(Conversion.Val(array2[1]));
+                aj[i].ColumnName = array2[2];
+                aj[i].Grid = array2[3];
+                aj[i].LongNote = Conversion.Val(array2[4]) != 0.0;
+                aj[i].Hidden = Conversion.Val(array2[5]) != 0.0;
+                aj[i].AdjTo64 = Conversion.Val(array2[6]) != 0.0;
+                aj[i].D64 = (int)Math.Round(Conversion.Val(array2[7]));
+                aj[i].D48 = (int)Math.Round(Conversion.Val(array2[8]));
                 AddAdjItem(Aj[i], i);
             }
         }
