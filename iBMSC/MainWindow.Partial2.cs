@@ -2270,7 +2270,7 @@ end_IL_0000_3:
                             break;
                         }
                     case Keys.Delete:
-                        mnDelete_Click(mnDelete, new EventArgs());
+                        mnDelete_Click(mnDelete, EventArgs.Empty);
                         break;
                     case Keys.Home:
                         if (PanelFocus == 0)
@@ -2438,28 +2438,28 @@ end_IL_0000_3:
                     switch (e.KeyCode)
                     {
                         case Keys.Z:
-                            TBUndo_Click(TBUndo, new EventArgs());
+                            TBUndo_Click(TBUndo, EventArgs.Empty);
                             break;
                         case Keys.Y:
-                            TBRedo_Click(TBRedo, new EventArgs());
+                            TBRedo_Click(TBRedo, EventArgs.Empty);
                             break;
                         case Keys.X:
-                            TBCut_Click(TBCut, new EventArgs());
+                            TBCut_Click(TBCut, EventArgs.Empty);
                             break;
                         case Keys.C:
-                            TBCopy_Click(TBCopy, new EventArgs());
+                            TBCopy_Click(TBCopy, EventArgs.Empty);
                             break;
                         case Keys.V:
-                            TBPaste_Click(TBPaste, new EventArgs());
+                            TBPaste_Click(TBPaste, EventArgs.Empty);
                             break;
                         case Keys.A:
-                            mnSelectAll_Click(mnSelectAll, new EventArgs());
+                            mnSelectAll_Click(mnSelectAll, EventArgs.Empty);
                             break;
                         case Keys.F:
-                            TBFind_Click(TBFind, new EventArgs());
+                            TBFind_Click(TBFind, EventArgs.Empty);
                             break;
                         case Keys.T:
-                            TBStatistics_Click(TBStatistics, new EventArgs());
+                            TBStatistics_Click(TBStatistics, EventArgs.Empty);
                             break;
                     }
                 }

@@ -74,65 +74,71 @@ public partial class MainWindow
 
     private string GetBMSChannelBy(Note note)
     {
-        var columnIndex = note.ColumnIndex;
-        var value = note.Value;
-        var longNote = note.LongNote;
-        var hidden = note.Hidden;
-        var bmsBaseChannel = GetColumn(columnIndex).Identifier;
-        var landmine = note.Landmine;
+        var iCol = note.ColumnIndex;
+        var xVal = note.Value;
+        var xLong = note.LongNote;
+        var xHidden = note.Hidden;
+        var bmsBaseChannel = GetColumn(iCol).Identifier;
+        var xLandmine = note.Landmine;
 
-        if (columnIndex == 2 && (value / 10000.0 != value / 10000 || value >= 2560000 || value < 0))
+        if (iCol == niBPM && (xVal / 10000.0 != xVal / 10000 || xVal >= 2560000 || xVal < 0))
         {
-            bmsBaseChannel += 5;
+            bmsBaseChannel += idflBPM;
         }
-        if (columnIndex == 1)
+
+        if (iCol == niSCROLL)
         {
             return "SC";
         }
-        if (columnIndex >= 5 && columnIndex <= 12)
+
+        // p1 side
+        if (iCol >= niA1 && iCol <= niA8)
         {
-            if (longNote)
+            if (xLong)
             {
                 return Conversion.Hex(bmsBaseChannel + Convert.ToInt32("50", 16) - 10);
             }
 
-            if (hidden)
+            if (xHidden)
             {
                 return Conversion.Hex(bmsBaseChannel + Convert.ToInt32("30", 16) - 10);
             }
 
-            if (landmine)
+            if (xLandmine)
             {
                 return Conversion.Hex(bmsBaseChannel + Convert.ToInt32("D0", 16) - 10);
             }
         }
-        if (columnIndex >= 14 && columnIndex <= 21)
+
+        // p2 side
+        if (iCol >= niD1 && iCol <= niD8)
         {
-            if (longNote)
+            if (xLong)
             {
                 return Conversion.Hex(bmsBaseChannel + Convert.ToInt32("60", 16) - 20);
             }
 
-            if (hidden)
+            if (xHidden)
             {
                 return Conversion.Hex(bmsBaseChannel + Convert.ToInt32("40", 16) - 20);
             }
 
-            if (landmine)
+            if (xLandmine)
             {
                 return Conversion.Hex(bmsBaseChannel + Convert.ToInt32("E0", 16) - 20);
             }
         }
+
         return Functions.Add2Zeros(bmsBaseChannel);
     }
 
     private int nLeft(int iCol)
     {
-        if (iCol < 27)
+        if (iCol < niB)
         {
             return column[iCol].Left;
         }
-        return column[27].Left + (iCol - 27) * column[27].Width;
+        return column[niB].Left + (iCol - niB) * column[niB].Width;
     }
 
     private int GetColumnWidth(int iCol)
@@ -141,61 +147,61 @@ public partial class MainWindow
         {
             return 0;
         }
-        if (iCol < 27)
+        if (iCol < niB)
         {
             return column[iCol].Width;
         }
-        return column[27].Width;
+        return column[niB].Width;
     }
 
     private string nTitle(int iCol)
     {
-        if (iCol < 27)
+        if (iCol < niB)
         {
             return column[iCol].Title;
         }
-        return column[27].Title + (iCol - 27 + 1);
+        return column[niB].Title + (iCol - niB + 1);
     }
 
     private bool nEnabled(int iCol)
     {
-        if (iCol < 27)
+        if (iCol < niB)
         {
             return column[iCol].isEnabledAfterAll;
         }
-        return column[27].isEnabledAfterAll;
+        return column[niB].isEnabledAfterAll;
     }
 
     private bool IsColumnNumeric(int iCol)
     {
-        if (iCol < 27)
+        if (iCol < niB)
         {
             return column[iCol].isNumeric;
         }
-        return column[27].isNumeric;
+        return column[niB].isNumeric;
     }
 
     private Column GetColumn(int iCol)
     {
-        if (iCol < 27)
+        if (iCol < niB)
         {
             return column[iCol];
         }
-        return column[27];
+        return column[niB];
     }
 
     private object BMSEChannelToColumnIndex(string I)
     {
-        double num = Conversion.Val(I);
-        if (num > 100.0)
+        double Ivalue = Conversion.Val(I);
+        if (Ivalue > 100)
         {
-            return 27.0 + num - 101.0;
+            return niB + Ivalue - 101;
         }
-        if (num < 100.0 && num > 0.0)
+        if (Ivalue < 100 && Ivalue > 0)
         {
             return BMSChannelToColumn(Microsoft.VisualBasic.Strings.Mid(I, 2, 2));
         }
-        return 27;
+        return niB; // ??? how did a negative number get here?
     }
 
     private int BMSChannelToColumn(string I)

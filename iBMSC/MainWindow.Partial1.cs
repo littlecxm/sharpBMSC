@@ -2509,7 +2509,7 @@ IL_03ba:
                 }
                 else
                 {
-                    BVCApply_Click(BVCApply, new EventArgs());
+                    BVCApply_Click(BVCApply, EventArgs.Empty);
                 }
             }
         }
@@ -2540,7 +2540,7 @@ IL_03ba:
                 }
                 else
                 {
-                    BVCApply_Click(BVCApply, new EventArgs());
+                    BVCApply_Click(BVCApply, EventArgs.Empty);
                 }
             }
         }
@@ -2571,7 +2571,7 @@ IL_03ba:
                 }
                 else
                 {
-                    BVCCalculate_Click(BVCCalculate, new EventArgs());
+                    BVCCalculate_Click(BVCCalculate, EventArgs.Empty);
                 }
             }
         }
@@ -3817,7 +3817,7 @@ IL_0347:
                 {
                     Interaction.Beep();
                 }
-                TBThemeRefresh_Click(TBThemeRefresh, new EventArgs());
+                TBThemeRefresh_Click(TBThemeRefresh, EventArgs.Empty);
             }
         }
 
