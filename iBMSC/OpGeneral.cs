@@ -450,58 +450,58 @@ end_IL_0006_3:
     private void OpGeneral_Load(object sender, EventArgs e)
     {
         Font = MyProject.Forms.MainWindow.Font;
-        Text = Strings.fopGeneral.Title;
-        Label1.Text = Strings.fopGeneral.MouseWheel;
-        Label2.Text = Strings.fopGeneral.TextEncoding;
-        Label5.Text = Strings.fopGeneral.PageUpDown;
-        Label3.Text = Strings.fopGeneral.MiddleButton;
-        Label4.Text = Strings.fopGeneral.AssociateFileType;
-        rMiddleAuto.Text = Strings.fopGeneral.MiddleButtonAuto;
-        rMiddleDrag.Text = Strings.fopGeneral.MiddleButtonDrag;
-        Label6.Text = Strings.fopGeneral.MaxGridPartition;
-        cBeep.Text = Strings.fopGeneral.BeepWhileSaved;
-        cBpm1296.Text = Strings.fopGeneral.ExtendBPM;
-        cStop1296.Text = Strings.fopGeneral.ExtendSTOP;
-        cMEnterFocus.Text = Strings.fopGeneral.AutoFocusOnMouseEnter;
-        cMClickFocus.Text = Strings.fopGeneral.DisableFirstClick;
-        cAutoSave.Text = Strings.fopGeneral.AutoSave;
-        Label7.Text = Strings.fopGeneral.minutes;
-        cMStopPreview.Text = Strings.fopGeneral.StopPreviewOnClick;
+        Text = Strings1.fopGeneral.Title;
+        Label1.Text = Strings1.fopGeneral.MouseWheel;
+        Label2.Text = Strings1.fopGeneral.TextEncoding;
+        Label5.Text = Strings1.fopGeneral.PageUpDown;
+        Label3.Text = Strings1.fopGeneral.MiddleButton;
+        Label4.Text = Strings1.fopGeneral.AssociateFileType;
+        rMiddleAuto.Text = Strings1.fopGeneral.MiddleButtonAuto;
+        rMiddleDrag.Text = Strings1.fopGeneral.MiddleButtonDrag;
+        Label6.Text = Strings1.fopGeneral.MaxGridPartition;
+        cBeep.Text = Strings1.fopGeneral.BeepWhileSaved;
+        cBpm1296.Text = Strings1.fopGeneral.ExtendBPM;
+        cStop1296.Text = Strings1.fopGeneral.ExtendSTOP;
+        cMEnterFocus.Text = Strings1.fopGeneral.AutoFocusOnMouseEnter;
+        cMClickFocus.Text = Strings1.fopGeneral.DisableFirstClick;
+        cAutoSave.Text = Strings1.fopGeneral.AutoSave;
+        Label7.Text = Strings1.fopGeneral.minutes;
+        cMStopPreview.Text = Strings1.fopGeneral.StopPreviewOnClick;
         var @default = Encoding.Default;
         CTextEncoding.Items[0] = "System ANSI (" + @default.EncodingName + ")";
-        OK_Button.Text = Strings.OK;
-        Cancel_Button.Text = Strings.Cancel;
+        OK_Button.Text = Strings1.OK;
+        Cancel_Button.Text = Strings1.Cancel;
     }
 
     private void TBAssociate_Click(object sender, EventArgs e)
     {
-        Associate(".bms", "iBMSC.BMS", Strings.FileAssociation.BMS, isIBMSC: false);
+        Associate(".bms", "iBMSC.BMS", Strings1.FileAssociation.BMS, isIBMSC: false);
     }
 
     private void TBAssociateIBMSC_Click(object sender, EventArgs e)
     {
-        Associate(".ibmsc", "iBMSC.iBMSC", Strings.FileAssociation.IBMSC, isIBMSC: true);
+        Associate(".ibmsc", "iBMSC.iBMSC", Strings1.FileAssociation.IBMSC, isIBMSC: true);
     }
 
     private void TBAssociateBME_Click(object sender, EventArgs e)
     {
-        Associate(".bme", "iBMSC.BME", Strings.FileAssociation.BME, isIBMSC: false);
+        Associate(".bme", "iBMSC.BME", Strings1.FileAssociation.BME, isIBMSC: false);
     }
 
     private void TBAssociateBML_Click(object sender, EventArgs e)
     {
-        Associate(".bml", "iBMSC.BML", Strings.FileAssociation.BML, isIBMSC: false);
+        Associate(".bml", "iBMSC.BML", Strings1.FileAssociation.BML, isIBMSC: false);
     }
 
     private void TBAssociatePMS_Click(object sender, EventArgs e)
     {
-        Associate(".pms", "iBMSC.PMS", Strings.FileAssociation.PMS, isIBMSC: false);
+        Associate(".pms", "iBMSC.PMS", Strings1.FileAssociation.PMS, isIBMSC: false);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
     private void Associate(string xExt, string xClass, string xDescription, bool isIBMSC)
     {
-        if (Interaction.MsgBox(Microsoft.VisualBasic.Strings.Replace(Strings.Messages.FileAssociationPrompt, "{}", "*" + xExt), MsgBoxStyle.YesNo | MsgBoxStyle.Question) != MsgBoxResult.Yes)
+        if (Interaction.MsgBox(Microsoft.VisualBasic.Strings.Replace(Strings1.Messages.FileAssociationPrompt, "{}", "*" + xExt), MsgBoxStyle.YesNo | MsgBoxStyle.Question) != MsgBoxResult.Yes)
         {
             return;
         }
@@ -532,7 +532,7 @@ end_IL_0006_3:
             registryKey = classesRoot.OpenSubKey(xClass + "\\shell", writable: true);
             registryKey.CreateSubKey("open\\command");
             registryKey = classesRoot.OpenSubKey(xClass + "\\shell\\open", writable: true);
-            registryKey.SetValue("", Strings.FileAssociation.Open);
+            registryKey.SetValue("", Strings1.FileAssociation.Open);
             registryKey = classesRoot.OpenSubKey(xClass + "\\shell\\open\\command", writable: true);
             registryKey.SetValue("", "\"" + Application.ExecutablePath + "\" \"%1\"");
             if (!isIBMSC)
@@ -540,13 +540,13 @@ end_IL_0006_3:
                 registryKey = classesRoot.OpenSubKey(xClass + "\\shell", writable: true);
                 registryKey.CreateSubKey("preview\\command");
                 registryKey = classesRoot.OpenSubKey(xClass + "\\shell\\preview", writable: true);
-                registryKey.SetValue("", Strings.FileAssociation.Preview);
+                registryKey.SetValue("", Strings1.FileAssociation.Preview);
                 registryKey = classesRoot.OpenSubKey(xClass + "\\shell\\preview\\command", writable: true);
                 registryKey.SetValue("", "\"" + MyProject.Application.Info.DirectoryPath + "\\uBMplay.exe\" \"%1\"");
                 registryKey = classesRoot.OpenSubKey(xClass + "\\shell", writable: true);
                 registryKey.CreateSubKey("viewcode\\command");
                 registryKey = classesRoot.OpenSubKey(xClass + "\\shell\\viewcode", writable: true);
-                registryKey.SetValue("", Strings.FileAssociation.ViewCode);
+                registryKey.SetValue("", Strings1.FileAssociation.ViewCode);
                 registryKey = classesRoot.OpenSubKey(xClass + "\\shell\\viewcode\\command", writable: true);
                 registryKey.SetValue("", Environment.SystemDirectory + "\\notepad.exe %1");
             }
@@ -562,7 +562,7 @@ end_IL_0006_3:
         catch (Exception ex)
         {
             ProjectData.SetProjectError(ex);
-            Interaction.MsgBox(Strings.Messages.FileAssociationError + "\r\n\r\n" + ex.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err);
+            Interaction.MsgBox(Strings1.Messages.FileAssociationError + "\r\n\r\n" + ex.Message, MsgBoxStyle.Exclamation, Strings1.Messages.Err);
             ProjectData.ClearProjectError();
         }
         SHChangeNotify(134217728, 0, 0, 0);

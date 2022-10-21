@@ -3,162 +3,112 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Globalization;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 
 namespace iBMSC.Editor;
 
-[StandardModule]
-public sealed class Functions
+public static class Functions
 {
-    [SpecialName]
-    private static Regex _0024STATIC_0024IsBase36_0024012E_0024re;
-
-    [SpecialName]
-    private static NumberFormatInfo _0024STATIC_0024WriteDecimalWithDot_002401ED_0024nfi;
-
-    [SpecialName]
-    private static StaticLocalInitFlag _0024STATIC_0024WriteDecimalWithDot_002401ED_0024nfi_0024Init = new StaticLocalInitFlag();
-
-    [SpecialName]
-    private static StaticLocalInitFlag _0024STATIC_0024IsBase36_0024012E_0024re_0024Init = new StaticLocalInitFlag();
+    private static NumberFormatInfo _WriteDecimalWithDot_nfi = new NumberFormatInfo();
+    private static Regex _IsBase36_re = new Regex("^[A-Za-z0-9]+$");
 
     public static string WriteDecimalWithDot(double v)
     {
-        var lockTaken = false;
-        try
-        {
-            Monitor.Enter(_0024STATIC_0024WriteDecimalWithDot_002401ED_0024nfi_0024Init, ref lockTaken);
-            if (_0024STATIC_0024WriteDecimalWithDot_002401ED_0024nfi_0024Init.State == 0)
-            {
-                _0024STATIC_0024WriteDecimalWithDot_002401ED_0024nfi_0024Init.State = 2;
-                _0024STATIC_0024WriteDecimalWithDot_002401ED_0024nfi = new NumberFormatInfo();
-            }
-            else if (_0024STATIC_0024WriteDecimalWithDot_002401ED_0024nfi_0024Init.State == 2)
-            {
-                throw new IncompleteInitialization();
-            }
-        }
-        finally
-        {
-            _0024STATIC_0024WriteDecimalWithDot_002401ED_0024nfi_0024Init.State = 1;
-            if (lockTaken)
-            {
-                Monitor.Exit(_0024STATIC_0024WriteDecimalWithDot_002401ED_0024nfi_0024Init);
-            }
-        }
-        _0024STATIC_0024WriteDecimalWithDot_002401ED_0024nfi.NumberDecimalSeparator = ".";
-        return v.ToString(_0024STATIC_0024WriteDecimalWithDot_002401ED_0024nfi);
+        _WriteDecimalWithDot_nfi.NumberDecimalSeparator = ".";
+        return v.ToString(_WriteDecimalWithDot_nfi);
     }
 
     public static string Add3Zeros(int xNum)
     {
         var text = "000" + Conversions.ToString(xNum);
-        return Microsoft.VisualBasic.Strings.Mid(text, Microsoft.VisualBasic.Strings.Len(text) - 2);
+        return Strings.Mid(text, Strings.Len(text) - 2);
     }
 
     public static string Add2Zeros(int xNum)
     {
         var text = "00" + Conversions.ToString(xNum);
-        return Microsoft.VisualBasic.Strings.Mid(text, Microsoft.VisualBasic.Strings.Len(text) - 1);
+        return Strings.Mid(text, Strings.Len(text) - 1);
     }
 
     public static char C10to36S(int xStart)
     {
         if (xStart < 10)
-        {
-            return Conversions.ToChar(Conversions.ToString(xStart));
-        }
-        return Microsoft.VisualBasic.Strings.Chr(xStart + 55);
+            return Conversions.ToChar(xStart.ToString());
+        else
+            return Strings.Chr(xStart + 55);
     }
 
     public static int C36to10S(char xChar)
     {
-        var num = Microsoft.VisualBasic.Strings.Asc(Microsoft.VisualBasic.Strings.UCase(xChar));
-        if (num is >= 48 and <= 57)
+        int xAsc = Strings.Asc(Strings.UCase(xChar));
+        if (xAsc >= 48 & xAsc <= 57)
         {
-            return num - 48;
+            return xAsc - 48;
         }
-        if (num is >= 65 and <= 90)
+        else if (xAsc >= 65 & xAsc <= 90)
         {
-            return num - 55;
+            return xAsc - 55;
         }
         return 0;
     }
 
     public static string C10to36(long xStart)
     {
-        if (xStart < 1)
-        {
+        if (xStart < 1L)
             xStart = 1L;
-        }
-        if (xStart > 1295)
-        {
+        if (xStart > 1295L)
             xStart = 1295L;
-        }
-
-        return Conversions.ToString(C10to36S((int)(xStart / 36))) + Conversions.ToString(C10to36S((int)(xStart % 36)));
+        return Conversions.ToString(C10to36S((int)(xStart / 36L))) + C10to36S((int)(xStart % 36L));
     }
 
     public static int C36to10(string xStart)
     {
-        xStart = Microsoft.VisualBasic.Strings.Mid("00" + xStart, Microsoft.VisualBasic.Strings.Len(xStart) + 1);
+        xStart = Strings.Mid("00" + xStart, Strings.Len(xStart) + 1);
         return C36to10S(xStart[0]) * 36 + C36to10S(xStart[1]);
     }
 
     public static string EncodingToString(Encoding TextEncoding)
     {
-        if (TextEncoding == Encoding.Default)
-        {
+        if (ReferenceEquals(TextEncoding, Encoding.Default))
             return "System Ansi";
-        }
-        if (TextEncoding == Encoding.Unicode)
-        {
+        if (ReferenceEquals(TextEncoding, Encoding.Unicode))
             return "Little Endian UTF16";
-        }
-        if (TextEncoding == Encoding.ASCII)
-        {
+        if (ReferenceEquals(TextEncoding, Encoding.ASCII))
             return "ASCII";
-        }
-        if (TextEncoding == Encoding.BigEndianUnicode)
-        {
+        if (ReferenceEquals(TextEncoding, Encoding.BigEndianUnicode))
             return "Big Endian UTF16";
-        }
-        if (TextEncoding == Encoding.UTF32)
-        {
+        if (ReferenceEquals(TextEncoding, Encoding.UTF32))
             return "Little Endian UTF32";
-        }
-        if (TextEncoding == Encoding.UTF7)
-        {
+        if (ReferenceEquals(TextEncoding, Encoding.UTF7))
             return "UTF7";
-        }
-        if (TextEncoding == Encoding.UTF8)
-        {
+        if (ReferenceEquals(TextEncoding, Encoding.UTF8))
             return "UTF8";
-        }
-        if (TextEncoding == Encoding.GetEncoding(932))
-        {
+        if (ReferenceEquals(TextEncoding, Encoding.GetEncoding(932)))
             return "SJIS";
-        }
-        if (TextEncoding == Encoding.GetEncoding(51949))
-        {
+        if (ReferenceEquals(TextEncoding, Encoding.GetEncoding(51949)))
             return "EUC-KR";
-        }
-        return "ANSI (" + TextEncoding.EncodingName + ")" + Conversions.ToString(TextEncoding == Encoding.Default);
+        return "ANSI (" + TextEncoding.EncodingName + ")" + ReferenceEquals(TextEncoding, Encoding.Default);
     }
 
+    /// <summary>
+    /// Adjust the brightness of a color.
+    /// </summary>
+    /// <param name="cStart">Original Color.</param>
+    /// <param name="iPercent">(-100 to 100) Brightness.</param>
+    /// <param name="iTransparency">(0 - 1) Transparency.</param>
     public static Color AdjustBrightness(Color cStart, float iPercent, float iTransparency)
     {
         if (cStart.A == 0)
         {
             return Color.FromArgb(0);
         }
-
-        return Color.FromArgb((int)Math.Round(cStart.A * iTransparency), (int)Math.Round(unchecked(cStart.R * (100f - Math.Abs(iPercent)) * 0.01 + Math.Abs((0 - (iPercent >= 0f ? 1 : 0)) * iPercent) * 2.55)), (int)Math.Round(unchecked(cStart.G * (100f - Math.Abs(iPercent)) * 0.01 + Math.Abs((0 - (iPercent >= 0f ? 1 : 0)) * iPercent) * 2.55)), (int)Math.Round(unchecked(cStart.B * (100f - Math.Abs(iPercent)) * 0.01 + Math.Abs((0 - (iPercent >= 0f ? 1 : 0)) * iPercent) * 2.55)));
+        else
+        {
+            return Color.FromArgb((int)Math.Round(cStart.A * iTransparency), (int)Math.Round(cStart.R * (100f - Math.Abs(iPercent)) * 0.01d + Math.Abs(Conversions.ToInteger(iPercent >= 0f) * iPercent) * 2.55d), (int)Math.Round(cStart.G * (100f - Math.Abs(iPercent)) * 0.01d + Math.Abs(Conversions.ToInteger(iPercent >= 0f) * iPercent) * 2.55d), (int)Math.Round(cStart.B * (100f - Math.Abs(iPercent)) * 0.01d + Math.Abs(Conversions.ToInteger(iPercent >= 0f) * iPercent) * 2.55d));
+        }
     }
 
     public static bool IdentifiertoLongNote(string I)
@@ -170,97 +120,93 @@ public sealed class Functions
     public static bool IdentifiertoHidden(string I)
     {
         var num = (int)Math.Round(Conversion.Val(I));
-        return num is >= 30 and < 50 || num is >= 70 and < 90;
+        return num is >= 30 and < 50 or >= 70 and < 90;
     }
 
     public static string RandomFileName(string extWithDot)
     {
-        string text;
+        string RandomFileNameRet;
         do
         {
             VBMath.Randomize();
-            text = Conversions.ToString(DateAndTime.Now.Ticks) + Microsoft.VisualBasic.Strings.Mid(Conversions.ToString(VBMath.Rnd()), 3) + extWithDot;
+            RandomFileNameRet = Conversions.ToString(DateAndTime.Now.Ticks) + Strings.Mid(Conversions.ToString(VBMath.Rnd()), 3) + extWithDot;
         }
-        while (File.Exists(text) | Directory.Exists(text));
-        return text;
+        while (File.Exists(RandomFileNameRet) | Directory.Exists(RandomFileNameRet));
+        return RandomFileNameRet;
     }
 
     public static Color HSL2RGB(int xH, int xS, int xL, int xA = 255)
     {
         if (xH > 360 || xS > 1000 || xL > 1000 || xA > 255)
-        {
             return Color.Black;
-        }
-        var num = xS / 1000.0;
 
-        var num2 = (xL - 500) / 500.0;
-        double num4;
-        double num5;
-        double num3;
+        var xxS = xS / 1000.0;
+        var xxB = (xL - 500) / 500.0;
+        double xR;
+        double xG;
+        double xB;
         if (xH < 60)
         {
-            num3 = -1.0;
-            num4 = 1.0;
-            num5 = (xH - 30) / 30.0;
+            xB = -1.0;
+            xR = 1.0;
+            xG = (xH - 30) / 30.0;
         }
         else if (xH < 120)
         {
-            num3 = -1.0;
-            num5 = 1.0;
-            num4 = (90 - xH) / 30.0;
+            xB = -1.0;
+            xG = 1.0;
+            xR = (90 - xH) / 30.0;
         }
         else if (xH < 180)
         {
-            num4 = -1.0;
-            num5 = 1.0;
-            num3 = (xH - 150) / 30.0;
+            xR = -1.0;
+            xG = 1.0;
+            xB = (xH - 150) / 30.0;
         }
         else if (xH < 240)
         {
-            num4 = -1.0;
-            num3 = 1.0;
-            num5 = (210 - xH) / 30.0;
+            xR = -1.0;
+            xB = 1.0;
+            xG = (210 - xH) / 30.0;
         }
         else if (xH < 300)
         {
-            num5 = -1.0;
-            num3 = 1.0;
-            num4 = (xH - 270) / 30.0;
+            xG = -1.0;
+            xB = 1.0;
+            xR = (xH - 270) / 30.0;
         }
         else
         {
-            num5 = -1.0;
-            num4 = 1.0;
-            num3 = (330 - xH) / 30.0;
+            xG = -1.0;
+            xR = 1.0;
+            xB = (330 - xH) / 30.0;
         }
-        num4 = (num4 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
-        num5 = (num5 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
-        num3 = (num3 * num * (1.0 - Math.Abs(num2)) + num2 + 1.0) * 255.0 / 2.0;
-        return Color.FromArgb(xA, (int)Math.Round(num4), (int)Math.Round(num5), (int)Math.Round(num3));
+
+        xR = (xR * xxS * (1.0 - Math.Abs(xxB)) + xxB + 1.0) * 255.0 / 2.0;
+        xG = (xG * xxS * (1.0 - Math.Abs(xxB)) + xxB + 1.0) * 255.0 / 2.0;
+        xB = (xB * xxS * (1.0 - Math.Abs(xxB)) + xxB + 1.0) * 255.0 / 2.0;
+        return Color.FromArgb(xA, (int)Math.Round(xR), (int)Math.Round(xG), (int)Math.Round(xB));
     }
 
     public static string FontToString(Font xFont)
     {
-        return xFont.FontFamily.Name + "," + Conversions.ToString(xFont.Size) + "," + Conversions.ToString((int)xFont.Style);
+        return xFont.FontFamily.Name + "," + xFont.Size + "," + (int)xFont.Style;
     }
 
     public static bool isFontInstalled(string f)
     {
-        var installedFontCollection = new InstalledFontCollection();
-        var families = installedFontCollection.Families;
-        foreach (var fontFamily in families)
+        var xFontCollection = new InstalledFontCollection();
+        foreach (FontFamily ff in xFontCollection.Families)
         {
-            if (f.Equals(fontFamily.Name, StringComparison.CurrentCultureIgnoreCase))
-            {
+            if (f.Equals(ff.Name, StringComparison.CurrentCultureIgnoreCase))
                 return true;
-            }
         }
         return false;
     }
 
     public static Font StringToFont(string xStr, Font xDefault)
     {
-        var array = Microsoft.VisualBasic.Strings.Split(xStr, ",");
+        var array = Strings.Split(xStr, ",");
         if (Information.UBound(array) == 2)
         {
             var style = (FontStyle)(int)Math.Round(Conversion.Val(array[2]));
@@ -271,123 +217,79 @@ public sealed class Functions
 
     public static string ArrayToString(int[] xInt)
     {
-        var text = "";
-        var num = Information.UBound(xInt);
-        for (var i = 0; i <= num; i += 1)
-        {
-            text = Conversions.ToString(Operators.ConcatenateObject(text, Operators.ConcatenateObject(xInt[i].ToString(), Interaction.IIf(i == Information.UBound(xInt), "", ","))));
-        }
-        return text;
+        string xStr = "";
+        for (int xI1 = 0, loopTo = Information.UBound(xInt); xI1 <= loopTo; xI1++)
+            xStr = Conversions.ToString(xStr + Operators.ConcatenateObject(xInt[xI1].ToString(), Interaction.IIf(xI1 == Information.UBound(xInt), "", ",")));
+        return xStr;
     }
 
     public static string ArrayToString(bool[] xBool)
     {
-        var text = "";
-        var num = Information.UBound(xBool);
-        for (var i = 0; i <= num; i += 1)
-        {
-            text = Conversions.ToString(Operators.ConcatenateObject(text, Operators.ConcatenateObject((0 - (xBool[i] ? 1 : 0)).ToString(), Interaction.IIf(i == Information.UBound(xBool), "", ","))));
-        }
-        return text;
+        string xStr = "";
+        for (int xI1 = 0, loopTo = Information.UBound(xBool); xI1 <= loopTo; xI1++)
+            xStr = Conversions.ToString(xStr + Operators.ConcatenateObject(Conversions.ToInteger(xBool[xI1]).ToString(), Interaction.IIf(xI1 == Information.UBound(xBool), "", ",")));
+        return xStr;
     }
 
     public static string ArrayToString(Color[] xColor)
     {
-        var text = "";
-        var num = Information.UBound(xColor);
-        for (var i = 0; i <= num; i += 1)
-        {
-            text = Conversions.ToString(Operators.ConcatenateObject(text, Operators.ConcatenateObject(xColor[i].ToArgb().ToString(), Interaction.IIf(i == Information.UBound(xColor), "", ","))));
-        }
-        return text;
+        string xStr = "";
+        for (int xI1 = 0, loopTo = Information.UBound(xColor); xI1 <= loopTo; xI1++)
+            xStr = Conversions.ToString(xStr + Operators.ConcatenateObject(xColor[xI1].ToArgb().ToString(), Interaction.IIf(xI1 == Information.UBound(xColor), "", ",")));
+        return xStr;
     }
 
     public static int[] StringToArrayInt(string xStr)
     {
-        var array = Microsoft.VisualBasic.Strings.Split(xStr, ",");
-
-        var array2 = new int[Information.UBound(array) + 1];
-        var num = Information.UBound(array2);
-        for (var i = 0; i <= num; i++)
-        {
-            array2[i] = (int)Math.Round(Conversion.Val(array[i]));
-        }
-
-        return array2;
+        var xL = Strings.Split(xStr, ",");
+        var xInt = new int[Information.UBound(xL) + 1];
+        for (int xI1 = 0, loopTo = Information.UBound(xInt); xI1 <= loopTo; xI1++)
+            xInt[xI1] = (int)Math.Round(Conversion.Val(xL[xI1]));
+        return xInt;
     }
 
     public static bool[] StringToArrayBool(string xStr)
     {
-        var array = Microsoft.VisualBasic.Strings.Split(xStr, ",");
-
-        var array2 = new bool[Information.UBound(array) + 1];
-        var num = Information.UBound(array2);
-        for (var i = 0; i <= num; i++)
-        {
-            array2[i] = Conversion.Val(array[i]) != 0.0;
-        }
-
-        return array2;
+        var xL = Strings.Split(xStr, ",");
+        var xBool = new bool[Information.UBound(xL) + 1];
+        for (int xI1 = 0, loopTo = Information.UBound(xBool); xI1 <= loopTo; xI1++)
+            xBool[xI1] = Conversions.ToBoolean(Conversion.Val(xL[xI1]));
+        return xBool;
     }
 
-    public static long GetDenominator(double a, long maxDenom = 2147483647L)
+    public static long GetDenominator(double a, long maxDenom = 0x7FFFFFFFL)
     {
-        var num = 1L;
-        var num2 = 0L;
-        var num3 = 0L;
-        var num4 = 1L;
-        var num5 = a;
+        var m00 = 1L;
+        var m01 = 0L;
+        var m10 = 0L;
+        var m11 = 1L;
+        var x = a;
+        var ai = (long)Math.Round(Conversion.Int(x));
 
-        var num6 = (long)Math.Round(Conversion.Int(num5));
-        while (num3 * num6 + num4 <= maxDenom)
+        while (m10 * ai + m11 <= maxDenom)
         {
-            var num7 = num * num6 + num2;
-            num2 = num;
-            num = num7;
-            num7 = num3 * num6 + num4;
-            num4 = num3;
-            num3 = num7;
-            if (num5 == num6)
-            {
-                break;
-            }
+            var t = m00 * ai + m01;
+            m01 = m00;
+            m00 = t;
+            t = m10 * ai + m11;
+            m11 = m10;
+            m10 = t;
 
-            num5 = 1.0 / (num5 - num6);
-            if (num5 > 9.223372036854776E+18)
-            {
+            if (x == ai)
                 break;
-            }
 
-            num6 = (long)Math.Round(Conversion.Int(num5));
+            x = 1d / (x - ai);
+            if (x > 0x7FFFFFFFFFFFFFFF)
+                break;
+
+            ai = (long)Math.Round(Conversion.Int(x));
         }
 
-        return num3;
+        return m10;
     }
 
     public static bool IsBase36(string str)
     {
-        var lockTaken = false;
-        try
-        {
-            Monitor.Enter(_0024STATIC_0024IsBase36_0024012E_0024re_0024Init, ref lockTaken);
-            if (_0024STATIC_0024IsBase36_0024012E_0024re_0024Init.State == 0)
-            {
-                _0024STATIC_0024IsBase36_0024012E_0024re_0024Init.State = 2;
-                _0024STATIC_0024IsBase36_0024012E_0024re = new Regex("^[A-Za-z0-9]+$");
-            }
-            else if (_0024STATIC_0024IsBase36_0024012E_0024re_0024Init.State == 2)
-            {
-                throw new IncompleteInitialization();
-            }
-        }
-        finally
-        {
-            _0024STATIC_0024IsBase36_0024012E_0024re_0024Init.State = 1;
-            if (lockTaken)
-            {
-                Monitor.Exit(_0024STATIC_0024IsBase36_0024012E_0024re_0024Init);
-            }
-        }
-        return _0024STATIC_0024IsBase36_0024012E_0024re.IsMatch(str);
+        return _IsBase36_re.IsMatch(str);
     }
 }

@@ -37,17 +37,17 @@ public partial  class OpPlayer : Form
     private void OpPlayer_Load(object sender, EventArgs e)
     {
         Font = MyProject.Forms.MainWindow.Font;
-        Text = Strings.fopPlayer.Title;
-        Label1.Text = Strings.fopPlayer.Path;
-        Label2.Text = Strings.fopPlayer.PlayFromBeginning;
-        Label3.Text = Strings.fopPlayer.PlayFromHere;
-        Label4.Text = Strings.fopPlayer.StopPlaying;
-        BAdd.Text = Strings.fopPlayer.Add;
-        BRemove.Text = Strings.fopPlayer.Remove;
-        Label6.Text = Strings.fopPlayer.References + "\r\n<apppath> = " + Strings.fopPlayer.DirectoryOfApp + "\r\n<measure> = " + Strings.fopPlayer.CurrMeasure + "\r\n<filename> = " + Strings.fopPlayer.FileName;
-        OK_Button.Text = Strings.OK;
-        Cancel_Button.Text = Strings.Cancel;
-        BDefault.Text = Strings.fopPlayer.RestoreDefault;
+        Text = Strings1.fopPlayer.Title;
+        Label1.Text = Strings1.fopPlayer.Path;
+        Label2.Text = Strings1.fopPlayer.PlayFromBeginning;
+        Label3.Text = Strings1.fopPlayer.PlayFromHere;
+        Label4.Text = Strings1.fopPlayer.StopPlaying;
+        BAdd.Text = Strings1.fopPlayer.Add;
+        BRemove.Text = Strings1.fopPlayer.Remove;
+        Label6.Text = Strings1.fopPlayer.References + "\r\n<apppath> = " + Strings1.fopPlayer.DirectoryOfApp + "\r\n<measure> = " + Strings1.fopPlayer.CurrMeasure + "\r\n<filename> = " + Strings1.fopPlayer.FileName;
+        OK_Button.Text = Strings1.OK;
+        Cancel_Button.Text = Strings1.Cancel;
+        BDefault.Text = Strings1.fopPlayer.RestoreDefault;
     }
 
     private void LPlayer_Click(object sender, EventArgs e)
@@ -83,7 +83,7 @@ public partial  class OpPlayer : Form
     {
         if (LPlayer.Items.Count == 1)
         {
-            Interaction.MsgBox(Strings.Messages.PreviewDelError, MsgBoxStyle.Exclamation);
+            Interaction.MsgBox(Strings1.Messages.PreviewDelError, MsgBoxStyle.Exclamation);
             return;
         }
         var currPlayer = CurrPlayer;
@@ -105,7 +105,7 @@ public partial  class OpPlayer : Form
     {
         var openFileDialog = new OpenFileDialog();
         openFileDialog.InitialDirectory = Conversions.ToString(Interaction.IIf(Operators.CompareString(Path.GetDirectoryName(Microsoft.VisualBasic.Strings.Replace(TPath.Text, "<apppath>", MyProject.Application.Info.DirectoryPath)), "", TextCompare: false) == 0, MyProject.Application.Info.DirectoryPath, Path.GetDirectoryName(Microsoft.VisualBasic.Strings.Replace(TPath.Text, "<apppath>", MyProject.Application.Info.DirectoryPath))));
-        openFileDialog.Filter = Strings.FileType.EXE + "|*.exe";
+        openFileDialog.Filter = Strings1.FileType.EXE + "|*.exe";
         openFileDialog.DefaultExt = "exe";
         if (openFileDialog.ShowDialog() != DialogResult.Cancel)
         {
@@ -115,7 +115,7 @@ public partial  class OpPlayer : Form
 
     private void BPrevDefault_Click(object sender, EventArgs e)
     {
-        if (Interaction.MsgBox(Strings.Messages.RestoreDefaultSettings, MsgBoxStyle.YesNo | MsgBoxStyle.Question) != MsgBoxResult.No)
+        if (Interaction.MsgBox(Strings1.Messages.RestoreDefaultSettings, MsgBoxStyle.YesNo | MsgBoxStyle.Question) != MsgBoxResult.No)
         {
             var array = new MainWindow.PlayerArguments[2];
             ref var reference = ref array[0];

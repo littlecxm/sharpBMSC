@@ -1,6 +1,6 @@
 namespace iBMSC;
 
-public class Strings
+public class Strings1
 {
     public class StatusBar
     {

@@ -81,15 +81,11 @@ public partial class MainWindow
         var bmsBaseChannel = GetColumn(iCol).Identifier;
         var xLandmine = note.Landmine;
 
-        if (iCol == niBPM && (xVal / 10000.0 != xVal / 10000 || xVal >= 2560000 || xVal < 0))
-        {
+        if (iCol == niBPM && (xVal / 10000.0 != xVal / 10000 || xVal >= 2560000 || xVal < 0)) 
             bmsBaseChannel += idflBPM;
-        }
 
         if (iCol == niSCROLL)
-        {
             return "SC";
-        }
 
         // p1 side
         if (iCol >= niA1 && iCol <= niA8)
@@ -135,59 +131,52 @@ public partial class MainWindow
     private int nLeft(int iCol)
     {
         if (iCol < niB)
-        {
             return column[iCol].Left;
-        }
-        return column[niB].Left + (iCol - niB) * column[niB].Width;
+        else
+            return column[niB].Left + (iCol - niB) * column[niB].Width;
     }
 
     private int GetColumnWidth(int iCol)
     {
         if (!GetColumn(iCol).isVisible)
-        {
             return 0;
-        }
         if (iCol < niB)
-        {
             return column[iCol].Width;
-        }
-        return column[niB].Width;
+        else
+            return column[niB].Width;
     }
 
     private string nTitle(int iCol)
     {
         if (iCol < niB)
-        {
             return column[iCol].Title;
-        }
-        return column[niB].Title + (iCol - niB + 1);
+        else
+            return column[niB].Title + (iCol - niB + 1).ToString();
     }
 
     private bool nEnabled(int iCol)
     {
+        // If iCol < niB Then Return col(iCol).Enabled And col(iCol).Visible Else Return col(niB).Enabled And col(niB).Visible
         if (iCol < niB)
-        {
             return column[iCol].isEnabledAfterAll;
-        }
-        return column[niB].isEnabledAfterAll;
+        else
+            return column[niB].isEnabledAfterAll;
     }
 
     private bool IsColumnNumeric(int iCol)
     {
         if (iCol < niB)
-        {
             return column[iCol].isNumeric;
-        }
-        return column[niB].isNumeric;
+        else
+            return column[niB].isNumeric;
     }
 
     private Column GetColumn(int iCol)
     {
         if (iCol < niB)
-        {
             return column[iCol];
-        }
-        return column[niB];
+        else
+            return column[niB];
     }
 
     private object BMSEChannelToColumnIndex(string I)

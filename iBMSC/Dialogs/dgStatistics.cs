@@ -24,20 +24,20 @@ public partial class dgStatistics : Form
     private void dgStatistics_Load(object sender, EventArgs e)
     {
         Font = MyProject.Forms.MainWindow.Font;
-        Text = Strings.fStatistics.Title;
-        Label6.Text = Strings.fStatistics.lBPM;
-        Label7.Text = Strings.fStatistics.lSTOP;
-        Label8.Text = Strings.fStatistics.lA;
-        Label9.Text = Strings.fStatistics.lD;
-        Label10.Text = Strings.fStatistics.lBGM;
-        Label1.Text = Strings.fStatistics.lTotal;
-        Label11.Text = Strings.fStatistics.lShort;
-        Label12.Text = Strings.fStatistics.lLong;
-        Label13.Text = Strings.fStatistics.lLnObj;
-        Label14.Text = Strings.fStatistics.lHidden;
-        Label15.Text = Strings.fStatistics.lErrors;
-        Label2.Text = Strings.fStatistics.lTotal;
-        OK_Button.Text = Strings.OK;
+        Text = Strings1.fStatistics.Title;
+        Label6.Text = Strings1.fStatistics.lBPM;
+        Label7.Text = Strings1.fStatistics.lSTOP;
+        Label8.Text = Strings1.fStatistics.lA;
+        Label9.Text = Strings1.fStatistics.lD;
+        Label10.Text = Strings1.fStatistics.lBGM;
+        Label1.Text = Strings1.fStatistics.lTotal;
+        Label11.Text = Strings1.fStatistics.lShort;
+        Label12.Text = Strings1.fStatistics.lLong;
+        Label13.Text = Strings1.fStatistics.lLnObj;
+        Label14.Text = Strings1.fStatistics.lHidden;
+        Label15.Text = Strings1.fStatistics.lErrors;
+        Label2.Text = Strings1.fStatistics.lTotal;
+        OK_Button.Text = Strings1.OK;
     }
 
     public dgStatistics(int[,] data)

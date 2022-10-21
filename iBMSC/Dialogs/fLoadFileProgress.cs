@@ -112,6 +112,6 @@ IL_0143:
     private void fLoadFileProgress_Load(object sender, EventArgs e)
     {
         Font = MyProject.Forms.MainWindow.Font;
-        Cancel_Button.Text = Strings.Cancel;
+        Cancel_Button.Text = Strings1.Cancel;
     }
 }

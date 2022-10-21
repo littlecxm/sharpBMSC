@@ -39,10 +39,10 @@ public partial  class dgImportSM : Form
     private void dgImportSM_Load(object sender, EventArgs e)
     {
         Font = MyProject.Forms.MainWindow.Font;
-        Text = Strings.fImportSM.Title;
-        Label7.Text = Strings.fImportSM.Difficulty;
-        Label5.Text = Strings.fImportSM.Note;
-        OK_Button.Text = Strings.OK;
-        Cancel_Button.Text = Strings.Cancel;
+        Text = Strings1.fImportSM.Title;
+        Label7.Text = Strings1.fImportSM.Difficulty;
+        Label5.Text = Strings1.fImportSM.Note;
+        OK_Button.Text = Strings1.OK;
+        Cancel_Button.Text = Strings1.Cancel;
     }
 }

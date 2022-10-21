@@ -306,7 +306,7 @@ end_IL_0000_3:
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.DefaultExt = "wav";
-            openFileDialog.Filter = Strings.FileType._wave + "|*.wav;*.ogg;*.mp3|" + Strings.FileType.WAV + "|*.wav|" + Strings.FileType.OGG + "|*.ogg|" + Strings.FileType.MP3 + "|*.mp3|" + Strings.FileType._all + "|*.*";
+            openFileDialog.Filter = Strings1.FileType._wave + "|*.wav;*.ogg;*.mp3|" + Strings1.FileType.WAV + "|*.wav|" + Strings1.FileType.OGG + "|*.ogg|" + Strings1.FileType.MP3 + "|*.mp3|" + Strings1.FileType._all + "|*.*";
             openFileDialog.InitialDirectory = Conversions.ToString(Interaction.IIf(Operators.CompareString(ExcludeFileName(FileName), "", TextCompare: false) == 0, InitPath, ExcludeFileName(FileName)));
             openFileDialog.Multiselect = WAVMultiSelect;
             if (openFileDialog.ShowDialog() != DialogResult.Cancel)
@@ -892,7 +892,7 @@ end_IL_0000_3:
         private void BHStageFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = Strings.FileType._image + "|*.bmp;*.png;*.jpg;*.gif|" + Strings.FileType._all + "|*.*";
+            openFileDialog.Filter = Strings1.FileType._image + "|*.bmp;*.png;*.jpg;*.gif|" + Strings1.FileType._all + "|*.*";
             openFileDialog.InitialDirectory = Conversions.ToString(Interaction.IIf(Operators.CompareString(ExcludeFileName(FileName), "", TextCompare: false) == 0, InitPath, ExcludeFileName(FileName)));
             openFileDialog.DefaultExt = "png";
             if (openFileDialog.ShowDialog() != DialogResult.Cancel)
@@ -1122,7 +1122,7 @@ end_IL_0000_3:
 
         private void mnGotoMeasure_Click(object sender, EventArgs e)
         {
-            string s = Interaction.InputBox(Strings.Messages.PromptEnterMeasure, "Enter Measure");
+            string s = Interaction.InputBox(Strings1.Messages.PromptEnterMeasure, "Enter Measure");
             if (int.TryParse(s, out var result) && !(result < 0 || result > 999))
             {
                 PanelVScroll[PanelFocus] = (int)Math.Round(0.0 - MeasureBottom[result]);
@@ -2857,18 +2857,18 @@ end_IL_0000_3:
                 }
                 else if (IsColumnNumeric(Conversions.ToInteger(objectValue2)))
                 {
-                    string prompt = Strings.Messages.PromptEnterNumeric;
+                    string prompt = Strings1.Messages.PromptEnterNumeric;
                     if (Operators.ConditionalCompareObjectEqual(objectValue2, 2, TextCompare: false))
                     {
-                        prompt = Strings.Messages.PromptEnterBPM;
+                        prompt = Strings1.Messages.PromptEnterBPM;
                     }
                     if (Operators.ConditionalCompareObjectEqual(objectValue2, 3, TextCompare: false))
                     {
-                        prompt = Strings.Messages.PromptEnterSTOP;
+                        prompt = Strings1.Messages.PromptEnterSTOP;
                     }
                     if (Operators.ConditionalCompareObjectEqual(objectValue2, 1, TextCompare: false))
                     {
-                        prompt = Strings.Messages.PromptEnterSCROLL;
+                        prompt = Strings1.Messages.PromptEnterSCROLL;
                     }
                     string text = Interaction.InputBox(prompt, Text);
                     double num = Conversion.Val(text) * 10000.0;
@@ -3175,18 +3175,18 @@ end_IL_0000_3:
             int columnIndex = xN.ColumnIndex;
             if (IsColumnNumeric(columnIndex))
             {
-                string prompt = Strings.Messages.PromptEnterNumeric;
+                string prompt = Strings1.Messages.PromptEnterNumeric;
                 if (columnIndex == 2)
                 {
-                    prompt = Strings.Messages.PromptEnterBPM;
+                    prompt = Strings1.Messages.PromptEnterBPM;
                 }
                 if (columnIndex == 3)
                 {
-                    prompt = Strings.Messages.PromptEnterSTOP;
+                    prompt = Strings1.Messages.PromptEnterSTOP;
                 }
                 if (columnIndex == 1)
                 {
-                    prompt = Strings.Messages.PromptEnterSCROLL;
+                    prompt = Strings1.Messages.PromptEnterSCROLL;
                 }
                 string text = Interaction.InputBox(prompt, Text);
                 double num = Conversion.Val(text) * 10000.0;
@@ -3207,7 +3207,7 @@ end_IL_0000_3:
                 }
                 return;
             }
-            string text2 = Microsoft.VisualBasic.Strings.UCase(Microsoft.VisualBasic.Strings.Trim(Interaction.InputBox(Strings.Messages.PromptEnter, Text)));
+            string text2 = Microsoft.VisualBasic.Strings.UCase(Microsoft.VisualBasic.Strings.Trim(Interaction.InputBox(Strings1.Messages.PromptEnter, Text)));
             if (Microsoft.VisualBasic.Strings.Len(text2) != 0)
             {
                 if (Functions.IsBase36(text2) & !((Operators.CompareString(text2, "00", TextCompare: false) == 0) | (Operators.CompareString(text2, "0", TextCompare: false) == 0)))
@@ -3220,7 +3220,7 @@ end_IL_0000_3:
                 }
                 else
                 {
-                    Interaction.MsgBox(Strings.Messages.InvalidLabel, MsgBoxStyle.Critical, Strings.Messages.Err);
+                    Interaction.MsgBox(Strings1.Messages.InvalidLabel, MsgBoxStyle.Critical, Strings1.Messages.Err);
                 }
             }
         }
@@ -4205,18 +4205,18 @@ end_IL_0000_3:
                         UndoRedo.LinkedURCmd linkedURCmd = BaseRedo;
                         if (IsColumnNumeric(Conversions.ToInteger(objectValue)))
                         {
-                            string prompt = Strings.Messages.PromptEnterNumeric;
+                            string prompt = Strings1.Messages.PromptEnterNumeric;
                             if (Operators.ConditionalCompareObjectEqual(objectValue, 2, TextCompare: false))
                             {
-                                prompt = Strings.Messages.PromptEnterBPM;
+                                prompt = Strings1.Messages.PromptEnterBPM;
                             }
                             if (Operators.ConditionalCompareObjectEqual(objectValue, 3, TextCompare: false))
                             {
-                                prompt = Strings.Messages.PromptEnterSTOP;
+                                prompt = Strings1.Messages.PromptEnterSTOP;
                             }
                             if (Operators.ConditionalCompareObjectEqual(objectValue, 1, TextCompare: false))
                             {
-                                prompt = Strings.Messages.PromptEnterSCROLL;
+                                prompt = Strings1.Messages.PromptEnterSCROLL;
                             }
                             string text = Interaction.InputBox(prompt, Text);
                             long num4 = (long)Math.Round(Conversion.Val(text) * 10000.0);
@@ -4814,7 +4814,7 @@ end_IL_0000_3:
             if ((num3 - num) / num4 <= (num2 - num) / xValue)
             {
                 double num11 = (num2 - num) * num4 / (num3 - num) / 10000.0;
-                Interaction.MsgBox("Please enter a value that is greater than " + Conversions.ToString(num11) + ".", MsgBoxStyle.Critical, Strings.Messages.Err);
+                Interaction.MsgBox("Please enter a value that is greater than " + Conversions.ToString(num11) + ".", MsgBoxStyle.Critical, Strings1.Messages.Err);
                 return;
             }
             double num12 = num4 * (num2 - num) - xValue * (num3 - num);
@@ -5064,7 +5064,7 @@ end_IL_0000_3:
         {
             wWavL = null;
             wWavR = null;
-            TWFileName.Text = "(" + Strings.None + ")";
+            TWFileName.Text = "(" + Strings1.None + ")";
             RefreshPanelAll();
         }
 

@@ -789,9 +789,9 @@ public partial class MainWindow
                 throw new NullReferenceException();
             }
 
-            XMLLoadLocale(Root["OK"], ref Strings.OK);
-            XMLLoadLocale(Root["Cancel"], ref Strings.Cancel);
-            XMLLoadLocale(Root["None"], ref Strings.None);
+            XMLLoadLocale(Root["OK"], ref Strings1.OK);
+            XMLLoadLocale(Root["Cancel"], ref Strings1.Cancel);
+            XMLLoadLocale(Root["None"], ref Strings1.None);
             XmlElement eFont = Root["Font"];
             if (eFont != null)
             {
@@ -1323,10 +1323,10 @@ public partial class MainWindow
                 target = fSC.ToolTipText;
                 XMLLoadLocale(n78, ref target);
                 fSC.ToolTipText = target;
-                XMLLoadLocale(eStatusBar["Length"], ref Strings.StatusBar.Length);
-                XMLLoadLocale(eStatusBar["LongNote"], ref Strings.StatusBar.LongNote);
-                XMLLoadLocale(eStatusBar["Hidden"], ref Strings.StatusBar.Hidden);
-                XMLLoadLocale(eStatusBar["Error"], ref Strings.StatusBar.Err);
+                XMLLoadLocale(eStatusBar["Length"], ref Strings1.StatusBar.Length);
+                XMLLoadLocale(eStatusBar["LongNote"], ref Strings1.StatusBar.LongNote);
+                XMLLoadLocale(eStatusBar["Hidden"], ref Strings1.StatusBar.Hidden);
+                XMLLoadLocale(eStatusBar["Error"], ref Strings1.StatusBar.Err);
                 XmlElement n79 = eStatusBar["SelStart"];
                 ToolStripButton tBNew = FSSS;
                 target = tBNew.ToolTipText;
@@ -1876,199 +1876,199 @@ public partial class MainWindow
             XmlElement eMessages = Root["Messages"];
             if (eMessages != null)
             {
-                XMLLoadLocale(eMessages["Err"], ref Strings.Messages.Err);
-                XMLLoadLocale(eMessages["SaveOnExit"], ref Strings.Messages.SaveOnExit);
-                XMLLoadLocale(eMessages["SaveOnExit1"], ref Strings.Messages.SaveOnExit1);
-                XMLLoadLocale(eMessages["SaveOnExit2"], ref Strings.Messages.SaveOnExit2);
-                XMLLoadLocale(eMessages["PromptEnter"], ref Strings.Messages.PromptEnter);
-                XMLLoadLocale(eMessages["PromptEnterNumeric"], ref Strings.Messages.PromptEnterNumeric);
-                XMLLoadLocale(eMessages["PromptEnterBPM"], ref Strings.Messages.PromptEnterBPM);
-                XMLLoadLocale(eMessages["PromptEnterSTOP"], ref Strings.Messages.PromptEnterSTOP);
-                XMLLoadLocale(eMessages["PromptEnterSCROLL"], ref Strings.Messages.PromptEnterSCROLL);
-                XMLLoadLocale(eMessages["PromptSlashValue"], ref Strings.Messages.PromptSlashValue);
-                XMLLoadLocale(eMessages["InvalidLabel"], ref Strings.Messages.InvalidLabel);
-                XMLLoadLocale(eMessages["CannotFind"], ref Strings.Messages.CannotFind);
-                XMLLoadLocale(eMessages["PleaseRespecifyPath"], ref Strings.Messages.PleaseRespecifyPath);
-                XMLLoadLocale(eMessages["PlayerNotFound"], ref Strings.Messages.PlayerNotFound);
-                XMLLoadLocale(eMessages["PreviewDelError"], ref Strings.Messages.PreviewDelError);
-                XMLLoadLocale(eMessages["NegativeFactorError"], ref Strings.Messages.NegativeFactorError);
-                XMLLoadLocale(eMessages["NegativeDivisorError"], ref Strings.Messages.NegativeDivisorError);
-                XMLLoadLocale(eMessages["PreferencePostpone"], ref Strings.Messages.PreferencePostpone);
-                XMLLoadLocale(eMessages["EraserObsolete"], ref Strings.Messages.EraserObsolete);
-                XMLLoadLocale(eMessages["SaveWarning"], ref Strings.Messages.SaveWarning);
-                XMLLoadLocale(eMessages["NoteOverlapError"], ref Strings.Messages.NoteOverlapError);
-                XMLLoadLocale(eMessages["BPMOverflowError"], ref Strings.Messages.BPMOverflowError);
-                XMLLoadLocale(eMessages["STOPOverflowError"], ref Strings.Messages.STOPOverflowError);
-                XMLLoadLocale(eMessages["SCROLLOverflowError"], ref Strings.Messages.SCROLLOverflowError);
-                XMLLoadLocale(eMessages["SavedFileWillContainErrors"], ref Strings.Messages.SavedFileWillContainErrors);
-                XMLLoadLocale(eMessages["FileAssociationPrompt"], ref Strings.Messages.FileAssociationPrompt);
-                XMLLoadLocale(eMessages["FileAssociationError"], ref Strings.Messages.FileAssociationError);
-                XMLLoadLocale(eMessages["RestoreDefaultSettings"], ref Strings.Messages.RestoreDefaultSettings);
-                XMLLoadLocale(eMessages["RestoreAutosavedFile"], ref Strings.Messages.RestoreAutosavedFile);
+                XMLLoadLocale(eMessages["Err"], ref Strings1.Messages.Err);
+                XMLLoadLocale(eMessages["SaveOnExit"], ref Strings1.Messages.SaveOnExit);
+                XMLLoadLocale(eMessages["SaveOnExit1"], ref Strings1.Messages.SaveOnExit1);
+                XMLLoadLocale(eMessages["SaveOnExit2"], ref Strings1.Messages.SaveOnExit2);
+                XMLLoadLocale(eMessages["PromptEnter"], ref Strings1.Messages.PromptEnter);
+                XMLLoadLocale(eMessages["PromptEnterNumeric"], ref Strings1.Messages.PromptEnterNumeric);
+                XMLLoadLocale(eMessages["PromptEnterBPM"], ref Strings1.Messages.PromptEnterBPM);
+                XMLLoadLocale(eMessages["PromptEnterSTOP"], ref Strings1.Messages.PromptEnterSTOP);
+                XMLLoadLocale(eMessages["PromptEnterSCROLL"], ref Strings1.Messages.PromptEnterSCROLL);
+                XMLLoadLocale(eMessages["PromptSlashValue"], ref Strings1.Messages.PromptSlashValue);
+                XMLLoadLocale(eMessages["InvalidLabel"], ref Strings1.Messages.InvalidLabel);
+                XMLLoadLocale(eMessages["CannotFind"], ref Strings1.Messages.CannotFind);
+                XMLLoadLocale(eMessages["PleaseRespecifyPath"], ref Strings1.Messages.PleaseRespecifyPath);
+                XMLLoadLocale(eMessages["PlayerNotFound"], ref Strings1.Messages.PlayerNotFound);
+                XMLLoadLocale(eMessages["PreviewDelError"], ref Strings1.Messages.PreviewDelError);
+                XMLLoadLocale(eMessages["NegativeFactorError"], ref Strings1.Messages.NegativeFactorError);
+                XMLLoadLocale(eMessages["NegativeDivisorError"], ref Strings1.Messages.NegativeDivisorError);
+                XMLLoadLocale(eMessages["PreferencePostpone"], ref Strings1.Messages.PreferencePostpone);
+                XMLLoadLocale(eMessages["EraserObsolete"], ref Strings1.Messages.EraserObsolete);
+                XMLLoadLocale(eMessages["SaveWarning"], ref Strings1.Messages.SaveWarning);
+                XMLLoadLocale(eMessages["NoteOverlapError"], ref Strings1.Messages.NoteOverlapError);
+                XMLLoadLocale(eMessages["BPMOverflowError"], ref Strings1.Messages.BPMOverflowError);
+                XMLLoadLocale(eMessages["STOPOverflowError"], ref Strings1.Messages.STOPOverflowError);
+                XMLLoadLocale(eMessages["SCROLLOverflowError"], ref Strings1.Messages.SCROLLOverflowError);
+                XMLLoadLocale(eMessages["SavedFileWillContainErrors"], ref Strings1.Messages.SavedFileWillContainErrors);
+                XMLLoadLocale(eMessages["FileAssociationPrompt"], ref Strings1.Messages.FileAssociationPrompt);
+                XMLLoadLocale(eMessages["FileAssociationError"], ref Strings1.Messages.FileAssociationError);
+                XMLLoadLocale(eMessages["RestoreDefaultSettings"], ref Strings1.Messages.RestoreDefaultSettings);
+                XMLLoadLocale(eMessages["RestoreAutosavedFile"], ref Strings1.Messages.RestoreAutosavedFile);
             }
             XmlElement eFileType = Root["FileType"];
             if (eFileType != null)
             {
-                XMLLoadLocale(eFileType["_all"], ref Strings.FileType._all);
-                XMLLoadLocale(eFileType["_bms"], ref Strings.FileType._bms);
-                XMLLoadLocale(eFileType["BMS"], ref Strings.FileType.BMS);
-                XMLLoadLocale(eFileType["BME"], ref Strings.FileType.BME);
-                XMLLoadLocale(eFileType["BML"], ref Strings.FileType.BML);
-                XMLLoadLocale(eFileType["PMS"], ref Strings.FileType.PMS);
-                XMLLoadLocale(eFileType["TXT"], ref Strings.FileType.TXT);
-                XMLLoadLocale(eFileType["SM"], ref Strings.FileType.SM);
-                XMLLoadLocale(eFileType["IBMSC"], ref Strings.FileType.IBMSC);
-                XMLLoadLocale(eFileType["XML"], ref Strings.FileType.XML);
-                XMLLoadLocale(eFileType["THEME_XML"], ref Strings.FileType.THEME_XML);
-                XMLLoadLocale(eFileType["TH"], ref Strings.FileType.TH);
-                XMLLoadLocale(eFileType["_audio"], ref Strings.FileType._audio);
-                XMLLoadLocale(eFileType["_wave"], ref Strings.FileType._wave);
-                XMLLoadLocale(eFileType["WAV"], ref Strings.FileType.WAV);
-                XMLLoadLocale(eFileType["OGG"], ref Strings.FileType.OGG);
-                XMLLoadLocale(eFileType["MP3"], ref Strings.FileType.MP3);
-                XMLLoadLocale(eFileType["MID"], ref Strings.FileType.MID);
-                XMLLoadLocale(eFileType["_image"], ref Strings.FileType._image);
-                XMLLoadLocale(eFileType["EXE"], ref Strings.FileType.EXE);
+                XMLLoadLocale(eFileType["_all"], ref Strings1.FileType._all);
+                XMLLoadLocale(eFileType["_bms"], ref Strings1.FileType._bms);
+                XMLLoadLocale(eFileType["BMS"], ref Strings1.FileType.BMS);
+                XMLLoadLocale(eFileType["BME"], ref Strings1.FileType.BME);
+                XMLLoadLocale(eFileType["BML"], ref Strings1.FileType.BML);
+                XMLLoadLocale(eFileType["PMS"], ref Strings1.FileType.PMS);
+                XMLLoadLocale(eFileType["TXT"], ref Strings1.FileType.TXT);
+                XMLLoadLocale(eFileType["SM"], ref Strings1.FileType.SM);
+                XMLLoadLocale(eFileType["IBMSC"], ref Strings1.FileType.IBMSC);
+                XMLLoadLocale(eFileType["XML"], ref Strings1.FileType.XML);
+                XMLLoadLocale(eFileType["THEME_XML"], ref Strings1.FileType.THEME_XML);
+                XMLLoadLocale(eFileType["TH"], ref Strings1.FileType.TH);
+                XMLLoadLocale(eFileType["_audio"], ref Strings1.FileType._audio);
+                XMLLoadLocale(eFileType["_wave"], ref Strings1.FileType._wave);
+                XMLLoadLocale(eFileType["WAV"], ref Strings1.FileType.WAV);
+                XMLLoadLocale(eFileType["OGG"], ref Strings1.FileType.OGG);
+                XMLLoadLocale(eFileType["MP3"], ref Strings1.FileType.MP3);
+                XMLLoadLocale(eFileType["MID"], ref Strings1.FileType.MID);
+                XMLLoadLocale(eFileType["_image"], ref Strings1.FileType._image);
+                XMLLoadLocale(eFileType["EXE"], ref Strings1.FileType.EXE);
             }
             XmlElement eStatistics = Root["Statistics"];
             if (eStatistics != null)
             {
-                XMLLoadLocale(eStatistics["Title"], ref Strings.fStatistics.Title);
-                XMLLoadLocale(eStatistics["lBPM"], ref Strings.fStatistics.lBPM);
-                XMLLoadLocale(eStatistics["lSTOP"], ref Strings.fStatistics.lSTOP);
-                XMLLoadLocale(eStatistics["lSCROLL"], ref Strings.fStatistics.lSCROLL);
-                XMLLoadLocale(eStatistics["lA"], ref Strings.fStatistics.lA);
-                XMLLoadLocale(eStatistics["lD"], ref Strings.fStatistics.lD);
-                XMLLoadLocale(eStatistics["lBGM"], ref Strings.fStatistics.lBGM);
-                XMLLoadLocale(eStatistics["lTotal"], ref Strings.fStatistics.lTotal);
-                XMLLoadLocale(eStatistics["lShort"], ref Strings.fStatistics.lShort);
-                XMLLoadLocale(eStatistics["lLong"], ref Strings.fStatistics.lLong);
-                XMLLoadLocale(eStatistics["lLnObj"], ref Strings.fStatistics.lLnObj);
-                XMLLoadLocale(eStatistics["lHidden"], ref Strings.fStatistics.lHidden);
-                XMLLoadLocale(eStatistics["lErrors"], ref Strings.fStatistics.lErrors);
+                XMLLoadLocale(eStatistics["Title"], ref Strings1.fStatistics.Title);
+                XMLLoadLocale(eStatistics["lBPM"], ref Strings1.fStatistics.lBPM);
+                XMLLoadLocale(eStatistics["lSTOP"], ref Strings1.fStatistics.lSTOP);
+                XMLLoadLocale(eStatistics["lSCROLL"], ref Strings1.fStatistics.lSCROLL);
+                XMLLoadLocale(eStatistics["lA"], ref Strings1.fStatistics.lA);
+                XMLLoadLocale(eStatistics["lD"], ref Strings1.fStatistics.lD);
+                XMLLoadLocale(eStatistics["lBGM"], ref Strings1.fStatistics.lBGM);
+                XMLLoadLocale(eStatistics["lTotal"], ref Strings1.fStatistics.lTotal);
+                XMLLoadLocale(eStatistics["lShort"], ref Strings1.fStatistics.lShort);
+                XMLLoadLocale(eStatistics["lLong"], ref Strings1.fStatistics.lLong);
+                XMLLoadLocale(eStatistics["lLnObj"], ref Strings1.fStatistics.lLnObj);
+                XMLLoadLocale(eStatistics["lHidden"], ref Strings1.fStatistics.lHidden);
+                XMLLoadLocale(eStatistics["lErrors"], ref Strings1.fStatistics.lErrors);
             }
             XmlElement ePlayerOptions = Root["PlayerOptions"];
             if (ePlayerOptions != null)
             {
-                XMLLoadLocale(ePlayerOptions["Title"], ref Strings.fopPlayer.Title);
-                XMLLoadLocale(ePlayerOptions["Add"], ref Strings.fopPlayer.Add);
-                XMLLoadLocale(ePlayerOptions["Remove"], ref Strings.fopPlayer.Remove);
-                XMLLoadLocale(ePlayerOptions["Path"], ref Strings.fopPlayer.Path);
-                XMLLoadLocale(ePlayerOptions["PlayFromBeginning"], ref Strings.fopPlayer.PlayFromBeginning);
-                XMLLoadLocale(ePlayerOptions["PlayFromHere"], ref Strings.fopPlayer.PlayFromHere);
-                XMLLoadLocale(ePlayerOptions["StopPlaying"], ref Strings.fopPlayer.StopPlaying);
-                XMLLoadLocale(ePlayerOptions["References"], ref Strings.fopPlayer.References);
-                XMLLoadLocale(ePlayerOptions["DirectoryOfApp"], ref Strings.fopPlayer.DirectoryOfApp);
-                XMLLoadLocale(ePlayerOptions["CurrMeasure"], ref Strings.fopPlayer.CurrMeasure);
-                XMLLoadLocale(ePlayerOptions["FileName"], ref Strings.fopPlayer.FileName);
-                XMLLoadLocale(ePlayerOptions["RestoreDefault"], ref Strings.fopPlayer.RestoreDefault);
+                XMLLoadLocale(ePlayerOptions["Title"], ref Strings1.fopPlayer.Title);
+                XMLLoadLocale(ePlayerOptions["Add"], ref Strings1.fopPlayer.Add);
+                XMLLoadLocale(ePlayerOptions["Remove"], ref Strings1.fopPlayer.Remove);
+                XMLLoadLocale(ePlayerOptions["Path"], ref Strings1.fopPlayer.Path);
+                XMLLoadLocale(ePlayerOptions["PlayFromBeginning"], ref Strings1.fopPlayer.PlayFromBeginning);
+                XMLLoadLocale(ePlayerOptions["PlayFromHere"], ref Strings1.fopPlayer.PlayFromHere);
+                XMLLoadLocale(ePlayerOptions["StopPlaying"], ref Strings1.fopPlayer.StopPlaying);
+                XMLLoadLocale(ePlayerOptions["References"], ref Strings1.fopPlayer.References);
+                XMLLoadLocale(ePlayerOptions["DirectoryOfApp"], ref Strings1.fopPlayer.DirectoryOfApp);
+                XMLLoadLocale(ePlayerOptions["CurrMeasure"], ref Strings1.fopPlayer.CurrMeasure);
+                XMLLoadLocale(ePlayerOptions["FileName"], ref Strings1.fopPlayer.FileName);
+                XMLLoadLocale(ePlayerOptions["RestoreDefault"], ref Strings1.fopPlayer.RestoreDefault);
             }
             XmlElement eVisualOptions = Root["VisualOptions"];
             if (eVisualOptions != null)
             {
-                XMLLoadLocale(eVisualOptions["Title"], ref Strings.fopVisual.Title);
-                XMLLoadLocale(eVisualOptions["Width"], ref Strings.fopVisual.Width);
-                XMLLoadLocale(eVisualOptions["Caption"], ref Strings.fopVisual.Caption);
-                XMLLoadLocale(eVisualOptions["Note"], ref Strings.fopVisual.Note);
-                XMLLoadLocale(eVisualOptions["Label"], ref Strings.fopVisual.Label);
-                XMLLoadLocale(eVisualOptions["LongNote"], ref Strings.fopVisual.LongNote);
-                XMLLoadLocale(eVisualOptions["LongNoteLabel"], ref Strings.fopVisual.LongNoteLabel);
-                XMLLoadLocale(eVisualOptions["Bg"], ref Strings.fopVisual.Bg);
-                XMLLoadLocale(eVisualOptions["ColumnCaption"], ref Strings.fopVisual.ColumnCaption);
-                XMLLoadLocale(eVisualOptions["ColumnCaptionFont"], ref Strings.fopVisual.ColumnCaptionFont);
-                XMLLoadLocale(eVisualOptions["Background"], ref Strings.fopVisual.Background);
-                XMLLoadLocale(eVisualOptions["Grid"], ref Strings.fopVisual.Grid);
-                XMLLoadLocale(eVisualOptions["SubGrid"], ref Strings.fopVisual.SubGrid);
-                XMLLoadLocale(eVisualOptions["VerticalLine"], ref Strings.fopVisual.VerticalLine);
-                XMLLoadLocale(eVisualOptions["MeasureBarLine"], ref Strings.fopVisual.MeasureBarLine);
-                XMLLoadLocale(eVisualOptions["BGMWaveform"], ref Strings.fopVisual.BGMWaveform);
-                XMLLoadLocale(eVisualOptions["NoteHeight"], ref Strings.fopVisual.NoteHeight);
-                XMLLoadLocale(eVisualOptions["NoteLabel"], ref Strings.fopVisual.NoteLabel);
-                XMLLoadLocale(eVisualOptions["MeasureLabel"], ref Strings.fopVisual.MeasureLabel);
-                XMLLoadLocale(eVisualOptions["LabelVerticalShift"], ref Strings.fopVisual.LabelVerticalShift);
-                XMLLoadLocale(eVisualOptions["LabelHorizontalShift"], ref Strings.fopVisual.LabelHorizontalShift);
-                XMLLoadLocale(eVisualOptions["LongNoteLabelHorizontalShift"], ref Strings.fopVisual.LongNoteLabelHorizontalShift);
-                XMLLoadLocale(eVisualOptions["HiddenNoteOpacity"], ref Strings.fopVisual.HiddenNoteOpacity);
-                XMLLoadLocale(eVisualOptions["NoteBorderOnMouseOver"], ref Strings.fopVisual.NoteBorderOnMouseOver);
-                XMLLoadLocale(eVisualOptions["NoteBorderOnSelection"], ref Strings.fopVisual.NoteBorderOnSelection);
-                XMLLoadLocale(eVisualOptions["NoteBorderOnAdjustingLength"], ref Strings.fopVisual.NoteBorderOnAdjustingLength);
-                XMLLoadLocale(eVisualOptions["SelectionBoxBorder"], ref Strings.fopVisual.SelectionBoxBorder);
-                XMLLoadLocale(eVisualOptions["TSCursor"], ref Strings.fopVisual.TSCursor);
-                XMLLoadLocale(eVisualOptions["TSSplitter"], ref Strings.fopVisual.TSSplitter);
-                XMLLoadLocale(eVisualOptions["TSCursorSensitivity"], ref Strings.fopVisual.TSCursorSensitivity);
-                XMLLoadLocale(eVisualOptions["TSMouseOverBorder"], ref Strings.fopVisual.TSMouseOverBorder);
-                XMLLoadLocale(eVisualOptions["TSFill"], ref Strings.fopVisual.TSFill);
-                XMLLoadLocale(eVisualOptions["TSBPM"], ref Strings.fopVisual.TSBPM);
-                XMLLoadLocale(eVisualOptions["TSBPMFont"], ref Strings.fopVisual.TSBPMFont);
-                XMLLoadLocale(eVisualOptions["MiddleSensitivity"], ref Strings.fopVisual.MiddleSensitivity);
+                XMLLoadLocale(eVisualOptions["Title"], ref Strings1.fopVisual.Title);
+                XMLLoadLocale(eVisualOptions["Width"], ref Strings1.fopVisual.Width);
+                XMLLoadLocale(eVisualOptions["Caption"], ref Strings1.fopVisual.Caption);
+                XMLLoadLocale(eVisualOptions["Note"], ref Strings1.fopVisual.Note);
+                XMLLoadLocale(eVisualOptions["Label"], ref Strings1.fopVisual.Label);
+                XMLLoadLocale(eVisualOptions["LongNote"], ref Strings1.fopVisual.LongNote);
+                XMLLoadLocale(eVisualOptions["LongNoteLabel"], ref Strings1.fopVisual.LongNoteLabel);
+                XMLLoadLocale(eVisualOptions["Bg"], ref Strings1.fopVisual.Bg);
+                XMLLoadLocale(eVisualOptions["ColumnCaption"], ref Strings1.fopVisual.ColumnCaption);
+                XMLLoadLocale(eVisualOptions["ColumnCaptionFont"], ref Strings1.fopVisual.ColumnCaptionFont);
+                XMLLoadLocale(eVisualOptions["Background"], ref Strings1.fopVisual.Background);
+                XMLLoadLocale(eVisualOptions["Grid"], ref Strings1.fopVisual.Grid);
+                XMLLoadLocale(eVisualOptions["SubGrid"], ref Strings1.fopVisual.SubGrid);
+                XMLLoadLocale(eVisualOptions["VerticalLine"], ref Strings1.fopVisual.VerticalLine);
+                XMLLoadLocale(eVisualOptions["MeasureBarLine"], ref Strings1.fopVisual.MeasureBarLine);
+                XMLLoadLocale(eVisualOptions["BGMWaveform"], ref Strings1.fopVisual.BGMWaveform);
+                XMLLoadLocale(eVisualOptions["NoteHeight"], ref Strings1.fopVisual.NoteHeight);
+                XMLLoadLocale(eVisualOptions["NoteLabel"], ref Strings1.fopVisual.NoteLabel);
+                XMLLoadLocale(eVisualOptions["MeasureLabel"], ref Strings1.fopVisual.MeasureLabel);
+                XMLLoadLocale(eVisualOptions["LabelVerticalShift"], ref Strings1.fopVisual.LabelVerticalShift);
+                XMLLoadLocale(eVisualOptions["LabelHorizontalShift"], ref Strings1.fopVisual.LabelHorizontalShift);
+                XMLLoadLocale(eVisualOptions["LongNoteLabelHorizontalShift"], ref Strings1.fopVisual.LongNoteLabelHorizontalShift);
+                XMLLoadLocale(eVisualOptions["HiddenNoteOpacity"], ref Strings1.fopVisual.HiddenNoteOpacity);
+                XMLLoadLocale(eVisualOptions["NoteBorderOnMouseOver"], ref Strings1.fopVisual.NoteBorderOnMouseOver);
+                XMLLoadLocale(eVisualOptions["NoteBorderOnSelection"], ref Strings1.fopVisual.NoteBorderOnSelection);
+                XMLLoadLocale(eVisualOptions["NoteBorderOnAdjustingLength"], ref Strings1.fopVisual.NoteBorderOnAdjustingLength);
+                XMLLoadLocale(eVisualOptions["SelectionBoxBorder"], ref Strings1.fopVisual.SelectionBoxBorder);
+                XMLLoadLocale(eVisualOptions["TSCursor"], ref Strings1.fopVisual.TSCursor);
+                XMLLoadLocale(eVisualOptions["TSSplitter"], ref Strings1.fopVisual.TSSplitter);
+                XMLLoadLocale(eVisualOptions["TSCursorSensitivity"], ref Strings1.fopVisual.TSCursorSensitivity);
+                XMLLoadLocale(eVisualOptions["TSMouseOverBorder"], ref Strings1.fopVisual.TSMouseOverBorder);
+                XMLLoadLocale(eVisualOptions["TSFill"], ref Strings1.fopVisual.TSFill);
+                XMLLoadLocale(eVisualOptions["TSBPM"], ref Strings1.fopVisual.TSBPM);
+                XMLLoadLocale(eVisualOptions["TSBPMFont"], ref Strings1.fopVisual.TSBPMFont);
+                XMLLoadLocale(eVisualOptions["MiddleSensitivity"], ref Strings1.fopVisual.MiddleSensitivity);
             }
             XmlElement eGeneralOptions = Root["GeneralOptions"];
             if (eGeneralOptions != null)
             {
-                XMLLoadLocale(eGeneralOptions["Title"], ref Strings.fopGeneral.Title);
-                XMLLoadLocale(eGeneralOptions["MouseWheel"], ref Strings.fopGeneral.MouseWheel);
-                XMLLoadLocale(eGeneralOptions["TextEncoding"], ref Strings.fopGeneral.TextEncoding);
-                XMLLoadLocale(eGeneralOptions["PageUpDown"], ref Strings.fopGeneral.PageUpDown);
-                XMLLoadLocale(eGeneralOptions["MiddleButton"], ref Strings.fopGeneral.MiddleButton);
-                XMLLoadLocale(eGeneralOptions["MiddleButtonAuto"], ref Strings.fopGeneral.MiddleButtonAuto);
-                XMLLoadLocale(eGeneralOptions["MiddleButtonDrag"], ref Strings.fopGeneral.MiddleButtonDrag);
-                XMLLoadLocale(eGeneralOptions["AssociateFileType"], ref Strings.fopGeneral.AssociateFileType);
-                XMLLoadLocale(eGeneralOptions["MaxGridPartition"], ref Strings.fopGeneral.MaxGridPartition);
-                XMLLoadLocale(eGeneralOptions["BeepWhileSaved"], ref Strings.fopGeneral.BeepWhileSaved);
-                XMLLoadLocale(eGeneralOptions["ExtendBPM"], ref Strings.fopGeneral.ExtendBPM);
-                XMLLoadLocale(eGeneralOptions["ExtendSTOP"], ref Strings.fopGeneral.ExtendSTOP);
-                XMLLoadLocale(eGeneralOptions["AutoFocusOnMouseEnter"], ref Strings.fopGeneral.AutoFocusOnMouseEnter);
-                XMLLoadLocale(eGeneralOptions["DisableFirstClick"], ref Strings.fopGeneral.DisableFirstClick);
-                XMLLoadLocale(eGeneralOptions["AutoSave"], ref Strings.fopGeneral.AutoSave);
-                XMLLoadLocale(eGeneralOptions["minutes"], ref Strings.fopGeneral.minutes);
-                XMLLoadLocale(eGeneralOptions["StopPreviewOnClick"], ref Strings.fopGeneral.StopPreviewOnClick);
+                XMLLoadLocale(eGeneralOptions["Title"], ref Strings1.fopGeneral.Title);
+                XMLLoadLocale(eGeneralOptions["MouseWheel"], ref Strings1.fopGeneral.MouseWheel);
+                XMLLoadLocale(eGeneralOptions["TextEncoding"], ref Strings1.fopGeneral.TextEncoding);
+                XMLLoadLocale(eGeneralOptions["PageUpDown"], ref Strings1.fopGeneral.PageUpDown);
+                XMLLoadLocale(eGeneralOptions["MiddleButton"], ref Strings1.fopGeneral.MiddleButton);
+                XMLLoadLocale(eGeneralOptions["MiddleButtonAuto"], ref Strings1.fopGeneral.MiddleButtonAuto);
+                XMLLoadLocale(eGeneralOptions["MiddleButtonDrag"], ref Strings1.fopGeneral.MiddleButtonDrag);
+                XMLLoadLocale(eGeneralOptions["AssociateFileType"], ref Strings1.fopGeneral.AssociateFileType);
+                XMLLoadLocale(eGeneralOptions["MaxGridPartition"], ref Strings1.fopGeneral.MaxGridPartition);
+                XMLLoadLocale(eGeneralOptions["BeepWhileSaved"], ref Strings1.fopGeneral.BeepWhileSaved);
+                XMLLoadLocale(eGeneralOptions["ExtendBPM"], ref Strings1.fopGeneral.ExtendBPM);
+                XMLLoadLocale(eGeneralOptions["ExtendSTOP"], ref Strings1.fopGeneral.ExtendSTOP);
+                XMLLoadLocale(eGeneralOptions["AutoFocusOnMouseEnter"], ref Strings1.fopGeneral.AutoFocusOnMouseEnter);
+                XMLLoadLocale(eGeneralOptions["DisableFirstClick"], ref Strings1.fopGeneral.DisableFirstClick);
+                XMLLoadLocale(eGeneralOptions["AutoSave"], ref Strings1.fopGeneral.AutoSave);
+                XMLLoadLocale(eGeneralOptions["minutes"], ref Strings1.fopGeneral.minutes);
+                XMLLoadLocale(eGeneralOptions["StopPreviewOnClick"], ref Strings1.fopGeneral.StopPreviewOnClick);
             }
             XmlElement eFind = Root["Find"];
             if (eFind != null)
             {
-                XMLLoadLocale(eFind["NoteRange"], ref Strings.fFind.NoteRange);
-                XMLLoadLocale(eFind["MeasureRange"], ref Strings.fFind.MeasureRange);
-                XMLLoadLocale(eFind["LabelRange"], ref Strings.fFind.LabelRange);
-                XMLLoadLocale(eFind["ValueRange"], ref Strings.fFind.ValueRange);
-                XMLLoadLocale(eFind["to"], ref Strings.fFind.to_);
-                XMLLoadLocale(eFind["Selected"], ref Strings.fFind.Selected);
-                XMLLoadLocale(eFind["UnSelected"], ref Strings.fFind.UnSelected);
-                XMLLoadLocale(eFind["ShortNote"], ref Strings.fFind.ShortNote);
-                XMLLoadLocale(eFind["LongNote"], ref Strings.fFind.LongNote);
-                XMLLoadLocale(eFind["Hidden"], ref Strings.fFind.Hidden);
-                XMLLoadLocale(eFind["Visible"], ref Strings.fFind.Visible);
-                XMLLoadLocale(eFind["Column"], ref Strings.fFind.Column);
-                XMLLoadLocale(eFind["SelectAll"], ref Strings.fFind.SelectAll);
-                XMLLoadLocale(eFind["SelectInverse"], ref Strings.fFind.SelectInverse);
-                XMLLoadLocale(eFind["UnselectAll"], ref Strings.fFind.UnselectAll);
-                XMLLoadLocale(eFind["Operation"], ref Strings.fFind.Operation);
-                XMLLoadLocale(eFind["ReplaceWithLabel"], ref Strings.fFind.ReplaceWithLabel);
-                XMLLoadLocale(eFind["ReplaceWithValue"], ref Strings.fFind.ReplaceWithValue);
-                XMLLoadLocale(eFind["Select"], ref Strings.fFind.Select_);
-                XMLLoadLocale(eFind["Unselect"], ref Strings.fFind.Unselect_);
-                XMLLoadLocale(eFind["Delete"], ref Strings.fFind.Delete_);
-                XMLLoadLocale(eFind["Close"], ref Strings.fFind.Close_);
+                XMLLoadLocale(eFind["NoteRange"], ref Strings1.fFind.NoteRange);
+                XMLLoadLocale(eFind["MeasureRange"], ref Strings1.fFind.MeasureRange);
+                XMLLoadLocale(eFind["LabelRange"], ref Strings1.fFind.LabelRange);
+                XMLLoadLocale(eFind["ValueRange"], ref Strings1.fFind.ValueRange);
+                XMLLoadLocale(eFind["to"], ref Strings1.fFind.to_);
+                XMLLoadLocale(eFind["Selected"], ref Strings1.fFind.Selected);
+                XMLLoadLocale(eFind["UnSelected"], ref Strings1.fFind.UnSelected);
+                XMLLoadLocale(eFind["ShortNote"], ref Strings1.fFind.ShortNote);
+                XMLLoadLocale(eFind["LongNote"], ref Strings1.fFind.LongNote);
+                XMLLoadLocale(eFind["Hidden"], ref Strings1.fFind.Hidden);
+                XMLLoadLocale(eFind["Visible"], ref Strings1.fFind.Visible);
+                XMLLoadLocale(eFind["Column"], ref Strings1.fFind.Column);
+                XMLLoadLocale(eFind["SelectAll"], ref Strings1.fFind.SelectAll);
+                XMLLoadLocale(eFind["SelectInverse"], ref Strings1.fFind.SelectInverse);
+                XMLLoadLocale(eFind["UnselectAll"], ref Strings1.fFind.UnselectAll);
+                XMLLoadLocale(eFind["Operation"], ref Strings1.fFind.Operation);
+                XMLLoadLocale(eFind["ReplaceWithLabel"], ref Strings1.fFind.ReplaceWithLabel);
+                XMLLoadLocale(eFind["ReplaceWithValue"], ref Strings1.fFind.ReplaceWithValue);
+                XMLLoadLocale(eFind["Select"], ref Strings1.fFind.Select_);
+                XMLLoadLocale(eFind["Unselect"], ref Strings1.fFind.Unselect_);
+                XMLLoadLocale(eFind["Delete"], ref Strings1.fFind.Delete_);
+                XMLLoadLocale(eFind["Close"], ref Strings1.fFind.Close_);
             }
 
             XmlElement eImportSM = Root["ImportSM"];
             if (eImportSM != null)
             {
-                XMLLoadLocale(eImportSM["Title"], ref Strings.fImportSM.Title);
-                XMLLoadLocale(eImportSM["Difficulty"], ref Strings.fImportSM.Difficulty);
-                XMLLoadLocale(eImportSM["Note"], ref Strings.fImportSM.Note);
+                XMLLoadLocale(eImportSM["Title"], ref Strings1.fImportSM.Title);
+                XMLLoadLocale(eImportSM["Difficulty"], ref Strings1.fImportSM.Difficulty);
+                XMLLoadLocale(eImportSM["Note"], ref Strings1.fImportSM.Note);
             }
 
             XmlElement eFileAssociation = Root["FileAssociation"];
             if (eFileAssociation != null)
             {
-                XMLLoadLocale(eFileAssociation["BMS"], ref Strings.FileAssociation.BMS);
-                XMLLoadLocale(eFileAssociation["BME"], ref Strings.FileAssociation.BME);
-                XMLLoadLocale(eFileAssociation["BML"], ref Strings.FileAssociation.BML);
-                XMLLoadLocale(eFileAssociation["PMS"], ref Strings.FileAssociation.PMS);
-                XMLLoadLocale(eFileAssociation["IBMSC"], ref Strings.FileAssociation.IBMSC);
-                XMLLoadLocale(eFileAssociation["Open"], ref Strings.FileAssociation.Open);
-                XMLLoadLocale(eFileAssociation["Preview"], ref Strings.FileAssociation.Preview);
-                XMLLoadLocale(eFileAssociation["ViewCode"], ref Strings.FileAssociation.ViewCode);
+                XMLLoadLocale(eFileAssociation["BMS"], ref Strings1.FileAssociation.BMS);
+                XMLLoadLocale(eFileAssociation["BME"], ref Strings1.FileAssociation.BME);
+                XMLLoadLocale(eFileAssociation["BML"], ref Strings1.FileAssociation.BML);
+                XMLLoadLocale(eFileAssociation["PMS"], ref Strings1.FileAssociation.PMS);
+                XMLLoadLocale(eFileAssociation["IBMSC"], ref Strings1.FileAssociation.IBMSC);
+                XMLLoadLocale(eFileAssociation["Open"], ref Strings1.FileAssociation.Open);
+                XMLLoadLocale(eFileAssociation["Preview"], ref Strings1.FileAssociation.Preview);
+                XMLLoadLocale(eFileAssociation["ViewCode"], ref Strings1.FileAssociation.ViewCode);
             }
 
             DispLang = Path.Replace(MyProject.Application.Info.DirectoryPath + "\\", "");
@@ -2237,7 +2237,7 @@ public partial class MainWindow
         }
         catch (Exception ex)
         {
-            Interaction.MsgBox(ex.Message, MsgBoxStyle.Exclamation, iBMSC.Strings.Messages.Err);
+            Interaction.MsgBox(ex.Message, MsgBoxStyle.Exclamation, iBMSC.Strings1.Messages.Err);
         }
         finally
         {

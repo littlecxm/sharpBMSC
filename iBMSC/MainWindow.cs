@@ -692,19 +692,19 @@ IL_0952:
         }
         if (hasOverlapping)
         {
-            Interaction.MsgBox(Strings.Messages.SaveWarning + "\r\n" + Strings.Messages.NoteOverlapError + "\r\n" + Strings.Messages.SavedFileWillContainErrors, MsgBoxStyle.Exclamation);
+            Interaction.MsgBox(Strings1.Messages.SaveWarning + "\r\n" + Strings1.Messages.NoteOverlapError + "\r\n" + Strings1.Messages.SavedFileWillContainErrors, MsgBoxStyle.Exclamation);
         }
         if (Operators.ConditionalCompareObjectGreater(Information.UBound(hBPM), Interaction.IIf(BPMx1296, 1295, 255), TextCompare: false))
         {
-            Interaction.MsgBox(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(string.Concat(string.Concat(string.Concat(Strings.Messages.SaveWarning + "\r\n", Strings.Messages.BPMOverflowError), Conversions.ToString(Information.UBound(hBPM))), " > "), Interaction.IIf(BPMx1296, 1295, 255)), "\r\n"), Strings.Messages.SavedFileWillContainErrors), MsgBoxStyle.Exclamation);
+            Interaction.MsgBox(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(string.Concat(string.Concat(string.Concat(Strings1.Messages.SaveWarning + "\r\n", Strings1.Messages.BPMOverflowError), Conversions.ToString(Information.UBound(hBPM))), " > "), Interaction.IIf(BPMx1296, 1295, 255)), "\r\n"), Strings1.Messages.SavedFileWillContainErrors), MsgBoxStyle.Exclamation);
         }
         if (Operators.ConditionalCompareObjectGreater(Information.UBound(hSTOP), Interaction.IIf(STOPx1296, 1295, 255), TextCompare: false))
         {
-            Interaction.MsgBox(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(string.Concat(string.Concat(string.Concat(Strings.Messages.SaveWarning + "\r\n", Strings.Messages.STOPOverflowError), Conversions.ToString(Information.UBound(hSTOP))), " > "), Interaction.IIf(STOPx1296, 1295, 255)), "\r\n"), Strings.Messages.SavedFileWillContainErrors), MsgBoxStyle.Exclamation);
+            Interaction.MsgBox(Operators.ConcatenateObject(Operators.ConcatenateObject(Operators.ConcatenateObject(string.Concat(string.Concat(string.Concat(Strings1.Messages.SaveWarning + "\r\n", Strings1.Messages.STOPOverflowError), Conversions.ToString(Information.UBound(hSTOP))), " > "), Interaction.IIf(STOPx1296, 1295, 255)), "\r\n"), Strings1.Messages.SavedFileWillContainErrors), MsgBoxStyle.Exclamation);
         }
         if (Information.UBound(hSCROLL) > 1295)
         {
-            Interaction.MsgBox(Strings.Messages.SaveWarning + "\r\n" + Strings.Messages.SCROLLOverflowError + Conversions.ToString(Information.UBound(hSCROLL)) + " > " + Conversions.ToString(1295) + "\r\n" + Strings.Messages.SavedFileWillContainErrors, MsgBoxStyle.Exclamation);
+            Interaction.MsgBox(Strings1.Messages.SaveWarning + "\r\n" + Strings1.Messages.SCROLLOverflowError + Conversions.ToString(Information.UBound(hSCROLL)) + " > " + Conversions.ToString(1295) + "\r\n" + Strings1.Messages.SavedFileWillContainErrors, MsgBoxStyle.Exclamation);
         }
         string text2 = "\r\n*---------------------- EXPANSION FIELD\r\n" + TExpansion.Text + "\r\n\r\n";
         if (Operators.CompareString(TExpansion.Text, "", TextCompare: false) == 0)
@@ -1781,10 +1781,10 @@ IL_0952:
                 toolStripMenuItem2 = mnOpenR4;
                 break;
         }
-        toolStripMenuItem.Text = Conversions.ToString(Interaction.IIf(Operators.CompareString(Text, "", TextCompare: false) == 0, "<" + Strings.None + ">", GetFileName(Text)));
+        toolStripMenuItem.Text = Conversions.ToString(Interaction.IIf(Operators.CompareString(Text, "", TextCompare: false) == 0, "<" + Strings1.None + ">", GetFileName(Text)));
         toolStripMenuItem.ToolTipText = Text;
         toolStripMenuItem.Enabled = Operators.CompareString(Text, "", TextCompare: false) != 0;
-        toolStripMenuItem2.Text = Conversions.ToString(Interaction.IIf(Operators.CompareString(Text, "", TextCompare: false) == 0, "<" + Strings.None + ">", GetFileName(Text)));
+        toolStripMenuItem2.Text = Conversions.ToString(Interaction.IIf(Operators.CompareString(Text, "", TextCompare: false) == 0, "<" + Strings1.None + ">", GetFileName(Text)));
         toolStripMenuItem2.ToolTipText = Text;
         toolStripMenuItem2.Enabled = Operators.CompareString(Text, "", TextCompare: false) != 0;
     }
@@ -1795,7 +1795,7 @@ IL_0952:
         KMouseOver = -1;
         if (!MyProject.Computer.FileSystem.FileExists(xFileName))
         {
-            Interaction.MsgBox(Strings.Messages.CannotFind.Replace("{}", xFileName), MsgBoxStyle.Critical);
+            Interaction.MsgBox(Strings1.Messages.CannotFind.Replace("{}", xFileName), MsgBoxStyle.Critical);
         }
         else if (!ClosingPopSave())
         {

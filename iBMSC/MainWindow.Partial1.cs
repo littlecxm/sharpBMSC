@@ -621,14 +621,14 @@ namespace iBMSC
         {
             if (!IsSaved)
             {
-                string prompt = Strings.Messages.SaveOnExit;
+                string prompt = Strings1.Messages.SaveOnExit;
                 if (e.CloseReason == CloseReason.WindowsShutDown)
                 {
-                    prompt = Strings.Messages.SaveOnExit1;
+                    prompt = Strings1.Messages.SaveOnExit1;
                 }
                 if (e.CloseReason == CloseReason.TaskManagerClosing)
                 {
-                    prompt = Strings.Messages.SaveOnExit2;
+                    prompt = Strings1.Messages.SaveOnExit2;
                 }
                 MsgBoxResult msgBoxResult = Interaction.MsgBox(prompt, MsgBoxStyle.YesNoCancel | MsgBoxStyle.Question, Text);
                 if (msgBoxResult == MsgBoxResult.Yes)
@@ -636,7 +636,7 @@ namespace iBMSC
                     if (Operators.CompareString(ExcludeFileName(FileName), "", TextCompare: false) == 0)
                     {
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
-                        saveFileDialog.Filter = Strings.FileType._bms + "|*.bms;*.bme;*.bml;*.pms;*.txt|" + Strings.FileType.BMS + "|*.bms|" + Strings.FileType.BME + "|*.bme|" + Strings.FileType.BML + "|*.bml|" + Strings.FileType.PMS + "|*.pms|" + Strings.FileType.TXT + "|*.txt|" + Strings.FileType._all + "|*.*";
+                        saveFileDialog.Filter = Strings1.FileType._bms + "|*.bms;*.bme;*.bml;*.pms;*.txt|" + Strings1.FileType.BMS + "|*.bms|" + Strings1.FileType.BME + "|*.bme|" + Strings1.FileType.BML + "|*.bml|" + Strings1.FileType.PMS + "|*.pms|" + Strings1.FileType.TXT + "|*.txt|" + Strings1.FileType._all + "|*.*";
                         saveFileDialog.DefaultExt = "bms";
                         saveFileDialog.InitialDirectory = InitPath;
                         if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
@@ -958,7 +958,7 @@ namespace iBMSC
                 var files = MyProject.Computer.FileSystem.GetDirectoryInfo(MyProject.Application.Info.DirectoryPath).GetFiles("AutoSave_*.IBMSC");
                 if (files != null && files.Length != 0)
                 {
-                    if (Interaction.MsgBox(Microsoft.VisualBasic.Strings.Replace(Strings.Messages.RestoreAutosavedFile, "{}", Conversions.ToString(files.Length)), MsgBoxStyle.YesNo | MsgBoxStyle.MsgBoxSetForeground) == MsgBoxResult.Yes)
+                    if (Interaction.MsgBox(Microsoft.VisualBasic.Strings.Replace(Strings1.Messages.RestoreAutosavedFile, "{}", Conversions.ToString(files.Length)), MsgBoxStyle.YesNo | MsgBoxStyle.MsgBoxSetForeground) == MsgBoxResult.Yes)
                     {
                         foreach (var fileInfo in files)
                         {
@@ -1170,13 +1170,13 @@ IL_03ba:
         {
             if (!IsSaved)
             {
-                MsgBoxResult msgBoxResult = Interaction.MsgBox(Strings.Messages.SaveOnExit, MsgBoxStyle.YesNoCancel | MsgBoxStyle.Question, Text);
+                MsgBoxResult msgBoxResult = Interaction.MsgBox(Strings1.Messages.SaveOnExit, MsgBoxStyle.YesNoCancel | MsgBoxStyle.Question, Text);
                 if (msgBoxResult == MsgBoxResult.Yes)
                 {
                     if (Operators.CompareString(ExcludeFileName(FileName), "", TextCompare: false) == 0)
                     {
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
-                        saveFileDialog.Filter = Strings.FileType._bms + "|*.bms;*.bme;*.bml;*.pms;*.txt|" + Strings.FileType.BMS + "|*.bms|" + Strings.FileType.BME + "|*.bme|" + Strings.FileType.BML + "|*.bml|" + Strings.FileType.PMS + "|*.pms|" + Strings.FileType.TXT + "|*.txt|" + Strings.FileType._all + "|*.*";
+                        saveFileDialog.Filter = Strings1.FileType._bms + "|*.bms;*.bme;*.bml;*.pms;*.txt|" + Strings1.FileType.BMS + "|*.bms|" + Strings1.FileType.BME + "|*.bme|" + Strings1.FileType.BML + "|*.bml|" + Strings1.FileType.PMS + "|*.pms|" + Strings1.FileType.TXT + "|*.txt|" + Strings1.FileType._all + "|*.*";
                         saveFileDialog.DefaultExt = "bms";
                         saveFileDialog.InitialDirectory = InitPath;
                         if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
@@ -1282,7 +1282,7 @@ IL_03ba:
             if (!ClosingPopSave())
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = Strings.FileType._bms + "|*.bms;*.bme;*.bml;*.pms;*.txt";
+                openFileDialog.Filter = Strings1.FileType._bms + "|*.bms;*.bme;*.bml;*.pms;*.txt";
                 openFileDialog.DefaultExt = "bms";
                 openFileDialog.InitialDirectory = Conversions.ToString(Interaction.IIf(Operators.CompareString(ExcludeFileName(FileName), "", TextCompare: false) == 0, InitPath, ExcludeFileName(FileName)));
                 if (openFileDialog.ShowDialog() != DialogResult.Cancel)
@@ -1304,7 +1304,7 @@ IL_03ba:
             if (!ClosingPopSave())
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = Strings.FileType.IBMSC + "|*.ibmsc";
+                openFileDialog.Filter = Strings1.FileType.IBMSC + "|*.ibmsc";
                 openFileDialog.DefaultExt = "ibmsc";
                 openFileDialog.InitialDirectory = Conversions.ToString(Interaction.IIf(Operators.CompareString(ExcludeFileName(FileName), "", TextCompare: false) == 0, InitPath, ExcludeFileName(FileName)));
                 if (openFileDialog.ShowDialog() != DialogResult.Cancel)
@@ -1325,7 +1325,7 @@ IL_03ba:
             if (!ClosingPopSave())
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = Strings.FileType.SM + "|*.sm";
+                openFileDialog.Filter = Strings1.FileType.SM + "|*.sm";
                 openFileDialog.DefaultExt = "sm";
                 openFileDialog.InitialDirectory = Conversions.ToString(Interaction.IIf(Operators.CompareString(ExcludeFileName(FileName), "", TextCompare: false) == 0, InitPath, ExcludeFileName(FileName)));
                 if (openFileDialog.ShowDialog() != DialogResult.Cancel && !OpenSM(MyProject.Computer.FileSystem.ReadAllText(openFileDialog.FileName, TextEncoding)))
@@ -1345,7 +1345,7 @@ IL_03ba:
             if (Operators.CompareString(ExcludeFileName(FileName), "", TextCompare: false) == 0)
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = Strings.FileType._bms + "|*.bms;*.bme;*.bml;*.pms;*.txt|" + Strings.FileType.BMS + "|*.bms|" + Strings.FileType.BME + "|*.bme|" + Strings.FileType.BML + "|*.bml|" + Strings.FileType.PMS + "|*.pms|" + Strings.FileType.TXT + "|*.txt|" + Strings.FileType._all + "|*.*";
+                saveFileDialog.Filter = Strings1.FileType._bms + "|*.bms;*.bme;*.bml;*.pms;*.txt|" + Strings1.FileType.BMS + "|*.bms|" + Strings1.FileType.BME + "|*.bme|" + Strings1.FileType.BML + "|*.bml|" + Strings1.FileType.PMS + "|*.pms|" + Strings1.FileType.TXT + "|*.txt|" + Strings1.FileType._all + "|*.*";
                 saveFileDialog.DefaultExt = "bms";
                 saveFileDialog.InitialDirectory = InitPath;
                 if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
@@ -1371,7 +1371,7 @@ IL_03ba:
             SelectedNotes = Array.Empty<Note>();
             KMouseOver = -1;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = Strings.FileType._bms + "|*.bms;*.bme;*.bml;*.pms;*.txt|" + Strings.FileType.BMS + "|*.bms|" + Strings.FileType.BME + "|*.bme|" + Strings.FileType.BML + "|*.bml|" + Strings.FileType.PMS + "|*.pms|" + Strings.FileType.TXT + "|*.txt|" + Strings.FileType._all + "|*.*";
+            saveFileDialog.Filter = Strings1.FileType._bms + "|*.bms;*.bme;*.bml;*.pms;*.txt|" + Strings1.FileType.BMS + "|*.bms|" + Strings1.FileType.BME + "|*.bme|" + Strings1.FileType.BML + "|*.bml|" + Strings1.FileType.PMS + "|*.pms|" + Strings1.FileType.TXT + "|*.txt|" + Strings1.FileType._all + "|*.*";
             saveFileDialog.DefaultExt = "bms";
             saveFileDialog.InitialDirectory = Conversions.ToString(Interaction.IIf(Operators.CompareString(ExcludeFileName(FileName), "", TextCompare: false) == 0, InitPath, ExcludeFileName(FileName)));
             if (saveFileDialog.ShowDialog() != DialogResult.Cancel)
@@ -1395,7 +1395,7 @@ IL_03ba:
             SelectedNotes = Array.Empty<Note>();
             KMouseOver = -1;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = Strings.FileType.IBMSC + "|*.ibmsc";
+            saveFileDialog.Filter = Strings1.FileType.IBMSC + "|*.ibmsc";
             saveFileDialog.DefaultExt = "ibmsc";
             saveFileDialog.InitialDirectory = Conversions.ToString(Interaction.IIf(Operators.CompareString(ExcludeFileName(FileName), "", TextCompare: false) == 0, InitPath, ExcludeFileName(FileName)));
             if (saveFileDialog.ShowDialog() != DialogResult.Cancel)
@@ -1636,7 +1636,7 @@ IL_03ba:
 
         private void BGSlash_Click(object sender, EventArgs e)
         {
-            int num = (int)Math.Round(Conversion.Val(Interaction.InputBox(Strings.Messages.PromptSlashValue, "", Conversions.ToString(gSlash))));
+            int num = (int)Math.Round(Conversion.Val(Interaction.InputBox(Strings1.Messages.PromptSlashValue, "", Conversions.ToString(gSlash))));
             if (num != 0)
             {
                 if (decimal.Compare(new decimal(num), CGDivide.Maximum) > 0)
@@ -1884,7 +1884,7 @@ IL_03ba:
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.DefaultExt = "wav";
-            openFileDialog.Filter = Strings.FileType._wave + "|*.wav;*.ogg;*.mp3|" + Strings.FileType.WAV + "|*.wav|" + Strings.FileType.OGG + "|*.ogg|" + Strings.FileType.MP3 + "|*.mp3|" + Strings.FileType._all + "|*.*";
+            openFileDialog.Filter = Strings1.FileType._wave + "|*.wav;*.ogg;*.mp3|" + Strings1.FileType.WAV + "|*.wav|" + Strings1.FileType.OGG + "|*.ogg|" + Strings1.FileType.MP3 + "|*.mp3|" + Strings1.FileType._all + "|*.*";
             openFileDialog.InitialDirectory = Conversions.ToString(Interaction.IIf(Operators.CompareString(ExcludeFileName(FileName), "", TextCompare: false) == 0, InitPath, ExcludeFileName(FileName)));
             if (openFileDialog.ShowDialog() != DialogResult.Cancel)
             {
@@ -2004,11 +2004,11 @@ IL_03ba:
         private void PlayerMissingPrompt()
         {
             PlayerArguments playerArguments = pArgs[CurrentPlayer];
-            Interaction.MsgBox(Strings.Messages.CannotFind.Replace("{}", PrevCodeToReal(playerArguments.Path)) + "\r\n" + Strings.Messages.PleaseRespecifyPath, MsgBoxStyle.Critical, Strings.Messages.PlayerNotFound);
+            Interaction.MsgBox(Strings1.Messages.CannotFind.Replace("{}", PrevCodeToReal(playerArguments.Path)) + "\r\n" + Strings1.Messages.PleaseRespecifyPath, MsgBoxStyle.Critical, Strings1.Messages.PlayerNotFound);
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = Conversions.ToString(Interaction.IIf(Operators.CompareString(ExcludeFileName(PrevCodeToReal(playerArguments.Path)), "", TextCompare: false) == 0, MyProject.Application.Info.DirectoryPath, ExcludeFileName(PrevCodeToReal(playerArguments.Path))));
             openFileDialog.FileName = PrevCodeToReal(playerArguments.Path);
-            openFileDialog.Filter = Strings.FileType.EXE + "|*.exe";
+            openFileDialog.Filter = Strings1.FileType.EXE + "|*.exe";
             openFileDialog.DefaultExt = "exe";
             if (openFileDialog.ShowDialog() != DialogResult.Cancel)
             {
@@ -2315,9 +2315,9 @@ IL_03ba:
                     FSC.Text = nTitle(Notes[kMouseOver].ColumnIndex);
                     FSW.Text = Conversions.ToString(Interaction.IIf(IsColumnNumeric(Notes[kMouseOver].ColumnIndex), Notes[kMouseOver].Value / 10000.0, Functions.C10to36(Notes[kMouseOver].Value / 10000)));
                     FSM.Text = Functions.Add3Zeros(num5);
-                    FST.Text = Conversions.ToString(Interaction.IIf(NTInput, Strings.StatusBar.Length + " = " + Conversions.ToString(Notes[kMouseOver].Length), RuntimeHelpers.GetObjectValue(Interaction.IIf(Notes[kMouseOver].LongNote, Strings.StatusBar.LongNote, ""))));
-                    FSH.Text = Conversions.ToString(Interaction.IIf(Notes[kMouseOver].Hidden, Strings.StatusBar.Hidden, ""));
-                    FSE.Text = Conversions.ToString(Interaction.IIf(Notes[kMouseOver].HasError, Strings.StatusBar.Err, ""));
+                    FST.Text = Conversions.ToString(Interaction.IIf(NTInput, Strings1.StatusBar.Length + " = " + Conversions.ToString(Notes[kMouseOver].Length), RuntimeHelpers.GetObjectValue(Interaction.IIf(Notes[kMouseOver].LongNote, Strings1.StatusBar.LongNote, ""))));
+                    FSH.Text = Conversions.ToString(Interaction.IIf(Notes[kMouseOver].Hidden, Strings1.StatusBar.Hidden, ""));
+                    FSE.Text = Conversions.ToString(Interaction.IIf(Notes[kMouseOver].HasError, Strings1.StatusBar.Err, ""));
                 }
             }
             else if (TBWrite.Checked)
@@ -2338,8 +2338,8 @@ IL_03ba:
                 FSC.Text = nTitle(SelectedColumn);
                 FSW.Text = Functions.C10to36(LWAV.SelectedIndex + 1);
                 FSM.Text = Functions.Add3Zeros(num9);
-                FST.Text = Conversions.ToString(Interaction.IIf(NTInput, TempLength, RuntimeHelpers.GetObjectValue(Interaction.IIf(MyProject.Computer.Keyboard.ShiftKeyDown, Strings.StatusBar.LongNote, ""))));
-                FSH.Text = Conversions.ToString(Interaction.IIf(MyProject.Computer.Keyboard.CtrlKeyDown, Strings.StatusBar.Hidden, ""));
+                FST.Text = Conversions.ToString(Interaction.IIf(NTInput, TempLength, RuntimeHelpers.GetObjectValue(Interaction.IIf(MyProject.Computer.Keyboard.ShiftKeyDown, Strings1.StatusBar.LongNote, ""))));
+                FSH.Text = Conversions.ToString(Interaction.IIf(MyProject.Computer.Keyboard.CtrlKeyDown, Strings1.StatusBar.Hidden, ""));
             }
             else if (TBTimeSelect.Checked)
             {
@@ -2502,7 +2502,7 @@ IL_03ba:
                 TVCM.Text = Conversions.ToString(Conversion.Val(TVCM.Text));
                 if (Conversion.Val(TVCM.Text) <= 0.0)
                 {
-                    Interaction.MsgBox(Strings.Messages.NegativeFactorError, MsgBoxStyle.Critical, Strings.Messages.Err);
+                    Interaction.MsgBox(Strings1.Messages.NegativeFactorError, MsgBoxStyle.Critical, Strings1.Messages.Err);
                     TVCM.Text = Conversions.ToString(1);
                     TVCM.Focus();
                     TVCM.SelectAll();
@@ -2519,7 +2519,7 @@ IL_03ba:
             TVCM.Text = Conversions.ToString(Conversion.Val(TVCM.Text));
             if (Conversion.Val(TVCM.Text) <= 0.0)
             {
-                Interaction.MsgBox(Strings.Messages.NegativeFactorError, MsgBoxStyle.Critical, Strings.Messages.Err);
+                Interaction.MsgBox(Strings1.Messages.NegativeFactorError, MsgBoxStyle.Critical, Strings1.Messages.Err);
                 TVCM.Text = Conversions.ToString(1);
                 TVCM.Focus();
                 TVCM.SelectAll();
@@ -2533,7 +2533,7 @@ IL_03ba:
                 TVCD.Text = Conversions.ToString(Conversion.Val(TVCD.Text));
                 if (Conversion.Val(TVCD.Text) <= 0.0)
                 {
-                    Interaction.MsgBox(Strings.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings.Messages.Err);
+                    Interaction.MsgBox(Strings1.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings1.Messages.Err);
                     TVCD.Text = Conversions.ToString(1);
                     TVCD.Focus();
                     TVCD.SelectAll();
@@ -2550,7 +2550,7 @@ IL_03ba:
             TVCD.Text = Conversions.ToString(Conversion.Val(TVCD.Text));
             if (Conversion.Val(TVCD.Text) <= 0.0)
             {
-                Interaction.MsgBox(Strings.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings.Messages.Err);
+                Interaction.MsgBox(Strings1.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings1.Messages.Err);
                 TVCD.Text = Conversions.ToString(1);
                 TVCD.Focus();
                 TVCD.SelectAll();
@@ -2564,7 +2564,7 @@ IL_03ba:
                 TVCBPM.Text = Conversions.ToString(Conversion.Val(TVCBPM.Text));
                 if (Conversion.Val(TVCBPM.Text) <= 0.0)
                 {
-                    Interaction.MsgBox(Strings.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings.Messages.Err);
+                    Interaction.MsgBox(Strings1.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings1.Messages.Err);
                     TVCBPM.Text = Conversions.ToString(Notes[0].Value / 10000.0);
                     TVCBPM.Focus();
                     TVCBPM.SelectAll();
@@ -2581,7 +2581,7 @@ IL_03ba:
             TVCBPM.Text = Conversions.ToString(Conversion.Val(TVCBPM.Text));
             if (Conversion.Val(TVCBPM.Text) <= 0.0)
             {
-                Interaction.MsgBox(Strings.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings.Messages.Err);
+                Interaction.MsgBox(Strings1.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings1.Messages.Err);
                 TVCBPM.Text = Conversions.ToString(Notes[0].Value / 10000.0);
                 TVCBPM.Focus();
                 TVCBPM.SelectAll();
@@ -3048,7 +3048,7 @@ IL_03ba:
         private void TBLangDef_Click(object sender, EventArgs e)
         {
             DispLang = "";
-            Interaction.MsgBox(Strings.Messages.PreferencePostpone, MsgBoxStyle.Information);
+            Interaction.MsgBox(Strings1.Messages.PreferencePostpone, MsgBoxStyle.Information);
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
@@ -3337,7 +3337,7 @@ IL_03ba:
             }
             if (flag)
             {
-                double num3 = Conversion.Val(Interaction.InputBox(Strings.Messages.PromptEnterNumeric, Text)) * 10000.0;
+                double num3 = Conversion.Val(Interaction.InputBox(Strings1.Messages.PromptEnterNumeric, Text)) * 10000.0;
                 if (num3 != 0.0)
                 {
                     if (num3 <= 0.0)
@@ -3361,7 +3361,7 @@ IL_03ba:
             }
             if (flag2)
             {
-                string text = Microsoft.VisualBasic.Strings.UCase(Microsoft.VisualBasic.Strings.Trim(Interaction.InputBox(Strings.Messages.PromptEnter, Text)));
+                string text = Microsoft.VisualBasic.Strings.UCase(Microsoft.VisualBasic.Strings.Trim(Interaction.InputBox(Strings1.Messages.PromptEnter, Text)));
                 if (Microsoft.VisualBasic.Strings.Len(text) != 0)
                 {
                     if (!((Operators.CompareString(text, "00", TextCompare: false) == 0) | (Operators.CompareString(text, "0", TextCompare: false) == 0)) && !((Microsoft.VisualBasic.Strings.Len(text) != 1) & (Microsoft.VisualBasic.Strings.Len(text) != 2)))
@@ -3402,7 +3402,7 @@ IL_0359:
             RefreshPanelAll();
             return;
 IL_0347:
-            Interaction.MsgBox(Strings.Messages.InvalidLabel, MsgBoxStyle.Critical, Strings.Messages.Err);
+            Interaction.MsgBox(Strings1.Messages.InvalidLabel, MsgBoxStyle.Critical, Strings1.Messages.Err);
             goto IL_0359;
         }
 
@@ -3414,7 +3414,7 @@ IL_0347:
 
         private void TBFind_Click(object sender, EventArgs e)
         {
-            diagFind diagFind2 = new diagFind(gColumns, Strings.Messages.Err, Strings.Messages.InvalidLabel);
+            diagFind diagFind2 = new diagFind(gColumns, Strings1.Messages.Err, Strings1.Messages.InvalidLabel);
             diagFind2.Show();
         }
 
@@ -3807,7 +3807,7 @@ IL_0347:
         private void TBThemeSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = Strings.FileType.THEME_XML + "|*.Theme.xml";
+            saveFileDialog.Filter = Strings1.FileType.THEME_XML + "|*.Theme.xml";
             saveFileDialog.DefaultExt = "Theme.xml";
             saveFileDialog.InitialDirectory = MyProject.Application.Info.DirectoryPath + "\\Data";
             if (saveFileDialog.ShowDialog() != DialogResult.Cancel)
@@ -3852,7 +3852,7 @@ IL_0347:
         private void TBThemeLoadComptability_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = Strings.FileType.TH + "|*.th";
+            openFileDialog.Filter = Strings1.FileType.TH + "|*.th";
             openFileDialog.DefaultExt = "th";
             openFileDialog.InitialDirectory = MyProject.Application.Info.DirectoryPath;
             if (MyProject.Computer.FileSystem.DirectoryExists(MyProject.Application.Info.DirectoryPath + "\\Theme"))
