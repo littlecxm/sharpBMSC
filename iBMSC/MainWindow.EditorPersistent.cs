@@ -299,8 +299,6 @@ public partial class MainWindow
         }
         catch (Exception ex)
         {
-            ProjectData.SetProjectError(ex);
-            ProjectData.ClearProjectError();
         }
 
         XmlElement xmlElement2 = Root["Form"];
@@ -828,8 +826,6 @@ public partial class MainWindow
                     }
                     catch (Exception ex)
                     {
-                        ProjectData.SetProjectError(ex);
-                        ProjectData.ClearProjectError();
                     }
                 }
 
@@ -844,8 +840,6 @@ public partial class MainWindow
                     }
                     catch (Exception ex3)
                     {
-                        ProjectData.SetProjectError(ex3);
-                        ProjectData.ClearProjectError();
                     }
                 }
             }
@@ -883,8 +877,6 @@ public partial class MainWindow
                     }
                     catch (Exception ex5)
                     {
-                        ProjectData.SetProjectError(ex5);
-                        ProjectData.ClearProjectError();
                     }
                 }
             }
@@ -2083,9 +2075,7 @@ public partial class MainWindow
         }
         catch (Exception ex7)
         {
-            ProjectData.SetProjectError(ex7);
             Interaction.MsgBox(Path + "\r\n\r\n" + ex7.Message, MsgBoxStyle.Exclamation);
-            ProjectData.ClearProjectError();
         }
         finally
         {
@@ -2100,180 +2090,146 @@ public partial class MainWindow
     {
         try
         {
-            string[] array = Microsoft.VisualBasic.Strings.Split(MyProject.Computer.FileSystem.ReadAllText(xPath), "\r\n");
-            if ((Operators.CompareString(array[0].Trim(), "iBMSC Configuration Settings Format", TextCompare: false) != 0) & (Operators.CompareString(array[0].Trim(), "iBMSC Theme Format", TextCompare: false) != 0))
-            {
+            string[] xStrLine = Microsoft.VisualBasic.Strings.Split(File.ReadAllText(xPath), "\r\n");
+            if (xStrLine[0].Trim() != "iBMSC Configuration Settings Format" && xStrLine[0].Trim() != "iBMSC Theme Format")
                 return;
-            }
-            string text = "";
-            string text2 = "";
-            foreach (string text3 in array)
+
+            string xW1 = "";
+            string xW2 = "";
+
+            foreach (string xLine in xStrLine)
             {
-                text = Microsoft.VisualBasic.Strings.UCase(Microsoft.VisualBasic.Strings.Mid(text3, 1, Microsoft.VisualBasic.Strings.InStr(text3, "=") - 1));
-                text2 = Microsoft.VisualBasic.Strings.Mid(text3, Microsoft.VisualBasic.Strings.InStr(text3, "=") + 1);
-                switch (text)
+                xW1 = Microsoft.VisualBasic.Strings.UCase(Microsoft.VisualBasic.Strings.Mid(xLine, 1, Microsoft.VisualBasic.Strings.InStr(xLine, "=") - 1));
+                xW2 = Microsoft.VisualBasic.Strings.Mid(xLine, Microsoft.VisualBasic.Strings.InStr(xLine, "=") + 1);
+
+                switch (xW1)
                 {
                     case "VOTITLE":
-                        vo.ColumnTitle.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        vo.ColumnTitle.Color = Color.FromArgb((int)Math.Round(Conversion.Val(xW2)));
                         break;
                     case "VOTITLEFONT":
-                        vo.ColumnTitleFont = Functions.StringToFont(text2, Font);
+                        vo.ColumnTitleFont = Functions.StringToFont(xW2, Font);
                         break;
                     case "VOBG":
-                        vo.Bg.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        vo.Bg.Color = Color.FromArgb((int)Math.Round(Conversion.Val(xW2)));
                         break;
                     case "VOGRID":
-                        vo.pGrid.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        vo.pGrid.Color = Color.FromArgb((int)Math.Round(Conversion.Val(xW2)));
                         break;
                     case "VOSUB":
-                        vo.pSub.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        vo.pSub.Color = Color.FromArgb((int)Math.Round(Conversion.Val(xW2)));
                         break;
                     case "VOVLINE":
-                        vo.pVLine.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        vo.pVLine.Color = Color.FromArgb((int)Math.Round(Conversion.Val(xW2)));
                         break;
                     case "VOMLINE":
-                        vo.pMLine.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        vo.pMLine.Color = Color.FromArgb((int)Math.Round(Conversion.Val(xW2)));
                         break;
                     case "VOBGMWAV":
-                        vo.pBGMWav.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
-                        TWTransparency.Value = new decimal(vo.pBGMWav.Color.A);
-                        TWTransparency2.Value = vo.pBGMWav.Color.A;
-                        TWSaturation.Value = new decimal(vo.pBGMWav.Color.GetSaturation() * 1000f);
+                        vo.pBGMWav.Color = Color.FromArgb((int)Math.Round(Conversion.Val(xW2)));
+                        this.TWTransparency.Value = (decimal)this.vo.pBGMWav.Color.A;
+                        this.TWTransparency2.Value = (int)this.vo.pBGMWav.Color.A;
+                        this.TWSaturation.Value = (decimal)(this.vo.pBGMWav.Color.GetSaturation() * 1000f);
                         TWSaturation2.Value = (int)Math.Round(vo.pBGMWav.Color.GetSaturation() * 1000f);
                         break;
                     case "VOSELBOX":
-                        vo.SelBox.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        vo.SelBox.Color = Color.FromArgb((int)Math.Round(Conversion.Val(xW2)));
                         break;
                     case "VOPECURSOR":
-                        vo.PECursor.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        vo.PECursor.Color = Color.FromArgb((int)Math.Round(Conversion.Val(xW2)));
                         break;
                     case "VOPEHALF":
-                        vo.PEHalf.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        vo.PEHalf.Color = Color.FromArgb((int)Math.Round(Conversion.Val(xW2)));
                         break;
                     case "VOPEDELTAMOUSEOVER":
-                        vo.PEDeltaMouseOver = (int)Math.Round(Conversion.Val(text2));
+                        vo.PEDeltaMouseOver = (int)Math.Round(Conversion.Val(xW2));
                         break;
                     case "VOPEMOUSEOVER":
-                        vo.PEMouseOver.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        vo.PEMouseOver.Color = Color.FromArgb((int)Math.Round(Conversion.Val(xW2)));
                         break;
                     case "VOPESEL":
-                        vo.PESel.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        vo.PESel.Color = Color.FromArgb((int)Math.Round(Conversion.Val(xW2)));
                         break;
                     case "VOPEBPM":
-                        vo.PEBPM.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        vo.PEBPM.Color = Color.FromArgb((int)Math.Round(Conversion.Val(xW2)));
                         break;
                     case "VOPEBPMFONT":
-                        vo.PEBPMFont = Functions.StringToFont(text2, Font);
+                        vo.PEBPMFont = Functions.StringToFont(xW2, Font);
                         break;
                     case "VKHEIGHT":
-                        vo.kHeight = (int)Math.Round(Conversion.Val(text2));
+                        vo.kHeight = (int)Math.Round(Conversion.Val(xW2));
                         break;
                     case "VKFONT":
-                        vo.kFont = Functions.StringToFont(text2, Font);
+                        vo.kFont = Functions.StringToFont(xW2, Font);
                         break;
                     case "VKMFONT":
-                        vo.kMFont = Functions.StringToFont(text2, Font);
+                        vo.kMFont = Functions.StringToFont(xW2, Font);
                         break;
                     case "VKLABELVSHIFT":
-                        vo.kLabelVShift = (int)Math.Round(Conversion.Val(text2));
+                        vo.kLabelVShift = (int)Math.Round(Conversion.Val(xW2));
                         break;
                     case "VKLABELHSHIFT":
-                        vo.kLabelHShift = (int)Math.Round(Conversion.Val(text2));
+                        vo.kLabelHShift = (int)Math.Round(Conversion.Val(xW2));
                         break;
                     case "VKLABELHSHIFTL":
-                        vo.kLabelHShiftL = (int)Math.Round(Conversion.Val(text2));
+                        vo.kLabelHShiftL = (int)Math.Round(Conversion.Val(xW2));
                         break;
                     case "VKMOUSEOVER":
-                        vo.kMouseOver.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        vo.kMouseOver.Color = Color.FromArgb((int)Math.Round(Conversion.Val(xW2)));
                         break;
                     case "VKMOUSEOVERE ":
-                        vo.kMouseOverE.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        vo.kMouseOverE.Color = Color.FromArgb((int)Math.Round(Conversion.Val(xW2)));
                         break;
                     case "VKSELECTED":
-                        vo.kSelected.Color = Color.FromArgb((int)Math.Round(Conversion.Val(text2)));
+                        vo.kSelected.Color = Color.FromArgb((int)Math.Round(Conversion.Val(xW2)));
                         break;
                     case "KLENGTH":
                         {
-                            string[] array9 = LoadThemeComptability_SplitStringInto26Parts(text2);
-                            int num7 = 0;
-                            do
-                            {
-                                column[num7].Width = (int)Math.Round(Conversion.Val(array9[num7]));
-                                num7++;
-                            }
-                            while (num7 <= 26);
+                            var xE = LoadThemeComptability_SplitStringInto26Parts(xW2);
+                            for (int i = 0; i <= 26; i++)
+                                this.column[i].Width = (int)Math.Round(Conversion.Val(xE[i]));
                             break;
                         }
                     case "KTITLE":
                         {
-                            string[] array8 = LoadThemeComptability_SplitStringInto26Parts(text2);
-                            int num6 = 0;
-                            do
-                            {
-                                column[num6].Title = array8[num6];
-                                num6++;
-                            }
-                            while (num6 <= 26);
+                            var xE = LoadThemeComptability_SplitStringInto26Parts(xW2);
+                            for (int i = 0; i <= 26; i++)
+                                this.column[i].Title = xE[i];
                             break;
                         }
                     case "KCOLOR":
                         {
-                            string[] array7 = LoadThemeComptability_SplitStringInto26Parts(text2);
-                            int num5 = 0;
-                            do
-                            {
-                                column[num5].setNoteColor((int)Math.Round(Conversion.Val(array7[num5])));
-                                num5++;
-                            }
-                            while (num5 <= 26);
+                            var xE = LoadThemeComptability_SplitStringInto26Parts(xW2);
+                            for (int i = 0; i <= 26; i++)
+                                this.column[i].setNoteColor((int)Math.Round(Conversion.Val(xE[i])));
                             break;
                         }
                     case "KCOLORL":
                         {
-                            string[] array6 = LoadThemeComptability_SplitStringInto26Parts(text2);
-                            int num4 = 0;
-                            do
-                            {
-                                column[num4].setLNoteColor((int)Math.Round(Conversion.Val(array6[num4])));
-                                num4++;
-                            }
-                            while (num4 <= 26);
+                            var xE = LoadThemeComptability_SplitStringInto26Parts(xW2);
+                            for (int i = 0; i <= 26; i++)
+                                this.column[i].setLNoteColor((int)Math.Round(Conversion.Val(xE[i])));
                             break;
                         }
                     case "KFORECOLOR":
                         {
-                            string[] array5 = LoadThemeComptability_SplitStringInto26Parts(text2);
-                            int num3 = 0;
-                            do
-                            {
-                                column[num3].cText = Color.FromArgb((int)Math.Round(Conversion.Val(array5[num3])));
-                                num3++;
-                            }
-                            while (num3 <= 26);
+                            var xE = LoadThemeComptability_SplitStringInto26Parts(xW2);
+                            for (int i = 0; i <= 26; i++)
+                                this.column[i].cText = Color.FromArgb((int)Math.Round(Conversion.Val(xE[i])));
                             break;
                         }
                     case "KFORECOLORL":
                         {
-                            string[] array4 = LoadThemeComptability_SplitStringInto26Parts(text2);
-                            int num2 = 0;
-                            do
-                            {
-                                column[num2].cLText = Color.FromArgb((int)Math.Round(Conversion.Val(array4[num2])));
-                                num2++;
-                            }
-                            while (num2 <= 26);
+                            var xE = LoadThemeComptability_SplitStringInto26Parts(xW2);
+                            for (int i = 0; i <= 26; i++)
+                                this.column[i].cLText = Color.FromArgb((int)Math.Round(Conversion.Val(xE[i])));
                             break;
                         }
                     case "KBGCOLOR":
                         {
-                            string[] array3 = LoadThemeComptability_SplitStringInto26Parts(text2);
-                            int num = 0;
-                            do
-                            {
-                                column[num].cBG = Color.FromArgb((int)Math.Round(Conversion.Val(array3[num])));
-                                num++;
-                            }
-                            while (num <= 26);
+                            var xE = LoadThemeComptability_SplitStringInto26Parts(xW2);
+                            for (int i = 0; i <= 26; i++)
+                                this.column[i].cBG = Color.FromArgb((int)Math.Round(Conversion.Val(xE[i])));
                             break;
                         }
                 }
@@ -2281,9 +2237,7 @@ public partial class MainWindow
         }
         catch (Exception ex)
         {
-            ProjectData.SetProjectError(ex);
-            Interaction.MsgBox(ex.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err);
-            ProjectData.ClearProjectError();
+            Interaction.MsgBox(ex.Message, MsgBoxStyle.Exclamation, iBMSC.Strings.Messages.Err);
         }
         finally
         {
@@ -2293,8 +2247,9 @@ public partial class MainWindow
 
     private string[] LoadThemeComptability_SplitStringInto26Parts(string xLine)
     {
-        string[] array = Microsoft.VisualBasic.Strings.Split(xLine, ",");
-        return (string[])Utils.CopyArray(array, new string[27]);
+        string[] xE = Microsoft.VisualBasic.Strings.Split(xLine, ",");
+        Array.Resize(ref xE, 27);
+        return xE;
     }
 
     private void LoadLang(object sender, EventArgs e)
@@ -2305,30 +2260,31 @@ public partial class MainWindow
 
     private void LoadLocaleXML(FileInfo xStr)
     {
-        XmlDocument xmlDocument = new XmlDocument();
-        FileStream fileStream = new FileStream(xStr.FullName, FileMode.Open, FileAccess.Read);
+        XmlDocument d = new XmlDocument();
+        FileStream fs = new FileStream(xStr.FullName, FileMode.Open, FileAccess.Read);
         try
         {
-            xmlDocument.Load(fileStream);
-            string left = xmlDocument["iBMSC.Locale"].GetAttribute("Name");
-            if (Operators.CompareString(left, "", TextCompare: false) == 0)
-            {
-                left = xStr.Name;
-            }
-            cmnLanguage.Items.Add(left, null, LoadLang);
+            d.Load(fs);
+            string xName = d["iBMSC.Locale"].GetAttribute("Name");
+            if (string.IsNullOrEmpty(xName))
+                xName = xStr.Name;
+
+            cmnLanguage.Items.Add(xName, null, LoadLang);
             cmnLanguage.Items[cmnLanguage.Items.Count - 1].ToolTipText = xStr.FullName;
         }
         catch (Exception ex)
         {
-            ProjectData.SetProjectError(ex);
             Interaction.MsgBox(xStr.FullName + "\r\n\r\n" + ex.Message, MsgBoxStyle.Exclamation);
-            ProjectData.ClearProjectError();
         }
-        fileStream.Close();
+
+        fs.Close();
     }
 
     private void LoadTheme(object sender, EventArgs e)
-    {
+    {    
+        // If Not File.Exists(My.Application.Info.DirectoryPath & "\Data\" & sender.Text) Then Exit Sub
+        // SaveTheme = True
+        // LoadCFF(My.Computer.FileSystem.ReadAllText(My.Application.Info.DirectoryPath & "\Theme\" & sender.Text, System.Text.Encoding.Unicode))
         LoadSettings(Conversions.ToString(Operators.ConcatenateObject(MyProject.Application.Info.DirectoryPath + "\\Data\\", NewLateBinding.LateGet(sender, null, "Text", Array.Empty<object>(), null, null, null))));
         RefreshPanelAll();
     }
