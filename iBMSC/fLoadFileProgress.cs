@@ -21,8 +21,8 @@ public partial class fLoadFileProgress : Form
 
     public fLoadFileProgress(string[] xxPath, bool xIsSaved, bool TopMost = true)
     {
-        base.Shown += fLoadFileProgress_Shown;
-        base.Load += fLoadFileProgress_Load;
+        Shown += fLoadFileProgress_Shown;
+        Load += fLoadFileProgress_Load;
         xPath = Array.Empty<string>();
         CancelPressed = false;
         IsSaved = false;

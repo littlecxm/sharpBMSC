@@ -16,7 +16,7 @@ public partial  class dgImportSM : Form
 
     public dgImportSM(string[] sDiff)
     {
-        base.Load += dgImportSM_Load;
+        Load += dgImportSM_Load;
         iResult = -1;
         InitializeComponent();
         LDiff.Items.AddRange(sDiff);

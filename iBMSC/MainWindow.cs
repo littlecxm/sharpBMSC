@@ -5027,18 +5027,18 @@ IL_0952:
 
     public MainWindow()
     {
-        base.FormClosed += Form1_FormClosed;
-        base.FormClosing += Form1_FormClosing;
-        base.DragEnter += Form1_DragEnter;
-        base.DragLeave += Form1_DragLeave;
-        base.DragDrop += Form1_DragDrop;
-        base.KeyDown += Form1_KeyDown;
-        base.KeyUp += Form1_KeyUp;
-        base.Disposed += [SpecialName][DebuggerStepThrough] (object a0, EventArgs a1) =>
+        FormClosed += Form1_FormClosed;
+        FormClosing += Form1_FormClosing;
+        DragEnter += Form1_DragEnter;
+        DragLeave += Form1_DragLeave;
+        DragDrop += Form1_DragDrop;
+        KeyDown += Form1_KeyDown;
+        KeyUp += Form1_KeyUp;
+        Disposed += [SpecialName][DebuggerStepThrough] (object a0, EventArgs a1) =>
         {
             Unload();
         };
-        base.Load += Form1_Load;
+        Load += Form1_Load;
         BMSChannelList = new string[72]
         {
             "01", "03", "04", "06", "07", "08", "09", "11", "12", "13",

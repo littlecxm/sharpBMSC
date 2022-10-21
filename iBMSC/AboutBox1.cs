@@ -109,10 +109,10 @@ public sealed partial  class AboutBox1 : Form
 
     public AboutBox1()
     {
-        base.KeyPress += AboutBox1_KeyPress;
-        base.Load += AboutBox1_Load;
-        base.MouseDown += AboutBox1_MouseDown;
-        base.MouseUp += AboutBox1_MouseUp;
+        KeyPress += AboutBox1_KeyPress;
+        Load += AboutBox1_Load;
+        MouseDown += AboutBox1_MouseDown;
+        MouseUp += AboutBox1_MouseUp;
         bBitmap = Resources.SplashScreenx;
         InitializeComponent();
     }

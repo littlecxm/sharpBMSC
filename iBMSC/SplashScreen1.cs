@@ -11,7 +11,7 @@ public sealed partial  class SplashScreen1 : Form
 {
     public SplashScreen1()
     {
-        base.Paint += SplashScreen1_Paint;
+        Paint += SplashScreen1_Paint;
         InitializeComponent();
     }
 

@@ -90,7 +90,7 @@ public partial class dgMyO2 : Form
 
     public dgMyO2()
     {
-        base.Load += fMyO2_Load;
+        Load += fMyO2_Load;
         Aj = Array.Empty<Adj>();
         InitializeComponent();
     }

@@ -28,7 +28,7 @@ public partial class ColorPicker : Form
 
     public ColorPicker()
     {
-        base.Load += ColorPicker_Load;
+        Load += ColorPicker_Load;
         OrigColor = Color.Black;
         NewColor = Color.Black;
         DrawingIndex = 1;

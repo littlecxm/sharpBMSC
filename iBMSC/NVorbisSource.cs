@@ -62,7 +62,7 @@ internal class NVorbisSource : ISampleSource
     int IReadableAudioSource<float>.Read(float[] buffer, int offset, int count)
     {
         //ILSpy generated this explicit interface implementation from .override directive in Read
-        return this.Read(buffer, offset, count);
+        return Read(buffer, offset, count);
     }
 
     public void Dispose()
@@ -76,6 +76,6 @@ internal class NVorbisSource : ISampleSource
     void IDisposable.Dispose()
     {
         //ILSpy generated this explicit interface implementation from .override directive in Dispose
-        this.Dispose();
+        Dispose();
     }
 }

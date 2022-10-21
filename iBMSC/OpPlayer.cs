@@ -195,7 +195,7 @@ public partial  class OpPlayer : Form
 
     public OpPlayer(int xCurrPlayer)
     {
-        base.Load += OpPlayer_Load;
+        Load += OpPlayer_Load;
         CurrPlayer = -1;
         InitializeComponent();
         pArg = (MainWindow.PlayerArguments[])MyProject.Forms.MainWindow.pArgs.Clone();
@@ -206,7 +206,7 @@ public partial  class OpPlayer : Form
     private void TPath_KeyDown(object sender, KeyEventArgs e)
     {
         SavePArg();
-        if (object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), TPath))
+        if (ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), TPath))
         {
             LPlayerChangeCurrIndex(pArg[CurrPlayer].Path);
         }
@@ -215,7 +215,7 @@ public partial  class OpPlayer : Form
     private void TPath_LostFocus(object sender, EventArgs e)
     {
         SavePArg();
-        if (object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), TPath))
+        if (ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), TPath))
         {
             LPlayerChangeCurrIndex(pArg[CurrPlayer].Path);
         }

@@ -14,7 +14,7 @@ namespace iBMSC.My;
 [GeneratedCode("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.1.0.0")]
 internal sealed class MySettings : ApplicationSettingsBase
 {
-    private static MySettings defaultInstance = (MySettings)SettingsBase.Synchronized(new MySettings());
+    private static MySettings defaultInstance = (MySettings)Synchronized(new MySettings());
 
     private static bool addedHandler;
 

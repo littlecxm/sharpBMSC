@@ -898,15 +898,15 @@ end_IL_0000_3:
             if (openFileDialog.ShowDialog() != DialogResult.Cancel)
             {
                 InitPath = ExcludeFileName(openFileDialog.FileName);
-                if (object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), BHStageFile))
+                if (ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), BHStageFile))
                 {
                     THStageFile.Text = GetFileName(openFileDialog.FileName);
                 }
-                else if (object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), BHBanner))
+                else if (ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), BHBanner))
                 {
                     THBanner.Text = GetFileName(openFileDialog.FileName);
                 }
-                else if (object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), BHBackBMP))
+                else if (ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), BHBackBMP))
                 {
                     THBackBMP.Text = GetFileName(openFileDialog.FileName);
                 }
@@ -919,29 +919,29 @@ end_IL_0000_3:
             {
                 CheckBox checkBox = (CheckBox)sender;
                 Panel panel = null;
-                if (!object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), null))
+                if (!ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), null))
                 {
-                    if (object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POHeaderSwitch))
+                    if (ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POHeaderSwitch))
                     {
                         panel = POHeaderInner;
                     }
-                    else if (object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POGridSwitch))
+                    else if (ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POGridSwitch))
                     {
                         panel = POGridInner;
                     }
-                    else if (object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POWaveFormSwitch))
+                    else if (ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POWaveFormSwitch))
                     {
                         panel = POWaveFormInner;
                     }
-                    else if (object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POWAVSwitch))
+                    else if (ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POWAVSwitch))
                     {
                         panel = POWAVInner;
                     }
-                    else if (object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POBeatSwitch))
+                    else if (ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POBeatSwitch))
                     {
                         panel = POBeatInner;
                     }
-                    else if (object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POExpansionSwitch))
+                    else if (ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POExpansionSwitch))
                     {
                         panel = POExpansionInner;
                     }
@@ -969,25 +969,25 @@ end_IL_0000_3:
             {
                 CheckBox checkBox = (CheckBox)sender;
                 Panel panel = null;
-                if (!object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), null))
+                if (!ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), null))
                 {
-                    if (object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POHeaderExpander))
+                    if (ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POHeaderExpander))
                     {
                         panel = POHeaderPart2;
                     }
-                    else if (object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POGridExpander))
+                    else if (ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POGridExpander))
                     {
                         panel = POGridPart2;
                     }
-                    else if (object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POWaveFormExpander))
+                    else if (ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POWaveFormExpander))
                     {
                         panel = POWaveFormPart2;
                     }
-                    else if (object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POWAVExpander))
+                    else if (ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POWAVExpander))
                     {
                         panel = POWAVPart2;
                     }
-                    else if (object.ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POBeatExpander))
+                    else if (ReferenceEquals(RuntimeHelpers.GetObjectValue(sender), POBeatExpander))
                     {
                         panel = POBeatPart2;
                     }

@@ -20,7 +20,7 @@ public partial class diagFind : Form
 
     public diagFind(int xbCol, string xmsg1, string xmsg2)
     {
-        base.Load += diagFind_Load;
+        Load += diagFind_Load;
         bCol = 46;
         msg1 = "Error";
         msg2 = "Invalid label.";
